@@ -3,8 +3,8 @@
     <header
       :class="['fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 font-tuffy transition-all duration-300 ease-in-out', scrolled ? 'bg-white text-gray-900 shadow' : 'bg-transparent text-white']"
     >
-      <h1 class="text-md md:text-2xl font-bold animate-fade-down">Lila Chibane</h1>
-      <nav class="flex gap-6 text-xs md:text-sm uppercase tracking-widest">
+      <h1 class="text-md md:text-2xl animate-fade-down">Lila Chibane</h1>
+      <nav class="flex gap-2 sm:gap-6 text-[8px] md:text-sm uppercase tracking-widest">
         <a href="#about" class="nav-link hover:text-yellow-400 transition">À propos</a>
         <a href="#services" class="nav-link hover:text-yellow-400 transition">Accompagnement</a>
         <a href="#contact" class="nav-link hover:text-yellow-400 transition">Me contacter</a>
@@ -16,7 +16,7 @@
         <h2 class="text-4xl md:text-6xl font-extrabold mb-2 animate-fade-up font-tuffy">
           Coach sportive et mentale
         </h2>
-        <p class="text-xl block mb-6 ">(accompagnement en ligne / en présentiel)</p>
+        <p class="text-sm block mb-6 ">(accompagnement en ligne / en présentiel)</p>
         <p class="text-md md:text-md font-tuffy mb-8 animate-fade-up animate-delay-400">
           Créatrice de la méthode Anima™ : harmoniser mouvement et bien-être.
         </p>
@@ -145,9 +145,7 @@ onUnmounted(() => {
 html {
   scroll-behavior: smooth;
 }
-.font-tuffy {
-  font-family: 'Tuffy', sans-serif;
-}
+
 .animate-fade-up {
   opacity: 0;
   transform: translateY(20px);

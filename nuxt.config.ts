@@ -6,9 +6,4 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/fonts'
   ],
-  fonts: {
-    families: [
-      { name: 'Tuffy', provider: 'google' },
-    ]
-  }
 })
