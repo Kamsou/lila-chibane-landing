@@ -4,19 +4,18 @@
       :class="['fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 font-tuffy transition-all duration-300 ease-in-out', scrolled ? 'bg-white text-gray-900 shadow' : 'bg-transparent text-white']"
     >
       <h1 class="text-md md:text-2xl animate-fade-down">Lila Chibane</h1>
-      <nav class="flex gap-2 sm:gap-6 text-[8px] md:text-sm uppercase tracking-widest">
+      <nav class="flex gap-2 sm:gap-6 text-[8px] md:text-sm tracking-widest">
         <a href="#about" class="nav-link hover:text-yellow-400 transition">À propos</a>
-        <a href="#services" class="nav-link hover:text-yellow-400 transition">Accompagnement</a>
-        <a href="#contact" class="nav-link hover:text-yellow-400 transition">Me contacter</a>
+        <a href="#services" class="nav-link hover:text-yellow-400 transition">L'Accompagnement</a>
+        <a href="#contact" class="nav-link hover:text-yellow-400 transition">Contact</a>
       </nav>
     </header>
 
     <div class="relative h-full bg-black bg-opacity-50">
       <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 max-w-3xl mx-auto">
-        <h2 class="text-4xl md:text-6xl font-extrabold mb-2 animate-fade-up font-tuffy">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-8 animate-fade-up font-tuffy">
           Coach sportive et mentale
         </h2>
-        <p class="text-sm block mb-6 ">(accompagnement en ligne / en présentiel)</p>
         <p class="text-md md:text-md font-tuffy mb-8 animate-fade-up animate-delay-400">
           Créatrice de la méthode Anima™ : harmoniser mouvement et bien-être.
         </p>
@@ -34,11 +33,11 @@
         <img src="/lila-portrait.png" alt="Portrait de Lila Chibane">
       </div>
       <div>
-        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-yellow-700 font-tuffy">À propos de moi</h3>
-        <p class="text-lg leading-relaxed mb-6">
+        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-tuffy tracking-tighter">À propos de moi</h3>
+        <p class="text-lg leading-relaxed mb-6 text-gray-600">
           Je suis passionnée par le mouvement, le bien-être corporel et la confiance en soi. Mon approche est simple : te guider pour que tu te reconnectes à ton corps et que tu oses t'exprimer pleinement.
         </p>
-        <p class="text-lg leading-relaxed">
+        <p class="text-lg leading-relaxed text-gray-600">
           Que ce soit en ligne ou en présentiel, je t'accompagne avec une méthode personnalisée, bienveillante et axée sur ton évolution.
         </p>
       </div>
@@ -47,7 +46,7 @@
 
     <section id="services" class="py-20 bg-gray-100 text-gray-800 animate-fade-up">
     <div class="max-w-6xl mx-auto px-6 text-center">
-      <h3 class="text-3xl md:text-4xl font-bold mb-12 text-yellow-700 font-tuffy">Un accompagnement pensé pour toi</h3>
+      <h3 class="text-3xl md:text-4xl font-bold mb-12 text-gray-900 font-tuffy tracking-tighter">Un accompagnement pensé pour toi</h3>
       <div class="grid gap-16">
         <div class="flex flex-col md:flex-row items-center gap-8">
           <div class="md:w-1/2">
@@ -90,7 +89,7 @@
 
   <section id="contact" class="py-24 bg-white text-gray-800 animate-fade-up">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h3 class="text-3xl md:text-4xl font-bold mb-12 text-yellow-700 font-tuffy">Me contacter</h3>
+      <h3 class="text-3xl md:text-4xl font-bold mb-12 text-gray-900 font-tuffy tracking-tighter">Me contacter</h3>
       <p class="text-lg mb-8">
         Tu veux réserver une séance, poser une question ou tout simplement échanger ?<br>
         Écris-moi, je serai ravie de te répondre.
@@ -99,12 +98,12 @@
         <input type="text" placeholder="Nom" class="border border-gray-300 p-4 rounded focus:ring-2 focus:ring-yellow-400">
         <input type="email" placeholder="Email" class="border border-gray-300 p-4 rounded focus:ring-2 focus:ring-yellow-400">
         <textarea placeholder="Votre message" rows="5" class="border border-gray-300 p-4 rounded focus:ring-2 focus:ring-yellow-400"></textarea>
-        <button type="submit" class="btn-primary">Envoyer</button>
+        <button type="submit" class="bg-gray-900 text-white py-4 sm:w-[200px] mx-auto rounded-full">Envoyer</button>
       </form>
     </div>
   </section>
 
-  <footer class="py-8 bg-yellow-600 text-gray-800 text-center text-sm">
+  <footer class="py-8 bg-yellow-300 text-gray-800 text-center text-sm">
     <div class="max-w-6xl mx-auto px-6">
       © 2025 Lila Chibane — Tous droits réservés.
     </div>
@@ -178,6 +177,6 @@ html {
 }
 
 .btn-primary {
-  @apply bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-6 rounded-full transition transform hover:scale-105 hover:shadow-lg;
+  @apply bg-yellow-400 hover:bg-yellow-700 text-black font-semibold py-3 px-6 rounded-full transition transform hover:scale-105 hover:shadow-lg;
 }
 </style>
