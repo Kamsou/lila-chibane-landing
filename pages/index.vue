@@ -28,7 +28,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <section class="relative h-screen bg-cover bg-center scroll-smooth" style="background-image: url('/header.jpg');">
+    <section class="relative h-screen bg-cover bg-center scroll-smooth" style="background-image: url('https://res.cloudinary.com/augalo/image/upload/v1747472814/lilachibane/header_dyrbsr.jpg');">
     <header
       :class="['fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 font-tuffy transition-all duration-300 ease-in-out', scrolled ? 'bg-white text-gray-900 shadow' : 'bg-transparent text-white']"
     >
@@ -95,7 +95,7 @@ onUnmounted(() => {
           </p>
         </div>
         <div class="w-full md:w-1/2">
-          <img src="/visio.jpg" alt="Coaching en ligne" class="rounded-lg shadow-md w-full object-cover h-64">
+          <img src="https://res.cloudinary.com/augalo/image/upload/v1747472815/lilachibane/visio_wlvoc3.jpg" alt="Coaching en ligne" class="rounded-lg shadow-md w-full object-cover h-64">
         </div>
       </div>
 
@@ -114,7 +114,7 @@ onUnmounted(() => {
           </p>
         </div>
         <div class="w-full md:w-1/2">
-          <img src="/home.jpg" alt="Coaching en présentiel" class="rounded-lg shadow-md w-full object-cover h-64">
+          <img src="https://res.cloudinary.com/augalo/image/upload/v1747472815/lilachibane/home_mjegt1.jpg" alt="Coaching en présentiel" class="rounded-lg shadow-md w-full object-cover h-64">
         </div>
       </div>
 
@@ -132,7 +132,7 @@ onUnmounted(() => {
           </p>
         </div>
         <div class="w-full md:w-1/2">
-          <img src="/header.jpg" alt="Méthode Anima" class="rounded-lg shadow-md w-full object-cover h-64">
+          <img src="https://res.cloudinary.com/augalo/image/upload/v1747472814/lilachibane/header_dyrbsr.jpg" alt="Méthode Anima" class="rounded-lg shadow-md w-full object-cover h-64">
         </div>
       </div>
     </div>
