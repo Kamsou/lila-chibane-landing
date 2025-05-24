@@ -66,10 +66,10 @@ onUnmounted(() => {
       </div>
       <div>
         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-tuffy tracking-tighter">Je m'appelle Lila,</h3>
-        <p class="text-lg leading-relaxed mb-6 text-gray-600">
+        <p class="text-md md:text-lg leading-relaxed mb-6 text-gray-600">
           Je suis passionnée par le mouvement, le bien-être corporel et la confiance en soi. Mon approche est simple : te guider pour que tu te reconnectes à ton corps et que tu oses t'exprimer pleinement.
         </p>
-        <p class="text-lg leading-relaxed text-gray-600">
+        <p class="text-md md:text-lg leading-relaxed text-gray-600">
           Que ce soit en ligne ou en présentiel, je t'accompagne avec une méthode personnalisée, bienveillante et axée sur ton évolution.
         </p>
       </div>
@@ -77,15 +77,15 @@ onUnmounted(() => {
   </section>
 
 <section id="services" class="py-24 sm:py-32 bg-gradient-to-b from-yellow-50 via-white to-white text-gray-900">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h3 class="text-4xl md:text-5xl font-extrabold mb-20 font-tuffy tracking-tighter">
+  <div class="max-w-5xl mx-auto px-4 md:text-center">
+    <h3 class="text-4xl text-center md:text-5xl font-extrabold mb-20 font-tuffy tracking-tighter">
       L'accompagnement
     </h3>
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-20 lg:gap-8">
       <!-- Coaching en ligne -->
       <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" />
             <path d="M8 20h8" stroke="currentColor" stroke-linecap="round"/>
           </svg>
@@ -100,7 +100,7 @@ onUnmounted(() => {
       <!-- Séances en présentiel -->
       <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1 1 16 0c0 4.97-3.582 9-8 9z" stroke="currentColor"/>
             <circle cx="12" cy="12" r="3" stroke="currentColor"/>
           </svg>
@@ -115,7 +115,7 @@ onUnmounted(() => {
       <!-- Méthode Anima -->
       <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z" stroke="currentColor"/>
           </svg>
         </span>
@@ -129,8 +129,8 @@ onUnmounted(() => {
   </div>
 </section>
 
-<section class="py-40 from-yellow-50 to-white">
-  <div class="max-w-4xl mx-auto text-center px-6">
+<section class="py-20 lg:py-40 from-yellow-50 to-white">
+  <div class="max-w-4xl mx-auto md:text-center px-6">
     <h4 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">
       Trouve ton équilibre. Reprends le pouvoir sur ton bien-être.
     </h4>
@@ -147,12 +147,12 @@ onUnmounted(() => {
     <h3 class="text-4xl md:text-5xl font-extrabold mb-16 font-tuffy tracking-tighter">
       Mes offres
     </h3>
-    <div class="grid md:grid-cols-3 gap-10">
+    <div class="grid md:grid-cols-3 gap-20 lg:gap-10">
       <!-- Offre 1 -->
       <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
           <!-- Person Icon -->
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="8" r="4" stroke="currentColor"/>
             <path d="M6 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="currentColor"/>
           </svg>
@@ -171,7 +171,7 @@ onUnmounted(() => {
       <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
           <!-- Laptop Icon -->
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor"/>
             <path d="M8 20h8" stroke="currentColor" stroke-linecap="round"/>
           </svg>
@@ -190,7 +190,7 @@ onUnmounted(() => {
       <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
           <!-- Star/Medal Icon -->
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="10" r="6" stroke="currentColor"/>
             <path d="M12 16v4M10 20h4" stroke="currentColor" stroke-linecap="round"/>
           </svg>
@@ -211,13 +211,12 @@ onUnmounted(() => {
 
 
 <section id="contact" class="py-24 sm:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 text-white animate-fade-up">
-  <div class="max-w-3xl mx-auto px-6 text-center">
+  <div class="max-w-3xl mx-auto px-6 md:text-center">
     <h3 class="text-4xl md:text-5xl font-extrabold mb-8 font-tuffy tracking-tighter text-yellow-400 drop-shadow">
       Me contacter
     </h3>
-    <p class="text-lg md:text-xl mb-10 text-gray-100">
-      Envie de réserver une séance, de poser une question<br>
-      ou simplement d'échanger ?<br>
+    <p class="text-md md:text-xl mb-10 text-gray-100 md:w-[500px] mx-auto">
+      Envie d'en savoir plus ou de discuter de tes besoins ?
       <span class="font-semibold text-yellow-400">Écris-moi, je te répondrai avec plaisir !</span>
     </p>
     <form class="grid gap-6 mt-8 text-left">
