@@ -76,9 +76,9 @@ onUnmounted(() => {
     </div>
   </section>
 
-<section id="services" class="py-24 sm:py-32 bg-gradient-to-b from-yellow-50 via-white to-white text-gray-900">
+<section id="services" class="py-24 sm:py-32 bg-gradient-to-b from-yellow-50 via-white to-white text-gray-700">
   <div class="max-w-5xl mx-auto px-4 md:text-center">
-    <h3 class="text-4xl text-center md:text-5xl font-extrabold mb-20 font-tuffy tracking-tighter">
+    <h3 class="text-4xl text-center md:text-5xl mb-20 font-tuffy tracking-tighter">
       L'accompagnement
     </h3>
     <div class="grid md:grid-cols-3 gap-20 lg:gap-8">
@@ -90,9 +90,9 @@ onUnmounted(() => {
             <path d="M8 20h8" stroke="currentColor" stroke-linecap="round"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-2xl font-bold mb-3">Coaching en ligne</h4>
-        <p class="text-base leading-relaxed text-gray-700">
-          Un accompagnement <span class="font-semibold text-yellow-600">100% flexible</span>, adapté à ton rythme et à ton quotidien.<br>
+        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Coaching en ligne</h4>
+        <p class="text-sm leading-relaxed text-left text-gray-700">
+          Un accompagnement <span class="font-semibold text-yellow-600">100% flexible</span>, adapté à ton rythme et à ton quotidien.
           Bouge où tu veux, quand tu veux, avec un suivi personnalisé et bienveillant.
         </p>
       </div>
@@ -105,8 +105,8 @@ onUnmounted(() => {
             <circle cx="12" cy="12" r="3" stroke="currentColor"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-2xl font-bold mb-3">Séances en présentiel</h4>
-        <p class="text-base leading-relaxed text-gray-700">
+        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Séances en présentiel</h4>
+        <p class="text-sm text-left leading-relaxed text-gray-700">
           Retrouvons-nous <span class="font-semibold text-yellow-600">à Paris</span> pour des séances sur mesure, pensées pour progresser en toute confiance et dans le respect de ton corps.<br>
           Un moment privilégié pour toi, dans la bonne humeur.
         </p>
@@ -119,8 +119,8 @@ onUnmounted(() => {
             <path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z" stroke="currentColor"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-2xl font-bold mb-3">Méthode Anima™</h4>
-        <p class="text-base leading-relaxed text-gray-700">
+        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Méthode Anima™</h4>
+        <p class="text-sm text-left leading-relaxed text-gray-700">
           Une méthode unique qui reconnecte ton corps et ton esprit.<br>
           Retrouve ton énergie intérieure et épanouis-toi pleinement grâce à un accompagnement global et innovant.
         </p>
@@ -212,27 +212,27 @@ onUnmounted(() => {
 
 <section id="contact" class="py-24 sm:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 text-white animate-fade-up">
   <div class="max-w-3xl mx-auto px-6 md:text-center">
-    <h3 class="text-4xl md:text-5xl font-extrabold mb-8 font-tuffy tracking-tighter text-yellow-400 drop-shadow">
+    <h3 class="text-4xl md:text-5xl font-extrabold mb-8 font-tuffy tracking-tighter text-white drop-shadow">
       Me contacter
     </h3>
     <p class="text-md md:text-xl mb-10 text-gray-100 md:w-[500px] mx-auto">
       Envie d'en savoir plus ou de discuter de tes besoins ?
-      <span class="font-semibold text-yellow-400">Écris-moi, je te répondrai avec plaisir !</span>
+      <span class="text-yellow-400 text-base">Écris-moi, je te répondrai avec plaisir !</span>
     </p>
     <form class="grid gap-6 mt-8 text-left">
       <div class="flex flex-col gap-2">
-        <label for="name" class="text-sm font-semibold text-yellow-200">Nom</label>
+        <label for="name" class="text-sm font-semibold text-white">Nom</label>
         <input id="name" type="text" placeholder="Ton nom" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" />
       </div>
       <div class="flex flex-col gap-2">
-        <label for="email" class="text-sm font-semibold text-yellow-200">Email</label>
+        <label for="email" class="text-sm font-semibold text-white">Email</label>
         <input id="email" type="email" placeholder="Ton email" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" />
       </div>
       <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm font-semibold text-yellow-200">Message</label>
+        <label for="message" class="text-sm font-semibold text-white">Message</label>
         <textarea id="message" placeholder="Écris ton message ici" rows="5" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"></textarea>
       </div>
-      <button type="submit" class="mt-2 bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-gray-900 font-bold text-base py-4 w-full sm:w-[220px] mx-auto rounded-full shadow-lg shadow-yellow-200/40 transition">
+      <button type="submit" class="mt-2 bg-white hover:bg-yellow-500 active:bg-yellow-600 text-gray-800  text-base py-4 w-full sm:w-[220px] mx-auto rounded-full shadow-lg shadow-yellow-200/40 transition">
         Envoyer
       </button>
     </form>
