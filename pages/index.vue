@@ -35,7 +35,7 @@ onUnmounted(() => {
       <nav class="hidden md:flex gap-2 md:gap-10 text-base xl:text-md tracking-widest items-center">
         <a href="#about" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
         <a href="#services" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
-        <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink>
+        <!-- <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink> -->
         <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
       </nav>
       <!-- Burger menu (mobile) -->
