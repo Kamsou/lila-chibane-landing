@@ -1,25 +1,23 @@
-<script scritpt setup>
-
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 const scrolled = ref(false);
+const isMobileMenuOpen = ref(false);
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 400;
 };
 
+const handleLinkClick = (e, href) => {
+  e.preventDefault();
+  isMobileMenuOpen.value = false;
+  const target = document.querySelector(href);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
-
-  const links = document.querySelectorAll('.nav-link');
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const href = link.getAttribute('href');
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
 });
 
 onUnmounted(() => {
@@ -29,24 +27,38 @@ onUnmounted(() => {
 
 <template>
     <section id="header" class="relative h-screen bg-cover bg-center scroll-smooth" style="background-image: url('https://res.cloudinary.com/augalo/image/upload/v1747472814/lilachibane/header_dyrbsr.jpg');">
-    <header
+ <header
       :class="['fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 font-tuffy transition-all duration-300 ease-in-out', scrolled ? 'bg-white text-gray-900 shadow' : 'bg-transparent text-white']"
     >
-      <h1 class="text-md md:text-2xl animate-fade-down">Lila Chibane</h1>
-      <nav class="flex gap-2 sm:gap-6 text-[8px] md:text-sm tracking-widest">
-        <a href="#about" class="nav-link hover:text-yellow-400 transition">À propos</a>
-        <a href="#services" class="nav-link hover:text-yellow-400 transition">L'Accompagnement</a>
+      <h1 class="text-md md:text-2xl xl:text-3xl animate-fade-down">Lila Chibane</h1>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex gap-2 md:gap-10 text-base xl:text-md tracking-widest items-center">
+        <a href="#about" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
+        <a href="#services" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
         <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink>
-        <a href="#contact" class="nav-link hover:text-yellow-400 transition">Contact</a>
+        <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
       </nav>
+      <!-- Burger menu (mobile) -->
+      <button class="md:hidden p-2 focus:outline-none z-50" @click="isMobileMenuOpen = !isMobileMenuOpen">
+        <svg v-if="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+      <transition name="fade">
+        <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-white flex flex-col items-center justify-center gap-8 text-2xl font-tuffy z-40 shadow-xl">
+          <a href="#about" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
+          <a href="#services" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
+          <NuxtLink to="/blog" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="isMobileMenuOpen = false">Blog</NuxtLink>
+          <a href="#contact" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
+        </div>
+      </transition>
     </header>
 
 <div class="relative h-full bg-black bg-opacity-50">
   <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 max-w-3xl mx-auto">
-    <h2 class="text-4xl md:text-8xl font-extrabold mb-8 animate-fade-up font-tuffy">
+    <h2 class="text-5xl md:text-8xl font-extrabold mb-4 md:mb-8 animate-fade-up font-tuffy">
       Coach sportive
     </h2>
-    <p class="text-md md:text-md font-tuffy mb-8 animate-fade-up animate-delay-400">
+    <p class="text-sm md:text-xl font-tuffy mb-8 animate-fade-up animate-delay-400">
       J'aide les télétravailleuses à retrouver la forme en restant chez elles<br>
       Reconnexion corps et mental
     </p>
@@ -129,7 +141,7 @@ onUnmounted(() => {
   </div>
 </section>
 
-<section class="py-20 lg:py-40 from-yellow-50 to-white">
+<section class="py-8 lg:py-40 from-yellow-50 to-white">
   <div class="max-w-4xl mx-auto md:text-center px-6">
     <h4 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">
       Trouve ton équilibre. Reprends le pouvoir sur ton bien-être.
@@ -159,7 +171,7 @@ onUnmounted(() => {
         </span>
         <h4 class="mt-6 text-xl font-bold mb-1">Coaching individuel</h4>
         <p class="text-gray-600 mb-4">En présentiel à Paris</p>
-        <div class="text-4xl font-extrabold text-yellow-500 mb-3 tracking-tight">80&nbsp;€</div>
+        <div class="text-4xl font-extrabold text-yellow-500 mb-3 tracking-tight">90 €</div>
         <ul class="text-gray-500 text-sm mb-8 space-y-1">
           <li>Séance personnalisée</li>
           <li>En salle ou en extérieur</li>
@@ -219,23 +231,52 @@ onUnmounted(() => {
       Envie d'en savoir plus ou de discuter de tes besoins ?
       <span class="text-yellow-400 text-base">Écris-moi, je te répondrai avec plaisir !</span>
     </p>
-    <form class="grid gap-6 mt-8 text-left">
+    <form 
+      action="https://formspree.io/f/movwedpw" 
+      method="POST"
+      class="grid gap-6 mt-8 text-left"
+    >
       <div class="flex flex-col gap-2">
         <label for="name" class="text-sm font-semibold text-white">Nom</label>
-        <input id="name" type="text" placeholder="Ton nom" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" />
+        <input 
+          id="name" 
+          name="name" 
+          type="text" 
+          placeholder="Ton nom" 
+          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" 
+          required
+        />
       </div>
       <div class="flex flex-col gap-2">
         <label for="email" class="text-sm font-semibold text-white">Email</label>
-        <input id="email" type="email" placeholder="Ton email" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" />
+        <input 
+          id="email" 
+          name="email" 
+          type="email" 
+          placeholder="Ton email" 
+          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" 
+          required
+        />
       </div>
       <div class="flex flex-col gap-2">
         <label for="message" class="text-sm font-semibold text-white">Message</label>
-        <textarea id="message" placeholder="Écris ton message ici" rows="5" class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"></textarea>
+        <textarea 
+          id="message" 
+          name="message" 
+          placeholder="Écris ton message ici" 
+          rows="5" 
+          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"
+          required
+        ></textarea>
       </div>
-      <button type="submit" class="mt-2 bg-white hover:bg-yellow-500 active:bg-yellow-600 text-gray-800  text-base py-4 w-full sm:w-[220px] mx-auto rounded-full shadow-lg shadow-yellow-200/40 transition">
+      <button 
+        type="submit" 
+        class="mt-2 bg-white hover:bg-yellow-500 active:bg-yellow-600 text-gray-800  text-base py-4 w-full sm:w-[220px] mx-auto rounded-full shadow-lg shadow-yellow-200/40 transition"
+      >
         Envoyer
       </button>
     </form>
+
   </div>
 </section>
 
@@ -289,4 +330,7 @@ html {
 .btn-primary {
   @apply bg-white hover:bg-gray-200 text-black text-xs font-semibold py-3 px-6 rounded-full transition transform hover:scale-105 hover:shadow-lg;
 }
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>
