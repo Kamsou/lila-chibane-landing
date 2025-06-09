@@ -39,7 +39,7 @@ onUnmounted(() => {
         <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
       </nav>
       <!-- Burger menu (mobile) -->
-      <button class="md:hidden p-2 focus:outline-none z-50" @click="isMobileMenuOpen = !isMobileMenuOpen">
+      <button class="md:hidden p-2 focus:outline-none z-50"  style="touch-action: manipulation;" @click="isMobileMenuOpen = !isMobileMenuOpen">
         <svg v-if="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
