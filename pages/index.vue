@@ -35,7 +35,6 @@ onUnmounted(() => {
       <nav class="hidden md:flex gap-2 md:gap-10 text-base xl:text-md tracking-widest items-center">
         <a href="#about" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
         <a href="#services" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
-        <!-- <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink> -->
         <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
       </nav>
       <!-- Burger menu (mobile) -->
@@ -47,20 +46,20 @@ onUnmounted(() => {
         <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-white flex flex-col items-center justify-center gap-8 text-2xl font-tuffy z-40 shadow-xl">
           <a href="#about" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
           <a href="#services" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
-          <NuxtLink to="/blog" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="isMobileMenuOpen = false">Blog</NuxtLink>
           <a href="#contact" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
         </div>
       </transition>
     </header>
 
 <div class="relative h-full bg-black bg-opacity-50">
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 max-w-3xl mx-auto">
-    <h2 class="text-5xl md:text-8xl font-extrabold mb-4 md:mb-8 animate-fade-up font-tuffy">
-      Coach sportive
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 max-w-4xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8 animate-fade-up font-tuffy leading-tight">
+      Retrouve énergie, forme et confiance<br>
+      <span class="text-yellow-300">sans souffrance ni pression</span>
     </h2>
-    <p class="text-sm md:text-xl font-tuffy mb-8 animate-fade-up animate-delay-400">
-      J'aide les télétravailleuses à retrouver la forme en restant chez elles<br>
-      Reconnexion corps et mental
+    <p class="text-base md:text-xl font-light mb-8 animate-fade-up animate-delay-200 leading-relaxed">
+      Du mouvement doux et intelligent pour renouer avec ton énergie naturelle<br>
+      <span class="text-yellow-300">sans régime, ni salle de sport</span>
     </p>
     <a href="#about" class="btn-primary animate-fade-up animate-delay-400 nav-link">Je découvre</a>
     <div class="mt-12 animate-bounce">
@@ -71,155 +70,126 @@ onUnmounted(() => {
 
   </section>
 
-  <section id="about" class="py-20 md:py-64 bg-white text-gray-800 animate-fade-up">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <img src="/lila-portrait.png" alt="Portrait de Lila Chibane">
+  <section id="about" class="py-20 md:py-32 text-gray-800 animate-fade-up">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col items-center mb-8 md:mb-12">
+        <img src="/lila-portrait.png" alt="Portrait de Lila Chibane" class="w-48 md:w-64 mb-6">
+        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 font-tuffy tracking-tighter text-center">Je m'appelle Lila.</h3>
       </div>
-      <div>
-        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-tuffy tracking-tighter">Je m'appelle Lila,</h3>
-        <p class="text-md md:text-lg leading-relaxed mb-6 text-gray-600">
-          Je suis passionnée par le mouvement, le bien-être corporel et la confiance en soi. Mon approche est simple : te guider pour que tu te reconnectes à ton corps et que tu oses t'exprimer pleinement.
-        </p>
-        <p class="text-md md:text-lg leading-relaxed text-gray-600">
-          Que ce soit en ligne ou en présentiel, je t'accompagne avec une méthode personnalisée, bienveillante et axée sur ton évolution.
+
+      <div class="grid md:grid-cols-3 gap-8 md:gap-10 mb-10">
+        <div>
+          <p class="text-base md:text-lg leading-loose text-gray-700">
+            Je suis coach sport-santé, spécialisée dans la reconnexion corps/mental et la sortie de la sédentarité.
+          </p>
+          <p class="text-base md:text-lg leading-loose text-gray-700 mt-6">
+            J'ai longtemps cru que pour progresser, il fallait souffrir. Aujourd'hui, j'aide les femmes à retrouver énergie, bien-être et confiance en elles, sans violence envers leur corps.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-base md:text-lg leading-loose text-gray-700">
+            Mon approche combine travail de renforcement, mobilité et relâchement pour reconnecter ton corps à sa vitalité naturelle.
+          </p>
+          <p class="text-base md:text-lg leading-loose text-gray-700 mt-6">
+            Ce sont des séances qui réveillent ton énergie tout en respectant ton rythme. Le but : bouger, respirer, s'ancrer - sans brusquer ton corps, ni ton esprit.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-base md:text-lg leading-loose text-gray-700">
+            J'accompagne les femmes, souvent prises dans le rythme du télétravail, à sortir de la sédentarité et à retrouver un corps fort, un mental apaisé et une énergie durable, tout en respectant leur rythme, sans contrainte ni culpabilité.
+          </p>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 pt-8">
+        <p class="text-base md:text-lg leading-loose text-gray-700 text-center max-w-5xl mx-auto">
+          <span class="font-semibold text-gray-900">Tu es la bienvenue ici, quel que soit ton niveau ou ton parcours sportif.</span><br>
+          J'ai créé ces espaces pour rendre la pratique du sport accessible, confortable et bienveillante. Quelle que soit ta morphologie, ta condition physique ou ton histoire, mes coachings sont pensés comme des lieux d'écoute, de respect et de chaleur humaine.<br>
+          <span class="text-yellow-600">Ici, pas de culte du corps parfait - seulement la recherche de la joie, de la vitalité et de la santé !</span>
         </p>
       </div>
     </div>
   </section>
 
 <section id="services" class="py-24 sm:py-32 bg-gradient-to-b from-yellow-50 via-white to-white text-gray-700">
-  <div class="max-w-5xl mx-auto px-4 md:text-center">
-    <h3 class="text-4xl text-center md:text-5xl mb-20 font-tuffy tracking-tighter">
+  <div class="max-w-6xl mx-auto px-4">
+    <h3 class="text-4xl text-center md:text-5xl mb-12 font-tuffy tracking-tighter">
       L'accompagnement
     </h3>
-    <div class="grid md:grid-cols-3 gap-20 lg:gap-8">
-      <!-- Coaching en ligne -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" />
-            <path d="M8 20h8" stroke="currentColor" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Coaching en ligne</h4>
-        <p class="text-sm leading-relaxed text-left text-gray-700">
-          Un accompagnement <span class="font-semibold text-yellow-600">100% flexible</span>, adapté à ton rythme et à ton quotidien.
-          Bouge où tu veux, quand tu veux, avec un suivi personnalisé et bienveillant.
-        </p>
-      </div>
 
-      <!-- Séances en présentiel -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1 1 16 0c0 4.97-3.582 9-8 9z" stroke="currentColor"/>
-            <circle cx="12" cy="12" r="3" stroke="currentColor"/>
+    <!-- Ma méthode - Section principale -->
+    <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border-2 border-yellow-200">
+      <div class="flex items-center justify-center mb-6">
+        <span class="bg-yellow-400/80 rounded-full p-4 shadow-md">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" stroke="currentColor"/>
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="1.5" fill="white"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Séances en présentiel</h4>
-        <p class="text-sm text-left leading-relaxed text-gray-700">
-          Retrouvons-nous <span class="font-semibold text-yellow-600">à Paris</span> pour des séances sur mesure, pensées pour progresser en toute confiance et dans le respect de ton corps.<br>
-          Un moment privilégié pour toi, dans la bonne humeur.
-        </p>
       </div>
-
-      <!-- Méthode Anima -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z" stroke="currentColor"/>
-          </svg>
-        </span>
-        <h4 class="mt-6 text-2xl text-gray-600 mb-3">Méthode Anima™</h4>
-        <p class="text-sm text-left leading-relaxed text-gray-700">
-          Une méthode unique qui reconnecte ton corps et ton esprit.<br>
-          Retrouve ton énergie intérieure et épanouis-toi pleinement grâce à un accompagnement global et innovant.
-        </p>
-      </div>
+      <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">Ma méthode</h4>
+      <p class="text-base md:text-lg leading-relaxed text-gray-700 text-center max-w-4xl mx-auto">
+        Une méthode qui relie <span class="font-semibold text-yellow-600">le mouvement, le mental et l'alimentation</span>.
+        Parce que ton énergie vient autant de ce que tu manges que de la façon dont tu bouges,
+        je t'aide à renouer avec des habitudes plus justes, plus douces, plus naturelles — pour retrouver une vitalité durable.
+      </p>
     </div>
-  </div>
-</section>
 
-<section class="py-8 lg:py-40 from-yellow-50 to-white">
-  <div class="max-w-4xl mx-auto md:text-center px-6">
-    <h4 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">
-      Trouve ton équilibre. Reprends le pouvoir sur ton bien-être.
-    </h4>
-    <p class="text-lg text-gray-700">
-      <span class="font-semibold text-yellow-600">Bienveillance, énergie, et résultats :</span> une approche sur-mesure pour t’aider à progresser, à ton rythme, et sans pression.
-    </p>
-  </div>
-</section>
+    <!-- Deux options -->
+    <div class="text-center mb-10">
+      <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Deux formules, une même approche</h4>
+      <p class="text-base md:text-lg text-gray-600">Choisis le format qui te correspond</p>
+    </div>
 
-
-
-<section id="offers" class="py-24 md:py-40 bg-gradient-to-b from-white via-yellow-50 to-gray-100 text-gray-900">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h3 class="text-4xl md:text-5xl font-extrabold mb-16 font-tuffy tracking-tighter">
-      Mes offres
-    </h3>
-    <div class="grid md:grid-cols-3 gap-20 lg:gap-10">
-      <!-- Offre 1 -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
+    <div class="grid md:grid-cols-2 gap-10 md:gap-12 max-w-5xl mx-auto">
+      <!-- Coaching individuel -->
+      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <!-- Person Icon -->
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="8" r="4" stroke="currentColor"/>
             <path d="M6 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="currentColor"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-xl font-bold mb-1">Coaching individuel</h4>
-        <p class="text-gray-600 mb-4">En présentiel à Paris</p>
-        <div class="text-4xl font-extrabold text-yellow-500 mb-3 tracking-tight">90 €</div>
-        <ul class="text-gray-500 text-sm mb-8 space-y-1">
-          <li>Séance personnalisée</li>
-          <li>En salle ou en extérieur</li>
-          <li>Suivi adapté à tes besoins</li>
-        </ul>
-        <a href="https://calendly.com/lilacoach/call?back=1" target="_blank" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full transition mb-1 shadow-lg shadow-yellow-100/40">Prendre RDV</a>
+        <h5 class="mt-6 text-xl md:text-2xl font-bold text-gray-700 mb-3">Coaching individuel</h5>
+        <p class="text-sm md:text-base leading-relaxed text-gray-700 text-center">
+          Un accompagnement <span class="font-semibold text-yellow-600">100% flexible et sur-mesure</span>, entièrement adapté à ton rythme et à ton quotidien.<br>
+          Séances en visio avec un suivi personnalisé et bienveillant.
+        </p>
       </div>
-      <!-- Offre 2 -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
+
+      <!-- Séances en groupe réduit -->
+      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
         <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <!-- Laptop Icon -->
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor"/>
-            <path d="M8 20h8" stroke="currentColor" stroke-linecap="round"/>
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="9" cy="7" r="3" stroke="currentColor"/>
+            <circle cx="15" cy="7" r="3" stroke="currentColor"/>
+            <path d="M3 18c0-2 2.5-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor"/>
+            <path d="M15 18c0-2 2.5-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor"/>
           </svg>
         </span>
-        <h4 class="mt-6 text-xl font-bold mb-1">Coaching individuel</h4>
-        <p class="text-gray-600 mb-4">En visio</p>
-        <div class="text-4xl font-extrabold text-yellow-500 mb-3 tracking-tight">70&nbsp;€</div>
-        <ul class="text-gray-500 text-sm mb-8 space-y-1">
-          <li>Séance à distance</li>
-          <li>Flexibilité horaire</li>
-          <li>Accompagnement personnalisé</li>
-        </ul>
-        <a href="https://calendly.com/lilacoach/call?back=1" target="_blank" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full transition mb-1 shadow-lg shadow-yellow-100/40">Prendre RDV</a>
+        <h5 class="mt-6 text-xl md:text-2xl font-bold text-gray-700 mb-3">Séances en groupe réduit</h5>
+        <p class="text-sm md:text-base leading-relaxed text-gray-700 text-center">
+          Des séances <span class="font-semibold text-yellow-600">en visio en petit comité (max 5 personnes)</span> pour un accompagnement personnalisé et convivial.<br>
+          Bouge avec d'autres, progresse dans la bonne humeur et le respect de ton rythme.
+        </p>
       </div>
-      <!-- Offre 3 -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-10 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <!-- Star/Medal Icon -->
-          <svg class="lg:w-10 lg:h-10 w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="10" r="6" stroke="currentColor"/>
-            <path d="M12 16v4M10 20h4" stroke="currentColor" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <h4 class="mt-6 text-xl font-bold mb-1">Accompagnement global</h4>
-        <p class="text-gray-600 mb-4">Sur 3 mois (100% live)</p>
-        <div class="text-4xl font-extrabold text-yellow-500 mb-3 tracking-tight">1500&nbsp;€</div>
-        <ul class="text-gray-500 text-sm mb-8 space-y-1">
-          <li>Programme complet sur 3 mois</li>
-          <li>Séances en direct chaque semaine</li>
-          <li>Suivi & soutien continu</li>
-        </ul>
-        <a href="#contact" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full transition mb-1 shadow-lg shadow-yellow-100/40">Me contacter</a>
-      </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="text-center mt-16">
+      <a href="https://calendly.com/lilacoach/bilanpersonnalise" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-lg py-4 px-10 rounded-full transition transform hover:scale-105 shadow-xl shadow-yellow-200/50">
+        Prendre rendez-vous
+      </a>
+      <p class="text-gray-600 mt-4 text-sm">Premier bilan personnalisé offert</p>
     </div>
   </div>
 </section>
+
+
+
 
 
 <section id="contact" class="py-24 sm:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 text-white animate-fade-up">
