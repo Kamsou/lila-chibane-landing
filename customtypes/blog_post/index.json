@@ -1,0 +1,66 @@
+{
+  "id": "blog_post",
+  "label": "Blog Post",
+  "format": "page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "URL de l'article",
+          "placeholder": "mon-premier-article"
+        }
+      },
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre de l'article",
+          "placeholder": "Entrez le titre de votre article"
+        }
+      },
+      "excerpt": {
+        "type": "Text",
+        "config": {
+          "label": "Résumé",
+          "placeholder": "Courte description de l'article (sera affiché dans la liste des articles)"
+        }
+      },
+      "featured_image": {
+        "type": "Image",
+        "config": {
+          "label": "Image à la une",
+          "constraint": {
+            "width": 1200,
+            "height": 675
+          },
+          "thumbnails": []
+        }
+      },
+      "publication_date": {
+        "type": "Date",
+        "config": {
+          "label": "Date de publication",
+          "placeholder": "Sélectionnez la date de publication"
+        }
+      },
+      "reading_time": {
+        "type": "Number",
+        "config": {
+          "label": "Temps de lecture (en minutes)",
+          "placeholder": "5"
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Contenu de l'article",
+          "placeholder": "Écrivez votre article ici...",
+          "allowTargetBlank": true,
+          "multi": "paragraph,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      }
+    }
+  }
+}

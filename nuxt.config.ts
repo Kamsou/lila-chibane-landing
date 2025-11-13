@@ -4,6 +4,18 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    '@nuxtjs/prismic'
   ],
+  prismic: {
+    endpoint: 'lila-chibane', // Remplacez par le nom de votre repository Prismic
+    clientConfig: {
+      routes: [
+        {
+          type: 'blog_post',
+          path: '/blog/:uid',
+        }
+      ]
+    }
+  },
 })

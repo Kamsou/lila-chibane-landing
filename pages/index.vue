@@ -35,6 +35,7 @@ onUnmounted(() => {
       <nav class="hidden md:flex gap-2 md:gap-10 text-base xl:text-md tracking-widest items-center">
         <a href="#about" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
         <a href="#services" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
+        <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink>
         <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
       </nav>
       <!-- Burger menu (mobile) -->
@@ -46,6 +47,7 @@ onUnmounted(() => {
         <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-white flex flex-col items-center justify-center gap-8 text-2xl font-tuffy z-40 shadow-xl">
           <a href="#about" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
           <a href="#services" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
+          <NuxtLink to="/blog" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="isMobileMenuOpen = false">Blog</NuxtLink>
           <a href="#contact" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
         </div>
       </transition>
