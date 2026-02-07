@@ -14,7 +14,7 @@
     "@nuxt/fonts": "0.11.2",
     "@nuxtjs/prismic": "^4.1.0",
     "@nuxtjs/tailwindcss": "6.13.2",
-    "nuxt": "^3.16.2",
+    "nuxt": "^4.0.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
