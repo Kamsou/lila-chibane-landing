@@ -16,26 +16,19 @@ useSeoMeta({
 
 const currentStep = ref(0);
 const answers = ref({
-  q1: null,
-  q2: null,
-  q3: null,
-  q4: null,
-  q5: null,
-  q6: null,
-  q7: null,
-  q8: null,
-  q9: null
+  q1: null, q2: null, q3: null,
+  q4: null, q5: null, q6: null,
+  q7: null, q8: null, q9: null
 });
 
 const questions = [
   {
     step: 1,
     title: 'Énergie physique',
-    icon: '🌞',
     questions: [
       {
         id: 'q1',
-        text: '🌅 Le matin…',
+        text: 'Le matin…',
         options: [
           { value: 'A', label: 'Je me lève pleine d\'énergie' },
           { value: 'B', label: 'J\'ai du mal à émerger' },
@@ -44,7 +37,7 @@ const questions = [
       },
       {
         id: 'q2',
-        text: '⚡ Ton niveau d\'énergie dans la journée ?',
+        text: 'Ton niveau d\'énergie dans la journée ?',
         options: [
           { value: 'A', label: 'Stable' },
           { value: 'B', label: 'En dents de scie' },
@@ -53,7 +46,7 @@ const questions = [
       },
       {
         id: 'q3',
-        text: '😴 Ton sommeil ?',
+        text: 'Ton sommeil ?',
         options: [
           { value: 'A', label: 'Réparateur' },
           { value: 'B', label: 'Léger / entrecoupé' },
@@ -65,11 +58,10 @@ const questions = [
   {
     step: 2,
     title: 'Mental & émotions',
-    icon: '☁️',
     questions: [
       {
         id: 'q4',
-        text: '🧠 Ton mental en ce moment ?',
+        text: 'Ton mental en ce moment ?',
         options: [
           { value: 'A', label: 'Clair et concentré' },
           { value: 'B', label: 'Brouillon / dispersé' },
@@ -78,7 +70,7 @@ const questions = [
       },
       {
         id: 'q5',
-        text: '💬 Ton rapport à toi-même ?',
+        text: 'Ton rapport à toi-même ?',
         options: [
           { value: 'A', label: 'Bienveillant' },
           { value: 'B', label: 'Critique' },
@@ -87,7 +79,7 @@ const questions = [
       },
       {
         id: 'q6',
-        text: '🌊 Tes émotions ?',
+        text: 'Tes émotions ?',
         options: [
           { value: 'A', label: 'Fluides' },
           { value: 'B', label: 'En montagnes russes' },
@@ -99,11 +91,10 @@ const questions = [
   {
     step: 3,
     title: 'Habitudes & hygiène de vie',
-    icon: '🌿',
     questions: [
       {
         id: 'q7',
-        text: '🤸‍♀️ Combien de fois par semaine fais-tu du sport ?',
+        text: 'Combien de fois par semaine fais-tu du sport ?',
         options: [
           { value: 'A', label: '3 fois ou plus' },
           { value: 'B', label: '1 à 2 fois' },
@@ -112,7 +103,7 @@ const questions = [
       },
       {
         id: 'q8',
-        text: '🥗 Ton alimentation ?',
+        text: 'Ton alimentation ?',
         options: [
           { value: 'A', label: 'Équilibrée et intuitive' },
           { value: 'B', label: 'Je mange sur le pouce' },
@@ -121,7 +112,7 @@ const questions = [
       },
       {
         id: 'q9',
-        text: '☕ Tu fais des pauses dans la journée ?',
+        text: 'Tu fais des pauses dans la journée ?',
         options: [
           { value: 'A', label: 'Plusieurs fois' },
           { value: 'B', label: 'Parfois' },
@@ -135,8 +126,6 @@ const questions = [
 const profiles = {
   A: {
     title: 'L\'Énergisée',
-    icon: '⚡',
-    color: 'yellow',
     description: 'Tu es connectée à ton corps et à tes sensations.',
     details: [
       'Tu as compris qu\'avoir de l\'énergie ne veut pas dire "en faire plus", mais "mieux gérer ton équilibre".',
@@ -156,8 +145,6 @@ const profiles = {
   },
   B: {
     title: 'L\'Éparpillée',
-    icon: '🌪️',
-    color: 'blue',
     description: 'Tu es souvent pleine de bonne volonté, motivée, mais ton énergie part dans tous les sens.',
     details: [
       'Certaines journées, tu es au top : concentrée, productive, en mouvement.',
@@ -176,8 +163,6 @@ const profiles = {
   },
   C: {
     title: 'L\'Éteinte',
-    icon: '☁️',
-    color: 'gray',
     description: 'Ton corps t\'envoie des signaux clairs : fatigue persistante, démotivation, tensions physiques, alimentation émotionnelle…',
     details: [
       'Tu sens que ton énergie baisse, même quand tu dors ou manges "bien".',
@@ -200,9 +185,8 @@ const profiles = {
 const showResults = ref(false);
 
 const canProgress = computed(() => {
-  if (currentStep.value === 0) return true; // Intro page
-  if (currentStep.value === questions.length + 1) return true; // Results page
-
+  if (currentStep.value === 0) return true;
+  if (currentStep.value === questions.length + 1) return true;
   const stepQuestions = questions[currentStep.value - 1].questions;
   return stepQuestions.every(q => answers.value[q.id] !== null);
 });
@@ -212,23 +196,12 @@ const result = computed(() => {
   Object.values(answers.value).forEach(answer => {
     if (answer) counts[answer]++;
   });
-
   const maxCount = Math.max(counts.A, counts.B, counts.C);
   const dominantProfile = Object.entries(counts).find(([_, count]) => count === maxCount)?.[0];
-
-  return {
-    counts,
-    profile: profiles[dominantProfile]
-  };
+  return { counts, profile: profiles[dominantProfile] };
 });
 
-function nextStep() {
-  if (currentStep.value < questions.length) {
-    currentStep.value++;
-  } else {
-    showResults.value = true;
-    currentStep.value++;
-  }
+function scrollTop() {
   window.scrollTo(0, 0);
   nextTick(() => {
     window.scrollTo(0, 0);
@@ -237,17 +210,22 @@ function nextStep() {
   });
 }
 
+function nextStep() {
+  if (currentStep.value < questions.length) {
+    currentStep.value++;
+  } else {
+    showResults.value = true;
+    currentStep.value++;
+  }
+  scrollTop();
+}
+
 function prevStep() {
   if (currentStep.value > 0) {
     currentStep.value--;
     showResults.value = false;
   }
-  window.scrollTo(0, 0);
-  nextTick(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
+  scrollTop();
 }
 
 function restart() {
@@ -258,56 +236,48 @@ function restart() {
     q4: null, q5: null, q6: null,
     q7: null, q8: null, q9: null
   };
-  window.scrollTo(0, 0);
-  nextTick(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
+  scrollTop();
 }
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-yellow-50/30">
+  <div class="min-h-screen bg-cream">
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full h-20 flex items-center justify-between px-8 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-      <NuxtLink to="/" class="text-lg md:text-xl font-display text-gray-800 hover:text-yellow-600 transition flex items-center gap-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
-        Lila Chibane
-      </NuxtLink>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-400/10">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
+        <NuxtLink to="/" class="font-display text-lg md:text-xl font-light tracking-tight text-stone-900 flex items-center gap-2">
+          <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Lila Chibane
+        </NuxtLink>
+      </div>
     </header>
 
     <!-- Intro Page -->
-    <div v-if="currentStep === 0" class="h-screen flex items-center justify-center px-4 pt-20">
-      <div class="max-w-3xl w-full animate-fade-up">
-        <div class="text-center mb-10">
-          <div class="text-6xl mb-6">✨</div>
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display tracking-tight">
-            Quel est ton profil d'énergie actuelle ?
+    <div v-if="currentStep === 0" class="min-h-screen flex items-center justify-center px-5 sm:px-6 md:px-8 pt-20">
+      <div class="max-w-2xl w-full animate-fade-up">
+        <div class="text-center mb-10 md:mb-12">
+          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6">Quiz energie</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-stone-900 leading-[1.15] mb-5 md:mb-6">
+            Quel est ton profil<br>d'energie actuelle ?
           </h1>
-          <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
-            Découvre en quelques minutes ton état d'énergie, physique, mental et émotionnel
+          <p class="text-base sm:text-lg font-body font-light text-stone-600 max-w-xl mx-auto leading-relaxed">
+            Decouvre en quelques minutes ton etat d'energie, physique, mental et emotionnel
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 mb-8">
-          <div class="flex items-start gap-3 mb-6">
-            <span class="text-2xl">🌸</span>
-            <div>
-              <h2 class="text-xl font-semibold text-gray-900 mb-3">Introduction</h2>
-              <div class="space-y-3 text-gray-600 text-base leading-relaxed">
-                <p>Bienvenue dans ce quiz introspectif.</p>
-                <p>Il n'y a pas de bonne ou de mauvaise réponse, juste une invitation à t'écouter.</p>
-                <p class="text-gray-700">À la fin, tu découvriras ton profil d'énergie et des pistes concrètes pour le rééquilibrer naturellement.</p>
-              </div>
-            </div>
+        <div class="bg-white rounded-2xl border border-stone-400/10 p-7 md:p-9 mb-8">
+          <h2 class="text-lg font-display font-semibold text-stone-900 mb-4">Introduction</h2>
+          <div class="space-y-3 text-base font-body font-light text-stone-600 leading-relaxed">
+            <p>Bienvenue dans ce quiz introspectif.</p>
+            <p>Il n'y a pas de bonne ou de mauvaise reponse, juste une invitation a t'ecouter.</p>
+            <p class="text-stone-800 font-normal">A la fin, tu decouvriras ton profil d'energie et des pistes concretes pour le reequilibrer naturellement.</p>
           </div>
         </div>
 
         <div class="text-center">
-          <button @click="nextStep" class="bg-gray-900 hover:bg-gray-800 text-white font-medium text-base py-4 px-12 rounded-full shadow-sm transition transform hover:scale-[1.02]">
+          <button @click="nextStep" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
             Commencer le quiz
           </button>
         </div>
@@ -316,46 +286,46 @@ function restart() {
 
     <!-- Question Steps -->
     <div v-else-if="currentStep > 0 && currentStep <= questions.length" class="min-h-screen flex flex-col pt-20 pb-8">
-      <div class="flex-1 flex items-center justify-center px-4 py-8">
-        <div class="max-w-3xl w-full animate-fade-up my-auto">
+      <div class="flex-1 flex items-center justify-center px-5 sm:px-6 md:px-8 py-8">
+        <div class="max-w-2xl w-full animate-fade-up my-auto">
           <!-- Progress Bar -->
-          <div class="mb-10">
+          <div class="mb-8 md:mb-10">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Étape {{ currentStep }} / {{ questions.length }}</span>
-              <span class="text-xs font-medium text-gray-900">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
+              <span class="text-xs font-body font-medium text-sage-dark tracking-wide">Etape {{ currentStep }} / {{ questions.length }}</span>
+              <span class="text-xs font-body font-medium text-stone-900">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
             </div>
-            <div class="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
-              <div class="bg-gray-900 h-1.5 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
+            <div class="w-full bg-sand rounded-full h-1 overflow-hidden">
+              <div class="bg-stone-900 h-1 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
             </div>
           </div>
 
           <!-- Questions Card -->
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 mb-6">
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-              <span class="text-2xl">{{ questions[currentStep - 1].icon }}</span>
-              <h2 class="text-xl md:text-2xl font-semibold text-gray-900">
+          <div class="bg-white rounded-2xl border border-stone-400/10 p-6 md:p-8 mb-6">
+            <div class="mb-6 pb-4 border-b border-stone-400/10">
+              <p class="text-xs font-body font-medium text-sage-dark tracking-wide mb-2">Etape {{ currentStep }}</p>
+              <h2 class="text-xl md:text-2xl font-display font-light text-stone-900">
                 {{ questions[currentStep - 1].title }}
               </h2>
             </div>
 
-            <div class="space-y-5">
-              <div v-for="question in questions[currentStep - 1].questions" :key="question.id" class="space-y-2">
-                <h3 class="text-sm font-medium text-gray-800">{{ question.text }}</h3>
+            <div class="space-y-6">
+              <div v-for="question in questions[currentStep - 1].questions" :key="question.id" class="space-y-2.5">
+                <h3 class="text-sm font-body font-medium text-stone-900">{{ question.text }}</h3>
                 <div class="space-y-1.5">
                   <label
                     v-for="option in question.options"
                     :key="option.value"
-                    class="flex items-center p-2.5 rounded-lg border cursor-pointer transition-all group"
-                    :class="answers[question.id] === option.value ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50/50'"
+                    class="flex items-center p-3 rounded-xl border cursor-pointer transition-all duration-200"
+                    :class="answers[question.id] === option.value ? 'border-stone-900 bg-sand/50' : 'border-stone-400/15 hover:border-stone-400/30 hover:bg-sand/30'"
                   >
                     <input
                       type="radio"
                       :name="question.id"
                       :value="option.value"
                       v-model="answers[question.id]"
-                      class="w-4 h-4 text-gray-900 focus:ring-gray-900 cursor-pointer"
+                      class="w-4 h-4 text-stone-900 focus:ring-sage cursor-pointer accent-stone-900"
                     />
-                    <span class="ml-3 text-gray-700 text-sm">{{ option.label }}</span>
+                    <span class="ml-3 text-sm font-body text-stone-700">{{ option.label }}</span>
                   </label>
                 </div>
               </div>
@@ -364,16 +334,16 @@ function restart() {
 
           <!-- Navigation -->
           <div class="flex justify-between gap-4">
-            <button @click="prevStep" class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-medium py-3 px-6 rounded-full transition text-sm">
-              ← Retour
+            <button @click="prevStep" class="bg-transparent border border-stone-300 text-stone-600 text-sm font-body font-medium py-3 px-6 rounded-full hover:border-stone-900 hover:text-stone-900 transition-all duration-300">
+              Retour
             </button>
             <button
               @click="nextStep"
               :disabled="!canProgress"
-              class="bg-gray-900 hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-medium py-3 px-8 rounded-full transition text-sm"
-              :class="canProgress ? 'shadow-sm transform hover:scale-[1.02]' : ''"
+              class="text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300"
+              :class="canProgress ? 'bg-stone-900 hover:bg-stone-800 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-stone-400 cursor-not-allowed'"
             >
-              {{ currentStep === questions.length ? 'Voir mes résultats' : 'Suivant →' }}
+              {{ currentStep === questions.length ? 'Voir mes resultats' : 'Suivant' }}
             </button>
           </div>
         </div>
@@ -381,87 +351,81 @@ function restart() {
     </div>
 
     <!-- Results Page -->
-    <div v-else-if="showResults" class="min-h-screen px-4 py-24">
-      <div class="max-w-4xl mx-auto animate-fade-up">
-        <div class="text-center mb-12">
-          <div class="text-6xl mb-6">{{ result.profile.icon }}</div>
-          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3 font-display">
-            Ton profil : {{ result.profile.title }}
+    <div v-else-if="showResults" class="min-h-screen px-5 sm:px-6 md:px-8 pt-28 md:pt-36 pb-20 md:pb-32">
+      <div class="max-w-3xl mx-auto animate-fade-up">
+        <div class="text-center mb-10 md:mb-14">
+          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6">Ton resultat</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-stone-900 leading-[1.15] mb-4">
+            {{ result.profile.title }}
           </h1>
-          <div class="flex justify-center gap-6 text-xs text-gray-500 uppercase tracking-wider">
+          <div class="flex justify-center gap-6 text-xs font-body text-stone-400 tracking-wide">
             <span>A : {{ result.counts.A }}</span>
             <span>B : {{ result.counts.B }}</span>
             <span>C : {{ result.counts.C }}</span>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
-          <div class="space-y-8 text-gray-700">
-            <p class="text-lg leading-relaxed font-medium text-gray-900">{{ result.profile.description }}</p>
+        <div class="bg-white rounded-2xl border border-stone-400/10 p-7 md:p-10 mb-8">
+          <div class="space-y-8">
+            <p class="text-lg font-body font-medium text-stone-900 leading-relaxed">{{ result.profile.description }}</p>
 
-            <div v-for="detail in result.profile.details" :key="detail" class="text-base leading-relaxed text-gray-600">
+            <div v-for="detail in result.profile.details" :key="detail" class="text-base font-body font-light text-stone-600 leading-relaxed">
               <p>{{ detail }}</p>
             </div>
 
-            <div class="border-t border-gray-100 pt-8">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span>🌿</span>
-                Ce que cela dit de toi
-              </h3>
+            <div class="border-t border-stone-400/15 pt-8">
+              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ce que cela dit de toi</h3>
               <ul class="space-y-3">
-                <li v-for="item in result.profile.whatThisSays" :key="item" class="text-base leading-relaxed text-gray-600">
+                <li v-for="item in result.profile.whatThisSays" :key="item" class="text-base font-body font-light text-stone-600 leading-relaxed">
                   {{ item }}
                 </li>
               </ul>
             </div>
 
-            <div class="border-t border-gray-100 pt-8">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span>✨</span>
-                Ce que tu peux approfondir
-              </h3>
+            <div class="border-t border-stone-400/15 pt-8">
+              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ce que tu peux approfondir</h3>
               <ul class="space-y-3">
-                <li v-for="item in result.profile.toDeepen" :key="item" class="flex items-start gap-2 text-base leading-relaxed text-gray-600">
-                  <span class="text-gray-400 mt-1">•</span>
+                <li v-for="item in result.profile.toDeepen" :key="item" class="flex items-start gap-2.5 text-base font-body font-light text-stone-600 leading-relaxed">
+                  <span class="text-sage mt-1.5 text-xs">&#9679;</span>
                   <span>{{ item }}</span>
                 </li>
               </ul>
             </div>
 
-            <div class="border-t border-gray-100 pt-8 bg-gray-50 -mx-8 md:-mx-12 px-8 md:px-12 py-8 rounded-xl">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span>🎯</span>
-                Ton prochain défi
-              </h3>
-              <p class="text-base leading-relaxed text-gray-700">{{ result.profile.challenge }}</p>
+            <div class="border-t border-stone-400/15 pt-8 bg-sand -mx-7 md:-mx-10 px-7 md:px-10 py-8 rounded-xl">
+              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ton prochain defi</h3>
+              <p class="text-base font-body font-light text-stone-700 leading-relaxed">{{ result.profile.challenge }}</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-sm p-8 md:p-10 text-center mb-8 border border-gray-700">
-          <div class="text-4xl mb-4">🌷</div>
-          <h3 class="text-2xl font-semibold text-white mb-3">Tu veux aller plus loin ?</h3>
-          <p class="text-base text-gray-300 mb-6 max-w-md mx-auto">Prends rendez-vous pour un bilan gratuit personnalisé</p>
+        <!-- CTA -->
+        <div class="bg-stone-900 rounded-2xl p-8 md:p-10 text-center mb-8">
+          <h3 class="text-xl md:text-2xl font-display font-light text-white mb-3">Tu veux aller plus loin ?</h3>
+          <p class="text-sm font-body text-white/60 mb-6 max-w-md mx-auto leading-relaxed">
+            Prends rendez-vous pour un bilan gratuit personnalise
+          </p>
           <a
             href="https://calendly.com/lilacoach/bilanpersonnalise"
             target="_blank"
-            class="inline-block bg-white hover:bg-gray-100 text-gray-900 font-medium text-sm py-3.5 px-10 rounded-full shadow-sm transition transform hover:scale-[1.02] mb-6"
+            rel="noopener"
+            class="inline-block bg-white hover:bg-cream text-stone-900 text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg mb-6"
           >
             Je prends RDV
           </a>
-          <div class="border-t border-gray-700 pt-6 mt-6">
-            <p class="text-sm text-gray-300 mb-2">Aucun créneau ne te convient ?</p>
-            <a href="mailto:lila.chibane@outlook.com" class="text-base md:text-lg font-medium text-white hover:text-yellow-400 transition underline">
+          <div class="border-t border-white/10 pt-6 mt-2">
+            <p class="text-xs font-body text-white/40 mb-2">Aucun creneau ne te convient ?</p>
+            <a href="mailto:lila.chibane@outlook.com" class="text-sm font-body font-medium text-white hover:text-white/80 transition-colors duration-200 underline underline-offset-4">
               lila.chibane@outlook.com
             </a>
           </div>
         </div>
 
         <div class="flex justify-center gap-4">
-          <button @click="restart" class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-medium py-3 px-6 rounded-full transition text-sm">
+          <button @click="restart" class="bg-transparent border border-stone-300 text-stone-600 text-sm font-body font-medium py-3 px-6 rounded-full hover:border-stone-900 hover:text-stone-900 transition-all duration-300">
             Refaire le quiz
           </button>
-          <NuxtLink to="/" class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-8 rounded-full transition shadow-sm text-sm">
+          <NuxtLink to="/" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
             Retour sur le site
           </NuxtLink>
         </div>
@@ -472,7 +436,7 @@ function restart() {
 
 <style scoped>
 .animate-fade-up {
-  animation: fadeUp 0.6s ease-out;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeUp {

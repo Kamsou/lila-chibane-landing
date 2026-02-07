@@ -699,7 +699,7 @@ onUnmounted(() => {
 
       <div class="border-t border-white/10 mt-10 md:mt-12 pt-6 md:pt-8">
         <p class="text-xs font-body text-white/30">
-          &copy; 2026 Lila Chibane · Tous droits réservés.
+          &copy; {{ new Date().getFullYear() }} Lila Chibane · Tous droits réservés.
         </p>
       </div>
     </div>

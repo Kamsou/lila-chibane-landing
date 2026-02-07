@@ -6,7 +6,11 @@ useHead({
   htmlAttrs: { lang: 'fr' },
   link: [
     { rel: 'canonical', href: canonicalUrl },
+    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'apple-touch-icon', href: '/favicon.svg' },
+    { rel: 'preconnect', href: 'https://formspree.io' },
+    { rel: 'preconnect', href: 'https://lila-chibane.cdn.prismic.io', crossorigin: '' },
   ],
   meta: [
     { name: 'theme-color', content: '#FAF8F5' },

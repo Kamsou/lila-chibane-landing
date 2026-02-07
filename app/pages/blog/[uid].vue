@@ -12,7 +12,6 @@ const { data: article } = await useAsyncData(`blog-post-${route.params.uid}`, as
   }
 });
 
-// Format date helper
 const formatDate = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -23,7 +22,6 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-// SEO Meta
 if (article.value) {
   const articleUrl = `https://lilachibane.com/blog/${route.params.uid}`
   const articleImage = article.value.data.featured_image?.url || 'https://lilachibane.com/lila-portrait.png'
@@ -41,7 +39,6 @@ if (article.value) {
     twitterImage: articleImage,
   })
 
-  // JSON-LD BlogPosting
   useHead({
     script: [
       {
@@ -75,30 +72,34 @@ if (article.value) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-cream">
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-6 z-50 font-display">
-      <NuxtLink to="/" class="text-md md:text-2xl xl:text-3xl text-gray-900 hover:text-yellow-600 transition">
-        Lila Chibane
-      </NuxtLink>
-      <nav class="hidden md:flex gap-6 md:gap-10 text-sm md:text-base tracking-widest items-center">
-        <NuxtLink to="/#about" class="hover:text-yellow-600 transition">À propos</NuxtLink>
-        <NuxtLink to="/#services" class="hover:text-yellow-600 transition">L'Accompagnement</NuxtLink>
-        <NuxtLink to="/blog" class="text-yellow-600 font-semibold">Blog</NuxtLink>
-        <NuxtLink to="/#contact" class="hover:text-yellow-600 transition">Contact</NuxtLink>
-      </nav>
-      <!-- Mobile menu button -->
-      <NuxtLink to="/blog" class="md:hidden text-sm text-yellow-600 font-semibold">
-        ← Blog
-      </NuxtLink>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-400/10">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
+        <NuxtLink to="/" class="font-display text-lg md:text-xl font-light tracking-tight text-stone-900">
+          Lila Chibane
+        </NuxtLink>
+        <nav class="hidden md:flex items-center gap-8 lg:gap-10">
+          <NuxtLink to="/#a-propos" class="font-body text-sm font-medium tracking-wide text-stone-600 hover:text-stone-900 transition-colors duration-200">A propos</NuxtLink>
+          <NuxtLink to="/#methode" class="font-body text-sm font-medium tracking-wide text-stone-600 hover:text-stone-900 transition-colors duration-200">Methode</NuxtLink>
+          <NuxtLink to="/blog" class="font-body text-sm font-medium tracking-wide text-stone-900">Blog</NuxtLink>
+          <NuxtLink to="/#contact" class="font-body text-sm font-medium tracking-wide text-stone-600 hover:text-stone-900 transition-colors duration-200">Contact</NuxtLink>
+        </nav>
+        <NuxtLink to="/blog" class="md:hidden font-body text-sm text-stone-600 hover:text-stone-900 transition-colors duration-200 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Blog
+        </NuxtLink>
+      </div>
     </header>
 
     <!-- Article Content -->
-    <article v-if="article" class="pt-24 pb-20">
+    <article v-if="article" class="pt-28 md:pt-36 pb-20 md:pb-32">
       <!-- Back to blog -->
-      <div class="max-w-4xl mx-auto px-6 mb-8">
-        <NuxtLink to="/blog" class="inline-flex items-center text-yellow-600 hover:text-yellow-700 font-semibold transition">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 mb-8 md:mb-10">
+        <NuxtLink to="/blog" class="inline-flex items-center font-body text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors duration-200">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
           Retour aux articles
@@ -106,8 +107,8 @@ if (article.value) {
       </div>
 
       <!-- Featured Image -->
-      <div v-if="article.data.featured_image?.url" class="w-full max-w-5xl mx-auto px-6 mb-12">
-        <div class="aspect-video rounded-3xl overflow-hidden shadow-2xl">
+      <div v-if="article.data.featured_image?.url" class="w-full max-w-5xl mx-auto px-5 sm:px-6 md:px-8 mb-10 md:mb-14">
+        <div class="aspect-video rounded-2xl overflow-hidden">
           <img
             :src="article.data.featured_image.url"
             :alt="article.data.featured_image.alt || article.data.title"
@@ -117,17 +118,17 @@ if (article.value) {
       </div>
 
       <!-- Article Header -->
-      <div class="max-w-4xl mx-auto px-6 mb-12">
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 mb-10 md:mb-14">
         <!-- Date & Reading Time -->
-        <div class="flex items-center gap-4 mb-6 text-sm text-gray-600">
-          <span v-if="article.data.publication_date" class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="flex items-center gap-4 mb-5 md:mb-6">
+          <span v-if="article.data.publication_date" class="flex items-center gap-2 text-xs font-body font-medium text-sage-dark tracking-wide">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             {{ formatDate(article.data.publication_date) }}
           </span>
-          <span v-if="article.data.reading_time" class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <span v-if="article.data.reading_time" class="flex items-center gap-2 text-xs font-body font-medium text-sage-dark tracking-wide">
+            <svg class="w-4 h-4 text-sage" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {{ article.data.reading_time }} min de lecture
@@ -135,58 +136,54 @@ if (article.value) {
         </div>
 
         <!-- Title -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-display leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-light text-stone-900 mb-6 md:mb-8 leading-[1.15]">
           {{ article.data.title }}
         </h1>
 
         <!-- Excerpt -->
-        <p v-if="article.data.excerpt" class="text-xl text-gray-600 leading-relaxed border-l-4 border-yellow-400 pl-6 italic">
+        <p v-if="article.data.excerpt" class="text-lg md:text-xl font-display font-light italic text-stone-600 leading-relaxed border-l-2 border-sage/40 pl-6">
           {{ article.data.excerpt }}
         </p>
       </div>
 
       <!-- Article Body -->
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="prose prose-lg prose-yellow max-w-none overflow-hidden article-content break-words">
-          <!-- Rich Text Content from Prismic -->
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 md:px-8">
+        <div class="prose prose-lg max-w-none overflow-hidden article-content break-words">
           <PrismicRichText
             v-if="article.data.content"
             :field="article.data.content"
           />
-          <div v-else class="text-gray-600 italic">
-            Le contenu de cet article sera bientôt disponible...
+          <div v-else class="text-stone-500 font-body font-light italic">
+            Le contenu de cet article sera bientot disponible...
           </div>
         </div>
       </div>
 
       <!-- Share Section -->
-      <div class="max-w-4xl mx-auto px-6 mt-16 pt-8 border-t border-gray-200">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p class="text-gray-700 font-semibold mb-2">Cet article t'a plu ?</p>
-            <p class="text-gray-600">Partage-le avec tes amies !</p>
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 mt-16 md:mt-20 pt-8 border-t border-stone-400/20">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="text-center sm:text-left">
+            <p class="font-body font-medium text-stone-900 mb-1">Cet article t'a plu ?</p>
+            <p class="text-sm font-body font-light text-stone-600">Partage-le avec tes amies !</p>
           </div>
-          <div class="flex gap-4">
-            <!-- Share buttons could be added here -->
-            <NuxtLink to="/blog" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-full transition">
-              Voir tous les articles
-            </NuxtLink>
-          </div>
+          <NuxtLink to="/blog" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-body font-medium tracking-wide py-3 px-6 rounded-full transition-all duration-300">
+            Voir tous les articles
+          </NuxtLink>
         </div>
       </div>
 
       <!-- Author Section -->
-      <div class="max-w-4xl mx-auto px-6 mt-16">
-        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl p-8 md:p-12">
-          <div class="flex flex-col md:flex-row items-center gap-8">
-            <img src="/lila-portrait.png" alt="Lila Chibane" class="w-32 h-32 rounded-full shadow-lg" />
-            <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-2 font-display">Lila Chibane</h3>
-              <p class="text-gray-700 leading-relaxed mb-4">
-                Coach sport-santé, spécialisée dans la reconnexion corps/mental et la sortie de la sédentarité.
-                J'aide les femmes à retrouver énergie, bien-être et confiance en elles, sans violence envers leur corps.
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 md:px-8 mt-14 md:mt-20">
+        <div class="bg-sand rounded-2xl p-8 md:p-10">
+          <div class="flex flex-col sm:flex-row items-center gap-6 md:gap-8">
+            <img src="/lila-portrait.png" alt="Lila Chibane" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover object-top flex-shrink-0" loading="lazy" />
+            <div class="text-center sm:text-left">
+              <h3 class="text-xl md:text-2xl font-display font-light text-stone-900 mb-2">Lila Chibane</h3>
+              <p class="text-sm font-body font-light text-stone-600 leading-relaxed mb-4">
+                Coach sport-sante, specialisee dans la reconnexion corps/mental et la sortie de la sedentarite.
+                J'aide les femmes a retrouver energie, bien-etre et confiance en elles, sans violence envers leur corps.
               </p>
-              <NuxtLink to="/#contact" class="inline-block text-yellow-600 hover:text-yellow-700 font-semibold">
+              <NuxtLink to="/#contact" class="inline-block font-body text-sm font-medium text-stone-900 hover:text-sage-dark transition-colors duration-200">
                 Me contacter →
               </NuxtLink>
             </div>
@@ -196,10 +193,13 @@ if (article.value) {
     </article>
 
     <!-- Footer -->
-    <footer class="py-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white text-center text-sm">
-      <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-2">
-        <span class="tracking-wide">© 2025 Lila Chibane — Tous droits réservés.</span>
-        <NuxtLink to="/" class="text-yellow-400 hover:underline text-xs mt-1">Retour à l'accueil</NuxtLink>
+    <footer class="bg-stone-900 py-10 md:py-12 px-5 sm:px-6 md:px-8">
+      <div class="max-w-6xl mx-auto flex flex-col items-center gap-3">
+        <p class="font-display text-lg text-white font-light">Lila Chibane</p>
+        <p class="text-xs font-body text-white/30">&copy; {{ new Date().getFullYear() }} Lila Chibane · Tous droits reserves.</p>
+        <NuxtLink to="/" class="text-xs font-body text-white/50 hover:text-white transition-colors duration-200 mt-1">
+          Retour a l'accueil
+        </NuxtLink>
       </div>
     </footer>
   </div>
@@ -207,7 +207,7 @@ if (article.value) {
 
 <style scoped lang="postcss">
 :deep(.article-content) {
-  @apply text-gray-800 leading-relaxed;
+  @apply text-stone-800 leading-relaxed font-body;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -217,19 +217,19 @@ if (article.value) {
 }
 
 :deep(.article-content p) {
-  @apply mb-6 text-lg leading-relaxed;
+  @apply mb-6 text-base md:text-lg leading-relaxed font-light;
 }
 
 :deep(.article-content h2) {
-  @apply text-3xl font-bold text-gray-900 mt-12 mb-6 font-display;
+  @apply text-2xl md:text-3xl font-light text-stone-900 mt-12 mb-6 font-display;
 }
 
 :deep(.article-content h3) {
-  @apply text-2xl font-bold text-gray-900 mt-10 mb-4 font-display;
+  @apply text-xl md:text-2xl font-light text-stone-900 mt-10 mb-4 font-display;
 }
 
 :deep(.article-content h4) {
-  @apply text-xl font-bold text-gray-900 mt-8 mb-3 font-display;
+  @apply text-lg md:text-xl font-semibold text-stone-900 mt-8 mb-3 font-display;
 }
 
 :deep(.article-content ul),
@@ -246,15 +246,15 @@ if (article.value) {
 }
 
 :deep(.article-content li) {
-  @apply text-lg leading-relaxed;
+  @apply text-base md:text-lg leading-relaxed font-light;
 }
 
 :deep(.article-content a) {
-  @apply text-yellow-600 hover:text-yellow-700 underline transition;
+  @apply text-sage-dark hover:text-stone-900 underline underline-offset-4 transition-colors duration-200;
 }
 
 :deep(.article-content strong) {
-  @apply font-bold text-gray-900;
+  @apply font-semibold text-stone-900;
 }
 
 :deep(.article-content em) {
@@ -262,19 +262,19 @@ if (article.value) {
 }
 
 :deep(.article-content blockquote) {
-  @apply border-l-4 border-yellow-400 pl-6 py-2 my-6 italic text-gray-700 bg-yellow-50 rounded-r-lg;
+  @apply border-l-2 border-sage/40 pl-6 py-2 my-6 italic text-stone-600 font-display text-lg;
 }
 
 :deep(.article-content img) {
-  @apply rounded-2xl shadow-lg my-8 w-full max-w-full h-auto object-contain;
+  @apply rounded-2xl my-8 w-full max-w-full h-auto object-contain;
 }
 
 :deep(.article-content code) {
-  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+  @apply bg-sand px-2 py-1 rounded text-sm font-mono;
 }
 
 :deep(.article-content pre) {
-  @apply bg-gray-900 text-white p-6 rounded-2xl overflow-x-auto my-6;
+  @apply bg-stone-900 text-white p-6 rounded-2xl overflow-x-auto my-6;
 }
 
 :deep(.article-content pre code) {
