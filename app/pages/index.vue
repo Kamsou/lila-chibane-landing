@@ -1,308 +1,824 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-const scrolled = ref(false);
-const isMobileMenuOpen = ref(false);
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+
+useSeoMeta({
+  title: 'Lila Chibane · Coach sport-santé en visio',
+  description: 'Reprends une activité physique adaptée, régulière et agréable. Coaching en visio pour femmes actives. Sans violence, sans pression, à ton rythme.',
+  ogTitle: 'Lila Chibane · Coach sport-santé en visio',
+  ogDescription: 'Un corps fort, un esprit apaisé, une énergie qui dure.',
+  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  ogUrl: 'https://lilachibane.com',
+  ogType: 'website',
+  twitterTitle: 'Lila Chibane · Coach sport-santé en visio',
+  twitterDescription: 'Un corps fort, un esprit apaisé, une énergie qui dure.',
+  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+})
+
+const scrolled = ref(false)
+const isMobileMenuOpen = ref(false)
+const scrollIndicatorVisible = ref(true)
+const openFaq = ref(null)
+const isSubmitting = ref(false)
+
+const toggleFaq = (index) => {
+  openFaq.value = openFaq.value === index ? null : index
+}
 
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 400;
-};
+  scrolled.value = window.scrollY > 100
+  if (window.scrollY > 50) scrollIndicatorVisible.value = false
+}
 
-const handleLinkClick = (e, href) => {
-  e.preventDefault();
-  isMobileMenuOpen.value = false;
-  const target = document.querySelector(href);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth' });
+const scrollTo = (e, id) => {
+  e.preventDefault()
+  isMobileMenuOpen.value = false
+  const el = document.querySelector(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
+
+const handleSubmit = async (e) => {
+  isSubmitting.value = true
+  const form = e.target
+  try {
+    await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+    })
+    form.reset()
+  } catch (err) {
+    // silent
+  } finally {
+    isSubmitting.value = false
   }
-};
+}
+
+const navLinks = [
+  { label: 'Philosophie', href: '#philosophie' },
+  { label: 'Méthode', href: '#methode' },
+  { label: 'À propos', href: '#a-propos' },
+  { label: 'Blog', href: '/blog', external: true },
+  { label: 'Quiz', href: '/quiz', external: true },
+  { label: 'Contact', href: '#contact' },
+]
+
+const faqs = [
+  {
+    question: "Je n'ai pas fait de sport depuis des années, c'est un problème ?",
+    answer: "Pas du tout, c'est même la spécialité de mon accompagnement. Je travaille avec des femmes qui reprennent après un arrêt long. On commence en douceur, à ton rythme, sans aucun prérequis physique. Tout est adapté.",
+  },
+  {
+    question: 'Comment se passent les séances en visio ?',
+    answer: "On se retrouve en vidéo, depuis chez toi ou n'importe où. Tu n'as besoin que d'un tapis et d'un peu d'espace. Je te guide en temps réel, je corrige ta posture, j'adapte les exercices. C'est aussi efficace qu'en présentiel, avec la flexibilité en plus.",
+  },
+  {
+    question: "Est-ce que c'est adapté si j'ai des douleurs ou des limitations ?",
+    answer: "Oui. Je prends en compte ton historique, tes douleurs, tes limitations. Mon approche intègre la mobilité et la régulation nerveuse, ce qui aide aussi à diminuer les tensions et les douleurs chroniques. En cas de pathologie spécifique, je travaille en lien avec ton médecin.",
+  },
+  {
+    question: 'Quelle est la différence entre coaching individuel et groupe ?',
+    answer: "En individuel, le programme est 100% personnalisé et les séances sont planifiées selon ton emploi du temps. En petit groupe (max 5 personnes), tu bénéficies de la dynamique collective, du soutien des autres, tout en gardant un suivi adapté. Beaucoup de femmes combinent les deux.",
+  },
+  {
+    question: 'Je suis souvent fatiguée et stressée, est-ce que le sport ne va pas empirer les choses ?',
+    answer: "C'est justement l'inverse. Le sport « classique » peut effectivement aggraver le stress si le système nerveux est déjà en surcharge. Mon approche dose l'effort selon ton état. Certains jours, on travaille le renforcement. D'autres jours, on privilégie la mobilité et la respiration. Ton corps apprend à sortir du mode survie.",
+  },
+  {
+    question: 'Combien de temps avant de voir des résultats ?',
+    answer: "La plupart des femmes ressentent un changement dès les premières semaines : meilleur sommeil, plus d'énergie, moins de tensions. Les résultats physiques visibles suivent naturellement avec la régularité. Mon objectif n'est pas un résultat rapide, mais un changement durable.",
+  },
+]
+
+// JSON-LD Structured Data
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
+        name: 'Lila Chibane — Coach sport-santé',
+        description: 'Coach sport-santé en visio. Accompagnement personnalisé pour femmes actives : reprise du sport, régulation nerveuse, alimentation soutenante.',
+        url: 'https://lilachibane.com',
+        image: 'https://lilachibane.com/lila-portrait.png',
+        email: 'lila.chibane@outlook.com',
+        areaServed: [
+          { '@type': 'City', name: 'Bordeaux' },
+          { '@type': 'Country', name: 'France' },
+        ],
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Bordeaux',
+          addressRegion: 'Nouvelle-Aquitaine',
+          addressCountry: 'FR',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 44.8378,
+          longitude: -0.5792,
+        },
+        priceRange: '€€',
+        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio'],
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Lila Chibane',
+        url: 'https://lilachibane.com',
+        inLanguage: 'fr',
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      }),
+    },
+  ],
+})
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
+  window.addEventListener('scroll', handleScroll, { passive: true })
+
+  nextTick(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    )
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+  })
+})
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
-    <section id="header" class="relative h-screen bg-cover bg-center scroll-smooth" style="background-image: url('https://res.cloudinary.com/augalo/image/upload/v1747472814/lilachibane/header_dyrbsr.jpg');">
- <header
-      :class="['fixed top-0 left-0 w-full h-16 flex items-center justify-between px-6 z-50 font-tuffy transition-all duration-300 ease-in-out', scrolled ? 'bg-white text-gray-900 shadow' : 'bg-transparent text-white']"
-    >
-      <h1 class="text-md md:text-2xl xl:text-3xl animate-fade-down">Lila Chibane</h1>
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex gap-2 md:gap-10 text-base xl:text-md tracking-widest items-center">
-        <a href="#about" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
-        <a href="#services" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
-        <NuxtLink to="/blog" class="nav-link hover:text-yellow-400 transition">Blog</NuxtLink>
-        <a href="#contact" class="nav-link hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
-      </nav>
-      <!-- Burger menu (mobile) -->
-      <button class="md:hidden p-2 focus:outline-none z-50"  style="touch-action: manipulation;" @click="isMobileMenuOpen = !isMobileMenuOpen">
-        <svg v-if="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-      </button>
-      <transition name="fade">
-        <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-white flex flex-col items-center justify-center gap-8 text-2xl font-tuffy z-40 shadow-xl">
-          <a href="#about" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#about')">À propos</a>
-          <a href="#services" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#services')">L'Accompagnement</a>
-          <NuxtLink to="/blog" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="isMobileMenuOpen = false">Blog</NuxtLink>
-          <a href="#contact" class="nav-link text-gray-900 hover:text-yellow-400 transition" @click="e => handleLinkClick(e, '#contact')">Contact</a>
-        </div>
-      </transition>
-    </header>
-
-<div class="relative h-full bg-black bg-opacity-50">
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 max-w-4xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8 animate-fade-up font-tuffy leading-tight">
-      Retrouve énergie, forme et confiance<br>
-      <span class="text-yellow-300">sans souffrance ni pression</span>
-    </h2>
-    <p class="text-base md:text-xl font-light mb-8 animate-fade-up animate-delay-200 leading-relaxed">
-      Du mouvement doux et intelligent pour renouer avec ton énergie naturelle<br>
-      <span class="text-yellow-300">sans régime, ni salle de sport</span>
-    </p>
-    <a href="#about" class="btn-primary animate-fade-up animate-delay-400 nav-link">Je découvre</a>
-    <div class="mt-12 animate-bounce">
-      <a href="#about" class="text-white text-3xl nav-link">↓</a>
-    </div>
-  </div>
-</div>
-
-  </section>
-
-  <section id="about" class="py-20 md:py-32 text-gray-800 animate-fade-up">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="flex flex-col items-center mb-8 md:mb-12">
-        <img src="/lila-portrait.png" alt="Portrait de Lila Chibane" class="w-48 md:w-64 mb-6">
-        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 font-tuffy tracking-tighter text-center">Je m'appelle Lila.</h3>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 md:gap-10 mb-10">
-        <div>
-          <p class="text-base md:text-lg leading-loose text-gray-700">
-            Je suis coach sport-santé, spécialisée dans la reconnexion corps/mental et la sortie de la sédentarité.
-          </p>
-          <p class="text-base md:text-lg leading-loose text-gray-700 mt-6">
-            J'ai longtemps cru que pour progresser, il fallait souffrir. Aujourd'hui, j'aide les femmes à retrouver énergie, bien-être et confiance en elles, sans violence envers leur corps.
-          </p>
-        </div>
-
-        <div>
-          <p class="text-base md:text-lg leading-loose text-gray-700">
-            Mon approche combine travail de renforcement, mobilité et relâchement pour reconnecter ton corps à sa vitalité naturelle.
-          </p>
-          <p class="text-base md:text-lg leading-loose text-gray-700 mt-6">
-            Ce sont des séances qui réveillent ton énergie tout en respectant ton rythme. Le but : bouger, respirer, s'ancrer - sans brusquer ton corps, ni ton esprit.
-          </p>
-        </div>
-
-        <div>
-          <p class="text-base md:text-lg leading-loose text-gray-700">
-            J'accompagne les femmes, souvent prises dans le rythme du télétravail, à sortir de la sédentarité et à retrouver un corps fort, un mental apaisé et une énergie durable, tout en respectant leur rythme, sans contrainte ni culpabilité.
-          </p>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-200 pt-8">
-        <p class="text-base md:text-lg leading-loose text-gray-700 text-center max-w-5xl mx-auto">
-          <span class="font-semibold text-gray-900">Tu es la bienvenue ici, quel que soit ton niveau ou ton parcours sportif.</span><br>
-          J'ai créé ces espaces pour rendre la pratique du sport accessible, confortable et bienveillante. Quelle que soit ta morphologie, ta condition physique ou ton histoire, mes coachings sont pensés comme des lieux d'écoute, de respect et de chaleur humaine.<br>
-          <span class="text-yellow-600">Ici, pas de culte du corps parfait - seulement la recherche de la joie, de la vitalité et de la santé !</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-<section id="services" class="py-24 sm:py-32 bg-gradient-to-b from-yellow-50 via-white to-white text-gray-700">
-  <div class="max-w-6xl mx-auto px-4">
-    <h3 class="text-4xl text-center md:text-5xl mb-12 font-tuffy tracking-tighter">
-      L'accompagnement
-    </h3>
-
-    <!-- Ma méthode - Section principale -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border-2 border-yellow-200">
-      <div class="flex items-center justify-center mb-6">
-        <span class="bg-yellow-400/80 rounded-full p-4 shadow-md">
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9" stroke="currentColor"/>
-            <path d="M12 6v6l4 2" stroke="currentColor" stroke-linecap="round"/>
-            <circle cx="12" cy="12" r="1.5" fill="white"/>
-          </svg>
-        </span>
-      </div>
-      <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">Ma méthode</h4>
-      <p class="text-base md:text-lg leading-relaxed text-gray-700 text-center max-w-4xl mx-auto">
-        Une méthode qui relie <span class="font-semibold text-yellow-600">le mouvement, le mental et l'alimentation</span>.
-        Parce que ton énergie vient autant de ce que tu manges que de la façon dont tu bouges,
-        je t'aide à renouer avec des habitudes plus justes, plus douces, plus naturelles — pour retrouver une vitalité durable.
-      </p>
-    </div>
-
-    <!-- Deux options -->
-    <div class="text-center mb-10">
-      <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Deux formules, une même approche</h4>
-      <p class="text-base md:text-lg text-gray-600">Choisis le format qui te correspond</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-10 md:gap-12 max-w-5xl mx-auto">
-      <!-- Coaching individuel -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="8" r="4" stroke="currentColor"/>
-            <path d="M6 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="currentColor"/>
-          </svg>
-        </span>
-        <h5 class="mt-6 text-xl md:text-2xl font-bold text-gray-700 mb-3">Coaching individuel</h5>
-        <p class="text-sm md:text-base leading-relaxed text-gray-700 text-center">
-          Un accompagnement <span class="font-semibold text-yellow-600">100% flexible et sur-mesure</span>, entièrement adapté à ton rythme et à ton quotidien.<br>
-          Séances en visio avec un suivi personnalisé et bienveillant.
-        </p>
-      </div>
-
-      <!-- Séances en groupe réduit -->
-      <div class="group relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center transition transform hover:-translate-y-2 hover:shadow-2xl border border-yellow-100">
-        <span class="absolute left-1/2 -top-8 -translate-x-1/2 bg-yellow-400/80 rounded-full p-4 shadow-md group-hover:scale-105 transition">
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="9" cy="7" r="3" stroke="currentColor"/>
-            <circle cx="15" cy="7" r="3" stroke="currentColor"/>
-            <path d="M3 18c0-2 2.5-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor"/>
-            <path d="M15 18c0-2 2.5-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor"/>
-          </svg>
-        </span>
-        <h5 class="mt-6 text-xl md:text-2xl font-bold text-gray-700 mb-3">Séances en groupe réduit</h5>
-        <p class="text-sm md:text-base leading-relaxed text-gray-700 text-center">
-          Des séances <span class="font-semibold text-yellow-600">en visio en petit comité (max 5 personnes)</span> pour un accompagnement personnalisé et convivial.<br>
-          Bouge avec d'autres, progresse dans la bonne humeur et le respect de ton rythme.
-        </p>
-      </div>
-    </div>
-
-    <!-- Call to action -->
-    <div class="text-center mt-16">
-      <a href="https://calendly.com/lilacoach/bilanpersonnalise" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-lg py-4 px-10 rounded-full transition transform hover:scale-105 shadow-xl shadow-yellow-200/50">
-        Prendre rendez-vous
+  <!-- ==================== NAVIGATION ==================== -->
+  <header
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
+    :class="scrolled ? 'bg-white/90 backdrop-blur-md border-b border-stone-400/10' : 'bg-transparent'"
+  >
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="#" @click.prevent="scrollTo($event, '#hero')" class="font-display text-lg md:text-xl font-light tracking-tight text-stone-900">
+        Lila Chibane
       </a>
-      <p class="text-gray-600 mt-4 text-sm">Premier bilan personnalisé offert</p>
-    </div>
-  </div>
-</section>
 
+      <nav class="hidden md:flex items-center gap-8 lg:gap-10">
+        <template v-for="link in navLinks" :key="link.label">
+          <NuxtLink
+            v-if="link.external"
+            :to="link.href"
+            class="nav-link font-body text-sm font-medium tracking-wide text-stone-600 hover:text-stone-900 transition-colors duration-200 relative"
+          >
+            {{ link.label }}
+          </NuxtLink>
+          <a
+            v-else
+            :href="link.href"
+            @click.prevent="scrollTo($event, link.href)"
+            class="nav-link font-body text-sm font-medium tracking-wide text-stone-600 hover:text-stone-900 transition-colors duration-200 relative"
+          >
+            {{ link.label }}
+          </a>
+        </template>
+      </nav>
 
-
-
-
-<section id="contact" class="py-24 sm:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 text-white animate-fade-up">
-  <div class="max-w-3xl mx-auto px-6 md:text-center">
-    <h3 class="text-4xl md:text-5xl font-extrabold mb-8 font-tuffy tracking-tighter text-white drop-shadow">
-      Me contacter
-    </h3>
-    <p class="text-md md:text-xl mb-10 text-gray-100 md:w-[500px] mx-auto">
-      Envie d'en savoir plus ou de discuter de tes besoins ?
-      <span class="text-yellow-400 text-base">Écris-moi, je te répondrai avec plaisir !</span>
-    </p>
-    <form 
-      action="https://formspree.io/f/movwedpw" 
-      method="POST"
-      class="grid gap-6 mt-8 text-left"
-    >
-      <div class="flex flex-col gap-2">
-        <label for="name" class="text-sm font-semibold text-white">Nom</label>
-        <input 
-          id="name" 
-          name="name" 
-          type="text" 
-          placeholder="Ton nom" 
-          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" 
-          required
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="email" class="text-sm font-semibold text-white">Email</label>
-        <input 
-          id="email" 
-          name="email" 
-          type="email" 
-          placeholder="Ton email" 
-          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition" 
-          required
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm font-semibold text-white">Message</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          placeholder="Écris ton message ici" 
-          rows="5" 
-          class="border border-yellow-700 bg-gray-900/80 text-white p-4 rounded-2xl shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"
-          required
-        ></textarea>
-      </div>
-      <button 
-        type="submit" 
-        class="mt-2 bg-white hover:bg-yellow-500 active:bg-yellow-600 text-gray-800  text-base py-4 w-full sm:w-[220px] mx-auto rounded-full shadow-lg shadow-yellow-200/40 transition"
+      <button
+        class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+        style="touch-action: manipulation"
+        @click="isMobileMenuOpen = !isMobileMenuOpen"
+        :aria-label="isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
       >
-        Envoyer
+        <span class="block w-5 h-[1.5px] bg-stone-900 transition-all duration-300" :class="isMobileMenuOpen ? 'rotate-45 translate-y-[4.5px]' : ''"></span>
+        <span class="block w-5 h-[1.5px] bg-stone-900 transition-all duration-300" :class="isMobileMenuOpen ? '-rotate-45 -translate-y-[4.5px]' : ''"></span>
       </button>
-    </form>
+    </div>
 
-  </div>
-</section>
+    <!-- Mobile menu -->
+    <Transition name="fade">
+      <div v-if="isMobileMenuOpen" class="md:hidden fixed inset-0 top-0 bg-cream z-40 flex flex-col items-center justify-center">
+        <button
+          class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center"
+          @click="isMobileMenuOpen = false"
+          aria-label="Fermer le menu"
+        >
+          <span class="block w-5 h-[1.5px] bg-stone-900 rotate-45 absolute"></span>
+          <span class="block w-5 h-[1.5px] bg-stone-900 -rotate-45 absolute"></span>
+        </button>
 
+        <nav class="flex flex-col items-center gap-8">
+          <template v-for="(link, i) in navLinks" :key="link.label">
+            <NuxtLink
+              v-if="link.external"
+              :to="link.href"
+              class="font-display text-2xl font-light text-stone-900 mobile-menu-link"
+              :style="{ animationDelay: `${i * 80}ms` }"
+              @click="isMobileMenuOpen = false"
+            >
+              {{ link.label }}
+            </NuxtLink>
+            <a
+              v-else
+              :href="link.href"
+              @click="scrollTo($event, link.href)"
+              class="font-display text-2xl font-light text-stone-900 mobile-menu-link"
+              :style="{ animationDelay: `${i * 80}ms` }"
+            >
+              {{ link.label }}
+            </a>
+          </template>
+        </nav>
+      </div>
+    </Transition>
+  </header>
 
+  <main class="bg-cream">
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center px-5 sm:px-6 md:px-8 text-center relative">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-6 md:mb-8 hero-fade" style="animation-delay: 0.1s">
+          Coach sport-santé en visio
+        </p>
 
-<footer class="py-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white text-center text-sm shadow-inner">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-2">
-    <span class="tracking-wide">© 2025 Lila Chibane — Tous droits réservés.</span>
-    <a href="#header" class="text-yellow-400 hover:underline text-xs mt-1 nav-link">Retour en haut</a>
-  </div>
-</footer>
+        <h1 class="font-display font-light text-stone-900 leading-[1.1] tracking-tight">
+          <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl hero-fade" style="animation-delay: 0.3s">Un corps fort,</span>
+          <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl hero-fade" style="animation-delay: 0.5s">un esprit apaisé,</span>
+          <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl hero-fade" style="animation-delay: 0.7s">une énergie qui dure.</span>
+        </h1>
 
+        <p class="text-base sm:text-lg md:text-xl font-body font-light text-stone-600 max-w-2xl mx-auto mt-6 md:mt-8 leading-relaxed hero-fade" style="animation-delay: 0.9s">
+          Je t'accompagne à reprendre une activité physique adaptée, régulière et agréable. Sans violence, sans pression, à ton rythme.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 md:mt-12 hero-fade" style="animation-delay: 1.1s">
+          <a
+            href="#philosophie"
+            @click.prevent="scrollTo($event, '#philosophie')"
+            class="btn-primary"
+          >
+            Découvrir mon approche
+          </a>
+          <NuxtLink to="/quiz" class="btn-secondary">
+            Faire le quiz énergie
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-500"
+        :class="scrollIndicatorVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+      >
+        <div class="w-[1px] h-8 bg-stone-400/40 mx-auto scroll-pulse"></div>
+      </div>
+    </section>
+
+    <!-- ==================== PHILOSOPHIE ==================== -->
+    <section id="philosophie" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+        <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6 reveal">Philosophie</p>
+
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-stone-900 leading-[1.15] max-w-3xl mb-8 md:mb-12 reveal">
+          Ton corps est un système,<br>pas un objet à transformer.
+        </h2>
+
+        <blockquote class="text-lg sm:text-xl md:text-2xl font-display font-light text-stone-600 leading-relaxed max-w-3xl italic reveal">
+          Un corps fatigué, stressé ou en hypervigilance ne progresse pas durablement.
+          Ce n'est pas une question de volonté. C'est une question de régulation.
+        </blockquote>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-14 mt-16 md:mt-20">
+          <div class="reveal" style="transition-delay: 0ms">
+            <span class="text-xs font-body font-medium text-sage-dark tracking-widest mb-3 block number-blur">01</span>
+            <h3 class="text-lg font-display font-semibold text-stone-900 mb-3">Pas de souffrance</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Le sport ne devrait jamais être une punition. Je t'apprends à bouger avec plaisir, en respectant les signaux de ton corps.
+            </p>
+          </div>
+
+          <div class="reveal" style="transition-delay: 100ms">
+            <span class="text-xs font-body font-medium text-sage-dark tracking-widest mb-3 block number-blur">02</span>
+            <h3 class="text-lg font-display font-semibold text-stone-900 mb-3">Pas de pression</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Pas d'objectifs irréalistes, pas de « motivation à tout prix ». On construit ensemble une régularité douce, tenable, qui te ressemble.
+            </p>
+          </div>
+
+          <div class="reveal" style="transition-delay: 200ms">
+            <span class="text-xs font-body font-medium text-sage-dark tracking-widest mb-3 block number-blur">03</span>
+            <h3 class="text-lg font-display font-semibold text-stone-900 mb-3">Pas de culpabilité</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Tu as le droit de rater une séance. Tu as le droit de faire moins. Mon rôle est de t'aider à avancer sans te juger.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MÉTHODE ==================== -->
+    <section id="methode" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8 bg-sand">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6 reveal">Méthode</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-stone-900 leading-[1.15] reveal">
+            Trois piliers pour retrouver<br>ton équilibre.
+          </h2>
+          <p class="text-base sm:text-lg font-body font-light text-stone-600 mt-5 md:mt-6 leading-relaxed reveal">
+            Une approche globale qui relie le mouvement, le système nerveux et l'alimentation.
+          </p>
+        </div>
+
+        <!-- Photo action -->
+        <div class="mt-12 md:mt-16 mb-14 md:mb-20 rounded-2xl overflow-hidden reveal">
+          <img
+            src="/lila-action.jpg"
+            alt="Lila Chibane en séance de mobilité"
+            class="w-full h-64 sm:h-80 md:h-96 object-cover object-[center_45%] method-img"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+          <!-- Pilier 1 -->
+          <div class="pillar-card bg-white rounded-2xl p-7 md:p-9 reveal" style="transition-delay: 0ms">
+            <svg class="w-8 h-8 text-sage mb-5" fill="none" viewBox="0 0 32 32" stroke="currentColor" stroke-width="1.5">
+              <circle cx="16" cy="8" r="4" /><path d="M16 14v10m-5-7l5 3 5-3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="text-xs font-body font-medium tracking-wide text-sage-dark mb-3 block">Pilier 01</span>
+            <h3 class="text-xl font-display font-semibold text-stone-900 mb-3">Mouvement intelligent</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Renforcement, mobilité, cardio dosé. Chaque séance est pensée pour ton corps tel qu'il est aujourd'hui. On construit la force, la stabilité et la souplesse sans brusquer.
+            </p>
+          </div>
+
+          <!-- Pilier 2 -->
+          <div class="pillar-card bg-white rounded-2xl p-7 md:p-9 reveal" style="transition-delay: 150ms">
+            <svg class="w-8 h-8 text-sage mb-5" fill="none" viewBox="0 0 32 32" stroke="currentColor" stroke-width="1.5">
+              <circle cx="16" cy="16" r="10" /><path d="M10 16c2-3 4-4 6-4s4 1 6 4" stroke-linecap="round" /><path d="M16 6v2m0 16v2m-10-10h2m16 0h2" stroke-linecap="round" />
+            </svg>
+            <span class="text-xs font-body font-medium tracking-wide text-sage-dark mb-3 block">Pilier 02</span>
+            <h3 class="text-xl font-display font-semibold text-stone-900 mb-3">Régulation nerveuse</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Moins de stress, moins d'anxiété, un quotidien plus agréable. J'intègre des outils de régulation du système nerveux pour que ton corps sorte du mode « survie » et puisse enfin progresser.
+            </p>
+          </div>
+
+          <!-- Pilier 3 -->
+          <div class="pillar-card bg-white rounded-2xl p-7 md:p-9 sm:col-span-2 md:col-span-1 reveal" style="transition-delay: 300ms">
+            <svg class="w-8 h-8 text-sage mb-5" fill="none" viewBox="0 0 32 32" stroke="currentColor" stroke-width="1.5">
+              <path d="M16 4c-2 6-8 8-8 14a8 8 0 0016 0c0-6-6-8-8-14z" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M13 22c1-2 2-3 3-3s2 1 3 3" stroke-linecap="round" />
+            </svg>
+            <span class="text-xs font-body font-medium tracking-wide text-sage-dark mb-3 block">Pilier 03</span>
+            <h3 class="text-xl font-display font-semibold text-stone-900 mb-3">Alimentation soutenante</h3>
+            <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+              Pas de régime, pas de restriction, pas de culpabilité. On remet de la conscience et du plaisir dans ton assiette pour nourrir ton énergie au lieu de la saboter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROCESSUS ==================== -->
+    <section id="processus" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center">
+          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6 reveal">Processus</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-stone-900 leading-[1.15] reveal">
+            Reprendre le sport<br>n'a jamais été aussi simple.
+          </h2>
+          <p class="text-base sm:text-lg font-body font-light text-stone-600 mt-5 md:mt-6 reveal">
+            En 3 étapes, on pose les bases d'une pratique qui te correspond.
+          </p>
+        </div>
+
+        <div class="space-y-12 md:space-y-16 mt-12 md:mt-16">
+          <!-- Step 1 -->
+          <div class="flex gap-6 md:gap-10 items-start reveal">
+            <div class="flex-shrink-0 flex flex-col items-center">
+              <span class="text-4xl md:text-6xl font-display font-light text-sage-light number-blur">01</span>
+            </div>
+            <div class="pt-2 md:pt-4">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-display font-semibold text-stone-900 mb-2 md:mb-3">Ton bilan personnalisé gratuit</h3>
+              <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+                On échange 30 minutes en visio. Je découvre ton histoire, ton quotidien, tes envies. Tu découvres ma façon de travailler. Zéro engagement, zéro pression.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex gap-6 md:gap-10 items-start reveal" style="transition-delay: 100ms">
+            <div class="flex-shrink-0 flex flex-col items-center">
+              <span class="text-4xl md:text-6xl font-display font-light text-sage-light number-blur">02</span>
+            </div>
+            <div class="pt-2 md:pt-4">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-display font-semibold text-stone-900 mb-2 md:mb-3">Ton programme sur-mesure</h3>
+              <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+                Je construis un accompagnement 100% adapté à ton rythme, tes contraintes et tes objectifs. Séances en visio, seule ou en petit groupe (max 5 personnes). Tu choisis.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex gap-6 md:gap-10 items-start reveal" style="transition-delay: 200ms">
+            <div class="flex-shrink-0 flex flex-col items-center">
+              <span class="text-4xl md:text-6xl font-display font-light text-sage-light number-blur">03</span>
+            </div>
+            <div class="pt-2 md:pt-4">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-display font-semibold text-stone-900 mb-2 md:mb-3">Tu progresses, à ton rythme</h3>
+              <p class="text-base font-body font-light text-stone-600 leading-relaxed">
+                Suivi bienveillant, ajustements permanents, et une vraie relation de confiance. Tu n'es pas un numéro. Tu es une personne que j'accompagne avec sérieux et humanité.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-14 md:mt-20 reveal">
+          <a
+            href="https://calendly.com/lilacoach/bilanpersonnalise"
+            target="_blank"
+            rel="noopener"
+            class="btn-primary inline-block"
+          >
+            Réserver mon bilan gratuit
+          </a>
+          <p class="text-xs font-body text-stone-400 mt-4 tracking-wide">
+            30 minutes · gratuit · en visio · sans engagement
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== À PROPOS ==================== -->
+    <section id="a-propos" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8 bg-sand">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header with photo -->
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 md:gap-8 mb-6 md:mb-8 reveal">
+          <img
+            src="/lila-portrait.png"
+            alt="Lila Chibane, coach sport-santé"
+            class="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover object-top flex-shrink-0 shadow-md"
+            loading="lazy"
+          />
+          <div class="text-center sm:text-left">
+            <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-3">À propos</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-light text-stone-900">
+              Je m'appelle Lila.
+            </h2>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="space-y-5 md:space-y-6">
+          <p class="text-base font-body font-light text-stone-600 leading-relaxed reveal">
+            Je suis coach sport-santé, spécialisée dans la reconnexion corps-esprit et la sortie de la sédentarité. Basée à Bordeaux, j'accompagne des femmes partout en France grâce à la visio.
+          </p>
+          <p class="text-base font-body font-light text-stone-600 leading-relaxed reveal">
+            J'ai longtemps cru que pour progresser, il fallait forcer. M'imposer des séances épuisantes, ignorer la fatigue, repousser les limites. Mon corps a fini par me rappeler à l'ordre.
+          </p>
+          <p class="text-base font-body font-light text-stone-600 leading-relaxed reveal">
+            Aujourd'hui, j'aide les femmes actives et exigeantes, celles qui ont souvent « tout donné », à reprendre le sport autrement. Avec intelligence, douceur et régularité.
+          </p>
+          <p class="text-base font-body font-light text-stone-600 leading-relaxed reveal">
+            Mon approche s'adresse aux femmes au « cerveau qui tourne vite » : celles qui veulent comprendre comment et quand bouger pour leur santé, se sentir belles et fortes chaque jour, sans que le sport devienne une source de stress en plus.
+          </p>
+
+          <blockquote class="text-lg md:text-xl font-display italic text-stone-600 my-6 md:my-8 reveal">
+            Ici, pas de culte du corps parfait. Seulement la recherche de la joie, de la vitalité et de la santé.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center">
+          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6 reveal">FAQ</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-stone-900 leading-[1.15] reveal">
+            Tu te poses peut-être<br>ces questions.
+          </h2>
+        </div>
+
+        <div class="mt-10 md:mt-14 reveal">
+          <div
+            v-for="(faq, index) in faqs"
+            :key="index"
+            class="border-b border-stone-400/20"
+          >
+            <button
+              class="w-full py-5 md:py-6 flex justify-between items-start gap-4 text-left cursor-pointer"
+              @click="toggleFaq(index)"
+              :aria-expanded="openFaq === index"
+            >
+              <span class="text-base md:text-lg font-body font-medium text-stone-900 leading-snug">{{ faq.question }}</span>
+              <svg
+                class="w-5 h-5 flex-shrink-0 text-stone-400 mt-0.5 transition-transform duration-300"
+                :class="openFaq === index ? 'rotate-180' : ''"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-answer overflow-hidden transition-all duration-400"
+              :class="openFaq === index ? 'max-h-96 opacity-100 pb-5 md:pb-6' : 'max-h-0 opacity-0'"
+            >
+              <p class="text-base font-body font-light text-stone-600 leading-relaxed pr-8">
+                {{ faq.answer }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="py-20 md:py-32 lg:py-40 px-5 sm:px-6 md:px-8 bg-sand">
+      <!-- CTA -->
+      <div class="max-w-3xl mx-auto text-center mb-20 md:mb-28">
+        <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6 reveal">Prochaine étape</p>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light text-stone-900 leading-[1.15] reveal">
+          Prête à reprendre<br>le sport autrement ?
+        </h2>
+        <p class="text-base sm:text-lg font-body font-light text-stone-600 mt-5 md:mt-6 max-w-xl mx-auto leading-relaxed reveal">
+          Ton premier bilan est gratuit, en visio, et sans aucun engagement.
+          On échange 30 minutes pour voir si mon approche te correspond.
+        </p>
+        <div class="mt-8 md:mt-10 reveal">
+          <a
+            href="https://calendly.com/lilacoach/bilanpersonnalise"
+            target="_blank"
+            rel="noopener"
+            class="btn-primary inline-block"
+          >
+            Réserver mon bilan gratuit
+          </a>
+          <p class="mt-4">
+            <NuxtLink to="/quiz" class="text-sm font-body text-stone-400 underline underline-offset-4 hover:text-stone-600 transition-colors duration-200">
+              Ou fais le quiz énergie pour découvrir ton profil
+            </NuxtLink>
+          </p>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="max-w-xl mx-auto">
+        <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-light text-stone-900 text-center mb-3 md:mb-4 reveal">
+          Ou écris-moi directement.
+        </h3>
+        <p class="text-sm sm:text-base font-body font-light text-stone-600 text-center mb-10 md:mb-12 reveal">
+          Une question, une hésitation, ou simplement envie de discuter. Je réponds personnellement à chaque message.
+        </p>
+
+        <form
+          action="https://formspree.io/f/movwedpw"
+          method="POST"
+          class="space-y-5 md:space-y-6 reveal"
+          @submit.prevent="handleSubmit"
+        >
+          <div>
+            <label for="name" class="text-sm font-body font-medium text-stone-600 mb-2 block">Prénom</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Ton prénom"
+              required
+              class="form-input"
+            />
+          </div>
+          <div>
+            <label for="email" class="text-sm font-body font-medium text-stone-600 mb-2 block">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="ton@email.com"
+              required
+              class="form-input"
+            />
+          </div>
+          <div>
+            <label for="message" class="text-sm font-body font-medium text-stone-600 mb-2 block">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Dis-moi ce qui t'amène..."
+              rows="5"
+              required
+              class="form-input resize-none"
+            ></textarea>
+          </div>
+          <div class="text-center sm:text-left">
+            <button
+              type="submit"
+              class="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2"
+              :disabled="isSubmitting"
+            >
+              <svg v-if="isSubmitting" class="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" class="opacity-25" />
+                <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="opacity-75" />
+              </svg>
+              {{ isSubmitting ? 'Envoi...' : 'Envoyer mon message' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-stone-900 py-12 md:py-16 px-5 sm:px-6 md:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-8">
+        <!-- Identity -->
+        <div>
+          <p class="font-display text-xl text-white font-light mb-3">Lila Chibane</p>
+          <p class="text-sm font-body text-white/40 leading-relaxed">
+            Coach sport-santé en visio<br>Bordeaux, France
+          </p>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <nav class="flex flex-col gap-3">
+            <template v-for="link in navLinks" :key="'footer-' + link.label">
+              <NuxtLink
+                v-if="link.external"
+                :to="link.href"
+                class="text-sm font-body text-white/50 hover:text-white transition-colors duration-200"
+              >
+                {{ link.label }}
+              </NuxtLink>
+              <a
+                v-else
+                :href="link.href"
+                @click.prevent="scrollTo($event, link.href)"
+                class="text-sm font-body text-white/50 hover:text-white transition-colors duration-200"
+              >
+                {{ link.label }}
+              </a>
+            </template>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <a
+            href="mailto:lila.chibane@outlook.com"
+            class="text-sm font-body text-white/50 hover:text-white transition-colors duration-200"
+          >
+            lila.chibane@outlook.com
+          </a>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 mt-10 md:mt-12 pt-6 md:pt-8">
+        <p class="text-xs font-body text-white/30">
+          &copy; 2026 Lila Chibane · Tous droits réservés.
+        </p>
+      </div>
+    </div>
+  </footer>
 </template>
 
-<style scoped>
-html {
-  scroll-behavior: smooth;
+<style scoped lang="postcss">
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.animate-fade-up {
+.number-blur {
+  filter: blur(6px);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.visible .number-blur,
+.reveal.visible .number-blur {
+  filter: blur(0);
+}
+
+.hero-fade {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 1s ease-out forwards;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.animate-fade-down {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeDown 1s ease-out forwards;
-}
-.animate-delay-200 {
-  animation-delay: 0.2s;
-}
-.animate-delay-400 {
-  animation-delay: 0.4s;
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.scroll-pulse {
+  animation: scrollPulse 2s ease-in-out infinite;
 }
-
-@keyframes fadeDown {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
 }
 
 .btn-primary {
-  @apply bg-white hover:bg-gray-200 text-black text-xs font-semibold py-3 px-6 rounded-full transition transform hover:scale-105 hover:shadow-lg;
+  @apply bg-stone-900 text-white text-sm font-body font-medium tracking-wide py-3.5 px-8 rounded-full
+         hover:bg-stone-800 hover:shadow-lg active:scale-[0.97]
+         transition-all duration-300;
+}
+.btn-secondary {
+  @apply bg-transparent border border-stone-300 text-stone-600 text-sm font-body font-medium tracking-wide py-3.5 px-8 rounded-full
+         hover:border-stone-900 hover:text-stone-900 active:scale-[0.97]
+         transition-all duration-300;
 }
 
-.fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #A7B5A0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.mobile-menu-link {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: menuFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes menuFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pillar-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s ease;
+  border: 1px solid transparent;
+}
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+  border-color: rgba(167, 181, 160, 0.3);
+}
+
+.method-img {
+  transform: scale(1.08);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible .method-img {
+  transform: scale(1);
+}
+
+.form-input {
+  @apply bg-white border border-stone-400/20 rounded-xl px-4 py-3.5 md:px-5 md:py-4
+         text-stone-900 font-body text-base
+         placeholder:text-stone-400 placeholder:transition-opacity placeholder:duration-200
+         focus:placeholder:opacity-40
+         focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage
+         transition-colors duration-300 w-full;
+}
+
+.faq-answer {
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease,
+              padding-bottom 0.4s ease;
+}
+
+.fade-enter-active { transition: opacity 0.3s ease; }
+.fade-leave-active { transition: opacity 0.2s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+
+html { scroll-behavior: smooth; }
 </style>

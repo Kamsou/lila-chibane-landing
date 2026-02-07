@@ -1,6 +1,19 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue';
 
+useSeoMeta({
+  title: 'Quiz Énergie — Lila Chibane · Coach sport-santé',
+  description: 'Découvre ton profil énergie et reçois des conseils personnalisés pour retrouver forme et vitalité.',
+  ogTitle: 'Quiz Énergie — Lila Chibane',
+  ogDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
+  ogUrl: 'https://lilachibane.com/quiz',
+  ogType: 'website',
+  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  twitterTitle: 'Quiz Énergie — Lila Chibane',
+  twitterDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
+  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+})
+
 const currentStep = ref(0);
 const answers = ref({
   q1: null,
@@ -258,7 +271,7 @@ function restart() {
   <div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-yellow-50/30">
     <!-- Header -->
     <header class="fixed top-0 left-0 w-full h-20 flex items-center justify-between px-8 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-      <NuxtLink to="/" class="text-lg md:text-xl font-tuffy text-gray-800 hover:text-yellow-600 transition flex items-center gap-2">
+      <NuxtLink to="/" class="text-lg md:text-xl font-display text-gray-800 hover:text-yellow-600 transition flex items-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
@@ -271,7 +284,7 @@ function restart() {
       <div class="max-w-3xl w-full animate-fade-up">
         <div class="text-center mb-10">
           <div class="text-6xl mb-6">✨</div>
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-tuffy tracking-tight">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display tracking-tight">
             Quel est ton profil d'énergie actuelle ?
           </h1>
           <p class="text-base md:text-lg text-gray-600 max-w-xl mx-auto">
@@ -372,7 +385,7 @@ function restart() {
       <div class="max-w-4xl mx-auto animate-fade-up">
         <div class="text-center mb-12">
           <div class="text-6xl mb-6">{{ result.profile.icon }}</div>
-          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3 font-tuffy">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3 font-display">
             Ton profil : {{ result.profile.title }}
           </h1>
           <div class="flex justify-center gap-6 text-xs text-gray-500 uppercase tracking-wider">

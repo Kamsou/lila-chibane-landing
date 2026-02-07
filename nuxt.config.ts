@@ -5,10 +5,18 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/fonts',
-    '@nuxtjs/prismic'
+    '@nuxtjs/prismic',
+    '@nuxtjs/sitemap',
+    '@nuxthub/core',
   ],
+  site: {
+    url: 'https://lilachibane.com',
+  },
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
+  },
   prismic: {
-    endpoint: 'lila-chibane', // Remplacez par le nom de votre repository Prismic
+    endpoint: 'lila-chibane',
     clientConfig: {
       routes: [
         {

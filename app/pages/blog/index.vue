@@ -10,6 +10,19 @@ const { data: articles } = await useAsyncData('blog-posts', async () => {
   return response;
 });
 
+useSeoMeta({
+  title: 'Blog — Lila Chibane · Coach sport-santé',
+  description: 'Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.',
+  ogTitle: 'Blog — Lila Chibane',
+  ogDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
+  ogUrl: 'https://lilachibane.com/blog',
+  ogType: 'website',
+  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  twitterTitle: 'Blog — Lila Chibane',
+  twitterDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
+  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+})
+
 // Format date helper
 const formatDate = (dateString) => {
   if (!dateString) return '';
@@ -25,7 +38,7 @@ const formatDate = (dateString) => {
 <template>
   <div class="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
     <!-- Header with back to home -->
-    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-6 z-50 font-tuffy">
+    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-6 z-50 font-display">
       <NuxtLink to="/" class="text-md md:text-2xl xl:text-3xl text-gray-900 hover:text-yellow-600 transition">
         Lila Chibane
       </NuxtLink>
@@ -42,7 +55,7 @@ const formatDate = (dateString) => {
       <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-16">
-          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 font-tuffy tracking-tighter">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 font-display tracking-tighter">
             Blog
           </h1>
           <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
@@ -129,6 +142,7 @@ const formatDate = (dateString) => {
 <style scoped>
 .line-clamp-3 {
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;

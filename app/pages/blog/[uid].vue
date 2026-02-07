@@ -25,22 +25,59 @@ const formatDate = (dateString) => {
 
 // SEO Meta
 if (article.value) {
+  const articleUrl = `https://lilachibane.com/blog/${route.params.uid}`
+  const articleImage = article.value.data.featured_image?.url || 'https://lilachibane.com/lila-portrait.png'
+
+  useSeoMeta({
+    title: `${article.value.data.title} — Lila Chibane`,
+    description: article.value.data.excerpt || '',
+    ogTitle: article.value.data.title,
+    ogDescription: article.value.data.excerpt || '',
+    ogImage: articleImage,
+    ogUrl: articleUrl,
+    ogType: 'article',
+    twitterTitle: article.value.data.title,
+    twitterDescription: article.value.data.excerpt || '',
+    twitterImage: articleImage,
+  })
+
+  // JSON-LD BlogPosting
   useHead({
-    title: article.value.data.title + ' - Lila Chibane',
-    meta: [
-      { name: 'description', content: article.value.data.excerpt || '' },
-      { property: 'og:title', content: article.value.data.title },
-      { property: 'og:description', content: article.value.data.excerpt || '' },
-      { property: 'og:image', content: article.value.data.featured_image?.url || '' },
-    ]
-  });
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: article.value.data.title,
+          description: article.value.data.excerpt || '',
+          image: articleImage,
+          datePublished: article.value.data.publication_date || '',
+          author: {
+            '@type': 'Person',
+            name: 'Lila Chibane',
+            url: 'https://lilachibane.com',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Lila Chibane',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://lilachibane.com/lila-portrait.png',
+            },
+          },
+          mainEntityOfPage: articleUrl,
+        }),
+      },
+    ],
+  })
 }
 </script>
 
 <template>
   <div class="min-h-screen bg-white">
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-6 z-50 font-tuffy">
+    <header class="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center justify-between px-6 z-50 font-display">
       <NuxtLink to="/" class="text-md md:text-2xl xl:text-3xl text-gray-900 hover:text-yellow-600 transition">
         Lila Chibane
       </NuxtLink>
@@ -98,7 +135,7 @@ if (article.value) {
         </div>
 
         <!-- Title -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-tuffy leading-tight">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-display leading-tight">
           {{ article.data.title }}
         </h1>
 
@@ -144,7 +181,7 @@ if (article.value) {
           <div class="flex flex-col md:flex-row items-center gap-8">
             <img src="/lila-portrait.png" alt="Lila Chibane" class="w-32 h-32 rounded-full shadow-lg" />
             <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-2 font-tuffy">Lila Chibane</h3>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2 font-display">Lila Chibane</h3>
               <p class="text-gray-700 leading-relaxed mb-4">
                 Coach sport-santé, spécialisée dans la reconnexion corps/mental et la sortie de la sédentarité.
                 J'aide les femmes à retrouver énergie, bien-être et confiance en elles, sans violence envers leur corps.
@@ -168,8 +205,7 @@ if (article.value) {
   </div>
 </template>
 
-<style scoped>
-/* Article content styling */
+<style scoped lang="postcss">
 :deep(.article-content) {
   @apply text-gray-800 leading-relaxed;
   word-wrap: break-word;
@@ -185,15 +221,15 @@ if (article.value) {
 }
 
 :deep(.article-content h2) {
-  @apply text-3xl font-bold text-gray-900 mt-12 mb-6 font-tuffy;
+  @apply text-3xl font-bold text-gray-900 mt-12 mb-6 font-display;
 }
 
 :deep(.article-content h3) {
-  @apply text-2xl font-bold text-gray-900 mt-10 mb-4 font-tuffy;
+  @apply text-2xl font-bold text-gray-900 mt-10 mb-4 font-display;
 }
 
 :deep(.article-content h4) {
-  @apply text-xl font-bold text-gray-900 mt-8 mb-3 font-tuffy;
+  @apply text-xl font-bold text-gray-900 mt-8 mb-3 font-display;
 }
 
 :deep(.article-content ul),
