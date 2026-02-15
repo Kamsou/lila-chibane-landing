@@ -6,6 +6,8 @@ useHead({
   htmlAttrs: { lang: 'fr' },
   link: [
     { rel: 'canonical', href: canonicalUrl },
+    { rel: 'alternate', hreflang: 'fr', href: canonicalUrl },
+    { rel: 'alternate', hreflang: 'x-default', href: canonicalUrl },
     { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     { rel: 'apple-touch-icon', href: '/favicon.svg' },
     { rel: 'preconnect', href: 'https://formspree.io' },
@@ -14,9 +16,7 @@ useHead({
   meta: [
     { name: 'theme-color', content: '#FAF8F5' },
     { name: 'geo.region', content: 'FR-NAQ' },
-    { name: 'geo.placename', content: 'Bordeaux' },
-    { name: 'geo.position', content: '44.8378;-0.5792' },
-    { name: 'ICBM', content: '44.8378, -0.5792' },
+    { name: 'geo.placename', content: 'Médoc, Nouvelle-Aquitaine' },
     { property: 'og:locale', content: 'fr_FR' },
     { property: 'og:site_name', content: 'Lila Chibane' },
     { name: 'twitter:card', content: 'summary_large_image' },

@@ -76,8 +76,8 @@ const faqs = [
     answer: "Oui. Je prends en compte ton historique, tes douleurs, tes limitations. Mon approche intègre la mobilité et la régulation nerveuse, ce qui aide aussi à diminuer les tensions et les douleurs chroniques. En cas de pathologie spécifique, je travaille en lien avec ton médecin.",
   },
   {
-    question: 'Quelle est la différence entre coaching individuel et groupe ?',
-    answer: "En individuel, le programme est 100% personnalisé et les séances sont planifiées selon ton emploi du temps. En petit groupe (max 5 personnes), tu bénéficies de la dynamique collective, du soutien des autres, tout en gardant un suivi adapté. Beaucoup de femmes combinent les deux.",
+    question: 'Comment se déroule un accompagnement individuel ?',
+    answer: "Le programme est 100% personnalisé et les séances sont planifiées selon ton emploi du temps. On avance à ton rythme, en visio, avec un suivi adapté à tes objectifs et tes contraintes.",
   },
   {
     question: 'Je suis souvent fatiguée et stressée, est-ce que le sport ne va pas empirer les choses ?',
@@ -103,22 +103,16 @@ useHead({
         image: 'https://lilachibane.com/lila-portrait.png',
         email: 'lila.chibane@outlook.com',
         areaServed: [
-          { '@type': 'City', name: 'Bordeaux' },
+          { '@type': 'AdministrativeArea', name: 'Médoc, Gironde' },
           { '@type': 'Country', name: 'France' },
         ],
         address: {
           '@type': 'PostalAddress',
-          addressLocality: 'Bordeaux',
           addressRegion: 'Nouvelle-Aquitaine',
           addressCountry: 'FR',
         },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 44.8378,
-          longitude: -0.5792,
-        },
         priceRange: '€€',
-        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio'],
+        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel'],
       }),
     },
     {
@@ -144,6 +138,19 @@ useHead({
             text: faq.answer,
           },
         })),
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Lila Chibane',
+        jobTitle: 'Coach sport-santé',
+        url: 'https://lilachibane.com',
+        image: 'https://lilachibane.com/lila-portrait.png',
+        email: 'lila.chibane@outlook.com',
+        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Sport féminin'],
       }),
     },
   ],
@@ -434,7 +441,7 @@ onUnmounted(() => {
             <div class="pt-2 md:pt-4">
               <h3 class="text-lg sm:text-xl md:text-2xl font-display font-semibold text-stone-900 mb-2 md:mb-3">Ton programme sur-mesure</h3>
               <p class="text-base font-body font-light text-stone-600 leading-relaxed">
-                Je construis un accompagnement 100% adapté à ton rythme, tes contraintes et tes objectifs. Séances en visio, seule ou en petit groupe (max 5 personnes). Tu choisis.
+                Je construis un accompagnement 100% adapté à ton rythme, tes contraintes et tes objectifs. Séances en visio, en individuel.
               </p>
             </div>
           </div>

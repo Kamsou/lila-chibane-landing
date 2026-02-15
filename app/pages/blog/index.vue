@@ -11,16 +11,32 @@ const { data: articles } = await useAsyncData('blog-posts', async () => {
 });
 
 useSeoMeta({
-  title: 'Blog — Lila Chibane · Coach sport-santé',
+  title: 'Blog | Lila Chibane · Coach sport-santé',
   description: 'Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.',
-  ogTitle: 'Blog — Lila Chibane',
+  ogTitle: 'Blog | Lila Chibane',
   ogDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
   ogUrl: 'https://lilachibane.com/blog',
   ogType: 'website',
   ogImage: 'https://lilachibane.com/lila-portrait.png',
-  twitterTitle: 'Blog — Lila Chibane',
+  twitterTitle: 'Blog | Lila Chibane',
   twitterDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
   twitterImage: 'https://lilachibane.com/lila-portrait.png',
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Blog | Lila Chibane',
+        description: 'Conseils sport-santé, bien-être et confiance en soi par Lila Chibane.',
+        url: 'https://lilachibane.com/blog',
+        inLanguage: 'fr',
+      }),
+    },
+  ],
 })
 
 const formatDate = (dateString) => {

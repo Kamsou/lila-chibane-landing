@@ -2,16 +2,36 @@
 import { ref, computed, nextTick } from 'vue';
 
 useSeoMeta({
-  title: 'Quiz Énergie — Lila Chibane · Coach sport-santé',
+  title: 'Quiz Énergie | Lila Chibane · Coach sport-santé',
   description: 'Découvre ton profil énergie et reçois des conseils personnalisés pour retrouver forme et vitalité.',
-  ogTitle: 'Quiz Énergie — Lila Chibane',
+  ogTitle: 'Quiz Énergie | Lila Chibane',
   ogDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
   ogUrl: 'https://lilachibane.com/quiz',
   ogType: 'website',
   ogImage: 'https://lilachibane.com/lila-portrait.png',
-  twitterTitle: 'Quiz Énergie — Lila Chibane',
+  twitterTitle: 'Quiz Énergie | Lila Chibane',
   twitterDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
   twitterImage: 'https://lilachibane.com/lila-portrait.png',
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Quiz',
+        name: 'Quiz Énergie',
+        description: 'Découvre ton profil énergie et reçois des conseils personnalisés pour retrouver forme et vitalité.',
+        url: 'https://lilachibane.com/quiz',
+        about: {
+          '@type': 'Thing',
+          name: 'Santé et bien-être',
+        },
+        inLanguage: 'fr',
+      }),
+    },
+  ],
 })
 
 const currentStep = ref(0);
