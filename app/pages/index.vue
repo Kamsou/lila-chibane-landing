@@ -6,18 +6,19 @@ useSeoMeta({
   description: 'Lila Chibane, coach sportive, peintre et créatrice sonore. Trois façons de faire du bien au corps et à l\'esprit.',
   ogTitle: 'Lila Chibane · Coach · Peintre · Son',
   ogDescription: 'Trois façons de faire du bien au corps et à l\'esprit.',
-  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
   ogUrl: 'https://lilachibane.com',
   ogType: 'website',
   twitterTitle: 'Lila Chibane · Coach · Peintre · Son',
   twitterDescription: 'Trois façons de faire du bien au corps et à l\'esprit.',
-  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
 const scrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 const scrollIndicatorVisible = ref(true)
 const isSubmitting = ref(false)
+let revealObserver = null
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 100
@@ -35,12 +36,12 @@ const handleSubmit = async (e) => {
   isSubmitting.value = true
   const form = e.target
   try {
-    await fetch(form.action, {
+    const res = await fetch(form.action, {
       method: 'POST',
       body: new FormData(form),
       headers: { Accept: 'application/json' },
     })
-    form.reset()
+    if (res.ok) form.reset()
   } catch (err) {
     // silent
   } finally {
@@ -67,7 +68,7 @@ useHead({
         name: 'Lila Chibane',
         description: 'Coach sportive, peintre et créatrice sonore. Coaching sport-santé, art visuel et création audio.',
         url: 'https://lilachibane.com',
-        image: 'https://lilachibane.com/lila-portrait.png',
+        image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
         areaServed: [
           { '@type': 'AdministrativeArea', name: 'Médoc, Gironde' },
@@ -101,7 +102,7 @@ useHead({
         name: 'Lila Chibane',
         jobTitle: 'Coach sportive, peintre et créatrice sonore',
         url: 'https://lilachibane.com',
-        image: 'https://lilachibane.com/lila-portrait.png',
+        image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
         knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Peinture', 'Art visuel', 'Création sonore', 'Sound design'],
       }),
@@ -113,7 +114,7 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true })
 
   nextTick(() => {
-    const observer = new IntersectionObserver(
+    revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -123,12 +124,13 @@ onMounted(() => {
       },
       { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
     )
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el))
   })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (revealObserver) revealObserver.disconnect()
 })
 </script>
 
@@ -381,9 +383,9 @@ onUnmounted(() => {
         </div>
 
         <div class="mt-10 md:mt-14 reveal">
-          <a href="#" class="text-sm font-body text-white/50 hover:text-white transition-colors duration-300 border-b border-white/20 pb-1">
+          <span class="text-sm font-body text-white/50 cursor-default border-b border-white/20 pb-1">
             Voir la galerie complète →
-          </a>
+          </span>
         </div>
       </div>
     </section>
@@ -444,9 +446,9 @@ onUnmounted(() => {
         </div>
 
         <div class="mt-10 md:mt-14 reveal">
-          <a href="#" class="text-sm font-body text-gray hover:text-warm transition-colors duration-300 border-b border-gray-faint pb-1">
+          <span class="text-sm font-body text-gray cursor-default border-b border-gray-faint pb-1">
             Écouter sur SoundCloud →
-          </a>
+          </span>
         </div>
       </div>
     </section>
@@ -659,14 +661,6 @@ onUnmounted(() => {
 }
 @keyframes menuFadeIn {
   to { opacity: 1; transform: translateY(0); }
-}
-
-.method-img {
-  transform: scale(1.05);
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible .method-img {
-  transform: scale(1);
 }
 
 .form-input {

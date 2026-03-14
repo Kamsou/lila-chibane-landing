@@ -8,10 +8,10 @@ useSeoMeta({
   ogDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
   ogUrl: 'https://lilachibane.com/quiz',
   ogType: 'website',
-  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
   twitterTitle: 'Quiz Énergie | Lila Chibane',
   twitterDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
-  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
 useHead({
@@ -278,12 +278,12 @@ function restart() {
     <div v-if="currentStep === 0" class="min-h-screen flex items-center justify-center px-5 sm:px-6 md:px-8 pt-20">
       <div class="max-w-2xl w-full animate-fade-up">
         <div class="text-center mb-10 md:mb-12">
-          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Quiz energie</p>
+          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Quiz énergie</p>
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-warm leading-[1.15] mb-5 md:mb-6">
-            Quel est ton profil<br>d'energie actuelle ?
+            Quel est ton profil<br>d'énergie actuelle ?
           </h1>
           <p class="text-base sm:text-lg font-body font-light text-gray max-w-xl mx-auto leading-relaxed">
-            Decouvre en quelques minutes ton etat d'energie, physique, mental et emotionnel
+            Découvre en quelques minutes ton état d'énergie, physique, mental et émotionnel
           </p>
         </div>
 
@@ -291,13 +291,13 @@ function restart() {
           <h2 class="text-lg font-display font-semibold text-warm mb-4">Introduction</h2>
           <div class="space-y-3 text-base font-body font-light text-gray leading-relaxed">
             <p>Bienvenue dans ce quiz introspectif.</p>
-            <p>Il n'y a pas de bonne ou de mauvaise reponse, juste une invitation a t'ecouter.</p>
-            <p class="text-warm font-normal">A la fin, tu decouvriras ton profil d'energie et des pistes concretes pour le reequilibrer naturellement.</p>
+            <p>Il n'y a pas de bonne ou de mauvaise réponse, juste une invitation à t'écouter.</p>
+            <p class="text-warm font-normal">À la fin, tu découvriras ton profil d'énergie et des pistes concrètes pour le rééquilibrer naturellement.</p>
           </div>
         </div>
 
         <div class="text-center">
-          <button @click="nextStep" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
+          <button @click="nextStep" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-none transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
             Commencer le quiz
           </button>
         </div>
@@ -311,18 +311,18 @@ function restart() {
           <!-- Progress Bar -->
           <div class="mb-8 md:mb-10">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-body font-medium text-bronze tracking-wide">Etape {{ currentStep }} / {{ questions.length }}</span>
+              <span class="text-xs font-body font-medium text-bronze tracking-wide">Étape {{ currentStep }} / {{ questions.length }}</span>
               <span class="text-xs font-body font-medium text-warm">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
             </div>
-            <div class="w-full bg-sand rounded-full h-1 overflow-hidden">
-              <div class="bg-warm h-1 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
+            <div class="w-full bg-sand rounded-none h-1 overflow-hidden">
+              <div class="bg-warm h-1 rounded-none transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
             </div>
           </div>
 
           <!-- Questions Card -->
           <div class="bg-cream rounded-2xl border border-gray-faint p-6 md:p-8 mb-6">
             <div class="mb-6 pb-4 border-b border-gray-faint">
-              <p class="text-xs font-body font-medium text-bronze tracking-wide mb-2">Etape {{ currentStep }}</p>
+              <p class="text-xs font-body font-medium text-bronze tracking-wide mb-2">Étape {{ currentStep }}</p>
               <h2 class="text-xl md:text-2xl font-display font-light text-warm">
                 {{ questions[currentStep - 1].title }}
               </h2>
@@ -354,16 +354,16 @@ function restart() {
 
           <!-- Navigation -->
           <div class="flex justify-between gap-4">
-            <button @click="prevStep" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-warm transition-all duration-300">
+            <button @click="prevStep" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-none hover:border-warm hover:text-warm transition-all duration-300">
               Retour
             </button>
             <button
               @click="nextStep"
               :disabled="!canProgress"
-              class="text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300"
+              class="text-sm font-body font-medium py-3 px-8 rounded-none transition-all duration-300"
               :class="canProgress ? 'bg-warm hover:opacity-90 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-gray-light cursor-not-allowed'"
             >
-              {{ currentStep === questions.length ? 'Voir mes resultats' : 'Suivant' }}
+              {{ currentStep === questions.length ? 'Voir mes résultats' : 'Suivant' }}
             </button>
           </div>
         </div>
@@ -374,7 +374,7 @@ function restart() {
     <div v-else-if="showResults" class="min-h-screen px-5 sm:px-6 md:px-8 pt-28 md:pt-36 pb-20 md:pb-32">
       <div class="max-w-3xl mx-auto animate-fade-up">
         <div class="text-center mb-10 md:mb-14">
-          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Ton resultat</p>
+          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Ton résultat</p>
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-warm leading-[1.15] mb-4">
             {{ result.profile.title }}
           </h1>
@@ -413,7 +413,7 @@ function restart() {
             </div>
 
             <div class="border-t border-gray-faint pt-8 bg-sand -mx-7 md:-mx-10 px-7 md:px-10 py-8 rounded-xl">
-              <h3 class="text-lg font-display font-semibold text-warm mb-4">Ton prochain defi</h3>
+              <h3 class="text-lg font-display font-semibold text-warm mb-4">Ton prochain défi</h3>
               <p class="text-base font-body font-light text-gray leading-relaxed">{{ result.profile.challenge }}</p>
             </div>
           </div>
@@ -423,18 +423,18 @@ function restart() {
         <div class="bg-warm rounded-2xl p-8 md:p-10 text-center mb-8">
           <h3 class="text-xl md:text-2xl font-display font-light text-white mb-3">Tu veux aller plus loin ?</h3>
           <p class="text-sm font-body text-white/60 mb-6 max-w-md mx-auto leading-relaxed">
-            Prends rendez-vous pour un bilan gratuit personnalise
+            Prends rendez-vous pour un bilan gratuit personnalisé
           </p>
           <a
             href="https://calendly.com/lilacoach/bilanpersonnalise"
             target="_blank"
             rel="noopener"
-            class="inline-block bg-cream hover:bg-cream text-warm text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg mb-6"
+            class="inline-block bg-cream hover:bg-cream text-warm text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-none transition-all duration-300 hover:shadow-lg mb-6"
           >
             Je prends RDV
           </a>
           <div class="border-t border-white/10 pt-6 mt-2">
-            <p class="text-xs font-body text-white/40 mb-2">Aucun creneau ne te convient ?</p>
+            <p class="text-xs font-body text-white/40 mb-2">Aucun créneau ne te convient ?</p>
             <a href="mailto:lila.chibane@outlook.com" class="text-sm font-body font-medium text-white hover:text-white/80 transition-colors duration-200 underline underline-offset-4">
               lila.chibane@outlook.com
             </a>
@@ -442,10 +442,10 @@ function restart() {
         </div>
 
         <div class="flex justify-center gap-4">
-          <button @click="restart" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-warm transition-all duration-300">
+          <button @click="restart" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-none hover:border-warm hover:text-warm transition-all duration-300">
             Refaire le quiz
           </button>
-          <NuxtLink to="/" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
+          <NuxtLink to="/" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium py-3 px-8 rounded-none transition-all duration-300 hover:shadow-lg">
             Retour sur le site
           </NuxtLink>
         </div>

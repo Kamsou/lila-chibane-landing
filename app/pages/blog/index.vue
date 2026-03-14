@@ -17,10 +17,10 @@ useSeoMeta({
   ogDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
   ogUrl: 'https://lilachibane.com/blog',
   ogType: 'website',
-  ogImage: 'https://lilachibane.com/lila-portrait.png',
+  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
   twitterTitle: 'Blog | Lila Chibane',
   twitterDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
-  twitterImage: 'https://lilachibane.com/lila-portrait.png',
+  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
 useHead({
@@ -65,9 +65,10 @@ const formatDate = (dateString) => {
           <NuxtLink to="/blog" class="font-body text-sm font-normal tracking-wide text-warm">Blog</NuxtLink>
           <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Contact</NuxtLink>
         </nav>
-        <NuxtLink to="/" class="md:hidden font-body text-sm text-gray hover:text-warm transition-colors duration-300">
-          Accueil
-        </NuxtLink>
+        <div class="md:hidden flex items-center gap-4">
+          <NuxtLink to="/" class="font-body text-sm text-gray hover:text-warm transition-colors duration-300">Accueil</NuxtLink>
+          <NuxtLink to="/#contact" class="font-body text-sm text-gray hover:text-warm transition-colors duration-300">Contact</NuxtLink>
+        </div>
       </div>
     </header>
 

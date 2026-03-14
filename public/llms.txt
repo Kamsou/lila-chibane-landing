@@ -1,4 +1,4 @@
-# Lila Chibane -Coach · Painter · Sound Creator
+# Lila Chibane - Coach · Painter · Sound Creator
 
 > Lila Chibane is a multidisciplinary artist and coach based in the Médoc region (France). She works across three fields: sports coaching for women, painting, and sound creation.
 
@@ -17,11 +17,11 @@
 
 ---
 
-## 01 -Sports Coaching
+## 01 - Sports Coaching
 
 ### Target audience
 
-- Active women, ages 30–55
+- Active women, ages 30-55
 - Returning to exercise after a long break
 - Chronic fatigue, stress, mental overload
 - Physical pain or limitations
@@ -51,13 +51,13 @@ Lila offers individual coaching built on three pillars:
 
 ---
 
-## 02 -Painting
+## 02 - Painting
 
 Lila is a painter. Content about her artistic practice is coming soon. Her visual work explores the connection between body, senses and the world.
 
 ---
 
-## 03 -Sound Creation
+## 03 - Sound Creation
 
 Lila creates sound pieces. Content about her sound work is coming soon. Her audio creations explore the space between the visible and the invisible.
 
@@ -65,6 +65,6 @@ Lila creates sound pieces. Content about her sound work is coming soon. Her audi
 
 ## Site pages
 
-- https://lilachibane.com -Home page (coaching, painting, sound creation, about, contact)
-- https://lilachibane.com/blog -Blog with health, fitness and wellness tips
-- https://lilachibane.com/quiz -Energy quiz to discover your profile and get personalized advice
+- https://lilachibane.com - Home page (coaching, painting, sound creation, about, contact)
+- https://lilachibane.com/blog - Blog with health, fitness and wellness tips
+- https://lilachibane.com/quiz - Energy quiz to discover your profile and get personalized advice

@@ -9,7 +9,7 @@ useHead({
     { rel: 'alternate', hreflang: 'fr', href: canonicalUrl },
     { rel: 'alternate', hreflang: 'x-default', href: canonicalUrl },
     { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-    { rel: 'apple-touch-icon', href: '/favicon.svg' },
+    { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
     { rel: 'preconnect', href: 'https://formspree.io' },
     { rel: 'preconnect', href: 'https://lila-chibane.cdn.prismic.io', crossorigin: '' },
   ],

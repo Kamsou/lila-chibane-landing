@@ -22,53 +22,48 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-if (article.value) {
-  const articleUrl = `https://lilachibane.com/blog/${route.params.uid}`
-  const articleImage = article.value.data.featured_image?.url || 'https://lilachibane.com/lila-portrait.png'
+const articleUrl = computed(() => `https://lilachibane.com/blog/${route.params.uid}`)
+const articleImage = computed(() => article.value?.data.featured_image?.url || 'https://lilachibane.com/IMG_2553.jpg')
 
-  useSeoMeta({
-    title: `${article.value.data.title} | Lila Chibane`,
-    description: article.value.data.excerpt || '',
-    ogTitle: article.value.data.title,
-    ogDescription: article.value.data.excerpt || '',
-    ogImage: articleImage,
-    ogUrl: articleUrl,
-    ogType: 'article',
-    twitterTitle: article.value.data.title,
-    twitterDescription: article.value.data.excerpt || '',
-    twitterImage: articleImage,
-  })
+useSeoMeta({
+  title: () => article.value ? `${article.value.data.title} | Lila Chibane` : 'Blog | Lila Chibane',
+  description: () => article.value?.data.excerpt || '',
+  ogTitle: () => article.value?.data.title || 'Blog | Lila Chibane',
+  ogDescription: () => article.value?.data.excerpt || '',
+  ogImage: () => articleImage.value,
+  ogUrl: () => articleUrl.value,
+  ogType: 'article',
+  twitterTitle: () => article.value?.data.title || 'Blog | Lila Chibane',
+  twitterDescription: () => article.value?.data.excerpt || '',
+  twitterImage: () => articleImage.value,
+})
 
-  useHead({
-    script: [
-      {
-        type: 'application/ld+json',
-        innerHTML: JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: article.value.data.title,
-          description: article.value.data.excerpt || '',
-          image: articleImage,
-          datePublished: article.value.data.publication_date || '',
-          author: {
-            '@type': 'Person',
-            name: 'Lila Chibane',
-            url: 'https://lilachibane.com',
-          },
-          publisher: {
-            '@type': 'Organization',
-            name: 'Lila Chibane',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://lilachibane.com/lila-portrait.png',
-            },
-          },
-          mainEntityOfPage: articleUrl,
-        }),
-      },
-    ],
-  })
-}
+useHead({
+  script: article.value ? [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.value.data.title,
+        description: article.value.data.excerpt || '',
+        image: articleImage.value,
+        datePublished: article.value.data.publication_date || '',
+        dateModified: article.value.last_publication_date || article.value.data.publication_date || '',
+        author: {
+          '@type': 'Person',
+          name: 'Lila Chibane',
+          url: 'https://lilachibane.com',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Lila Chibane',
+        },
+        mainEntityOfPage: articleUrl.value,
+      }),
+    },
+  ] : [],
+})
 </script>
 
 <template>
