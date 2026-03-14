@@ -134,6 +134,16 @@ onUnmounted(() => {
       <!-- Texte -->
       <div class="flex items-center px-6 sm:px-10 md:px-12 lg:px-20 py-12 md:py-0">
         <div>
+          <a
+            href="https://jamaistroptard.substack.com/"
+            target="_blank"
+            rel="noopener"
+            class="inline-block text-sm font-body font-light text-gray hover:text-bleu transition-colors duration-300 mb-10 md:mb-12 border-b border-gray-faint hover:border-bleu pb-1 hero-fade"
+            style="animation-delay: 0.3s"
+          >
+            <span class="sparkle">✦</span> Ma newsletter, pour celles qui veulent aller plus loin
+          </a>
+
           <div class="space-y-4 md:space-y-5 mb-12 md:mb-16">
             <div class="hero-fade" style="animation-delay: 0.5s">
               <a
@@ -170,6 +180,7 @@ onUnmounted(() => {
           <p class="text-sm font-body font-light text-gray max-w-sm leading-relaxed hero-fade" style="animation-delay: 1s">
             Je coache, je peins, je crée du son. Trois façons de faire du bien au corps et à l'esprit.
           </p>
+
         </div>
       </div>
 
@@ -392,6 +403,17 @@ onUnmounted(() => {
           <blockquote class="text-xl md:text-2xl font-display font-normal italic text-white py-2 md:py-4 reveal">
             Trois façons de faire, une même envie : créer les conditions pour se sentir bien.
           </blockquote>
+
+          <div class="mt-8 reveal">
+            <a
+              href="https://jamaistroptard.substack.com/"
+              target="_blank"
+              rel="noopener"
+              class="inline-block bg-white text-bleu text-sm font-body font-normal tracking-wide py-4 px-10 rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-300"
+            >
+              S'abonner à la newsletter
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -552,6 +574,17 @@ onUnmounted(() => {
          placeholder:text-gray-light
          focus:outline-none focus:border-bronze
          transition-colors duration-300 w-full;
+}
+
+.sparkle {
+  display: inline-block;
+  color: #1B3FA0;
+  animation: sparkle 2s ease-in-out infinite;
+  margin-right: 4px;
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
 }
 
 html { scroll-behavior: smooth; }
