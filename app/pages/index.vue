@@ -14,22 +14,12 @@ useSeoMeta({
   twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
-const scrolled = ref(false)
-const isMobileMenuOpen = ref(false)
 const scrollIndicatorVisible = ref(true)
 const isSubmitting = ref(false)
 let revealObserver = null
 
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 100
   if (window.scrollY > 50) scrollIndicatorVisible.value = false
-}
-
-const scrollTo = (e, id) => {
-  e.preventDefault()
-  isMobileMenuOpen.value = false
-  const el = document.querySelector(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
 const handleSubmit = async (e) => {
@@ -48,14 +38,6 @@ const handleSubmit = async (e) => {
     isSubmitting.value = false
   }
 }
-
-const navLinks = [
-  { label: 'Coaching', href: '#coaching' },
-  { label: 'Peinture', href: '#peinture' },
-  { label: 'Son', href: '#creation-sonore' },
-  { label: 'Blog', href: '/blog', external: true },
-  { label: 'Contact', href: '#contact' },
-]
 
 // JSON-LD Structured Data
 useHead({
@@ -135,86 +117,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- ==================== NAVIGATION ==================== -->
-  <header
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="scrolled ? 'bg-cream/95 backdrop-blur-md border-b border-gray-faint' : 'bg-cream'"
-  >
-    <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-      <a href="#" @click.prevent="scrollTo($event, '#hero')" class="font-display text-lg md:text-xl font-normal tracking-tight text-warm">
-        Lila Chibane
-      </a>
-
-      <nav class="hidden md:flex items-center gap-10 lg:gap-12">
-        <template v-for="link in navLinks" :key="link.label">
-          <NuxtLink
-            v-if="link.external"
-            :to="link.href"
-            class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-500 relative"
-            :class="'text-gray hover:text-bleu'"
-          >
-            {{ link.label }}
-          </NuxtLink>
-          <a
-            v-else
-            :href="link.href"
-            @click.prevent="scrollTo($event, link.href)"
-            class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-500 relative"
-            :class="'text-gray hover:text-bleu'"
-          >
-            {{ link.label }}
-          </a>
-        </template>
-      </nav>
-
-      <button
-        class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
-        style="touch-action: manipulation"
-        @click="isMobileMenuOpen = !isMobileMenuOpen"
-        :aria-label="isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
-      >
-        <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? 'rotate-45 translate-y-[4px]' : ''"></span>
-        <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? '-rotate-45 -translate-y-[4px]' : ''"></span>
-      </button>
-    </div>
-
-    <!-- Mobile menu -->
-    <Transition name="fade">
-      <div v-if="isMobileMenuOpen" class="md:hidden fixed inset-0 top-0 bg-cream z-40 flex flex-col items-center justify-center">
-        <button
-          class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center"
-          @click="isMobileMenuOpen = false"
-          aria-label="Fermer le menu"
-        >
-          <span class="block w-5 h-[1px] bg-warm rotate-45 absolute"></span>
-          <span class="block w-5 h-[1px] bg-warm -rotate-45 absolute"></span>
-        </button>
-
-        <nav class="flex flex-col items-center gap-8">
-          <template v-for="(link, i) in navLinks" :key="link.label">
-            <NuxtLink
-              v-if="link.external"
-              :to="link.href"
-              class="font-body text-sm font-normal tracking-wide text-warm mobile-menu-link"
-              :style="{ animationDelay: `${i * 80}ms` }"
-              @click="isMobileMenuOpen = false"
-            >
-              {{ link.label }}
-            </NuxtLink>
-            <a
-              v-else
-              :href="link.href"
-              @click="scrollTo($event, link.href)"
-              class="font-body text-sm font-normal tracking-wide text-warm mobile-menu-link"
-              :style="{ animationDelay: `${i * 80}ms` }"
-            >
-              {{ link.label }}
-            </a>
-          </template>
-        </nav>
-      </div>
-    </Transition>
-  </header>
+  <AppHeader />
 
   <main class="bg-cream">
     <!-- ==================== HERO ==================== -->
@@ -565,59 +468,7 @@ onUnmounted(() => {
     </section>
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-warm py-16 md:py-20 px-6 md:px-10">
-    <div class="max-w-5xl mx-auto">
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-8">
-        <!-- Identity -->
-        <div>
-          <p class="font-display text-xl text-white font-normal mb-3">Lila Chibane</p>
-          <p class="text-xs font-body text-gray-light leading-relaxed tracking-wide">
-            Coach sportive · Peintre · Créatrice sonore<br>Médoc, France
-          </p>
-        </div>
-
-        <!-- Navigation -->
-        <div>
-          <nav class="flex flex-col gap-3">
-            <template v-for="link in navLinks" :key="'footer-' + link.label">
-              <NuxtLink
-                v-if="link.external"
-                :to="link.href"
-                class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300"
-              >
-                {{ link.label }}
-              </NuxtLink>
-              <a
-                v-else
-                :href="link.href"
-                @click.prevent="scrollTo($event, link.href)"
-                class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300"
-              >
-                {{ link.label }}
-              </a>
-            </template>
-          </nav>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <a
-            href="mailto:lila.chibane@outlook.com"
-            class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300"
-          >
-            lila.chibane@outlook.com
-          </a>
-        </div>
-      </div>
-
-      <div class="border-t border-white/10 mt-14 md:mt-16 pt-8">
-        <p class="text-xs font-body text-gray-faint tracking-[0.15em]">
-          &copy; {{ new Date().getFullYear() }} Lila Chibane
-        </p>
-      </div>
-    </div>
-  </footer>
+  <AppFooter />
 </template>
 
 <style scoped lang="postcss">
@@ -653,31 +504,6 @@ onUnmounted(() => {
   @apply bg-bleu text-white text-sm font-body font-normal tracking-wide py-4 px-10 rounded-full
          hover:opacity-90 active:scale-[0.98]
          transition-all duration-300;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-.mobile-menu-link {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: menuFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes menuFadeIn {
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .section-icon {
@@ -727,10 +553,6 @@ onUnmounted(() => {
          focus:outline-none focus:border-bronze
          transition-colors duration-300 w-full;
 }
-
-.fade-enter-active { transition: opacity 0.3s ease; }
-.fade-leave-active { transition: opacity 0.2s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
 
 html { scroll-behavior: smooth; }
 </style>

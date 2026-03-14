@@ -263,16 +263,7 @@ function restart() {
 <template>
   <div class="min-h-screen bg-cream">
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-gray-faint">
-      <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
-        <NuxtLink to="/" class="font-display text-lg md:text-xl font-light tracking-tight text-warm flex items-center gap-2">
-          <svg class="w-4 h-4 text-gray-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-          Lila Chibane
-        </NuxtLink>
-      </div>
-    </header>
+    <AppHeader minimal />
 
     <!-- Intro Page -->
     <div v-if="currentStep === 0" class="min-h-screen flex items-center justify-center px-5 sm:px-6 md:px-8 pt-20">

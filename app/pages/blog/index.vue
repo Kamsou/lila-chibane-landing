@@ -52,25 +52,7 @@ const formatDate = (dateString) => {
 
 <template>
   <div class="min-h-screen bg-cream">
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-gray-faint">
-      <div class="max-w-5xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-        <NuxtLink to="/" class="font-display text-lg md:text-xl font-normal tracking-tight text-warm">
-          Lila Chibane
-        </NuxtLink>
-        <nav class="hidden md:flex items-center gap-10">
-          <NuxtLink to="/#coaching" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Coaching</NuxtLink>
-          <NuxtLink to="/#peinture" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Peinture</NuxtLink>
-          <NuxtLink to="/#creation-sonore" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Son</NuxtLink>
-          <NuxtLink to="/blog" class="font-body text-sm font-normal tracking-wide text-warm">Blog</NuxtLink>
-          <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Contact</NuxtLink>
-        </nav>
-        <div class="md:hidden flex items-center gap-4">
-          <NuxtLink to="/" class="font-body text-sm text-gray hover:text-bleu transition-colors duration-300">Accueil</NuxtLink>
-          <NuxtLink to="/#contact" class="font-body text-sm text-gray hover:text-bleu transition-colors duration-300">Contact</NuxtLink>
-        </div>
-      </div>
-    </header>
+    <AppHeader active-page="blog" />
 
     <!-- Blog Content -->
     <main class="pt-32 md:pt-40 pb-20 md:pb-32 px-6 md:px-10">
@@ -136,16 +118,7 @@ const formatDate = (dateString) => {
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-warm py-14 md:py-16 px-6 md:px-10">
-      <div class="max-w-5xl mx-auto flex flex-col items-center gap-3">
-        <p class="font-display text-lg text-white font-normal">Lila Chibane</p>
-        <p class="text-xs font-body text-white/30">&copy; {{ new Date().getFullYear() }} Lila Chibane</p>
-        <NuxtLink to="/" class="text-xs font-body text-white/40 hover:text-white transition-colors duration-300 mt-1">
-          Retour à l'accueil
-        </NuxtLink>
-      </div>
-    </footer>
+    <AppFooter simple />
   </div>
 </template>
 
