@@ -297,7 +297,7 @@ function restart() {
         </div>
 
         <div class="text-center">
-          <button @click="nextStep" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-none transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
+          <button @click="nextStep" class="bg-bleu hover:opacity-90 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
             Commencer le quiz
           </button>
         </div>
@@ -314,8 +314,8 @@ function restart() {
               <span class="text-xs font-body font-medium text-bronze tracking-wide">Étape {{ currentStep }} / {{ questions.length }}</span>
               <span class="text-xs font-body font-medium text-warm">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
             </div>
-            <div class="w-full bg-sand rounded-none h-1 overflow-hidden">
-              <div class="bg-warm h-1 rounded-none transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
+            <div class="w-full bg-sand rounded-full h-1 overflow-hidden">
+              <div class="bg-bleu h-1 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
             </div>
           </div>
 
@@ -354,14 +354,14 @@ function restart() {
 
           <!-- Navigation -->
           <div class="flex justify-between gap-4">
-            <button @click="prevStep" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-none hover:border-warm hover:text-warm transition-all duration-300">
+            <button @click="prevStep" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-bleu transition-all duration-300">
               Retour
             </button>
             <button
               @click="nextStep"
               :disabled="!canProgress"
-              class="text-sm font-body font-medium py-3 px-8 rounded-none transition-all duration-300"
-              :class="canProgress ? 'bg-warm hover:opacity-90 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-gray-light cursor-not-allowed'"
+              class="text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300"
+              :class="canProgress ? 'bg-bleu hover:opacity-90 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-gray-light cursor-not-allowed'"
             >
               {{ currentStep === questions.length ? 'Voir mes résultats' : 'Suivant' }}
             </button>
@@ -420,7 +420,7 @@ function restart() {
         </div>
 
         <!-- CTA -->
-        <div class="bg-warm rounded-2xl p-8 md:p-10 text-center mb-8">
+        <div class="bg-bleu rounded-2xl p-8 md:p-10 text-center mb-8">
           <h3 class="text-xl md:text-2xl font-display font-light text-white mb-3">Tu veux aller plus loin ?</h3>
           <p class="text-sm font-body text-white/60 mb-6 max-w-md mx-auto leading-relaxed">
             Prends rendez-vous pour un bilan gratuit personnalisé
@@ -429,7 +429,7 @@ function restart() {
             href="https://calendly.com/lilacoach/bilanpersonnalise"
             target="_blank"
             rel="noopener"
-            class="inline-block bg-cream hover:bg-cream text-warm text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-none transition-all duration-300 hover:shadow-lg mb-6"
+            class="inline-block bg-cream hover:bg-cream text-warm text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg mb-6"
           >
             Je prends RDV
           </a>
@@ -442,10 +442,10 @@ function restart() {
         </div>
 
         <div class="flex justify-center gap-4">
-          <button @click="restart" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-none hover:border-warm hover:text-warm transition-all duration-300">
+          <button @click="restart" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-bleu transition-all duration-300">
             Refaire le quiz
           </button>
-          <NuxtLink to="/" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium py-3 px-8 rounded-none transition-all duration-300 hover:shadow-lg">
+          <NuxtLink to="/" class="bg-bleu hover:opacity-90 text-white text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
             Retour sur le site
           </NuxtLink>
         </div>

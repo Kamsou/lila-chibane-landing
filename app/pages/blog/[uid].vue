@@ -75,13 +75,13 @@ useHead({
           Lila Chibane
         </NuxtLink>
         <nav class="hidden md:flex items-center gap-10">
-          <NuxtLink to="/#coaching" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Coaching</NuxtLink>
-          <NuxtLink to="/#peinture" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Peinture</NuxtLink>
-          <NuxtLink to="/#creation-sonore" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Son</NuxtLink>
+          <NuxtLink to="/#coaching" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Coaching</NuxtLink>
+          <NuxtLink to="/#peinture" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Peinture</NuxtLink>
+          <NuxtLink to="/#creation-sonore" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Son</NuxtLink>
           <NuxtLink to="/blog" class="font-body text-sm font-normal tracking-wide text-warm">Blog</NuxtLink>
-          <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Contact</NuxtLink>
+          <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Contact</NuxtLink>
         </nav>
-        <NuxtLink to="/blog" class="md:hidden font-body text-sm text-gray hover:text-warm transition-colors duration-300">
+        <NuxtLink to="/blog" class="md:hidden font-body text-sm text-gray hover:text-bleu transition-colors duration-300">
           ← Blog
         </NuxtLink>
       </div>
@@ -91,7 +91,7 @@ useHead({
     <article v-if="article" class="pt-28 md:pt-36 pb-20 md:pb-32">
       <!-- Back to blog -->
       <div class="max-w-3xl mx-auto px-6 md:px-10 mb-8 md:mb-10">
-        <NuxtLink to="/blog" class="inline-flex items-center font-body text-sm text-gray hover:text-warm transition-colors duration-300">
+        <NuxtLink to="/blog" class="inline-flex items-center font-body text-sm text-gray hover:text-bleu transition-colors duration-300">
           ← Retour aux articles
         </NuxtLink>
       </div>
@@ -147,7 +147,7 @@ useHead({
             <p class="font-body font-normal text-warm mb-1">Cet article t'a plu ?</p>
             <p class="text-sm font-body font-light text-gray">Partage-le avec tes amies !</p>
           </div>
-          <NuxtLink to="/blog" class="bg-warm hover:opacity-90 text-white text-sm font-body font-normal tracking-wide py-3.5 px-8 transition-all duration-300">
+          <NuxtLink to="/blog" class="bg-bleu hover:opacity-90 text-white text-sm font-body font-normal tracking-wide py-3.5 px-8 transition-all duration-300">
             Voir tous les articles
           </NuxtLink>
         </div>
@@ -161,7 +161,7 @@ useHead({
             <p class="text-sm font-body font-light text-gray leading-relaxed mb-4">
               Coach sportive, peintre et créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
             </p>
-            <NuxtLink to="/#contact" class="inline-block font-body text-sm text-gray-light hover:text-warm transition-colors duration-300">
+            <NuxtLink to="/#contact" class="inline-block font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300">
               Me contacter →
             </NuxtLink>
           </div>
@@ -221,7 +221,7 @@ useHead({
 }
 
 :deep(.article-content a) {
-  @apply text-bronze hover:text-warm underline underline-offset-4 transition-colors duration-300;
+  @apply text-bronze hover:text-bleu underline underline-offset-4 transition-colors duration-300;
 }
 
 :deep(.article-content strong) {

@@ -59,15 +59,15 @@ const formatDate = (dateString) => {
           Lila Chibane
         </NuxtLink>
         <nav class="hidden md:flex items-center gap-10">
-          <NuxtLink to="/#coaching" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Coaching</NuxtLink>
-          <NuxtLink to="/#peinture" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Peinture</NuxtLink>
-          <NuxtLink to="/#creation-sonore" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Son</NuxtLink>
+          <NuxtLink to="/#coaching" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Coaching</NuxtLink>
+          <NuxtLink to="/#peinture" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Peinture</NuxtLink>
+          <NuxtLink to="/#creation-sonore" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Son</NuxtLink>
           <NuxtLink to="/blog" class="font-body text-sm font-normal tracking-wide text-warm">Blog</NuxtLink>
-          <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-warm transition-colors duration-300">Contact</NuxtLink>
+          <NuxtLink to="/#contact" class="font-body text-sm font-normal tracking-wide text-gray hover:text-bleu transition-colors duration-300">Contact</NuxtLink>
         </nav>
         <div class="md:hidden flex items-center gap-4">
-          <NuxtLink to="/" class="font-body text-sm text-gray hover:text-warm transition-colors duration-300">Accueil</NuxtLink>
-          <NuxtLink to="/#contact" class="font-body text-sm text-gray hover:text-warm transition-colors duration-300">Contact</NuxtLink>
+          <NuxtLink to="/" class="font-body text-sm text-gray hover:text-bleu transition-colors duration-300">Accueil</NuxtLink>
+          <NuxtLink to="/#contact" class="font-body text-sm text-gray hover:text-bleu transition-colors duration-300">Contact</NuxtLink>
         </div>
       </div>
     </header>
@@ -113,13 +113,13 @@ const formatDate = (dateString) => {
             <p v-if="article.data.publication_date" class="text-xs font-body text-gray-light mb-2">
               {{ formatDate(article.data.publication_date) }}
             </p>
-            <h2 class="text-lg md:text-xl font-display font-normal text-warm mb-2 group-hover:text-bronze transition-colors duration-300 leading-snug">
+            <h2 class="text-lg md:text-xl font-display font-normal text-warm mb-2 group-hover:text-bleu transition-colors duration-300 leading-snug">
               {{ article.data.title }}
             </h2>
             <p v-if="article.data.excerpt" class="text-sm font-body font-light text-gray leading-relaxed line-clamp-3">
               {{ article.data.excerpt }}
             </p>
-            <span class="inline-block mt-3 text-sm font-body text-gray-light group-hover:text-bronze transition-colors duration-300">
+            <span class="inline-block mt-3 text-sm font-body text-gray-light group-hover:text-bleu transition-colors duration-300">
               Lire →
             </span>
           </NuxtLink>
@@ -129,7 +129,7 @@ const formatDate = (dateString) => {
         <div v-else class="py-20">
           <h2 class="text-2xl font-display font-normal text-warm mb-3">Aucun article pour le moment</h2>
           <p class="text-base font-body font-light text-gray mb-8">Les premiers articles arrivent bientôt !</p>
-          <NuxtLink to="/" class="inline-block bg-warm hover:opacity-90 text-white text-sm font-body font-normal tracking-wide py-4 px-10 transition-all duration-300">
+          <NuxtLink to="/" class="inline-block bg-bleu hover:opacity-90 text-white text-sm font-body font-normal tracking-wide py-4 px-10 transition-all duration-300">
             Retour à l'accueil
           </NuxtLink>
         </div>

@@ -138,10 +138,10 @@ onUnmounted(() => {
   <!-- ==================== NAVIGATION ==================== -->
   <header
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="scrolled ? 'bg-cream/95 backdrop-blur-md border-b border-gray-faint' : 'bg-transparent'"
+    :class="scrolled ? 'bg-cream/95 backdrop-blur-md border-b border-gray-faint' : 'bg-cream'"
   >
     <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-      <a href="#" @click.prevent="scrollTo($event, '#hero')" class="font-display text-lg md:text-xl font-normal tracking-tight transition-colors duration-500" :class="scrolled ? 'text-warm' : 'text-white'">
+      <a href="#" @click.prevent="scrollTo($event, '#hero')" class="font-display text-lg md:text-xl font-normal tracking-tight text-warm">
         Lila Chibane
       </a>
 
@@ -151,7 +151,7 @@ onUnmounted(() => {
             v-if="link.external"
             :to="link.href"
             class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-500 relative"
-            :class="scrolled ? 'text-gray hover:text-warm' : 'text-white/60 hover:text-white'"
+            :class="'text-gray hover:text-bleu'"
           >
             {{ link.label }}
           </NuxtLink>
@@ -160,7 +160,7 @@ onUnmounted(() => {
             :href="link.href"
             @click.prevent="scrollTo($event, link.href)"
             class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-500 relative"
-            :class="scrolled ? 'text-gray hover:text-warm' : 'text-white/60 hover:text-white'"
+            :class="'text-gray hover:text-bleu'"
           >
             {{ link.label }}
           </a>
@@ -173,8 +173,8 @@ onUnmounted(() => {
         @click="isMobileMenuOpen = !isMobileMenuOpen"
         :aria-label="isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
       >
-        <span class="block w-5 h-[1px] transition-all duration-500" :class="[scrolled ? 'bg-warm' : 'bg-cream', isMobileMenuOpen ? 'rotate-45 translate-y-[4px]' : '']"></span>
-        <span class="block w-5 h-[1px] transition-all duration-500" :class="[scrolled ? 'bg-warm' : 'bg-cream', isMobileMenuOpen ? '-rotate-45 -translate-y-[4px]' : '']"></span>
+        <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? 'rotate-45 translate-y-[4px]' : ''"></span>
+        <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? '-rotate-45 -translate-y-[4px]' : ''"></span>
       </button>
     </div>
 
@@ -218,11 +218,11 @@ onUnmounted(() => {
 
   <main class="bg-cream">
     <!-- ==================== HERO ==================== -->
-    <section id="hero" class="h-screen max-h-screen bg-warm grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
+    <section id="hero" class="h-screen max-h-screen bg-cream grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
       <!-- Photo -->
       <div class="h-[50vh] md:h-auto overflow-hidden hero-fade" style="animation-delay: 0.1s">
         <img
-          src="/IMG_2553.jpg"
+          src="/test-2.jpeg"
           alt="Lila Chibane"
           class="w-full h-full object-cover object-[center_25%]"
         />
@@ -231,44 +231,40 @@ onUnmounted(() => {
       <!-- Texte -->
       <div class="flex items-center px-6 sm:px-10 md:px-12 lg:px-20 py-12 md:py-0">
         <div>
-          <h1 class="font-body font-light text-white text-4xl md:text-5xl leading-tight mb-10 md:mb-14 tracking-tight hero-fade" style="animation-delay: 0.3s">
-            Lila Chibane
-          </h1>
-
           <div class="space-y-4 md:space-y-5 mb-12 md:mb-16">
             <div class="hero-fade" style="animation-delay: 0.5s">
               <a
                 href="#coaching"
                 @click.prevent="scrollTo($event, '#coaching')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-white text-2xl md:text-3xl lg:text-4xl"
+                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
               >
-                <span class="border-b border-white/30 group-hover:border-bronze pb-1 transition-colors duration-300">Coach sportive</span>
-                <span class="text-white/30 group-hover:text-bronze group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
+                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Coach sportive</span>
+                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
               </a>
             </div>
             <div class="hero-fade" style="animation-delay: 0.65s">
               <a
                 href="#peinture"
                 @click.prevent="scrollTo($event, '#peinture')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-white text-2xl md:text-3xl lg:text-4xl"
+                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
               >
-                <span class="border-b border-white/30 group-hover:border-bronze pb-1 transition-colors duration-300">Peinture</span>
-                <span class="text-white/30 group-hover:text-bronze group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
+                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Peinture</span>
+                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
               </a>
             </div>
             <div class="hero-fade" style="animation-delay: 0.8s">
               <a
                 href="#creation-sonore"
                 @click.prevent="scrollTo($event, '#creation-sonore')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-white text-2xl md:text-3xl lg:text-4xl"
+                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
               >
-                <span class="border-b border-white/30 group-hover:border-bronze pb-1 transition-colors duration-300">Création sonore</span>
-                <span class="text-white/30 group-hover:text-bronze group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
+                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Création sonore</span>
+                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
               </a>
             </div>
           </div>
 
-          <p class="text-sm font-body font-light text-white/40 max-w-sm leading-relaxed hero-fade" style="animation-delay: 1s">
+          <p class="text-sm font-body font-light text-gray max-w-sm leading-relaxed hero-fade" style="animation-delay: 1s">
             Je coache, je peins, je crée du son. Trois façons de faire du bien au corps et à l'esprit.
           </p>
         </div>
@@ -279,7 +275,7 @@ onUnmounted(() => {
         class="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-500"
         :class="scrollIndicatorVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'"
       >
-        <div class="w-[1px] h-8 bg-cream/20 mx-auto scroll-pulse"></div>
+        <div class="w-[1px] h-8 bg-warm/20 mx-auto scroll-pulse"></div>
       </div>
     </section>
 
@@ -288,8 +284,18 @@ onUnmounted(() => {
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">01</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             Coach sportive
+            <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="8" r="4" />
+              <path d="M24 14v10" />
+              <path d="M16 44l4-14h8l4 14" />
+              <path d="M14 22h20" class="icon-draw" />
+              <path d="M18 16l-6 10" />
+              <path d="M30 16l6 10" />
+              <circle cx="10" cy="28" r="2" class="icon-pulse" />
+              <circle cx="38" cy="28" r="2" class="icon-pulse" style="animation-delay: 0.5s" />
+            </svg>
           </h2>
           <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
             J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter.
@@ -336,54 +342,61 @@ onUnmounted(() => {
     </section>
 
     <!-- ==================== PEINTURE ==================== -->
-    <section id="peinture" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-warm">
+    <section id="peinture" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-white/40 mb-4 block reveal">02</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-white leading-[1.1] mb-6 md:mb-8 reveal">
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">02</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             Peinture
+            <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 38 Q14 20 24 14 Q34 8 38 10" class="icon-draw" />
+              <path d="M38 10 L42 6" />
+              <path d="M42 6 C44 4 46 6 44 8 L40 12" />
+              <circle cx="12" cy="36" r="5" fill="currentColor" opacity="0.15" class="icon-pulse" />
+              <circle cx="22" cy="26" r="3" fill="currentColor" opacity="0.1" class="icon-pulse" style="animation-delay: 0.4s" />
+            </svg>
           </h2>
-          <p class="text-base sm:text-lg font-body font-light text-white/70 leading-relaxed reveal">
+          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
             [Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]
           </p>
         </div>
 
         <!-- Grille œuvres -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-[1px] mt-14 md:mt-20">
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 0ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Huile sur toile, 80×60 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 0ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Huile sur toile, 80×60 cm</p>
           </div>
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 60ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Acrylique, 100×100 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 60ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Acrylique, 100×100 cm</p>
           </div>
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 120ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Technique mixte, 60×40 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 120ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Technique mixte, 60×40 cm</p>
           </div>
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 180ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Huile sur bois, 50×50 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 180ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Huile sur bois, 50×50 cm</p>
           </div>
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 240ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Encre et pigments, 70×50 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 240ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Encre et pigments, 70×50 cm</p>
           </div>
-          <div class="aspect-square bg-white/10 flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 300ms">
-            <svg class="w-8 h-8 text-white/20 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-white/50">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-white/30">Acrylique sur papier, 40×30 cm</p>
+          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 300ms">
+            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
+            <p class="text-xs font-body text-gray-light">Acrylique sur papier, 40×30 cm</p>
           </div>
         </div>
 
         <div class="mt-10 md:mt-14 reveal">
-          <span class="text-sm font-body text-white/50 cursor-default border-b border-white/20 pb-1">
+          <span class="text-sm font-body text-gray cursor-default border-b border-gray-faint pb-1">
             Voir la galerie complète →
           </span>
         </div>
@@ -395,8 +408,12 @@ onUnmounted(() => {
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">03</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             Création sonore
+            <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M6 24c0-8 4-14 10-14s8 6 8 14-2 14-8 14S6 32 6 24z" class="icon-wave" />
+              <path d="M24 24c0-10 4-18 10-18s8 8 8 18-2 18-8 18-10-8-10-18z" class="icon-wave" style="animation-delay: 0.3s" />
+            </svg>
           </h2>
           <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
             [Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]
@@ -454,22 +471,22 @@ onUnmounted(() => {
     </section>
 
     <!-- ==================== À PROPOS ==================== -->
-    <section id="a-propos" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-warm">
+    <section id="a-propos" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
       <div class="max-w-3xl mx-auto">
-        <span class="text-xs font-body font-normal tracking-wider text-white/40 mb-4 block reveal">À propos</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-10 md:mb-14 reveal">
+        <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">À propos</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-warm leading-[1.1] mb-10 md:mb-14 reveal">
           Je m'appelle Lila.
         </h2>
 
         <div class="space-y-6 md:space-y-8">
-          <p class="text-base sm:text-lg font-body font-light text-white/70 leading-relaxed reveal">
+          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
             Coach sportive, peintre, créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
           </p>
-          <p class="text-base sm:text-lg font-body font-light text-white/70 leading-relaxed reveal">
+          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
             Le coaching m'a appris à accompagner avec douceur. La peinture me permet d'exprimer ce que les mots ne disent pas. La création sonore donne une forme à ce qu'on ressent sans pouvoir le nommer.
           </p>
 
-          <blockquote class="text-xl md:text-2xl font-display font-normal italic text-white py-2 md:py-4 reveal">
+          <blockquote class="text-xl md:text-2xl font-display font-normal italic text-warm py-2 md:py-4 reveal">
             Trois façons de faire, une même envie : créer les conditions pour se sentir bien.
           </blockquote>
         </div>
@@ -555,7 +572,7 @@ onUnmounted(() => {
         <!-- Identity -->
         <div>
           <p class="font-display text-xl text-white font-normal mb-3">Lila Chibane</p>
-          <p class="text-xs font-body text-white/30 leading-relaxed tracking-wide">
+          <p class="text-xs font-body text-gray-light leading-relaxed tracking-wide">
             Coach sportive · Peintre · Créatrice sonore<br>Médoc, France
           </p>
         </div>
@@ -595,7 +612,7 @@ onUnmounted(() => {
       </div>
 
       <div class="border-t border-white/10 mt-14 md:mt-16 pt-8">
-        <p class="text-xs font-body text-white/20 tracking-[0.15em]">
+        <p class="text-xs font-body text-gray-faint tracking-[0.15em]">
           &copy; {{ new Date().getFullYear() }} Lila Chibane
         </p>
       </div>
@@ -633,7 +650,7 @@ onUnmounted(() => {
 }
 
 .btn-warm {
-  @apply bg-warm text-white text-sm font-body font-normal tracking-wide py-4 px-10
+  @apply bg-bleu text-white text-sm font-body font-normal tracking-wide py-4 px-10 rounded-full
          hover:opacity-90 active:scale-[0.98]
          transition-all duration-300;
 }
@@ -661,6 +678,46 @@ onUnmounted(() => {
 }
 @keyframes menuFadeIn {
   to { opacity: 1; transform: translateY(0); }
+}
+
+.section-icon {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.4s;
+}
+.reveal.visible .section-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.icon-pulse {
+  animation: iconPulse 2s ease-in-out infinite;
+}
+@keyframes iconPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.icon-draw {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: iconDraw 2s ease-out forwards;
+  animation-delay: 0.8s;
+}
+.reveal.visible .icon-draw {
+  animation: iconDraw 2s ease-out forwards;
+}
+@keyframes iconDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.icon-wave {
+  animation: iconWave 3s ease-in-out infinite;
+}
+@keyframes iconWave {
+  0%, 100% { transform: scaleX(1); opacity: 0.6; }
+  50% { transform: scaleX(1.1); opacity: 1; }
 }
 
 .form-input {

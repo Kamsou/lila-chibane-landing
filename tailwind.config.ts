@@ -5,6 +5,8 @@ export default {
         cream: '#FAF5EF',
         sand: '#F0EBE3',
         warm: '#2C2520',
+        deep: '#1E2A3A',
+        bleu: '#1B3FA0',
         bronze: '#8B7355',
         gray: {
           DEFAULT: '#7A6B5D',
