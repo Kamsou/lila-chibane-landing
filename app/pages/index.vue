@@ -229,7 +229,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Texte -->
-      <div class="flex items-center px-8 md:px-12 lg:px-20 py-16 md:py-0">
+      <div class="flex items-center px-6 sm:px-10 md:px-12 lg:px-20 py-12 md:py-0">
         <div>
           <h1 class="font-body font-light text-white text-4xl md:text-5xl leading-tight mb-10 md:mb-14 tracking-tight hero-fade" style="animation-delay: 0.3s">
             Lila Chibane
