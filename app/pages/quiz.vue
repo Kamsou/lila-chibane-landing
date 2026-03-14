@@ -263,10 +263,10 @@ function restart() {
 <template>
   <div class="min-h-screen bg-cream">
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-400/10">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-gray-faint">
       <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
-        <NuxtLink to="/" class="font-display text-lg md:text-xl font-light tracking-tight text-stone-900 flex items-center gap-2">
-          <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <NuxtLink to="/" class="font-display text-lg md:text-xl font-light tracking-tight text-warm flex items-center gap-2">
+          <svg class="w-4 h-4 text-gray-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
           Lila Chibane
@@ -278,26 +278,26 @@ function restart() {
     <div v-if="currentStep === 0" class="min-h-screen flex items-center justify-center px-5 sm:px-6 md:px-8 pt-20">
       <div class="max-w-2xl w-full animate-fade-up">
         <div class="text-center mb-10 md:mb-12">
-          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6">Quiz energie</p>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-stone-900 leading-[1.15] mb-5 md:mb-6">
+          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Quiz energie</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-warm leading-[1.15] mb-5 md:mb-6">
             Quel est ton profil<br>d'energie actuelle ?
           </h1>
-          <p class="text-base sm:text-lg font-body font-light text-stone-600 max-w-xl mx-auto leading-relaxed">
+          <p class="text-base sm:text-lg font-body font-light text-gray max-w-xl mx-auto leading-relaxed">
             Decouvre en quelques minutes ton etat d'energie, physique, mental et emotionnel
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl border border-stone-400/10 p-7 md:p-9 mb-8">
-          <h2 class="text-lg font-display font-semibold text-stone-900 mb-4">Introduction</h2>
-          <div class="space-y-3 text-base font-body font-light text-stone-600 leading-relaxed">
+        <div class="bg-cream rounded-2xl border border-gray-faint p-7 md:p-9 mb-8">
+          <h2 class="text-lg font-display font-semibold text-warm mb-4">Introduction</h2>
+          <div class="space-y-3 text-base font-body font-light text-gray leading-relaxed">
             <p>Bienvenue dans ce quiz introspectif.</p>
             <p>Il n'y a pas de bonne ou de mauvaise reponse, juste une invitation a t'ecouter.</p>
-            <p class="text-stone-800 font-normal">A la fin, tu decouvriras ton profil d'energie et des pistes concretes pour le reequilibrer naturellement.</p>
+            <p class="text-warm font-normal">A la fin, tu decouvriras ton profil d'energie et des pistes concretes pour le reequilibrer naturellement.</p>
           </div>
         </div>
 
         <div class="text-center">
-          <button @click="nextStep" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
+          <button @click="nextStep" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg active:scale-[0.97]">
             Commencer le quiz
           </button>
         </div>
@@ -311,41 +311,41 @@ function restart() {
           <!-- Progress Bar -->
           <div class="mb-8 md:mb-10">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-body font-medium text-sage-dark tracking-wide">Etape {{ currentStep }} / {{ questions.length }}</span>
-              <span class="text-xs font-body font-medium text-stone-900">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
+              <span class="text-xs font-body font-medium text-bronze tracking-wide">Etape {{ currentStep }} / {{ questions.length }}</span>
+              <span class="text-xs font-body font-medium text-warm">{{ Math.round((currentStep / questions.length) * 100) }}%</span>
             </div>
             <div class="w-full bg-sand rounded-full h-1 overflow-hidden">
-              <div class="bg-stone-900 h-1 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
+              <div class="bg-warm h-1 rounded-full transition-all duration-700 ease-out" :style="{ width: (currentStep / questions.length) * 100 + '%' }"></div>
             </div>
           </div>
 
           <!-- Questions Card -->
-          <div class="bg-white rounded-2xl border border-stone-400/10 p-6 md:p-8 mb-6">
-            <div class="mb-6 pb-4 border-b border-stone-400/10">
-              <p class="text-xs font-body font-medium text-sage-dark tracking-wide mb-2">Etape {{ currentStep }}</p>
-              <h2 class="text-xl md:text-2xl font-display font-light text-stone-900">
+          <div class="bg-cream rounded-2xl border border-gray-faint p-6 md:p-8 mb-6">
+            <div class="mb-6 pb-4 border-b border-gray-faint">
+              <p class="text-xs font-body font-medium text-bronze tracking-wide mb-2">Etape {{ currentStep }}</p>
+              <h2 class="text-xl md:text-2xl font-display font-light text-warm">
                 {{ questions[currentStep - 1].title }}
               </h2>
             </div>
 
             <div class="space-y-6">
               <div v-for="question in questions[currentStep - 1].questions" :key="question.id" class="space-y-2.5">
-                <h3 class="text-sm font-body font-medium text-stone-900">{{ question.text }}</h3>
+                <h3 class="text-sm font-body font-medium text-warm">{{ question.text }}</h3>
                 <div class="space-y-1.5">
                   <label
                     v-for="option in question.options"
                     :key="option.value"
                     class="flex items-center p-3 rounded-xl border cursor-pointer transition-all duration-200"
-                    :class="answers[question.id] === option.value ? 'border-stone-900 bg-sand/50' : 'border-stone-400/15 hover:border-stone-400/30 hover:bg-sand/30'"
+                    :class="answers[question.id] === option.value ? 'border-warm bg-sand/50' : 'border-gray-faint hover:border-gray-light hover:bg-sand/30'"
                   >
                     <input
                       type="radio"
                       :name="question.id"
                       :value="option.value"
                       v-model="answers[question.id]"
-                      class="w-4 h-4 text-stone-900 focus:ring-sage cursor-pointer accent-stone-900"
+                      class="w-4 h-4 text-warm focus:ring-bronze cursor-pointer accent-warm"
                     />
-                    <span class="ml-3 text-sm font-body text-stone-700">{{ option.label }}</span>
+                    <span class="ml-3 text-sm font-body text-gray">{{ option.label }}</span>
                   </label>
                 </div>
               </div>
@@ -354,14 +354,14 @@ function restart() {
 
           <!-- Navigation -->
           <div class="flex justify-between gap-4">
-            <button @click="prevStep" class="bg-transparent border border-stone-300 text-stone-600 text-sm font-body font-medium py-3 px-6 rounded-full hover:border-stone-900 hover:text-stone-900 transition-all duration-300">
+            <button @click="prevStep" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-warm transition-all duration-300">
               Retour
             </button>
             <button
               @click="nextStep"
               :disabled="!canProgress"
               class="text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300"
-              :class="canProgress ? 'bg-stone-900 hover:bg-stone-800 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-stone-400 cursor-not-allowed'"
+              :class="canProgress ? 'bg-warm hover:opacity-90 text-white hover:shadow-lg active:scale-[0.97]' : 'bg-sand text-gray-light cursor-not-allowed'"
             >
               {{ currentStep === questions.length ? 'Voir mes resultats' : 'Suivant' }}
             </button>
@@ -374,53 +374,53 @@ function restart() {
     <div v-else-if="showResults" class="min-h-screen px-5 sm:px-6 md:px-8 pt-28 md:pt-36 pb-20 md:pb-32">
       <div class="max-w-3xl mx-auto animate-fade-up">
         <div class="text-center mb-10 md:mb-14">
-          <p class="text-xs font-body font-medium tracking-wide text-sage-dark mb-5 md:mb-6">Ton resultat</p>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-stone-900 leading-[1.15] mb-4">
+          <p class="text-xs font-body font-medium tracking-wide text-bronze mb-5 md:mb-6">Ton resultat</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-light text-warm leading-[1.15] mb-4">
             {{ result.profile.title }}
           </h1>
-          <div class="flex justify-center gap-6 text-xs font-body text-stone-400 tracking-wide">
+          <div class="flex justify-center gap-6 text-xs font-body text-gray-light tracking-wide">
             <span>A : {{ result.counts.A }}</span>
             <span>B : {{ result.counts.B }}</span>
             <span>C : {{ result.counts.C }}</span>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl border border-stone-400/10 p-7 md:p-10 mb-8">
+        <div class="bg-cream rounded-2xl border border-gray-faint p-7 md:p-10 mb-8">
           <div class="space-y-8">
-            <p class="text-lg font-body font-medium text-stone-900 leading-relaxed">{{ result.profile.description }}</p>
+            <p class="text-lg font-body font-medium text-warm leading-relaxed">{{ result.profile.description }}</p>
 
-            <div v-for="detail in result.profile.details" :key="detail" class="text-base font-body font-light text-stone-600 leading-relaxed">
+            <div v-for="detail in result.profile.details" :key="detail" class="text-base font-body font-light text-gray leading-relaxed">
               <p>{{ detail }}</p>
             </div>
 
-            <div class="border-t border-stone-400/15 pt-8">
-              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ce que cela dit de toi</h3>
+            <div class="border-t border-gray-faint pt-8">
+              <h3 class="text-lg font-display font-semibold text-warm mb-4">Ce que cela dit de toi</h3>
               <ul class="space-y-3">
-                <li v-for="item in result.profile.whatThisSays" :key="item" class="text-base font-body font-light text-stone-600 leading-relaxed">
+                <li v-for="item in result.profile.whatThisSays" :key="item" class="text-base font-body font-light text-gray leading-relaxed">
                   {{ item }}
                 </li>
               </ul>
             </div>
 
-            <div class="border-t border-stone-400/15 pt-8">
-              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ce que tu peux approfondir</h3>
+            <div class="border-t border-gray-faint pt-8">
+              <h3 class="text-lg font-display font-semibold text-warm mb-4">Ce que tu peux approfondir</h3>
               <ul class="space-y-3">
-                <li v-for="item in result.profile.toDeepen" :key="item" class="flex items-start gap-2.5 text-base font-body font-light text-stone-600 leading-relaxed">
-                  <span class="text-sage mt-1.5 text-xs">&#9679;</span>
+                <li v-for="item in result.profile.toDeepen" :key="item" class="flex items-start gap-2.5 text-base font-body font-light text-gray leading-relaxed">
+                  <span class="text-bronze mt-1.5 text-xs">&#9679;</span>
                   <span>{{ item }}</span>
                 </li>
               </ul>
             </div>
 
-            <div class="border-t border-stone-400/15 pt-8 bg-sand -mx-7 md:-mx-10 px-7 md:px-10 py-8 rounded-xl">
-              <h3 class="text-lg font-display font-semibold text-stone-900 mb-4">Ton prochain defi</h3>
-              <p class="text-base font-body font-light text-stone-700 leading-relaxed">{{ result.profile.challenge }}</p>
+            <div class="border-t border-gray-faint pt-8 bg-sand -mx-7 md:-mx-10 px-7 md:px-10 py-8 rounded-xl">
+              <h3 class="text-lg font-display font-semibold text-warm mb-4">Ton prochain defi</h3>
+              <p class="text-base font-body font-light text-gray leading-relaxed">{{ result.profile.challenge }}</p>
             </div>
           </div>
         </div>
 
         <!-- CTA -->
-        <div class="bg-stone-900 rounded-2xl p-8 md:p-10 text-center mb-8">
+        <div class="bg-warm rounded-2xl p-8 md:p-10 text-center mb-8">
           <h3 class="text-xl md:text-2xl font-display font-light text-white mb-3">Tu veux aller plus loin ?</h3>
           <p class="text-sm font-body text-white/60 mb-6 max-w-md mx-auto leading-relaxed">
             Prends rendez-vous pour un bilan gratuit personnalise
@@ -429,7 +429,7 @@ function restart() {
             href="https://calendly.com/lilacoach/bilanpersonnalise"
             target="_blank"
             rel="noopener"
-            class="inline-block bg-white hover:bg-cream text-stone-900 text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg mb-6"
+            class="inline-block bg-cream hover:bg-cream text-warm text-sm font-body font-medium tracking-wide py-3.5 px-10 rounded-full transition-all duration-300 hover:shadow-lg mb-6"
           >
             Je prends RDV
           </a>
@@ -442,10 +442,10 @@ function restart() {
         </div>
 
         <div class="flex justify-center gap-4">
-          <button @click="restart" class="bg-transparent border border-stone-300 text-stone-600 text-sm font-body font-medium py-3 px-6 rounded-full hover:border-stone-900 hover:text-stone-900 transition-all duration-300">
+          <button @click="restart" class="bg-transparent border border-gray-faint text-gray text-sm font-body font-medium py-3 px-6 rounded-full hover:border-warm hover:text-warm transition-all duration-300">
             Refaire le quiz
           </button>
-          <NuxtLink to="/" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
+          <NuxtLink to="/" class="bg-warm hover:opacity-90 text-white text-sm font-body font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
             Retour sur le site
           </NuxtLink>
         </div>

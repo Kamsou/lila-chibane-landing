@@ -14,7 +14,7 @@ useHead({
     { rel: 'preconnect', href: 'https://lila-chibane.cdn.prismic.io', crossorigin: '' },
   ],
   meta: [
-    { name: 'theme-color', content: '#FAF8F5' },
+    { name: 'theme-color', content: '#FAF5EF' },
     { name: 'geo.region', content: 'FR-NAQ' },
     { name: 'geo.placename', content: 'Médoc, Nouvelle-Aquitaine' },
     { property: 'og:locale', content: 'fr_FR' },

@@ -1,21 +1,25 @@
-# Lila Chibane — Health & Fitness Coach
+# Lila Chibane -Coach · Painter · Sound Creator
 
-> Health and fitness coach specializing in personalized support for active women looking to resume a regular, enjoyable and adapted physical activity.
+> Lila Chibane is a multidisciplinary artist and coach based in the Médoc region (France). She works across three fields: sports coaching for women, painting, and sound creation.
 
 ## Identity
 
 - Name: Lila Chibane
-- Profession: Health & fitness coach
+- Professions: Sports & health coach, painter, sound creator
 - Website: https://lilachibane.com
 - Contact: lila.chibane@outlook.com
 - Language: French
 
 ## Location
 
-- Online sessions (video): all of France
-- In-person sessions: Médoc area (Gironde, Nouvelle-Aquitaine, France)
+- Online coaching sessions (video): all of France
+- In-person coaching sessions: Médoc area (Gironde, Nouvelle-Aquitaine, France)
 
-## Target audience
+---
+
+## 01 -Sports Coaching
+
+### Target audience
 
 - Active women, ages 30–55
 - Returning to exercise after a long break
@@ -23,7 +27,7 @@
 - Physical pain or limitations
 - Looking for a supportive, pressure-free coaching approach
 
-## Approach
+### Approach
 
 Lila offers individual coaching built on three pillars:
 
@@ -31,22 +35,36 @@ Lila offers individual coaching built on three pillars:
 2. **Nervous system regulation**: stress management, breathing techniques, body awareness. Effort is adjusted based on the state of the nervous system.
 3. **Supportive nutrition**: nutritional guidance to sustain energy and recovery, with no dieting or restriction.
 
-## Format
+### Coaching format
 
 - Individual coaching via video or in-person (Médoc)
 - Fully personalized program
 - Sessions scheduled around the client's availability
 - Free 30-minute discovery call
 
-## Values
+### Values
 
 - No pressure, no punishment, at your own pace
 - Pleasure over performance
 - Consistency over intensity
 - Kindness, zero guilt
 
+---
+
+## 02 -Painting
+
+Lila is a painter. Content about her artistic practice is coming soon. Her visual work explores the connection between body, senses and the world.
+
+---
+
+## 03 -Sound Creation
+
+Lila creates sound pieces. Content about her sound work is coming soon. Her audio creations explore the space between the visible and the invisible.
+
+---
+
 ## Site pages
 
-- https://lilachibane.com — Home page (philosophy, method, about, contact)
-- https://lilachibane.com/blog — Blog with health, fitness and wellness tips
-- https://lilachibane.com/quiz — Energy quiz to discover your profile and get personalized advice
+- https://lilachibane.com -Home page (coaching, painting, sound creation, about, contact)
+- https://lilachibane.com/blog -Blog with health, fitness and wellness tips
+- https://lilachibane.com/quiz -Energy quiz to discover your profile and get personalized advice
