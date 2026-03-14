@@ -471,22 +471,22 @@ onUnmounted(() => {
     </section>
 
     <!-- ==================== À PROPOS ==================== -->
-    <section id="a-propos" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
+    <section id="a-propos" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-bleu">
       <div class="max-w-3xl mx-auto">
-        <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">À propos</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-warm leading-[1.1] mb-10 md:mb-14 reveal">
+        <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block reveal">À propos</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-10 md:mb-14 reveal">
           Je m'appelle Lila.
         </h2>
 
         <div class="space-y-6 md:space-y-8">
-          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
+          <p class="text-base sm:text-lg font-body font-light text-white/80 leading-relaxed reveal">
             Coach sportive, peintre, créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
           </p>
-          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
+          <p class="text-base sm:text-lg font-body font-light text-white/80 leading-relaxed reveal">
             Le coaching m'a appris à accompagner avec douceur. La peinture me permet d'exprimer ce que les mots ne disent pas. La création sonore donne une forme à ce qu'on ressent sans pouvoir le nommer.
           </p>
 
-          <blockquote class="text-xl md:text-2xl font-display font-normal italic text-warm py-2 md:py-4 reveal">
+          <blockquote class="text-xl md:text-2xl font-display font-normal italic text-white py-2 md:py-4 reveal">
             Trois façons de faire, une même envie : créer les conditions pour se sentir bien.
           </blockquote>
         </div>

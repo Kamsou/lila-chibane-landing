@@ -2,8 +2,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#FAF5EF',
-        sand: '#F0EBE3',
+        cream: '#EDE4D3',
+        sand: '#E2D6C3',
         warm: '#2C2520',
         deep: '#1E2A3A',
         bleu: '#1B3FA0',
