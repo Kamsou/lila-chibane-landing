@@ -12,17 +12,17 @@
   },
   "dependencies": {
     "@nuxt/fonts": "0.11.2",
-    "@nuxthub/core": "^0.10.6",
+    "@nuxthub/core": "^0.10.7",
     "@nuxtjs/prismic": "^4.1.0",
     "@nuxtjs/sitemap": "^7.6.0",
-    "@nuxtjs/tailwindcss": "6.13.2",
-    "nuxt": "^4.0.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "nuxt": "^4.4.6",
+    "vue": "^3.5.34",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@slicemachine/adapter-nuxt": "^0.3.86",
-    "slice-machine-ui": "^2.19.1"
+    "@slicemachine/adapter-nuxt": "^0.3.96",
+    "slice-machine-ui": "^2.21.3"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

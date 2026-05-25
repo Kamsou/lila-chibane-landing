@@ -12,7 +12,7 @@ defineProps({
         <div>
           <p class="font-display text-xl text-white font-normal mb-3">Lila Chibane</p>
           <p class="text-xs font-body text-white/30 leading-relaxed tracking-wide">
-            Coach sportive · Peintre · Créatrice sonore<br>Médoc, France
+            Coach sportive · Peintre · Créatrice sonore · Dog sitter<br>Médoc, France
           </p>
         </div>
 
@@ -21,6 +21,7 @@ defineProps({
             <NuxtLink to="/#coaching" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Coaching</NuxtLink>
             <NuxtLink to="/#peinture" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Peinture</NuxtLink>
             <NuxtLink to="/#creation-sonore" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Son</NuxtLink>
+            <NuxtLink to="/#dog-sitting" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Dog sitting</NuxtLink>
             <NuxtLink to="/blog" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Blog</NuxtLink>
             <NuxtLink to="/#contact" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Contact</NuxtLink>
           </nav>

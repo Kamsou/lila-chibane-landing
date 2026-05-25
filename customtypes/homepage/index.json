@@ -1,0 +1,229 @@
+{
+  "id": "homepage",
+  "label": "Page d'accueil",
+  "format": "page",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Hero": {
+      "hero_name": {
+        "type": "Text",
+        "config": {
+          "label": "Titre principal (h1)",
+          "placeholder": "Je m'appelle Lila."
+        }
+      },
+      "hero_subtitle": {
+        "type": "Text",
+        "config": {
+          "label": "Sous-titre (rôles)",
+          "placeholder": "Coach sportive · Peintre · Créatrice sonore · Dog sitter"
+        }
+      },
+      "hero_intro_1": {
+        "type": "Text",
+        "config": {
+          "label": "Paragraphe d'intro 1",
+          "placeholder": "Quatre pratiques, un même fil..."
+        }
+      },
+      "hero_intro_2": {
+        "type": "Text",
+        "config": {
+          "label": "Paragraphe d'intro 2",
+          "placeholder": "Je crée les conditions pour se sentir bien..."
+        }
+      },
+      "hero_cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "Texte du bouton",
+          "placeholder": "S'abonner à la newsletter"
+        }
+      },
+      "hero_cta_url": {
+        "type": "Link",
+        "config": {
+          "label": "Lien du bouton",
+          "placeholder": "https://jamaistroptard.substack.com/",
+          "allowTargetBlank": true
+        }
+      },
+      "hero_cta_caption": {
+        "type": "Text",
+        "config": {
+          "label": "Sous-texte du bouton",
+          "placeholder": "Pour celles qui veulent aller plus loin"
+        }
+      }
+    },
+    "Coaching": {
+      "coaching_label": {
+        "type": "Text",
+        "config": {
+          "label": "Numéro de section",
+          "placeholder": "01"
+        }
+      },
+      "coaching_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre de section",
+          "placeholder": "Coach sportive"
+        }
+      },
+      "coaching_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Paragraphe d'intro",
+          "placeholder": "J'accompagne les femmes actives...",
+          "single": "paragraph,strong,em"
+        }
+      },
+      "coaching_cards": {
+        "type": "Group",
+        "config": {
+          "label": "Cartes (Mouvement, Régulation, Alimentation)",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Titre", "placeholder": "Mouvement intelligent" }
+            },
+            "text": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "Renforcement, mobilité..." }
+            }
+          }
+        }
+      },
+      "coaching_cta_label": {
+        "type": "Text",
+        "config": { "label": "Texte du bouton", "placeholder": "Réserver un bilan gratuit" }
+      },
+      "coaching_cta_url": {
+        "type": "Link",
+        "config": {
+          "label": "Lien du bouton (Calendly)",
+          "placeholder": "https://calendly.com/...",
+          "allowTargetBlank": true
+        }
+      },
+      "coaching_cta_caption": {
+        "type": "Text",
+        "config": { "label": "Sous-texte du bouton", "placeholder": "30 minutes · gratuit · en visio..." }
+      }
+    },
+    "Peinture": {
+      "peinture_label": {
+        "type": "Text",
+        "config": { "label": "Numéro de section", "placeholder": "02" }
+      },
+      "peinture_title": {
+        "type": "Text",
+        "config": { "label": "Titre de section", "placeholder": "Peinture" }
+      },
+      "peinture_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Paragraphe d'intro",
+          "placeholder": "Quelques lignes sur ta démarche...",
+          "single": "paragraph,strong,em"
+        }
+      },
+      "peinture_footer": {
+        "type": "Text",
+        "config": { "label": "Mention bas de section", "placeholder": "Galerie complète à venir" }
+      }
+    },
+    "Son": {
+      "son_label": {
+        "type": "Text",
+        "config": { "label": "Numéro de section", "placeholder": "03" }
+      },
+      "son_title": {
+        "type": "Text",
+        "config": { "label": "Titre de section", "placeholder": "Création sonore" }
+      },
+      "son_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Paragraphe d'intro",
+          "placeholder": "Quelques lignes sur ton univers sonore...",
+          "single": "paragraph,strong,em"
+        }
+      },
+      "son_footer": {
+        "type": "Text",
+        "config": { "label": "Mention bas de section", "placeholder": "Sélection à venir" }
+      }
+    },
+    "Dog sitting": {
+      "dog_label": {
+        "type": "Text",
+        "config": { "label": "Numéro de section", "placeholder": "04" }
+      },
+      "dog_title": {
+        "type": "Text",
+        "config": { "label": "Titre de section", "placeholder": "Dog sitting" }
+      },
+      "dog_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Paragraphe d'intro",
+          "placeholder": "Je prends soin de ton chien...",
+          "single": "paragraph,strong,em"
+        }
+      },
+      "dog_cards": {
+        "type": "Group",
+        "config": {
+          "label": "Cartes (Promenades, Garde, Visites)",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Titre", "placeholder": "Promenades & sorties" }
+            },
+            "text": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "Des balades dans le Médoc..." }
+            }
+          }
+        }
+      },
+      "dog_cta_label": {
+        "type": "Text",
+        "config": { "label": "Texte du bouton", "placeholder": "Me parler de ton chien" }
+      },
+      "dog_cta_caption": {
+        "type": "Text",
+        "config": { "label": "Sous-texte du bouton", "placeholder": "Médoc, Gironde · tarifs sur demande" }
+      }
+    },
+    "Contact": {
+      "contact_label": {
+        "type": "Text",
+        "config": { "label": "Surtitre", "placeholder": "Contact" }
+      },
+      "contact_title": {
+        "type": "Text",
+        "config": { "label": "Titre de section", "placeholder": "Envie d'échanger ?" }
+      },
+      "contact_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Paragraphe d'intro",
+          "placeholder": "Que ce soit pour un coaching...",
+          "single": "paragraph,strong,em"
+        }
+      },
+      "contact_button_label": {
+        "type": "Text",
+        "config": { "label": "Texte du bouton d'envoi", "placeholder": "Envoyer" }
+      },
+      "contact_success": {
+        "type": "Text",
+        "config": { "label": "Message de succès", "placeholder": "Merci, ton message est bien arrivé..." }
+      }
+    }
+  }
+}

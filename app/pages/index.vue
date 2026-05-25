@@ -1,29 +1,125 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { asText, asLink } from '@prismicio/client'
+
+const prismic = usePrismic()
+const { data: homepage } = await useAsyncData('homepage', async () => {
+  try {
+    return await prismic.client.getSingle('homepage')
+  } catch (e) {
+    if (import.meta.dev) console.error('[homepage] Prismic fetch failed:', e)
+    return null
+  }
+})
+
+const content = computed(() => {
+  const d = homepage.value?.data || {}
+  return {
+    hero: {
+      name: d.hero_name || "Je m'appelle Lila.",
+      subtitle: d.hero_subtitle || 'Coach sportive · Peintre · Créatrice sonore · Dog sitter',
+      intro1: d.hero_intro_1 || 'Quatre pratiques, un même fil : prendre soin du corps, des sens, du vivant, et de ce qui nous relie au monde.',
+      intro2: d.hero_intro_2 || "Je crée les conditions pour se sentir bien, avec douceur, sans pression, à ton rythme.",
+      ctaLabel: d.hero_cta_label || "S'abonner à la newsletter",
+      ctaUrl: asLink(d.hero_cta_url) || 'https://jamaistroptard.substack.com/',
+      ctaCaption: d.hero_cta_caption || 'Pour celles qui veulent aller plus loin',
+    },
+    coaching: {
+      label: d.coaching_label || '01',
+      title: d.coaching_title || 'Coach sportive',
+      intro: asText(d.coaching_intro) || "J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter.",
+      cards: (d.coaching_cards?.length ? d.coaching_cards : [
+        { title: 'Mouvement intelligent', text: "Renforcement, mobilité, cardio dosé. Chaque séance est pensée pour ton corps tel qu'il est aujourd'hui." },
+        { title: 'Régulation nerveuse', text: "Des outils pour sortir du mode « survie » et retrouver un quotidien plus apaisé, moins de stress, moins d'anxiété." },
+        { title: 'Alimentation soutenante', text: "Pas de régime, pas de restriction. Remettre de la conscience et du plaisir dans l'assiette pour nourrir ton énergie." },
+      ]),
+      ctaLabel: d.coaching_cta_label || 'Réserver un bilan gratuit',
+      ctaUrl: asLink(d.coaching_cta_url) || 'https://calendly.com/lilacoach/bilanpersonnalise',
+      ctaCaption: d.coaching_cta_caption || '30 minutes · gratuit · en visio · sans engagement',
+    },
+    peinture: {
+      label: d.peinture_label || '02',
+      title: d.peinture_title || 'Peinture',
+      intro: asText(d.peinture_intro) || "[Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]",
+      footer: d.peinture_footer || 'Galerie complète à venir',
+    },
+    son: {
+      label: d.son_label || '03',
+      title: d.son_title || 'Création sonore',
+      intro: asText(d.son_intro) || "[Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]",
+      footer: d.son_footer || 'Sélection à venir',
+    },
+    dog: {
+      label: d.dog_label || '04',
+      title: d.dog_title || 'Dog sitting',
+      intro: asText(d.dog_intro) || "Je prends soin de ton chien comme s'il était le mien. Promenades, garde, présence rassurante : à chaque animal son rythme, à chaque humain sa tranquillité d'esprit.",
+      cards: (d.dog_cards?.length ? d.dog_cards : [
+        { title: 'Promenades & sorties', text: "Des balades dans le Médoc, adaptées à l'énergie et au caractère de ton chien. Forêt, plage, sentiers." },
+        { title: 'Garde à domicile', text: "Ton chien reste chez lui, dans ses repères. Je viens, je m'installe, je veille. Pour les week-ends ou les vacances." },
+        { title: 'Visites & soins', text: "Passage quotidien : nourrir, sortir, câliner. Pour les absences courtes ou les besoins ponctuels." },
+      ]),
+      ctaLabel: d.dog_cta_label || 'Me parler de ton chien',
+      ctaCaption: d.dog_cta_caption || 'Médoc, Gironde · tarifs sur demande',
+    },
+    contact: {
+      label: d.contact_label || 'Contact',
+      title: d.contact_title || "Envie d'échanger ?",
+      intro: asText(d.contact_intro) || 'Que ce soit pour un coaching, une collaboration artistique ou simplement discuter, je réponds personnellement à chaque message.',
+      buttonLabel: d.contact_button_label || 'Envoyer',
+      successMessage: d.contact_success || 'Merci, ton message est bien arrivé. Je te réponds très vite.',
+    },
+  }
+})
 
 useSeoMeta({
-  title: 'Lila Chibane · Coach sportive · Peintre · Création sonore',
-  description: 'Lila Chibane, coach sportive, peintre et créatrice sonore. Trois façons de faire du bien au corps et à l\'esprit.',
-  ogTitle: 'Lila Chibane · Coach · Peintre · Son',
-  ogDescription: 'Trois façons de faire du bien au corps et à l\'esprit.',
+  title: 'Lila Chibane · Coach sportive · Peintre · Création sonore · Dog sitting',
+  description: 'Lila Chibane, coach sportive, peintre, créatrice sonore et dog sitter. Quatre façons de faire du bien au corps, à l\'esprit, et aux compagnons à quatre pattes.',
+  ogTitle: 'Lila Chibane · Coach · Peintre · Son · Dog sitting',
+  ogDescription: 'Quatre façons de prendre soin : du corps, des sens, et des compagnons à quatre pattes.',
   ogImage: 'https://lilachibane.com/IMG_2553.jpg',
   ogUrl: 'https://lilachibane.com',
   ogType: 'website',
-  twitterTitle: 'Lila Chibane · Coach · Peintre · Son',
-  twitterDescription: 'Trois façons de faire du bien au corps et à l\'esprit.',
+  twitterTitle: 'Lila Chibane · Coach · Peintre · Son · Dog sitting',
+  twitterDescription: 'Quatre façons de prendre soin : du corps, des sens, et des compagnons à quatre pattes.',
   twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
+const paintingPlaceholders = [
+  { medium: 'Huile sur toile, 80×60 cm' },
+  { medium: 'Acrylique, 100×100 cm' },
+  { medium: 'Technique mixte, 60×40 cm' },
+  { medium: 'Huile sur bois, 50×50 cm' },
+  { medium: 'Encre et pigments, 70×50 cm' },
+  { medium: 'Acrylique sur papier, 40×30 cm' },
+]
+const trackPlaceholders = [
+  { type: 'Field recording, paysage sonore', duration: '3:42' },
+  { type: 'Composition électro-acoustique', duration: '5:17' },
+  { type: 'Installation sonore, performance', duration: '8:03' },
+]
+
+/** @type {import('vue').Ref<'idle' | 'success' | 'error'>} */
+const formStatus = ref('idle')
 const scrollIndicatorVisible = ref(true)
 const isSubmitting = ref(false)
 let revealObserver = null
 
 const handleScroll = () => {
-  if (window.scrollY > 50) scrollIndicatorVisible.value = false
+  if (window.scrollY > 50) {
+    scrollIndicatorVisible.value = false
+    window.removeEventListener('scroll', handleScroll)
+  }
+}
+
+const scrollToContact = (e) => {
+  e.preventDefault()
+  const el = document.querySelector('#contact')
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
 const handleSubmit = async (e) => {
   isSubmitting.value = true
+  formStatus.value = 'idle'
   const form = e.target
   try {
     const res = await fetch(form.action, {
@@ -31,15 +127,19 @@ const handleSubmit = async (e) => {
       body: new FormData(form),
       headers: { Accept: 'application/json' },
     })
-    if (res.ok) form.reset()
+    if (res.ok) {
+      form.reset()
+      formStatus.value = 'success'
+    } else {
+      formStatus.value = 'error'
+    }
   } catch (err) {
-    // silent
+    formStatus.value = 'error'
   } finally {
     isSubmitting.value = false
   }
 }
 
-// JSON-LD Structured Data
 useHead({
   script: [
     {
@@ -48,7 +148,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
         name: 'Lila Chibane',
-        description: 'Coach sportive, peintre et créatrice sonore. Coaching sport-santé, art visuel et création audio.',
+        description: 'Coach sportive, peintre, créatrice sonore et dog sitter. Coaching sport-santé, art visuel, création audio et garde de chiens dans le Médoc.',
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
@@ -62,7 +162,7 @@ useHead({
           addressCountry: 'FR',
         },
         priceRange: '€€',
-        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel', 'Peinture', 'Création sonore'],
+        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel', 'Peinture', 'Création sonore', 'Dog sitting', 'Garde de chien à domicile', 'Promenade de chien'],
       }),
     },
     {
@@ -82,11 +182,11 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Lila Chibane',
-        jobTitle: 'Coach sportive, peintre et créatrice sonore',
+        jobTitle: 'Coach sportive, peintre, créatrice sonore et dog sitter',
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
-        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Peinture', 'Art visuel', 'Création sonore', 'Sound design'],
+        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Peinture', 'Art visuel', 'Création sonore', 'Sound design', 'Dog sitting', 'Garde de chien', 'Bien-être animal'],
       }),
     },
   ],
@@ -101,6 +201,7 @@ onMounted(() => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+            revealObserver.unobserve(entry.target)
           }
         })
       },
@@ -120,67 +221,66 @@ onUnmounted(() => {
   <AppHeader />
 
   <main class="bg-cream">
-    <!-- ==================== HERO ==================== -->
-    <section id="hero" class="h-screen max-h-screen bg-cream grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
+    <section id="hero" class="min-h-screen md:h-screen md:max-h-screen bg-bleu grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
       <!-- Photo -->
       <div class="h-[50vh] md:h-auto overflow-hidden hero-fade" style="animation-delay: 0.1s">
         <img
           src="/test-2.jpeg"
           alt="Lila Chibane"
+          width="1200"
+          height="1800"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
           class="w-full h-full object-cover object-[center_25%]"
         />
       </div>
 
       <!-- Texte -->
-      <div class="flex items-center px-6 sm:px-10 md:px-12 lg:px-20 py-12 md:py-0">
-        <div>
-          <a
-            href="https://jamaistroptard.substack.com/"
-            target="_blank"
-            rel="noopener"
-            class="inline-block text-sm font-body font-light text-gray hover:text-bleu transition-colors duration-300 mb-10 md:mb-12 border-b border-gray-faint hover:border-bleu pb-1 hero-fade"
+      <div class="flex items-center px-6 sm:px-10 md:px-12 lg:px-20 py-16 md:py-20">
+        <div class="max-w-xl">
+          <h1
+            class="font-display font-normal text-white text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-8 md:mb-10 hero-fade"
             style="animation-delay: 0.3s"
           >
-            <span class="sparkle">✦</span> Ma newsletter, pour celles qui veulent aller plus loin
-          </a>
+            {{ content.hero.name }}
+          </h1>
 
-          <div class="space-y-4 md:space-y-5 mb-12 md:mb-16">
-            <div class="hero-fade" style="animation-delay: 0.5s">
-              <a
-                href="#coaching"
-                @click.prevent="scrollTo($event, '#coaching')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
-              >
-                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Coach sportive</span>
-                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
-              </a>
-            </div>
-            <div class="hero-fade" style="animation-delay: 0.65s">
-              <a
-                href="#peinture"
-                @click.prevent="scrollTo($event, '#peinture')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
-              >
-                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Peinture</span>
-                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
-              </a>
-            </div>
-            <div class="hero-fade" style="animation-delay: 0.8s">
-              <a
-                href="#creation-sonore"
-                @click.prevent="scrollTo($event, '#creation-sonore')"
-                class="hero-link group inline-flex items-center gap-3 font-display font-normal text-warm text-3xl md:text-5xl lg:text-6xl"
-              >
-                <span class="border-b border-warm/30 group-hover:border-bleu pb-1 transition-colors duration-300">Création sonore</span>
-                <span class="text-warm/30 group-hover:text-bleu group-hover:translate-x-1 transition-all duration-300 text-lg">&#8594;</span>
-              </a>
-            </div>
-          </div>
-
-          <p class="text-sm font-body font-light text-gray max-w-sm leading-relaxed hero-fade" style="animation-delay: 1s">
-            Je coache, je peins, je crée du son. Trois façons de faire du bien au corps et à l'esprit.
+          <p
+            class="text-sm font-body font-light text-white/60 mb-6 md:mb-8 hero-fade"
+            style="animation-delay: 0.45s"
+          >
+            {{ content.hero.subtitle }}
           </p>
 
+          <div class="space-y-5 md:space-y-6 mb-10 md:mb-12">
+            <p
+              class="text-base sm:text-lg font-body font-light text-white/85 leading-relaxed hero-fade"
+              style="animation-delay: 0.6s"
+            >
+              {{ content.hero.intro1 }}
+            </p>
+            <p
+              class="text-base sm:text-lg font-body font-light text-white/85 leading-relaxed hero-fade"
+              style="animation-delay: 0.75s"
+            >
+              {{ content.hero.intro2 }}
+            </p>
+          </div>
+
+          <div class="hero-fade inline-block" style="animation-delay: 0.9s">
+            <a
+              :href="content.hero.ctaUrl"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 bg-white text-bleu text-sm font-body font-normal tracking-wide py-4 px-8 rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-300"
+            >
+              <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
+            </a>
+            <p class="text-[11px] font-body font-light text-white/50 mt-3 text-center">
+              {{ content.hero.ctaCaption }}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -189,17 +289,16 @@ onUnmounted(() => {
         class="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-500"
         :class="scrollIndicatorVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'"
       >
-        <div class="w-[1px] h-8 bg-warm/20 mx-auto scroll-pulse"></div>
+        <div class="w-[1px] h-8 bg-white/30 mx-auto scroll-pulse"></div>
       </div>
     </section>
 
-    <!-- ==================== COACHING ==================== -->
     <section id="coaching" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">01</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.coaching.label }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
-            Coach sportive
+            {{ content.coaching.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="24" cy="8" r="4" />
               <path d="M24 14v10" />
@@ -212,56 +311,45 @@ onUnmounted(() => {
             </svg>
           </h2>
           <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
-            J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter.
+            {{ content.coaching.intro }}
           </p>
         </div>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-14 md:mt-20">
-          <div class="bg-sand rounded-xl p-7 md:p-8 reveal" style="transition-delay: 0ms">
-            <h3 class="text-lg font-display font-normal text-warm mb-3">Mouvement intelligent</h3>
-            <p class="text-sm font-body font-light text-gray leading-relaxed">
-              Renforcement, mobilité, cardio dosé. Chaque séance est pensée pour ton corps tel qu'il est aujourd'hui.
-            </p>
-          </div>
-
-          <div class="bg-sand rounded-xl p-7 md:p-8 reveal" style="transition-delay: 120ms">
-            <h3 class="text-lg font-display font-normal text-warm mb-3">Régulation nerveuse</h3>
-            <p class="text-sm font-body font-light text-gray leading-relaxed">
-              Des outils pour sortir du mode « survie » et retrouver un quotidien plus apaisé, moins de stress, moins d'anxiété.
-            </p>
-          </div>
-
-          <div class="bg-sand rounded-xl p-7 md:p-8 sm:col-span-2 md:col-span-1 reveal" style="transition-delay: 240ms">
-            <h3 class="text-lg font-display font-normal text-warm mb-3">Alimentation soutenante</h3>
-            <p class="text-sm font-body font-light text-gray leading-relaxed">
-              Pas de régime, pas de restriction. Remettre de la conscience et du plaisir dans l'assiette pour nourrir ton énergie.
-            </p>
+          <div
+            v-for="(card, i) in content.coaching.cards"
+            :key="`coaching-${i}`"
+            class="bg-sand rounded-xl p-7 md:p-8 reveal"
+            :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
+            :style="{ transitionDelay: `${i * 120}ms` }"
+          >
+            <h3 class="text-lg font-display font-normal text-warm mb-3">{{ card.title }}</h3>
+            <p class="text-sm font-body font-light text-gray leading-relaxed">{{ card.text }}</p>
           </div>
         </div>
 
         <div class="text-center mt-16 md:mt-24 reveal">
           <a
-            href="https://calendly.com/lilacoach/bilanpersonnalise"
+            :href="content.coaching.ctaUrl"
             target="_blank"
             rel="noopener"
             class="btn-warm inline-block"
           >
-            Réserver un bilan gratuit
+            {{ content.coaching.ctaLabel }}
           </a>
           <p class="text-xs font-body text-gray-light mt-4 tracking-wide">
-            30 minutes · gratuit · en visio · sans engagement
+            {{ content.coaching.ctaCaption }}
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ==================== PEINTURE ==================== -->
     <section id="peinture" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">02</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.peinture.label }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
-            Peinture
+            {{ content.peinture.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 38 Q14 20 24 14 Q34 8 38 10" class="icon-draw" />
               <path d="M38 10 L42 6" />
@@ -271,163 +359,156 @@ onUnmounted(() => {
             </svg>
           </h2>
           <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
-            [Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]
+            {{ content.peinture.intro }}
           </p>
         </div>
 
-        <!-- Grille œuvres -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-[1px] mt-14 md:mt-20">
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 0ms">
+          <div
+            v-for="(painting, i) in paintingPlaceholders"
+            :key="`painting-${i}`"
+            class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal"
+            :style="{ transitionDelay: `${i * 60}ms` }"
+          >
             <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
             <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Huile sur toile, 80×60 cm</p>
-          </div>
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 60ms">
-            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Acrylique, 100×100 cm</p>
-          </div>
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 120ms">
-            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Technique mixte, 60×40 cm</p>
-          </div>
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 180ms">
-            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Huile sur bois, 50×50 cm</p>
-          </div>
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 240ms">
-            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Encre et pigments, 70×50 cm</p>
-          </div>
-          <div class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal" style="transition-delay: 300ms">
-            <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            <p class="text-sm font-body text-gray">Titre de l'œuvre</p>
-            <p class="text-xs font-body text-gray-light">Acrylique sur papier, 40×30 cm</p>
+            <p class="text-xs font-body text-gray-light">{{ painting.medium }}</p>
           </div>
         </div>
 
         <div class="mt-10 md:mt-14 reveal">
-          <span class="text-sm font-body text-gray cursor-default border-b border-gray-faint pb-1">
-            Voir la galerie complète →
+          <span class="text-xs font-body font-light text-gray-light italic">
+            {{ content.peinture.footer }}
           </span>
         </div>
       </div>
     </section>
 
-    <!-- ==================== CRÉATION SONORE ==================== -->
     <section id="creation-sonore" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">03</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.son.label }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
-            Création sonore
+            {{ content.son.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M6 24c0-8 4-14 10-14s8 6 8 14-2 14-8 14S6 32 6 24z" class="icon-wave" />
               <path d="M24 24c0-10 4-18 10-18s8 8 8 18-2 18-8 18-10-8-10-18z" class="icon-wave" style="animation-delay: 0.3s" />
             </svg>
           </h2>
           <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
-            [Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]
+            {{ content.son.intro }}
           </p>
         </div>
 
-        <!-- Pistes -->
         <div class="mt-14 md:mt-20">
-          <div class="border-b border-gray-faint py-6 md:py-8 flex items-center justify-between reveal" style="transition-delay: 0ms">
+          <div
+            v-for="(track, i) in trackPlaceholders"
+            :key="`track-${i}`"
+            class="border-b border-gray-faint py-6 md:py-8 flex items-center justify-between reveal"
+            :style="{ transitionDelay: `${i * 80}ms` }"
+          >
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 rounded-full border border-gray-faint flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4 text-gray-light ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
               </div>
               <div>
                 <p class="text-base font-body font-normal text-warm">Titre de la pièce sonore</p>
-                <p class="text-xs font-body text-gray-light">Field recording, paysage sonore</p>
+                <p class="text-xs font-body text-gray-light">{{ track.type }}</p>
               </div>
             </div>
-            <span class="text-sm font-body text-gray-light">3:42</span>
-          </div>
-
-          <div class="border-b border-gray-faint py-6 md:py-8 flex items-center justify-between reveal" style="transition-delay: 80ms">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-full border border-gray-faint flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-gray-light ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-              </div>
-              <div>
-                <p class="text-base font-body font-normal text-warm">Titre de la pièce sonore</p>
-                <p class="text-xs font-body text-gray-light">Composition électro-acoustique</p>
-              </div>
-            </div>
-            <span class="text-sm font-body text-gray-light">5:17</span>
-          </div>
-
-          <div class="border-b border-gray-faint py-6 md:py-8 flex items-center justify-between reveal" style="transition-delay: 160ms">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-full border border-gray-faint flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-gray-light ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-              </div>
-              <div>
-                <p class="text-base font-body font-normal text-warm">Titre de la pièce sonore</p>
-                <p class="text-xs font-body text-gray-light">Installation sonore, performance</p>
-              </div>
-            </div>
-            <span class="text-sm font-body text-gray-light">8:03</span>
+            <span class="text-sm font-body text-gray-light">{{ track.duration }}</span>
           </div>
         </div>
 
         <div class="mt-10 md:mt-14 reveal">
-          <span class="text-sm font-body text-gray cursor-default border-b border-gray-faint pb-1">
-            Écouter sur SoundCloud →
+          <span class="text-xs font-body font-light text-gray-light italic">
+            {{ content.son.footer }}
           </span>
         </div>
       </div>
     </section>
 
-    <!-- ==================== À PROPOS ==================== -->
-    <section id="a-propos" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-bleu">
-      <div class="max-w-3xl mx-auto">
-        <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block reveal">À propos</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-10 md:mb-14 reveal">
-          Je m'appelle Lila.
-        </h2>
-
-        <div class="space-y-6 md:space-y-8">
-          <p class="text-base sm:text-lg font-body font-light text-white/80 leading-relaxed reveal">
-            Coach sportive, peintre, créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
+    <section id="dog-sitting" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
+      <div class="max-w-5xl mx-auto">
+        <div class="max-w-2xl">
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.dog.label }}</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
+            {{ content.dog.title }}
+            <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="currentColor" stroke="none">
+              <!-- Coussinet métacarpien : pointe arrondie en haut, base large avec 3 lobes -->
+              <path
+                d="M 24 18
+                   C 28 18 31 19 33 22
+                   C 35 25 37 28 37 32
+                   C 37 35 36 37 34 38.5
+                   C 32 39.7 30.5 39.2 29 38.2
+                   C 28 37.6 27 37.6 26 38.3
+                   C 25.2 38.9 24.8 39.3 24 39.3
+                   C 23.2 39.3 22.8 38.9 22 38.3
+                   C 21 37.6 20 37.6 19 38.2
+                   C 17.5 39.2 16 39.7 14 38.5
+                   C 12 37 11 35 11 32
+                   C 11 28 13 25 15 22
+                   C 17 19 20 18 24 18 Z"
+                class="paw-pad paw-center"
+              />
+              <!-- 4 coussinets digitaux : ovales pleins, orientés radialement -->
+              <g transform="rotate(-30 9 18)">
+                <ellipse cx="9" cy="18" rx="3.5" ry="5" class="paw-pad paw-toe" style="animation-delay: 0s" />
+              </g>
+              <g transform="rotate(-10 18 10)">
+                <ellipse cx="18" cy="10" rx="3.5" ry="5.5" class="paw-pad paw-toe" style="animation-delay: 0.18s" />
+              </g>
+              <g transform="rotate(10 30 10)">
+                <ellipse cx="30" cy="10" rx="3.5" ry="5.5" class="paw-pad paw-toe" style="animation-delay: 0.36s" />
+              </g>
+              <g transform="rotate(30 39 18)">
+                <ellipse cx="39" cy="18" rx="3.5" ry="5" class="paw-pad paw-toe" style="animation-delay: 0.54s" />
+              </g>
+            </svg>
+          </h2>
+          <p class="text-base sm:text-lg font-body font-light text-gray leading-relaxed reveal">
+            {{ content.dog.intro }}
           </p>
-          <p class="text-base sm:text-lg font-body font-light text-white/80 leading-relaxed reveal">
-            Le coaching m'a appris à accompagner avec douceur. La peinture me permet d'exprimer ce que les mots ne disent pas. La création sonore donne une forme à ce qu'on ressent sans pouvoir le nommer.
-          </p>
+        </div>
 
-          <blockquote class="text-xl md:text-2xl font-display font-normal italic text-white py-2 md:py-4 reveal">
-            Trois façons de faire, une même envie : créer les conditions pour se sentir bien.
-          </blockquote>
-
-          <div class="mt-8 reveal">
-            <a
-              href="https://jamaistroptard.substack.com/"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-white text-bleu text-sm font-body font-normal tracking-wide py-4 px-10 rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-300"
-            >
-              S'abonner à la newsletter
-            </a>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-14 md:mt-20">
+          <div
+            v-for="(card, i) in content.dog.cards"
+            :key="`dog-${i}`"
+            class="bg-cream rounded-xl p-7 md:p-8 reveal"
+            :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
+            :style="{ transitionDelay: `${i * 120}ms` }"
+          >
+            <h3 class="text-lg font-display font-normal text-warm mb-3">{{ card.title }}</h3>
+            <p class="text-sm font-body font-light text-gray leading-relaxed">{{ card.text }}</p>
           </div>
+        </div>
+
+        <div class="text-center mt-16 md:mt-24 reveal">
+          <a
+            href="#contact"
+            @click="scrollToContact"
+            class="btn-warm inline-block"
+          >
+            {{ content.dog.ctaLabel }}
+          </a>
+          <p class="text-xs font-body text-gray-light mt-4 tracking-wide">
+            {{ content.dog.ctaCaption }}
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- ==================== CONTACT ==================== -->
     <section id="contact" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
       <!-- CTA -->
       <div class="max-w-2xl mx-auto text-center mb-20 md:mb-28">
-        <p class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 reveal">Contact</p>
+        <p class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 reveal">{{ content.contact.label }}</p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] reveal">
-          Envie d'échanger ?
+          {{ content.contact.title }}
         </h2>
         <p class="text-base sm:text-lg font-body font-light text-gray mt-6 md:mt-8 max-w-lg mx-auto leading-relaxed reveal">
-          Que ce soit pour un coaching, une collaboration artistique ou simplement discuter, je réponds personnellement à chaque message.
+          {{ content.contact.intro }}
         </p>
       </div>
 
@@ -447,6 +528,7 @@ onUnmounted(() => {
               name="name"
               placeholder="Ton prénom"
               required
+              autocomplete="given-name"
               class="form-input"
             />
           </div>
@@ -458,6 +540,8 @@ onUnmounted(() => {
               name="email"
               placeholder="ton@email.com"
               required
+              autocomplete="email"
+              inputmode="email"
               class="form-input"
             />
           </div>
@@ -482,8 +566,24 @@ onUnmounted(() => {
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" class="opacity-25" />
                 <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="opacity-75" />
               </svg>
-              {{ isSubmitting ? 'Envoi...' : 'Envoyer' }}
+              {{ isSubmitting ? 'Envoi...' : content.contact.buttonLabel }}
             </button>
+            <p
+              v-if="formStatus === 'success'"
+              class="text-sm font-body font-light text-bleu mt-6"
+              role="status"
+              aria-live="polite"
+            >
+              {{ content.contact.successMessage }}
+            </p>
+            <p
+              v-else-if="formStatus === 'error'"
+              class="text-sm font-body font-light text-warm mt-6"
+              role="alert"
+            >
+              Oups, l'envoi n'a pas fonctionné. Tu peux réessayer ou m'écrire directement à
+              <a href="mailto:lila.chibane@outlook.com" class="underline">lila.chibane@outlook.com</a>.
+            </p>
           </div>
         </form>
       </div>
@@ -587,5 +687,45 @@ onUnmounted(() => {
   50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
 }
 
+.paw-pad {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.paw-toe {
+  animation: pawTap 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.paw-center {
+  animation: pawPress 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.7s;
+}
+@keyframes pawTap {
+  0%, 70%, 100% { transform: scale(1); opacity: 1; }
+  18% { transform: scale(1.12); opacity: 0.65; }
+}
+@keyframes pawPress {
+  0%, 70%, 100% { transform: scale(1); opacity: 1; }
+  18% { transform: scale(1.04); opacity: 0.75; }
+}
+
 html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .hero-fade,
+  .scroll-pulse,
+  .section-icon,
+  .icon-pulse,
+  .icon-draw,
+  .icon-wave,
+  .sparkle,
+  .paw-toe,
+  .paw-center {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
 </style>

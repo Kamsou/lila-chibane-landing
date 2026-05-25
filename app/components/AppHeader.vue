@@ -12,9 +12,13 @@ const navLinks = [
   { label: 'Coaching', href: '/#coaching' },
   { label: 'Peinture', href: '/#peinture' },
   { label: 'Son', href: '/#creation-sonore' },
+  { label: 'Dog sitting', href: '/#dog-sitting' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/#contact' },
 ]
+
+const isHome = computed(() => route.path === '/')
+const transparent = computed(() => isHome.value && !scrolled.value && !isMobileMenuOpen.value)
 
 const isActive = (link) => {
   if (props.activePage && link.label.toLowerCase() === props.activePage.toLowerCase()) return true
@@ -22,8 +26,16 @@ const isActive = (link) => {
   return false
 }
 
+let scrollTicking = false
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 100
+  if (scrollTicking) return
+  scrollTicking = true
+  requestAnimationFrame(() => {
+    const threshold = isHome.value ? window.innerHeight - 80 : 100
+    const next = window.scrollY > threshold
+    if (next !== scrolled.value) scrolled.value = next
+    scrollTicking = false
+  })
 }
 
 const scrollTo = (e, id) => {
@@ -50,10 +62,14 @@ onUnmounted(() => {
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="scrolled ? 'bg-cream/95 backdrop-blur-md border-b border-gray-faint' : 'bg-cream'"
+    :class="transparent ? 'bg-bleu' : (scrolled ? 'bg-cream/95 backdrop-blur-md border-b border-gray-faint' : 'bg-cream')"
   >
     <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-      <NuxtLink to="/" class="font-display text-lg md:text-xl font-normal tracking-tight text-warm">
+      <NuxtLink
+        to="/"
+        class="font-display text-lg md:text-xl font-normal tracking-tight transition-colors duration-500"
+        :class="transparent ? 'text-white' : 'text-warm'"
+      >
         Lila Chibane
       </NuxtLink>
 
@@ -65,7 +81,9 @@ onUnmounted(() => {
               :href="link.href"
               @click="scrollTo($event, link.href)"
               class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-300 relative"
-              :class="isActive(link) ? 'text-warm' : 'text-gray hover:text-bleu'"
+              :class="transparent
+                ? (isActive(link) ? 'text-white' : 'text-white/70 hover:text-white')
+                : (isActive(link) ? 'text-warm' : 'text-gray hover:text-bleu')"
             >
               {{ link.label }}
             </a>
@@ -73,7 +91,9 @@ onUnmounted(() => {
               v-else
               :to="link.href"
               class="nav-link font-body text-sm font-normal tracking-wide transition-colors duration-300 relative"
-              :class="isActive(link) ? 'text-warm' : 'text-gray hover:text-bleu'"
+              :class="transparent
+                ? (isActive(link) ? 'text-white' : 'text-white/70 hover:text-white')
+                : (isActive(link) ? 'text-warm' : 'text-gray hover:text-bleu')"
             >
               {{ link.label }}
             </NuxtLink>
@@ -87,8 +107,14 @@ onUnmounted(() => {
           @click="isMobileMenuOpen = !isMobileMenuOpen"
           :aria-label="isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
         >
-          <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? 'rotate-45 translate-y-[4px]' : ''"></span>
-          <span class="block w-5 h-[1px] bg-warm transition-all duration-300" :class="isMobileMenuOpen ? '-rotate-45 -translate-y-[4px]' : ''"></span>
+          <span
+            class="block w-5 h-[1px] transition-all duration-300"
+            :class="[transparent ? 'bg-white' : 'bg-warm', isMobileMenuOpen ? 'rotate-45 translate-y-[4px]' : '']"
+          ></span>
+          <span
+            class="block w-5 h-[1px] transition-all duration-300"
+            :class="[transparent ? 'bg-white' : 'bg-warm', isMobileMenuOpen ? '-rotate-45 -translate-y-[4px]' : '']"
+          ></span>
         </button>
       </template>
     </div>
