@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   prismic: {
     endpoint: 'lila-chibane',
     clientConfig: {
+      defaultParams: { lang: 'fr-fr' },
       routes: [
         {
           type: 'blog_post',
