@@ -224,6 +224,36 @@
         "type": "Text",
         "config": { "label": "Message de succès", "placeholder": "Merci, ton message est bien arrivé..." }
       }
+    },
+    "Navigation": {
+      "nav_brand_label": {
+        "type": "Text",
+        "config": { "label": "Logo / nom (en haut à gauche du site)", "placeholder": "Lila Chibane" }
+      },
+      "nav_label_coaching": {
+        "type": "Text",
+        "config": { "label": "Lien Coaching", "placeholder": "Coaching" }
+      },
+      "nav_label_peinture": {
+        "type": "Text",
+        "config": { "label": "Lien Peinture", "placeholder": "Peinture" }
+      },
+      "nav_label_son": {
+        "type": "Text",
+        "config": { "label": "Lien Son", "placeholder": "Son" }
+      },
+      "nav_label_dog": {
+        "type": "Text",
+        "config": { "label": "Lien Dog sitting", "placeholder": "Dog sitting" }
+      },
+      "nav_label_blog": {
+        "type": "Text",
+        "config": { "label": "Lien Blog", "placeholder": "Blog" }
+      },
+      "nav_label_contact": {
+        "type": "Text",
+        "config": { "label": "Lien Contact", "placeholder": "Contact" }
+      }
     }
   }
 }

@@ -8,20 +8,34 @@ const route = useRoute()
 const scrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 
-const navLinks = [
-  { label: 'Coaching', href: '/#coaching' },
-  { label: 'Peinture', href: '/#peinture' },
-  { label: 'Son', href: '/#creation-sonore' },
-  { label: 'Dog sitting', href: '/#dog-sitting' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/#contact' },
-]
+const prismic = usePrismic()
+const { data: homepage } = await useAsyncData('homepage', async () => {
+  try {
+    return await prismic.client.getSingle('homepage')
+  } catch (e) {
+    return null
+  }
+})
+
+const brandLabel = computed(() => homepage.value?.data?.nav_brand_label || 'Lila Chibane')
+
+const navLinks = computed(() => {
+  const d = homepage.value?.data || {}
+  return [
+    { id: 'coaching', label: d.nav_label_coaching || 'Coaching', href: '/#coaching' },
+    { id: 'peinture', label: d.nav_label_peinture || 'Peinture', href: '/#peinture' },
+    { id: 'son', label: d.nav_label_son || 'Son', href: '/#creation-sonore' },
+    { id: 'dog', label: d.nav_label_dog || 'Dog sitting', href: '/#dog-sitting' },
+    { id: 'blog', label: d.nav_label_blog || 'Blog', href: '/blog' },
+    { id: 'contact', label: d.nav_label_contact || 'Contact', href: '/#contact' },
+  ]
+})
 
 const isHome = computed(() => route.path === '/')
 const transparent = computed(() => isHome.value && !scrolled.value && !isMobileMenuOpen.value)
 
 const isActive = (link) => {
-  if (props.activePage && link.label.toLowerCase() === props.activePage.toLowerCase()) return true
+  if (props.activePage && link.id === props.activePage.toLowerCase()) return true
   if (link.href === '/blog' && route.path.startsWith('/blog')) return true
   return false
 }
@@ -70,12 +84,12 @@ onUnmounted(() => {
         class="font-display text-lg md:text-xl font-normal tracking-tight transition-colors duration-500"
         :class="transparent ? 'text-white' : 'text-warm'"
       >
-        Lila Chibane
+        {{ brandLabel }}
       </NuxtLink>
 
       <template v-if="!minimal">
         <nav class="hidden md:flex items-center gap-10 lg:gap-12">
-          <template v-for="link in navLinks" :key="link.label">
+          <template v-for="link in navLinks" :key="link.id">
             <a
               v-if="link.href.startsWith('/#')"
               :href="link.href"
@@ -132,7 +146,7 @@ onUnmounted(() => {
         </button>
 
         <nav class="flex flex-col items-center gap-8">
-          <template v-for="(link, i) in navLinks" :key="link.label">
+          <template v-for="(link, i) in navLinks" :key="link.id">
             <a
               v-if="link.href.startsWith('/#')"
               :href="link.href"
