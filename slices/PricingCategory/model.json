@@ -1,0 +1,76 @@
+{
+  "id": "pricing_category",
+  "type": "SharedSlice",
+  "name": "PricingCategory",
+  "description": "Tableau de tarifs : titre + en-têtes de colonnes + lignes + note optionnelle",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "Catégorie de tarifs",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Titre de la catégorie",
+            "placeholder": "Balade individuelle"
+          }
+        },
+        "col1_label": {
+          "type": "Text",
+          "config": {
+            "label": "En-tête colonne 1",
+            "placeholder": "Durée"
+          }
+        },
+        "col2_label": {
+          "type": "Text",
+          "config": {
+            "label": "En-tête colonne 2",
+            "placeholder": "Tarif unitaire"
+          }
+        },
+        "col3_label": {
+          "type": "Text",
+          "config": {
+            "label": "En-tête colonne 3 (optionnel)",
+            "placeholder": "Forfait 3 jours"
+          }
+        },
+        "note": {
+          "type": "Text",
+          "config": {
+            "label": "Note bas de tableau (optionnel)",
+            "placeholder": "Animal supplémentaire : +5€"
+          }
+        }
+      },
+      "items": {
+        "col1": {
+          "type": "Text",
+          "config": {
+            "label": "Cellule colonne 1",
+            "placeholder": "30 min"
+          }
+        },
+        "col2": {
+          "type": "Text",
+          "config": {
+            "label": "Cellule colonne 2 (prix principal)",
+            "placeholder": "18€"
+          }
+        },
+        "col3": {
+          "type": "Text",
+          "config": {
+            "label": "Cellule colonne 3 (optionnel)",
+            "placeholder": "48€"
+          }
+        }
+      }
+    }
+  ]
+}

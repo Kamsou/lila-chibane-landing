@@ -190,6 +190,18 @@
           }
         }
       },
+      "dog_pricing_slices": {
+        "type": "Slices",
+        "fieldset": "Grille tarifaire",
+        "config": {
+          "labels": {},
+          "choices": {
+            "pricing_category": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      },
       "dog_cta_label": {
         "type": "Text",
         "config": { "label": "Texte du bouton", "placeholder": "Me parler de ton chien" }

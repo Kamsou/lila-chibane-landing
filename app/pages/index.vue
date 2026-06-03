@@ -58,6 +58,7 @@ const content = computed(() => {
         { title: 'Garde à domicile', text: "Ton chien reste chez lui, dans ses repères. Je viens, je m'installe, je veille. Pour les week-ends ou les vacances." },
         { title: 'Visites & soins', text: "Passage quotidien : nourrir, sortir, câliner. Pour les absences courtes ou les besoins ponctuels." },
       ]),
+      pricingSlices: d.dog_pricing_slices || [],
       ctaLabel: d.dog_cta_label || 'Me parler de ton chien',
       ctaCaption: d.dog_cta_caption || 'Médoc, Gironde · tarifs sur demande',
     },
@@ -293,7 +294,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="coaching" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
+    <section id="coaching" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.coaching.label }}</span>
@@ -315,11 +316,11 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-14 md:mt-20">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-12">
           <div
             v-for="(card, i) in content.coaching.cards"
             :key="`coaching-${i}`"
-            class="bg-sand rounded-xl p-7 md:p-8 reveal"
+            class="bg-sand rounded-xl p-6 md:p-7 reveal"
             :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
             :style="{ transitionDelay: `${i * 120}ms` }"
           >
@@ -328,7 +329,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="text-center mt-16 md:mt-24 reveal">
+        <div class="text-center mt-10 md:mt-14 reveal">
           <a
             :href="content.coaching.ctaUrl"
             target="_blank"
@@ -344,7 +345,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="peinture" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
+    <section id="peinture" class="py-16 md:py-20 lg:py-24 px-6 md:px-10 bg-sand">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.peinture.label }}</span>
@@ -363,11 +364,11 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-[1px] mt-14 md:mt-20">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[1px] mt-10 md:mt-12">
           <div
             v-for="(painting, i) in paintingPlaceholders"
             :key="`painting-${i}`"
-            class="aspect-square bg-cream flex flex-col items-center justify-center p-4 reveal"
+            class="aspect-[4/3] bg-cream flex flex-col items-center justify-center p-4 reveal"
             :style="{ transitionDelay: `${i * 60}ms` }"
           >
             <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -384,7 +385,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="creation-sonore" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
+    <section id="creation-sonore" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.son.label }}</span>
@@ -400,7 +401,7 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <div class="mt-14 md:mt-20">
+        <div class="mt-10 md:mt-12">
           <div
             v-for="(track, i) in trackPlaceholders"
             :key="`track-${i}`"
@@ -428,7 +429,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="dog-sitting" class="py-24 md:py-40 lg:py-52 px-6 md:px-10 bg-sand">
+    <section id="dog-sitting" class="py-16 md:py-20 lg:py-24 px-6 md:px-10 bg-sand">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
           <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.dog.label }}</span>
@@ -472,11 +473,11 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-14 md:mt-20">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-12">
           <div
             v-for="(card, i) in content.dog.cards"
             :key="`dog-${i}`"
-            class="bg-cream rounded-xl p-7 md:p-8 reveal"
+            class="bg-cream rounded-xl p-6 md:p-7 reveal"
             :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
             :style="{ transitionDelay: `${i * 120}ms` }"
           >
@@ -485,7 +486,11 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="text-center mt-16 md:mt-24 reveal">
+        <div v-if="content.dog.pricingSlices.length" class="max-w-3xl mx-auto mt-10 md:mt-14 space-y-10 md:space-y-12">
+          <SliceZone :slices="content.dog.pricingSlices" />
+        </div>
+
+        <div class="text-center mt-10 md:mt-14 reveal">
           <a
             href="#contact"
             @click="scrollToContact"
@@ -500,9 +505,9 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="contact" class="py-24 md:py-40 lg:py-52 px-6 md:px-10">
+    <section id="contact" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <!-- CTA -->
-      <div class="max-w-2xl mx-auto text-center mb-20 md:mb-28">
+      <div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
         <p class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 reveal">{{ content.contact.label }}</p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] reveal">
           {{ content.contact.title }}
