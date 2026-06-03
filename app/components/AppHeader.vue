@@ -8,14 +8,7 @@ const route = useRoute()
 const scrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 
-const prismic = usePrismic()
-const { data: homepage } = await useAsyncData('homepage', async () => {
-  try {
-    return await prismic.client.getSingle('homepage')
-  } catch (e) {
-    return null
-  }
-})
+const { data: homepage } = await useHomepage()
 
 const brandLabel = computed(() => homepage.value?.data?.nav_brand_label || 'Lila Chibane')
 

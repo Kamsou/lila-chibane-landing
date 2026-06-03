@@ -1,4 +1,8 @@
 export default {
+  content: [
+    './app/**/*.{vue,js,ts}',
+    './slices/**/*.{vue,js,ts}',
+  ],
   theme: {
     extend: {
       colors: {

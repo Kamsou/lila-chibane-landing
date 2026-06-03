@@ -1,16 +1,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { asText, asLink } from '@prismicio/client'
+import { components as sliceComponents } from '~~/slices'
 
-const prismic = usePrismic()
-const { data: homepage } = await useAsyncData('homepage', async () => {
-  try {
-    return await prismic.client.getSingle('homepage')
-  } catch (e) {
-    if (import.meta.dev) console.error('[homepage] Prismic fetch failed:', e)
-    return null
-  }
-})
+const { data: homepage } = await useHomepage()
 
 const content = computed(() => {
   const d = homepage.value?.data || {}
@@ -116,6 +109,15 @@ const scrollToContact = (e) => {
   e.preventDefault()
   const el = document.querySelector('#contact')
   if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
+
+const pricingAllOpen = ref(false)
+const togglePricingAll = () => {
+  pricingAllOpen.value = !pricingAllOpen.value
+  document.querySelectorAll('.pricing-category').forEach((el) => {
+    if (pricingAllOpen.value) el.setAttribute('open', '')
+    else el.removeAttribute('open')
+  })
 }
 
 const handleSubmit = async (e) => {
@@ -486,8 +488,19 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div v-if="content.dog.pricingSlices.length" class="max-w-3xl mx-auto mt-10 md:mt-14 space-y-10 md:space-y-12">
-          <SliceZone :slices="content.dog.pricingSlices" />
+        <div v-if="content.dog.pricingSlices.length" class="max-w-5xl mx-auto mt-10 md:mt-14">
+          <div class="flex justify-end mb-3 md:mb-4">
+            <button
+              type="button"
+              @click="togglePricingAll"
+              class="text-xs font-body text-gray-light hover:text-bleu transition-colors duration-200"
+            >
+              {{ pricingAllOpen ? 'Tout replier' : 'Tout déplier' }}
+            </button>
+          </div>
+          <div class="columns-1 sm:columns-2 gap-5 md:gap-6">
+            <SliceZone :slices="content.dog.pricingSlices" :components="sliceComponents" />
+          </div>
         </div>
 
         <div class="text-center mt-10 md:mt-14 reveal">
