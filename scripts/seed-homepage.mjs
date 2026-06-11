@@ -189,7 +189,20 @@ const data = {
     ),
   ],
   dog_cta_label: 'Me parler de ton chien',
-  dog_cta_caption: 'Le Bouscat · Bordeaux',
+  dog_cta_caption: 'Avensan · Médoc · Le Bouscat · Bordeaux',
+
+  // FAQ
+  faq_visible: true,
+  faq_label: 'Questions fréquentes',
+  faq_title: 'Tu te poses peut-être ces questions',
+  faq_items: [
+    { question: 'Où proposes-tu le dog sitting ?', answer: "À Avensan, dans tout le Médoc, ainsi qu'au Bouscat et sur Bordeaux. Garde à domicile, promenades et visites, selon les besoins de ton chien." },
+    { question: 'Tu gardes mon chien chez moi ou chez toi ?', answer: "À domicile, chez toi : ton chien reste dans ses repères. Je propose aussi des promenades et des passages quotidiens pour les absences plus courtes." },
+    { question: 'Le coaching se passe en visio ou en présentiel ?', answer: "Les deux. En visio partout en France, et en présentiel dans le Médoc. On choisit ensemble ce qui te convient le mieux." },
+    { question: 'À qui s’adresse le coaching sportif ?', answer: "Aux femmes actives qui veulent reprendre une activité physique en douceur, sans pression ni performance, à leur rythme." },
+    { question: 'Comment réserver un premier échange ?', answer: "Tu peux réserver un bilan personnalisé gratuit de 30 minutes, en visio et sans engagement, depuis la section coaching." },
+    { question: 'Combien coûte la garde de mon chien ?', answer: "Les tarifs dépendent de la prestation (promenade, garde à domicile, visite). Le détail est dans la grille tarifaire de la section dog sitting ; pour un devis adapté, écris-moi." },
+  ],
 
   // Contact
   contact_visible: true,

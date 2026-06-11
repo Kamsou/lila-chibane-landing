@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "slicemachine": "start-slicemachine",
-    "seed-homepage": "node scripts/seed-homepage.mjs"
+    "seed-homepage": "node scripts/seed-homepage.mjs",
+    "seed-blog": "node scripts/seed-blog.mjs"
   },
   "dependencies": {
     "@nuxt/fonts": "0.11.2",

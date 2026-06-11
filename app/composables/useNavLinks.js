@@ -1,5 +1,3 @@
-// Sections masquées tant qu'elles ne sont pas explicitement activées dans Prismic
-// (leur boolean *_visible a default_value: false).
 const HIDDEN_BY_DEFAULT = ['peinture', 'son']
 
 export const isSectionVisible = (data, key) =>

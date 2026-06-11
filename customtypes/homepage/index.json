@@ -266,6 +266,39 @@
         "config": { "label": "Sous-texte du bouton", "placeholder": "Médoc, Gironde · tarifs sur demande" }
       }
     },
+    "FAQ": {
+      "faq_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section",
+          "default_value": true
+        }
+      },
+      "faq_label": {
+        "type": "Text",
+        "config": { "label": "Surtitre", "placeholder": "Questions fréquentes" }
+      },
+      "faq_title": {
+        "type": "Text",
+        "config": { "label": "Titre de section", "placeholder": "Tu te poses peut-être ces questions" }
+      },
+      "faq_items": {
+        "type": "Group",
+        "config": {
+          "label": "Questions / réponses",
+          "fields": {
+            "question": {
+              "type": "Text",
+              "config": { "label": "Question", "placeholder": "Où proposes-tu le dog sitting ?" }
+            },
+            "answer": {
+              "type": "Text",
+              "config": { "label": "Réponse", "placeholder": "À Avensan, dans le Médoc..." }
+            }
+          }
+        }
+      }
+    },
     "Contact": {
       "contact_visible": {
         "type": "Boolean",

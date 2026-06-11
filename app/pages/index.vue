@@ -67,7 +67,20 @@ const content = computed(() => {
       ]),
       pricingSlices: d.dog_pricing_slices || [],
       ctaLabel: d.dog_cta_label || 'Me parler de ton chien',
-      ctaCaption: d.dog_cta_caption || 'Médoc, Gironde · tarifs sur demande',
+      ctaCaption: d.dog_cta_caption || 'Avensan · Médoc · Le Bouscat · Bordeaux · tarifs sur demande',
+    },
+    faq: {
+      visible: isSectionVisible(d, 'faq'),
+      label: d.faq_label || 'Questions fréquentes',
+      title: d.faq_title || 'Tu te poses peut-être ces questions',
+      items: (d.faq_items?.length ? d.faq_items : [
+        { question: 'Où proposes-tu le dog sitting ?', answer: "À Avensan, dans tout le Médoc, ainsi qu'au Bouscat et sur Bordeaux. Garde à domicile, promenades et visites, selon les besoins de ton chien." },
+        { question: 'Tu gardes mon chien chez moi ou chez toi ?', answer: "À domicile, chez toi : ton chien reste dans ses repères. Je propose aussi des promenades et des passages quotidiens pour les absences plus courtes." },
+        { question: 'Le coaching se passe en visio ou en présentiel ?', answer: "Les deux. En visio partout en France, et en présentiel dans le Médoc. On choisit ensemble ce qui te convient le mieux." },
+        { question: 'À qui s’adresse le coaching sportif ?', answer: "Aux femmes actives qui veulent reprendre une activité physique en douceur, sans pression ni performance, à leur rythme." },
+        { question: 'Comment réserver un premier échange ?', answer: "Tu peux réserver un bilan personnalisé gratuit de 30 minutes, en visio et sans engagement, depuis la section coaching." },
+        { question: 'Combien coûte la garde de mon chien ?', answer: "Les tarifs dépendent de la prestation (promenade, garde à domicile, visite). Le détail est dans la grille tarifaire de la section dog sitting ; pour un devis adapté, écris-moi." },
+      ]),
     },
     contact: {
       visible: isSectionVisible(d, 'contact'),
@@ -80,7 +93,7 @@ const content = computed(() => {
   }
 })
 
-const SECTION_ORDER = ['about', 'coaching', 'peinture', 'son', 'dog', 'contact']
+const SECTION_ORDER = ['about', 'coaching', 'peinture', 'son', 'dog', 'faq', 'contact']
 const NUMBERED_SECTIONS = ['coaching', 'peinture', 'son', 'dog']
 
 const sectionNumber = computed(() => {
@@ -116,15 +129,15 @@ const cardBg = computed(() => {
 })
 
 useSeoMeta({
-  title: 'Lila Chibane · Coach sportive · Peintre · Création sonore · Dog sitting',
-  description: 'Lila Chibane, coach sportive, peintre, créatrice sonore et dog sitter. Quatre façons de faire du bien au corps, à l\'esprit, et aux compagnons à quatre pattes.',
-  ogTitle: 'Lila Chibane · Coach · Peintre · Son · Dog sitting',
-  ogDescription: 'Quatre façons de prendre soin : du corps, des sens, et des compagnons à quatre pattes.',
+  title: 'Lila Chibane · Coach sportive & dog sitter · Médoc, Le Bouscat, Bordeaux',
+  description: 'Coach sportive sport-santé (en visio partout et en présentiel dans le Médoc) et dog sitter à Le Bouscat, Bordeaux et dans le Médoc. Lila Chibane prend soin de toi et de ton chien, en douceur.',
+  ogTitle: 'Lila Chibane · Coach sportive & dog sitter · Médoc et Bordeaux',
+  ogDescription: 'Coaching sport-santé en visio et dans le Médoc, garde et promenade de chien à Le Bouscat, Bordeaux et le Médoc.',
   ogImage: 'https://lilachibane.com/IMG_2553.jpg',
   ogUrl: 'https://lilachibane.com',
   ogType: 'website',
-  twitterTitle: 'Lila Chibane · Coach · Peintre · Son · Dog sitting',
-  twitterDescription: 'Quatre façons de prendre soin : du corps, des sens, et des compagnons à quatre pattes.',
+  twitterTitle: 'Lila Chibane · Coach sportive & dog sitter · Médoc et Bordeaux',
+  twitterDescription: 'Coaching sport-santé en visio et dans le Médoc, garde et promenade de chien à Le Bouscat, Bordeaux et le Médoc.',
   twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
@@ -193,29 +206,117 @@ const handleSubmit = async (e) => {
   }
 }
 
-useHead({
+const frList = (arr) =>
+  arr.length <= 1 ? (arr[0] || '') : `${arr.slice(0, -1).join(', ')} et ${arr[arr.length - 1]}`
+
+const seoJobTitle = computed(() => {
+  const roles = ['Coach sportive']
+  if (content.value.peinture.visible) roles.push('peintre')
+  if (content.value.son.visible) roles.push('créatrice sonore')
+  roles.push('dog sitter')
+  return frList(roles)
+})
+
+const seoServiceType = computed(() => {
+  const st = ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel']
+  if (content.value.peinture.visible) st.push('Peinture')
+  if (content.value.son.visible) st.push('Création sonore')
+  st.push('Dog sitting', 'Garde de chien à domicile', 'Promenade de chien')
+  return st
+})
+
+const seoKnowsAbout = computed(() => {
+  const ka = ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé']
+  if (content.value.peinture.visible) ka.push('Peinture', 'Art visuel')
+  if (content.value.son.visible) ka.push('Création sonore', 'Sound design')
+  ka.push('Dog sitting', 'Garde de chien', 'Bien-être animal')
+  return ka
+})
+
+useHead(() => ({
   script: [
     {
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
+        '@id': 'https://lilachibane.com/#business',
         name: 'Lila Chibane',
-        description: 'Coach sportive, peintre, créatrice sonore et dog sitter. Coaching sport-santé, art visuel, création audio et garde de chiens dans le Médoc.',
+        description: 'Coach sportive sport-santé et dog sitter basée à Avensan, dans le Médoc. Coaching en visio et en présentiel dans le Médoc ; garde de chien, promenades et visites à Avensan, dans le Médoc, à Le Bouscat et sur Bordeaux.',
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
         areaServed: [
-          { '@type': 'AdministrativeArea', name: 'Médoc, Gironde' },
+          { '@type': 'City', name: 'Avensan' },
+          { '@type': 'AdministrativeArea', name: 'Médoc' },
+          { '@type': 'City', name: 'Le Bouscat' },
+          { '@type': 'City', name: 'Bordeaux' },
+          { '@type': 'AdministrativeArea', name: 'Bordeaux Métropole' },
           { '@type': 'Country', name: 'France' },
         ],
         address: {
           '@type': 'PostalAddress',
+          addressLocality: 'Avensan',
+          postalCode: '33480',
           addressRegion: 'Nouvelle-Aquitaine',
           addressCountry: 'FR',
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 45.0167,
+          longitude: -0.7833,
+        },
         priceRange: '€€',
-        serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel', 'Peinture', 'Création sonore', 'Dog sitting', 'Garde de chien à domicile', 'Promenade de chien'],
+        serviceType: seoServiceType.value,
+        sameAs: ['https://jamaistroptard.substack.com/'],
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        serviceType: 'Coaching sportif',
+        name: 'Coaching sportif et sport-santé',
+        description: "Coach sportive pour femmes : activité physique adaptée, régulation nerveuse, alimentation soutenante. En visio partout en France et en présentiel dans le Médoc.",
+        provider: { '@type': 'Person', name: 'Lila Chibane', url: 'https://lilachibane.com' },
+        areaServed: [
+          { '@type': 'Country', name: 'France' },
+          { '@type': 'AdministrativeArea', name: 'Médoc' },
+          { '@type': 'City', name: 'Avensan' },
+        ],
+        availableChannel: [
+          { '@type': 'ServiceChannel', name: 'Coaching en visio', serviceUrl: 'https://lilachibane.com/#coaching' },
+          { '@type': 'ServiceChannel', name: 'Coaching en présentiel (Médoc)', serviceUrl: 'https://lilachibane.com/#coaching' },
+        ],
+        offers: {
+          '@type': 'Offer',
+          name: 'Bilan personnalisé gratuit',
+          price: '0',
+          priceCurrency: 'EUR',
+          url: 'https://calendly.com/lilacoach/bilanpersonnalise',
+        },
+        url: 'https://lilachibane.com/#coaching',
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        serviceType: 'Dog sitting',
+        name: 'Dog sitting et garde de chien',
+        description: "Garde de chien à domicile, promenades et visites, à Avensan, dans le Médoc, à Le Bouscat et sur Bordeaux Métropole. À chaque chien son rythme, à chaque humain sa tranquillité.",
+        provider: { '@type': 'Person', name: 'Lila Chibane', url: 'https://lilachibane.com' },
+        areaServed: [
+          { '@type': 'City', name: 'Avensan' },
+          { '@type': 'AdministrativeArea', name: 'Médoc' },
+          { '@type': 'City', name: 'Le Bouscat' },
+          { '@type': 'City', name: 'Bordeaux' },
+          { '@type': 'AdministrativeArea', name: 'Bordeaux Métropole' },
+        ],
+        offers: { '@type': 'Offer', priceCurrency: 'EUR', url: 'https://lilachibane.com/#dog-sitting' },
+        url: 'https://lilachibane.com/#dog-sitting',
       }),
     },
     {
@@ -224,7 +325,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Lila Chibane',
-        description: 'Coach sportive, peintre et créatrice sonore.',
+        description: `${seoJobTitle.value}.`,
         url: 'https://lilachibane.com',
         inLanguage: 'fr',
       }),
@@ -235,14 +336,35 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Lila Chibane',
-        jobTitle: 'Coach sportive, peintre, créatrice sonore et dog sitter',
+        jobTitle: seoJobTitle.value,
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/IMG_2553.jpg',
         email: 'lila.chibane@outlook.com',
-        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Peinture', 'Art visuel', 'Création sonore', 'Sound design', 'Dog sitting', 'Garde de chien', 'Bien-être animal'],
+        knowsAbout: seoKnowsAbout.value,
+        sameAs: ['https://jamaistroptard.substack.com/'],
       }),
     },
   ],
+}))
+
+useHead(() => {
+  if (!content.value.faq.visible || !content.value.faq.items.length) return {}
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: content.value.faq.items.map((it) => ({
+            '@type': 'Question',
+            name: it.question,
+            acceptedAnswer: { '@type': 'Answer', text: it.answer },
+          })),
+        }),
+      },
+    ],
+  }
 })
 
 onMounted(() => {
@@ -348,30 +470,19 @@ onUnmounted(() => {
 
     <section v-if="content.about.visible" id="qui-suis-je" :class="sectionBg.about" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center">
+        <div class="grid gap-10 md:gap-14 lg:gap-20 items-center" :class="content.about.image?.url ? 'md:grid-cols-2' : ''">
           <!-- Portrait -->
-          <div class="reveal">
+          <div v-if="content.about.image?.url" class="reveal">
             <div class="aspect-[4/5] overflow-hidden rounded-2xl">
               <PrismicImage
-                v-if="content.about.image?.url"
                 :field="content.about.image"
                 class="w-full h-full object-cover"
-              />
-              <img
-                v-else
-                src="/test-2.jpeg"
-                alt="Lila Chibane"
-                width="800"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-                class="w-full h-full object-cover object-[center_25%]"
               />
             </div>
           </div>
 
           <!-- Texte -->
-          <div>
+          <div :class="content.about.image?.url ? '' : 'max-w-2xl'">
             <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.about.label }}</span>
             <h2 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal">
               {{ content.about.title }}
@@ -621,6 +732,38 @@ onUnmounted(() => {
       </div>
     </section>
 
+    <section v-if="content.faq.visible" id="faq" :class="sectionBg.faq" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
+      <div class="max-w-3xl mx-auto">
+        <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.faq.label }}</span>
+        <h2 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-display font-normal text-warm leading-[1.1] mb-8 md:mb-10 reveal">
+          {{ content.faq.title }}
+        </h2>
+        <div class="divide-y divide-gray-faint">
+          <details
+            v-for="(item, i) in content.faq.items"
+            :key="`faq-${i}`"
+            class="faq-item group py-5 reveal"
+          >
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none marker:hidden">
+              <h3 class="text-base md:text-lg font-display font-normal text-warm">{{ item.question }}</h3>
+              <svg
+                class="w-4 h-4 text-gray-light shrink-0 transition-transform duration-300 group-open:rotate-180"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </summary>
+            <p class="text-sm md:text-base font-body font-light text-gray leading-relaxed mt-3">{{ item.answer }}</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section v-if="content.contact.visible" id="contact" :class="sectionBg.contact" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <!-- CTA -->
       <div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
@@ -788,6 +931,8 @@ onUnmounted(() => {
   0%, 100% { transform: scaleX(1); opacity: 0.6; }
   50% { transform: scaleX(1.1); opacity: 1; }
 }
+
+.faq-item summary::-webkit-details-marker { display: none; }
 
 :deep(.about-richtext) {
   @apply space-y-5;

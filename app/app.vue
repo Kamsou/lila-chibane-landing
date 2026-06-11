@@ -15,8 +15,10 @@ useHead({
   ],
   meta: [
     { name: 'theme-color', content: '#EDE4D3' },
-    { name: 'geo.region', content: 'FR-NAQ' },
-    { name: 'geo.placename', content: 'Médoc, Nouvelle-Aquitaine' },
+    { name: 'geo.region', content: 'FR-33' },
+    { name: 'geo.placename', content: 'Avensan, Médoc, Gironde' },
+    { name: 'geo.position', content: '45.0167;-0.7833' },
+    { name: 'ICBM', content: '45.0167, -0.7833' },
     { property: 'og:locale', content: 'fr_FR' },
     { property: 'og:site_name', content: 'Lila Chibane' },
     { name: 'twitter:card', content: 'summary_large_image' },
