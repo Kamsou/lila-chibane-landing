@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   slice: { type: Object, required: true },
+  context: { type: Object, default: () => ({}) },
 })
 
 const hasHeaders = computed(() =>
@@ -26,7 +27,7 @@ const priceRange = computed(() => {
 </script>
 
 <template>
-  <details class="pricing-category bg-cream rounded-xl mb-5 md:mb-6 break-inside-avoid reveal group">
+  <details :class="context.cardBg || 'bg-cream'" class="pricing-category rounded-xl mb-5 md:mb-6 break-inside-avoid reveal group">
     <summary class="flex items-center justify-between gap-4 cursor-pointer list-none p-6 md:p-7 marker:hidden">
       <h3 class="text-base md:text-lg font-display font-normal text-warm">
         {{ slice.primary.title }}

@@ -17,8 +17,22 @@ const content = computed(() => {
       ctaUrl: asLink(d.hero_cta_url) || 'https://jamaistroptard.substack.com/',
       ctaCaption: d.hero_cta_caption || 'Pour celles qui veulent aller plus loin',
     },
+    about: {
+      visible: isSectionVisible(d, 'about'),
+      label: d.about_label || 'Qui suis-je ?',
+      title: d.about_title || 'Un même fil, plusieurs pratiques',
+      introField: d.about_intro,
+      hasIntro: !!asText(d.about_intro),
+      paragraphs: [
+        "Je m'appelle Lila. Coach sportive, peintre, créatrice sonore et dog sitter, je vis et travaille dans le Médoc.",
+        "Ce qui me porte, c'est le soin : celui du corps, des sens, du vivant. J'aime créer des espaces où l'on peut ralentir, respirer, se reconnecter à soi.",
+        "Mes pratiques se nourrissent les unes les autres. Le mouvement, la matière, le son : autant de façons d'être présente au monde et de prendre soin de ce qui nous entoure.",
+      ],
+      image: d.about_image,
+      footer: d.about_footer || '',
+    },
     coaching: {
-      label: d.coaching_label || '01',
+      visible: isSectionVisible(d, 'coaching'),
       title: d.coaching_title || 'Coach sportive',
       intro: asText(d.coaching_intro) || "J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter.",
       cards: (d.coaching_cards?.length ? d.coaching_cards : [
@@ -31,19 +45,19 @@ const content = computed(() => {
       ctaCaption: d.coaching_cta_caption || '30 minutes · gratuit · en visio · sans engagement',
     },
     peinture: {
-      label: d.peinture_label || '02',
+      visible: isSectionVisible(d, 'peinture'),
       title: d.peinture_title || 'Peinture',
       intro: asText(d.peinture_intro) || "[Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]",
       footer: d.peinture_footer || 'Galerie complète à venir',
     },
     son: {
-      label: d.son_label || '03',
+      visible: isSectionVisible(d, 'son'),
       title: d.son_title || 'Création sonore',
       intro: asText(d.son_intro) || "[Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]",
       footer: d.son_footer || 'Sélection à venir',
     },
     dog: {
-      label: d.dog_label || '04',
+      visible: isSectionVisible(d, 'dog'),
       title: d.dog_title || 'Dog sitting',
       intro: asText(d.dog_intro) || "Je prends soin de ton chien comme s'il était le mien. Promenades, garde, présence rassurante : à chaque animal son rythme, à chaque humain sa tranquillité d'esprit.",
       cards: (d.dog_cards?.length ? d.dog_cards : [
@@ -56,6 +70,7 @@ const content = computed(() => {
       ctaCaption: d.dog_cta_caption || 'Médoc, Gironde · tarifs sur demande',
     },
     contact: {
+      visible: isSectionVisible(d, 'contact'),
       label: d.contact_label || 'Contact',
       title: d.contact_title || "Envie d'échanger ?",
       intro: asText(d.contact_intro) || 'Que ce soit pour un coaching, une collaboration artistique ou simplement discuter, je réponds personnellement à chaque message.',
@@ -63,6 +78,41 @@ const content = computed(() => {
       successMessage: d.contact_success || 'Merci, ton message est bien arrivé. Je te réponds très vite.',
     },
   }
+})
+
+const SECTION_ORDER = ['about', 'coaching', 'peinture', 'son', 'dog', 'contact']
+const NUMBERED_SECTIONS = ['coaching', 'peinture', 'son', 'dog']
+
+const sectionNumber = computed(() => {
+  const map = {}
+  let n = 0
+  for (const key of NUMBERED_SECTIONS) {
+    if (content.value[key]?.visible) {
+      n += 1
+      map[key] = String(n).padStart(2, '0')
+    }
+  }
+  return map
+})
+
+const sectionBg = computed(() => {
+  const map = {}
+  let i = 0
+  for (const key of SECTION_ORDER) {
+    if (content.value[key]?.visible) {
+      map[key] = i % 2 === 0 ? 'bg-sand' : 'bg-cream'
+      i += 1
+    }
+  }
+  return map
+})
+
+const cardBg = computed(() => {
+  const map = {}
+  for (const key in sectionBg.value) {
+    map[key] = sectionBg.value[key] === 'bg-sand' ? 'bg-cream' : 'bg-sand'
+  }
+  return map
 })
 
 useSeoMeta({
@@ -296,10 +346,62 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="coaching" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
+    <section v-if="content.about.visible" id="qui-suis-je" :class="sectionBg.about" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-center">
+          <!-- Portrait -->
+          <div class="reveal">
+            <div class="aspect-[4/5] overflow-hidden rounded-2xl">
+              <PrismicImage
+                v-if="content.about.image?.url"
+                :field="content.about.image"
+                class="w-full h-full object-cover"
+              />
+              <img
+                v-else
+                src="/test-2.jpeg"
+                alt="Lila Chibane"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover object-[center_25%]"
+              />
+            </div>
+          </div>
+
+          <!-- Texte -->
+          <div>
+            <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.about.label }}</span>
+            <h2 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal">
+              {{ content.about.title }}
+            </h2>
+            <PrismicRichText
+              v-if="content.about.hasIntro"
+              :field="content.about.introField"
+              class="about-richtext reveal"
+            />
+            <div v-else class="space-y-5 reveal">
+              <p
+                v-for="(para, i) in content.about.paragraphs"
+                :key="`about-${i}`"
+                class="text-base sm:text-lg font-body font-light text-gray leading-relaxed"
+              >
+                {{ para }}
+              </p>
+            </div>
+            <p v-if="content.about.footer" class="text-xs font-body font-light text-gray-light italic mt-8 reveal">
+              {{ content.about.footer }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section v-if="content.coaching.visible" id="coaching" :class="sectionBg.coaching" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.coaching.label }}</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ sectionNumber.coaching }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             {{ content.coaching.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -322,8 +424,8 @@ onUnmounted(() => {
           <div
             v-for="(card, i) in content.coaching.cards"
             :key="`coaching-${i}`"
-            class="bg-sand rounded-xl p-6 md:p-7 reveal"
-            :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
+            class="rounded-xl p-6 md:p-7 reveal"
+            :class="[cardBg.coaching, i === 2 ? 'sm:col-span-2 md:col-span-1' : '']"
             :style="{ transitionDelay: `${i * 120}ms` }"
           >
             <h3 class="text-lg font-display font-normal text-warm mb-3">{{ card.title }}</h3>
@@ -347,10 +449,10 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="peinture" class="py-16 md:py-20 lg:py-24 px-6 md:px-10 bg-sand">
+    <section v-if="content.peinture.visible" id="peinture" :class="sectionBg.peinture" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.peinture.label }}</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ sectionNumber.peinture }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             {{ content.peinture.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -370,7 +472,8 @@ onUnmounted(() => {
           <div
             v-for="(painting, i) in paintingPlaceholders"
             :key="`painting-${i}`"
-            class="aspect-[4/3] bg-cream flex flex-col items-center justify-center p-4 reveal"
+            class="aspect-[4/3] flex flex-col items-center justify-center p-4 reveal"
+            :class="cardBg.peinture"
             :style="{ transitionDelay: `${i * 60}ms` }"
           >
             <svg class="w-8 h-8 text-gray-faint mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75"><rect x="3" y="3" width="18" height="18" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -387,10 +490,10 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="creation-sonore" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
+    <section v-if="content.son.visible" id="creation-sonore" :class="sectionBg.son" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.son.label }}</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ sectionNumber.son }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             {{ content.son.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -431,10 +534,10 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="dog-sitting" class="py-16 md:py-20 lg:py-24 px-6 md:px-10 bg-sand">
+    <section v-if="content.dog.visible" id="dog-sitting" :class="sectionBg.dog" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <div class="max-w-5xl mx-auto">
         <div class="max-w-2xl">
-          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ content.dog.label }}</span>
+          <span class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 block reveal">{{ sectionNumber.dog }}</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-warm leading-[1.1] mb-6 md:mb-8 reveal flex items-center gap-4 md:gap-6">
             {{ content.dog.title }}
             <svg class="w-10 h-10 md:w-14 md:h-14 text-bleu flex-shrink-0 section-icon" viewBox="0 0 48 48" fill="currentColor" stroke="none">
@@ -479,8 +582,8 @@ onUnmounted(() => {
           <div
             v-for="(card, i) in content.dog.cards"
             :key="`dog-${i}`"
-            class="bg-cream rounded-xl p-6 md:p-7 reveal"
-            :class="i === 2 ? 'sm:col-span-2 md:col-span-1' : ''"
+            class="rounded-xl p-6 md:p-7 reveal"
+            :class="[cardBg.dog, i === 2 ? 'sm:col-span-2 md:col-span-1' : '']"
             :style="{ transitionDelay: `${i * 120}ms` }"
           >
             <h3 class="text-lg font-display font-normal text-warm mb-3">{{ card.title }}</h3>
@@ -499,14 +602,14 @@ onUnmounted(() => {
             </button>
           </div>
           <div class="columns-1 sm:columns-2 gap-5 md:gap-6">
-            <SliceZone :slices="content.dog.pricingSlices" :components="sliceComponents" />
+            <SliceZone :slices="content.dog.pricingSlices" :components="sliceComponents" :context="{ cardBg: cardBg.dog }" />
           </div>
         </div>
 
         <div class="text-center mt-10 md:mt-14 reveal">
           <a
-            href="#contact"
-            @click="scrollToContact"
+            :href="content.contact.visible ? '#contact' : 'mailto:lila.chibane@outlook.com'"
+            @click="content.contact.visible && scrollToContact($event)"
             class="btn-warm inline-block"
           >
             {{ content.dog.ctaLabel }}
@@ -518,7 +621,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="contact" class="py-16 md:py-20 lg:py-24 px-6 md:px-10">
+    <section v-if="content.contact.visible" id="contact" :class="sectionBg.contact" class="scroll-mt-16 md:scroll-mt-20 py-16 md:py-20 lg:py-24 px-6 md:px-10">
       <!-- CTA -->
       <div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
         <p class="text-xs font-body font-normal tracking-wider text-gray-light mb-4 reveal">{{ content.contact.label }}</p>
@@ -684,6 +787,19 @@ onUnmounted(() => {
 @keyframes iconWave {
   0%, 100% { transform: scaleX(1); opacity: 0.6; }
   50% { transform: scaleX(1.1); opacity: 1; }
+}
+
+:deep(.about-richtext) {
+  @apply space-y-5;
+}
+:deep(.about-richtext p) {
+  @apply text-base sm:text-lg font-body font-light text-gray leading-relaxed;
+}
+:deep(.about-richtext strong) {
+  @apply font-normal text-warm;
+}
+:deep(.about-richtext em) {
+  @apply italic;
 }
 
 .form-input {

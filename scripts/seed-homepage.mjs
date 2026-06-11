@@ -23,6 +23,7 @@ if (!WRITE_TOKEN) {
 }
 
 const para = (text) => [{ type: 'paragraph', text, spans: [] }]
+const paras = (...texts) => texts.map((text) => ({ type: 'paragraph', text, spans: [] }))
 const webLink = (url) => ({ link_type: 'Web', url, target: '_blank' })
 
 const pricingCategory = (primary, items) => ({
@@ -44,8 +45,19 @@ const data = {
   hero_cta_url: webLink('https://jamaistroptard.substack.com/'),
   hero_cta_caption: 'Pour celles qui veulent aller plus loin',
 
+  // Qui suis-je
+  about_visible: true,
+  about_label: 'Qui suis-je ?',
+  about_title: 'Un même fil, plusieurs pratiques',
+  about_intro: paras(
+    "Je m'appelle Lila. Coach sportive, peintre, créatrice sonore et dog sitter, je vis et travaille dans le Médoc.",
+    "Ce qui me porte, c'est le soin : celui du corps, des sens, du vivant. J'aime créer des espaces où l'on peut ralentir, respirer, se reconnecter à soi.",
+    "Mes pratiques se nourrissent les unes les autres. Le mouvement, la matière, le son : autant de façons d'être présente au monde et de prendre soin de ce qui nous entoure."
+  ),
+  about_footer: '',
+
   // Coaching
-  coaching_label: '01',
+  coaching_visible: true,
   coaching_title: 'Coach sportive',
   coaching_intro: para("J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter."),
   coaching_cards: [
@@ -58,19 +70,19 @@ const data = {
   coaching_cta_caption: '30 minutes · gratuit · en visio · sans engagement',
 
   // Peinture
-  peinture_label: '02',
+  peinture_visible: false,
   peinture_title: 'Peinture',
   peinture_intro: para("[Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]"),
   peinture_footer: 'Galerie complète à venir',
 
   // Son
-  son_label: '03',
+  son_visible: false,
   son_title: 'Création sonore',
   son_intro: para("[Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]"),
   son_footer: 'Sélection à venir',
 
   // Dog sitting
-  dog_label: '04',
+  dog_visible: true,
   dog_title: 'Dog sitting',
   dog_intro: para("Je prends soin de ton chien comme s'il était le mien. Promenades, garde, présence rassurante : à chaque animal son rythme, à chaque humain sa tranquillité d'esprit."),
   dog_cards: [
@@ -180,6 +192,7 @@ const data = {
   dog_cta_caption: 'Le Bouscat · Bordeaux',
 
   // Contact
+  contact_visible: true,
   contact_label: 'Contact',
   contact_title: "Envie d'échanger ?",
   contact_intro: para('Que ce soit pour un coaching, une collaboration artistique ou simplement discuter, je réponds personnellement à chaque message.'),
@@ -188,10 +201,12 @@ const data = {
 
   // Navigation
   nav_brand_label: 'Lila Chibane',
+  nav_label_about: 'Qui suis-je',
   nav_label_coaching: 'Coaching',
   nav_label_peinture: 'Peinture',
   nav_label_son: 'Son',
   nav_label_dog: 'Dog sitting',
+  nav_show_blog: true,
   nav_label_blog: 'Blog',
   nav_label_contact: 'Contact',
 }

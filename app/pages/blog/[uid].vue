@@ -2,6 +2,9 @@
 const route = useRoute();
 const prismic = usePrismic();
 
+const { data: homepage } = await useHomepage();
+const contactVisible = computed(() => isSectionVisible(homepage.value?.data, 'contact'));
+
 const { data: article } = await useAsyncData(`blog-post-${route.params.uid}`, async () => {
   try {
     const response = await prismic.client.getByUID('blog_post', route.params.uid);
@@ -145,7 +148,10 @@ useHead({
             <p class="text-sm font-body font-light text-gray leading-relaxed mb-4">
               Coach sportive, peintre et créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
             </p>
-            <NuxtLink to="/#contact" class="inline-block font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300">
+            <NuxtLink
+              :to="contactVisible ? '/#contact' : 'mailto:lila.chibane@outlook.com'"
+              class="inline-block font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300"
+            >
               Me contacter →
             </NuxtLink>
           </div>

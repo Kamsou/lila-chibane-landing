@@ -2,6 +2,21 @@
 defineProps({
   simple: { type: Boolean, default: false },
 })
+
+const { navLinks: footerLinks, homepage } = await useNavLinks()
+
+const tagline = computed(() => {
+  const d = homepage.value?.data || {}
+  return [
+    { key: 'coaching', label: 'Coach sportive' },
+    { key: 'peinture', label: 'Peintre' },
+    { key: 'son', label: 'Créatrice sonore' },
+    { key: 'dog', label: 'Dog sitter' },
+  ]
+    .filter((r) => isSectionVisible(d, r.key))
+    .map((r) => r.label)
+    .join(' · ')
+})
 </script>
 
 <template>
@@ -12,18 +27,20 @@ defineProps({
         <div>
           <p class="font-display text-xl text-white font-normal mb-3">Lila Chibane</p>
           <p class="text-xs font-body text-white/30 leading-relaxed tracking-wide">
-            Coach sportive · Peintre · Créatrice sonore · Dog sitter<br>Médoc, France
+            {{ tagline }}<br>Médoc, France
           </p>
         </div>
 
         <div>
           <nav class="flex flex-col gap-3">
-            <NuxtLink to="/#coaching" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Coaching</NuxtLink>
-            <NuxtLink to="/#peinture" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Peinture</NuxtLink>
-            <NuxtLink to="/#creation-sonore" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Son</NuxtLink>
-            <NuxtLink to="/#dog-sitting" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Dog sitting</NuxtLink>
-            <NuxtLink to="/blog" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Blog</NuxtLink>
-            <NuxtLink to="/#contact" class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300">Contact</NuxtLink>
+            <NuxtLink
+              v-for="link in footerLinks"
+              :key="link.id"
+              :to="link.href"
+              class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300"
+            >
+              {{ link.label }}
+            </NuxtLink>
           </nav>
         </div>
 

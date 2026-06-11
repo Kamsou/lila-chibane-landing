@@ -57,12 +57,58 @@
         }
       }
     },
-    "Coaching": {
-      "coaching_label": {
+    "Qui suis-je": {
+      "about_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": true
+        }
+      },
+      "about_label": {
         "type": "Text",
         "config": {
-          "label": "Numéro de section",
-          "placeholder": "01"
+          "label": "Surtitre",
+          "placeholder": "Qui suis-je ?"
+        }
+      },
+      "about_title": {
+        "type": "Text",
+        "config": {
+          "label": "Titre de section",
+          "placeholder": "Un même fil, plusieurs pratiques"
+        }
+      },
+      "about_intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Texte de présentation",
+          "placeholder": "Je m'appelle Lila...",
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "about_image": {
+        "type": "Image",
+        "config": {
+          "label": "Portrait",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "about_footer": {
+        "type": "Text",
+        "config": {
+          "label": "Mention bas de section (optionnel)",
+          "placeholder": "Médoc, Gironde"
+        }
+      }
+    },
+    "Coaching": {
+      "coaching_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": true
         }
       },
       "coaching_title": {
@@ -114,9 +160,12 @@
       }
     },
     "Peinture": {
-      "peinture_label": {
-        "type": "Text",
-        "config": { "label": "Numéro de section", "placeholder": "02" }
+      "peinture_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": false
+        }
       },
       "peinture_title": {
         "type": "Text",
@@ -136,9 +185,12 @@
       }
     },
     "Son": {
-      "son_label": {
-        "type": "Text",
-        "config": { "label": "Numéro de section", "placeholder": "03" }
+      "son_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": false
+        }
       },
       "son_title": {
         "type": "Text",
@@ -158,9 +210,12 @@
       }
     },
     "Dog sitting": {
-      "dog_label": {
-        "type": "Text",
-        "config": { "label": "Numéro de section", "placeholder": "04" }
+      "dog_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": true
+        }
       },
       "dog_title": {
         "type": "Text",
@@ -212,6 +267,13 @@
       }
     },
     "Contact": {
+      "contact_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher cette section (page + navigation)",
+          "default_value": true
+        }
+      },
       "contact_label": {
         "type": "Text",
         "config": { "label": "Surtitre", "placeholder": "Contact" }
@@ -242,6 +304,10 @@
         "type": "Text",
         "config": { "label": "Logo / nom (en haut à gauche du site)", "placeholder": "Lila Chibane" }
       },
+      "nav_label_about": {
+        "type": "Text",
+        "config": { "label": "Lien Qui suis-je", "placeholder": "Qui suis-je" }
+      },
       "nav_label_coaching": {
         "type": "Text",
         "config": { "label": "Lien Coaching", "placeholder": "Coaching" }
@@ -257,6 +323,10 @@
       "nav_label_dog": {
         "type": "Text",
         "config": { "label": "Lien Dog sitting", "placeholder": "Dog sitting" }
+      },
+      "nav_show_blog": {
+        "type": "Boolean",
+        "config": { "label": "Afficher le lien Blog dans la navigation", "default_value": true }
       },
       "nav_label_blog": {
         "type": "Text",
