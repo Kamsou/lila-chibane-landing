@@ -15,12 +15,12 @@ useSeoMeta({
   description: "Coach sportive pour femmes : activité physique adaptée, régulation nerveuse, alimentation soutenante. En visio partout en France et en présentiel dans le Médoc. Bilan gratuit.",
   ogTitle: 'Coach sportive sport-santé · Lila Chibane',
   ogDescription: 'Reprendre une activité physique en douceur, sans pression. En visio et dans le Médoc.',
-  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
+  ogImage: 'https://lilachibane.com/coaching-sportif.jpeg',
   ogUrl: 'https://lilachibane.com/coaching',
   ogType: 'website',
   twitterTitle: 'Coach sportive sport-santé · Lila Chibane',
   twitterDescription: 'Reprendre une activité physique en douceur, sans pression. En visio et dans le Médoc.',
-  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
+  twitterImage: 'https://lilachibane.com/coaching-sportif.jpeg',
 })
 
 useHead({
@@ -95,19 +95,17 @@ useHead(() => {
     <PanelDeck :labels="panels">
       <template #default="{ active }">
         <!-- Présentation -->
-        <section v-show="active === 0" class="panel">
-          <div class="max-w-2xl mx-auto w-full">
-            <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block">{{ content.coaching.kicker }}</span>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-6 md:mb-8">
-              {{ coaching.title }}
-            </h1>
-            <p class="text-base sm:text-lg font-body font-light text-white/75 leading-relaxed mb-10">
-              {{ coaching.intro }}
-            </p>
-            <a :href="coaching.ctaUrl" target="_blank" rel="noopener" class="btn-light inline-block">{{ coaching.ctaLabel }}</a>
-            <p class="text-xs font-body text-white/50 mt-4 tracking-wide">{{ coaching.ctaCaption }}</p>
-          </div>
-        </section>
+        <ActivityIntro
+          v-show="active === 0"
+          :title="coaching.title"
+          :intro="coaching.intro"
+          :caption="coaching.ctaCaption"
+          :cta-label="coaching.ctaLabel"
+          :cta-url="coaching.ctaUrl"
+          image-src="/coaching-sportif.jpeg"
+          image-alt="Lila Chibane, coach sportive"
+          image-position="object-bottom"
+        />
 
         <!-- Approche -->
         <section v-show="active === 1" class="panel">
@@ -158,7 +156,7 @@ useHead(() => {
 
 <style scoped lang="postcss">
 .panel {
-  @apply flex-1 flex flex-col justify-center px-6 md:px-10 py-8 md:py-12;
+  @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 py-8 md:py-12;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 

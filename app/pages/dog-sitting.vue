@@ -25,12 +25,12 @@ useSeoMeta({
   description: "Garde de chien à domicile, promenades et visites à Avensan, dans le Médoc, et à Le Bouscat. À chaque chien son rythme, à chaque humain sa tranquillité.",
   ogTitle: 'Dog sitter · Médoc et Le Bouscat · Lila Chibane',
   ogDescription: 'Garde de chien à domicile, promenades et visites, dans le Médoc et à Le Bouscat.',
-  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
+  ogImage: 'https://lilachibane.com/dog-sitting.jpg',
   ogUrl: 'https://lilachibane.com/dog-sitting',
   ogType: 'website',
   twitterTitle: 'Dog sitter · Médoc et Le Bouscat · Lila Chibane',
   twitterDescription: 'Garde de chien à domicile, promenades et visites, dans le Médoc et à Le Bouscat.',
-  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
+  twitterImage: 'https://lilachibane.com/dog-sitting.jpg',
 })
 
 useHead({
@@ -95,18 +95,15 @@ useHead(() => {
     <PanelDeck :labels="labels">
       <template #default="{ active }">
         <!-- Présentation -->
-        <section v-show="active === idx('intro')" class="panel">
-          <div class="max-w-2xl mx-auto w-full">
-            <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block">{{ content.dog.kicker }}</span>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-6 md:mb-8">
-              {{ dog.title }}
-            </h1>
-            <p class="text-base sm:text-lg font-body font-light text-white/75 leading-relaxed mb-8">
-              {{ dog.intro }}
-            </p>
-            <p class="text-xs font-body text-white/50 tracking-wide">{{ dog.ctaCaption }}</p>
-          </div>
-        </section>
+        <ActivityIntro
+          v-show="active === idx('intro')"
+          :title="dog.title"
+          :intro="dog.intro"
+          :caption="dog.ctaCaption"
+          image-src="/dog-sitting.jpg"
+          image-alt="Lila Chibane, dog sitter dans le Médoc"
+          image-position="object-bottom md:object-center"
+        />
 
         <!-- Prestations -->
         <section v-show="active === idx('prestations')" class="panel">
@@ -193,7 +190,7 @@ useHead(() => {
 
 <style scoped lang="postcss">
 .panel {
-  @apply flex-1 flex flex-col justify-center px-6 md:px-10 py-8 md:py-12;
+  @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 py-8 md:py-12;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 

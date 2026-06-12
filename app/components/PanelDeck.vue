@@ -52,7 +52,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 
     <div class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col">
       <Transition :name="transitionName" mode="out-in">
-        <div :key="active" class="flex-1 flex flex-col">
+        <div :key="active" class="flex-1 min-h-0 flex flex-col">
           <slot :active="active" />
         </div>
       </Transition>
