@@ -2,9 +2,6 @@
 const route = useRoute();
 const prismic = usePrismic();
 
-const { data: homepage } = await useHomepage();
-const contactVisible = computed(() => isSectionVisible(homepage.value?.data, 'contact'));
-
 const { data: article } = await useAsyncData(`blog-post-${route.params.uid}`, async () => {
   try {
     const response = await prismic.client.getByUID('blog_post', route.params.uid);
@@ -51,18 +48,36 @@ useHead({
         headline: article.value.data.title,
         description: article.value.data.excerpt || '',
         image: articleImage.value,
+        inLanguage: 'fr',
+        articleSection: 'Sport-santé & bien-être',
         datePublished: article.value.data.publication_date || '',
         dateModified: article.value.last_publication_date || article.value.data.publication_date || '',
         author: {
           '@type': 'Person',
+          '@id': 'https://lilachibane.com/#lila',
           name: 'Lila Chibane',
           url: 'https://lilachibane.com',
         },
         publisher: {
           '@type': 'Organization',
           name: 'Lila Chibane',
+          url: 'https://lilachibane.com',
+          logo: { '@type': 'ImageObject', url: 'https://lilachibane.com/apple-touch-icon.png' },
         },
+        isPartOf: { '@type': 'Blog', name: 'Blog Lila Chibane', url: 'https://lilachibane.com/blog' },
         mainEntityOfPage: articleUrl.value,
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://lilachibane.com' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://lilachibane.com/blog' },
+          { '@type': 'ListItem', position: 3, name: article.value.data.title, item: articleUrl.value },
+        ],
       }),
     },
   ] : [],
@@ -78,8 +93,9 @@ useHead({
     <article v-if="article" class="pt-28 md:pt-36 pb-20 md:pb-32">
       <!-- Back to blog -->
       <div class="max-w-3xl mx-auto px-6 md:px-10 mb-8 md:mb-10">
-        <NuxtLink to="/blog" class="inline-flex items-center font-body text-sm text-gray hover:text-bleu transition-colors duration-300">
-          ← Retour aux articles
+        <NuxtLink to="/blog" class="group inline-flex items-center gap-1.5 font-body text-sm text-gray hover:text-bleu transition-colors duration-300">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          Retour aux articles
         </NuxtLink>
       </div>
 
@@ -148,12 +164,13 @@ useHead({
             <p class="text-sm font-body font-light text-gray leading-relaxed mb-4">
               Coach sportive, peintre et créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
             </p>
-            <NuxtLink
-              :to="contactVisible ? '/#contact' : 'mailto:lila.chibane@outlook.com'"
-              class="inline-block font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300"
+            <a
+              href="mailto:lila.chibane@outlook.com"
+              class="group inline-flex items-center gap-1.5 font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300"
             >
-              Me contacter →
-            </NuxtLink>
+              Me contacter
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
           </div>
         </div>
       </div>

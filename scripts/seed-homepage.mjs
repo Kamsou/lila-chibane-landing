@@ -23,7 +23,6 @@ if (!WRITE_TOKEN) {
 }
 
 const para = (text) => [{ type: 'paragraph', text, spans: [] }]
-const paras = (...texts) => texts.map((text) => ({ type: 'paragraph', text, spans: [] }))
 const webLink = (url) => ({ link_type: 'Web', url, target: '_blank' })
 
 const pricingCategory = (primary, items) => ({
@@ -38,26 +37,17 @@ const pricingCategory = (primary, items) => ({
 const data = {
   // Hero
   hero_name: "Je m'appelle Lila.",
-  hero_subtitle: 'Coach sportive · Peintre · Créatrice sonore · Dog sitter',
-  hero_intro_1: 'Quatre pratiques, un même fil : prendre soin du corps, des sens, du vivant, et de ce qui nous relie au monde.',
-  hero_intro_2: "Je crée les conditions pour se sentir bien, avec douceur, sans pression, à ton rythme.",
+  hero_intro_1: 'Prendre soin du corps, des sens, du vivant, et de ce qui nous relie au monde.',
   hero_cta_label: "S'abonner à la newsletter",
   hero_cta_url: webLink('https://jamaistroptard.substack.com/'),
   hero_cta_caption: 'Pour celles qui veulent aller plus loin',
-
-  // Qui suis-je
-  about_visible: true,
-  about_label: 'Qui suis-je ?',
-  about_title: 'Un même fil, plusieurs pratiques',
-  about_intro: paras(
-    "Je m'appelle Lila. Coach sportive, peintre, créatrice sonore et dog sitter, je vis et travaille dans le Médoc.",
-    "Ce qui me porte, c'est le soin : celui du corps, des sens, du vivant. J'aime créer des espaces où l'on peut ralentir, respirer, se reconnecter à soi.",
-    "Mes pratiques se nourrissent les unes les autres. Le mouvement, la matière, le son : autant de façons d'être présente au monde et de prendre soin de ce qui nous entoure."
-  ),
-  about_footer: '',
+  portal_choice_label: 'Je viens pour…',
 
   // Coaching
   coaching_visible: true,
+  coaching_kicker: 'Coaching sportif',
+  coaching_door_text: 'Sport-santé pour femmes, en douceur',
+  coaching_approach_title: 'Mon approche',
   coaching_title: 'Coach sportive',
   coaching_intro: para("J'accompagne les femmes actives à reprendre une activité physique adaptée, sans violence, sans pression, à leur rythme. Ton corps n'est pas un objet à transformer, c'est un système à écouter."),
   coaching_cards: [
@@ -69,20 +59,12 @@ const data = {
   coaching_cta_url: webLink('https://calendly.com/lilacoach/bilanpersonnalise'),
   coaching_cta_caption: '30 minutes · gratuit · en visio · sans engagement',
 
-  // Peinture
-  peinture_visible: false,
-  peinture_title: 'Peinture',
-  peinture_intro: para("[Ici, quelques lignes sur ta démarche : ce qui t'anime quand tu peins, tes thèmes, tes matières, ce que tu cherches à exprimer.]"),
-  peinture_footer: 'Galerie complète à venir',
-
-  // Son
-  son_visible: false,
-  son_title: 'Création sonore',
-  son_intro: para("[Ici, quelques lignes sur ton univers sonore : le type de créations (paysages sonores, compositions, field recording...), le contexte (installations, performances, podcasts...), ce que tu cherches à faire ressentir.]"),
-  son_footer: 'Sélection à venir',
-
   // Dog sitting
   dog_visible: true,
+  dog_kicker: 'Dog sitting',
+  dog_door_text: 'Garde & promenade, Médoc et Le Bouscat',
+  dog_services_title: 'Les prestations',
+  dog_pricing_title: 'Tarifs',
   dog_title: 'Dog sitting',
   dog_intro: para("Je prends soin de ton chien comme s'il était le mien. Promenades, garde, présence rassurante : à chaque animal son rythme, à chaque humain sa tranquillité d'esprit."),
   dog_cards: [
@@ -188,25 +170,23 @@ const data = {
       ]
     ),
   ],
-  dog_cta_label: 'Me parler de ton chien',
-  dog_cta_caption: 'Avensan · Médoc · Le Bouscat · Bordeaux',
+  dog_cta_caption: 'Avensan · Médoc · Le Bouscat',
 
   // FAQ
   faq_visible: true,
   faq_label: 'Questions fréquentes',
   faq_title: 'Tu te poses peut-être ces questions',
   faq_items: [
-    { question: 'Où proposes-tu le dog sitting ?', answer: "À Avensan, dans tout le Médoc, ainsi qu'au Bouscat et sur Bordeaux. Garde à domicile, promenades et visites, selon les besoins de ton chien." },
-    { question: 'Tu gardes mon chien chez moi ou chez toi ?', answer: "À domicile, chez toi : ton chien reste dans ses repères. Je propose aussi des promenades et des passages quotidiens pour les absences plus courtes." },
-    { question: 'Le coaching se passe en visio ou en présentiel ?', answer: "Les deux. En visio partout en France, et en présentiel dans le Médoc. On choisit ensemble ce qui te convient le mieux." },
-    { question: 'À qui s’adresse le coaching sportif ?', answer: "Aux femmes actives qui veulent reprendre une activité physique en douceur, sans pression ni performance, à leur rythme." },
-    { question: 'Comment réserver un premier échange ?', answer: "Tu peux réserver un bilan personnalisé gratuit de 30 minutes, en visio et sans engagement, depuis la section coaching." },
-    { question: 'Combien coûte la garde de mon chien ?', answer: "Les tarifs dépendent de la prestation (promenade, garde à domicile, visite). Le détail est dans la grille tarifaire de la section dog sitting ; pour un devis adapté, écris-moi." },
+    { question: 'Où proposes-tu le dog sitting ?', answer: "À Avensan, dans tout le Médoc, ainsi qu'au Bouscat. Garde à domicile, promenades et visites, selon les besoins de ton chien.", category: 'dog' },
+    { question: 'Tu gardes mon chien chez moi ou chez toi ?', answer: "À domicile, chez toi : ton chien reste dans ses repères. Je propose aussi des promenades et des passages quotidiens pour les absences plus courtes.", category: 'dog' },
+    { question: 'Le coaching se passe en visio ou en présentiel ?', answer: "Les deux. En visio partout en France, et en présentiel dans le Médoc. On choisit ensemble ce qui te convient le mieux.", category: 'coaching' },
+    { question: 'À qui s’adresse le coaching sportif ?', answer: "Aux femmes actives qui veulent reprendre une activité physique en douceur, sans pression ni performance, à leur rythme.", category: 'coaching' },
+    { question: 'Comment réserver un premier échange ?', answer: "Tu peux réserver un bilan personnalisé gratuit de 30 minutes, en visio et sans engagement, depuis la page coaching.", category: 'coaching' },
+    { question: 'Combien coûte la garde de mon chien ?', answer: "Les tarifs dépendent de la prestation (promenade, garde à domicile, visite). Le détail est sur la page dog sitting ; pour un devis adapté, écris-moi.", category: 'dog' },
   ],
 
   // Contact
   contact_visible: true,
-  contact_label: 'Contact',
   contact_title: "Envie d'échanger ?",
   contact_intro: para('Que ce soit pour un coaching, une collaboration artistique ou simplement discuter, je réponds personnellement à chaque message.'),
   contact_button_label: 'Envoyer',
@@ -214,14 +194,10 @@ const data = {
 
   // Navigation
   nav_brand_label: 'Lila Chibane',
-  nav_label_about: 'Qui suis-je',
   nav_label_coaching: 'Coaching',
-  nav_label_peinture: 'Peinture',
-  nav_label_son: 'Son',
   nav_label_dog: 'Dog sitting',
   nav_show_blog: true,
   nav_label_blog: 'Blog',
-  nav_label_contact: 'Contact',
 }
 
 const client = createWriteClient(REPOSITORY, { writeToken: WRITE_TOKEN })

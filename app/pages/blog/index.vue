@@ -11,15 +11,15 @@ const { data: articles } = await useAsyncData('blog-posts', async () => {
 });
 
 useSeoMeta({
-  title: 'Blog | Lila Chibane',
-  description: 'Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.',
-  ogTitle: 'Blog | Lila Chibane',
-  ogDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
+  title: 'Blog sport-santé & bien-être · Lila Chibane',
+  description: 'Conseils de coach sportive pour reprendre une activité physique en douceur : forme, énergie, régulation du stress et bien-être au féminin. Par Lila Chibane, dans le Médoc.',
+  ogTitle: 'Blog sport-santé & bien-être · Lila Chibane',
+  ogDescription: 'Conseils sport-santé, forme et confiance en soi, en douceur.',
   ogUrl: 'https://lilachibane.com/blog',
   ogType: 'website',
   ogImage: 'https://lilachibane.com/IMG_2553.jpg',
-  twitterTitle: 'Blog | Lila Chibane',
-  twitterDescription: 'Conseils sport-santé, bien-être et confiance en soi.',
+  twitterTitle: 'Blog sport-santé & bien-être · Lila Chibane',
+  twitterDescription: 'Conseils sport-santé, forme et confiance en soi, en douceur.',
   twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
 })
 
@@ -30,10 +30,23 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: 'Blog | Lila Chibane',
-        description: 'Conseils sport-santé, bien-être et confiance en soi par Lila Chibane.',
+        name: 'Blog sport-santé & bien-être · Lila Chibane',
+        description: 'Conseils de coach sportive : forme, énergie, régulation du stress et bien-être au féminin, par Lila Chibane.',
         url: 'https://lilachibane.com/blog',
         inLanguage: 'fr',
+        isPartOf: { '@type': 'WebSite', name: 'Lila Chibane', url: 'https://lilachibane.com' },
+        publisher: { '@type': 'Person', '@id': 'https://lilachibane.com/#lila', name: 'Lila Chibane' },
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://lilachibane.com' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://lilachibane.com/blog' },
+        ],
       }),
     },
   ],
@@ -101,8 +114,9 @@ const formatDate = (dateString) => {
             <p v-if="article.data.excerpt" class="text-sm font-body font-light text-gray leading-relaxed line-clamp-3">
               {{ article.data.excerpt }}
             </p>
-            <span class="inline-block mt-3 text-sm font-body text-gray-light group-hover:text-bleu transition-colors duration-300">
-              Lire →
+            <span class="inline-flex items-center gap-1.5 mt-3 text-sm font-body text-gray-light group-hover:text-bleu transition-colors duration-300">
+              Lire
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </span>
           </NuxtLink>
         </div>

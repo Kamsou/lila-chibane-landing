@@ -9,8 +9,6 @@ const tagline = computed(() => {
   const d = homepage.value?.data || {}
   return [
     { key: 'coaching', label: 'Coach sportive' },
-    { key: 'peinture', label: 'Peintre' },
-    { key: 'son', label: 'Créatrice sonore' },
     { key: 'dog', label: 'Dog sitter' },
   ]
     .filter((r) => isSectionVisible(d, r.key))

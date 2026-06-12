@@ -13,25 +13,11 @@
           "placeholder": "Je m'appelle Lila."
         }
       },
-      "hero_subtitle": {
-        "type": "Text",
-        "config": {
-          "label": "Sous-titre (rôles)",
-          "placeholder": "Coach sportive · Peintre · Créatrice sonore · Dog sitter"
-        }
-      },
       "hero_intro_1": {
         "type": "Text",
         "config": {
-          "label": "Paragraphe d'intro 1",
-          "placeholder": "Quatre pratiques, un même fil..."
-        }
-      },
-      "hero_intro_2": {
-        "type": "Text",
-        "config": {
-          "label": "Paragraphe d'intro 2",
-          "placeholder": "Je crée les conditions pour se sentir bien..."
+          "label": "Paragraphe d'intro",
+          "placeholder": "Prendre soin du corps, des sens, du vivant..."
         }
       },
       "hero_cta_label": {
@@ -55,51 +41,12 @@
           "label": "Sous-texte du bouton",
           "placeholder": "Pour celles qui veulent aller plus loin"
         }
-      }
-    },
-    "Qui suis-je": {
-      "about_visible": {
-        "type": "Boolean",
-        "config": {
-          "label": "Afficher cette section (page + navigation)",
-          "default_value": true
-        }
       },
-      "about_label": {
+      "portal_choice_label": {
         "type": "Text",
         "config": {
-          "label": "Surtitre",
-          "placeholder": "Qui suis-je ?"
-        }
-      },
-      "about_title": {
-        "type": "Text",
-        "config": {
-          "label": "Titre de section",
-          "placeholder": "Un même fil, plusieurs pratiques"
-        }
-      },
-      "about_intro": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Texte de présentation",
-          "placeholder": "Je m'appelle Lila...",
-          "multi": "paragraph,strong,em"
-        }
-      },
-      "about_image": {
-        "type": "Image",
-        "config": {
-          "label": "Portrait",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "about_footer": {
-        "type": "Text",
-        "config": {
-          "label": "Mention bas de section (optionnel)",
-          "placeholder": "Médoc, Gironde"
+          "label": "Portail · invitation au choix (au-dessus des deux portes)",
+          "placeholder": "Je viens pour…"
         }
       }
     },
@@ -110,6 +57,18 @@
           "label": "Afficher cette section (page + navigation)",
           "default_value": true
         }
+      },
+      "coaching_kicker": {
+        "type": "Text",
+        "config": { "label": "Surtitre / titre de la porte du portail", "placeholder": "Coaching sportif" }
+      },
+      "coaching_door_text": {
+        "type": "Text",
+        "config": { "label": "Description sous la porte (portail)", "placeholder": "Sport-santé pour femmes, en douceur" }
+      },
+      "coaching_approach_title": {
+        "type": "Text",
+        "config": { "label": "Titre du panneau « Approche »", "placeholder": "Mon approche" }
       },
       "coaching_title": {
         "type": "Text",
@@ -159,56 +118,6 @@
         "config": { "label": "Sous-texte du bouton", "placeholder": "30 minutes · gratuit · en visio..." }
       }
     },
-    "Peinture": {
-      "peinture_visible": {
-        "type": "Boolean",
-        "config": {
-          "label": "Afficher cette section (page + navigation)",
-          "default_value": false
-        }
-      },
-      "peinture_title": {
-        "type": "Text",
-        "config": { "label": "Titre de section", "placeholder": "Peinture" }
-      },
-      "peinture_intro": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Paragraphe d'intro",
-          "placeholder": "Quelques lignes sur ta démarche...",
-          "single": "paragraph,strong,em"
-        }
-      },
-      "peinture_footer": {
-        "type": "Text",
-        "config": { "label": "Mention bas de section", "placeholder": "Galerie complète à venir" }
-      }
-    },
-    "Son": {
-      "son_visible": {
-        "type": "Boolean",
-        "config": {
-          "label": "Afficher cette section (page + navigation)",
-          "default_value": false
-        }
-      },
-      "son_title": {
-        "type": "Text",
-        "config": { "label": "Titre de section", "placeholder": "Création sonore" }
-      },
-      "son_intro": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Paragraphe d'intro",
-          "placeholder": "Quelques lignes sur ton univers sonore...",
-          "single": "paragraph,strong,em"
-        }
-      },
-      "son_footer": {
-        "type": "Text",
-        "config": { "label": "Mention bas de section", "placeholder": "Sélection à venir" }
-      }
-    },
     "Dog sitting": {
       "dog_visible": {
         "type": "Boolean",
@@ -216,6 +125,22 @@
           "label": "Afficher cette section (page + navigation)",
           "default_value": true
         }
+      },
+      "dog_kicker": {
+        "type": "Text",
+        "config": { "label": "Surtitre / titre de la porte du portail", "placeholder": "Dog sitting" }
+      },
+      "dog_door_text": {
+        "type": "Text",
+        "config": { "label": "Description sous la porte (portail)", "placeholder": "Garde & promenade, Médoc et Le Bouscat" }
+      },
+      "dog_services_title": {
+        "type": "Text",
+        "config": { "label": "Titre du panneau « Prestations »", "placeholder": "Les prestations" }
+      },
+      "dog_pricing_title": {
+        "type": "Text",
+        "config": { "label": "Titre du panneau « Tarifs »", "placeholder": "Tarifs" }
       },
       "dog_title": {
         "type": "Text",
@@ -257,13 +182,9 @@
           }
         }
       },
-      "dog_cta_label": {
-        "type": "Text",
-        "config": { "label": "Texte du bouton", "placeholder": "Me parler de ton chien" }
-      },
       "dog_cta_caption": {
         "type": "Text",
-        "config": { "label": "Sous-texte du bouton", "placeholder": "Médoc, Gironde · tarifs sur demande" }
+        "config": { "label": "Sous-texte (zone desservie)", "placeholder": "Avensan · Médoc · Le Bouscat · tarifs sur demande" }
       }
     },
     "FAQ": {
@@ -294,6 +215,14 @@
             "answer": {
               "type": "Text",
               "config": { "label": "Réponse", "placeholder": "À Avensan, dans le Médoc..." }
+            },
+            "category": {
+              "type": "Select",
+              "config": {
+                "label": "Activité concernée",
+                "options": ["coaching", "dog", "les deux"],
+                "default_value": "les deux"
+              }
             }
           }
         }
@@ -306,10 +235,6 @@
           "label": "Afficher cette section (page + navigation)",
           "default_value": true
         }
-      },
-      "contact_label": {
-        "type": "Text",
-        "config": { "label": "Surtitre", "placeholder": "Contact" }
       },
       "contact_title": {
         "type": "Text",
@@ -337,21 +262,9 @@
         "type": "Text",
         "config": { "label": "Logo / nom (en haut à gauche du site)", "placeholder": "Lila Chibane" }
       },
-      "nav_label_about": {
-        "type": "Text",
-        "config": { "label": "Lien Qui suis-je", "placeholder": "Qui suis-je" }
-      },
       "nav_label_coaching": {
         "type": "Text",
         "config": { "label": "Lien Coaching", "placeholder": "Coaching" }
-      },
-      "nav_label_peinture": {
-        "type": "Text",
-        "config": { "label": "Lien Peinture", "placeholder": "Peinture" }
-      },
-      "nav_label_son": {
-        "type": "Text",
-        "config": { "label": "Lien Son", "placeholder": "Son" }
       },
       "nav_label_dog": {
         "type": "Text",
@@ -364,10 +277,6 @@
       "nav_label_blog": {
         "type": "Text",
         "config": { "label": "Lien Blog", "placeholder": "Blog" }
-      },
-      "nav_label_contact": {
-        "type": "Text",
-        "config": { "label": "Lien Contact", "placeholder": "Contact" }
       }
     }
   }

@@ -31,6 +31,17 @@ useHead({
         inLanguage: 'fr',
       }),
     },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://lilachibane.com' },
+          { '@type': 'ListItem', position: 2, name: 'Quiz Énergie', item: 'https://lilachibane.com/quiz' },
+        ],
+      }),
+    },
   ],
 })
 
