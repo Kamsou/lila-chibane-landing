@@ -77,9 +77,9 @@ useHead({
 </script>
 
 <template>
-  <main class="h-[100dvh] overflow-hidden bg-bleu text-white grid grid-rows-[36vh_1fr] md:grid-rows-1 md:grid-cols-2">
+  <main class="min-h-[100dvh] md:h-[100dvh] md:overflow-hidden bg-bleu text-white flex flex-col md:grid md:grid-rows-1 md:grid-cols-2">
     <!-- Photo -->
-    <div class="relative overflow-hidden">
+    <div class="relative overflow-hidden h-[38vh] md:h-auto shrink-0">
       <img
         src="/test-2.jpeg"
         alt="Lila Chibane"
@@ -100,7 +100,7 @@ useHead({
         </p>
       </header>
 
-      <div class="flex-1 min-h-0 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-10 lg:px-16">
+      <div class="flex-1 min-h-0 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-10 lg:px-16 py-8 md:py-0">
         <h1 class="font-display font-normal text-3xl md:text-4xl lg:text-6xl leading-[1.1] mb-4 md:mb-5 max-w-xl portal-fade" style="animation-delay: 0.2s">
           {{ content.hero.name }}
         </h1>
@@ -159,13 +159,13 @@ useHead({
         </div>
       </div>
 
-      <footer class="px-6 md:px-10 pb-5 md:pb-10 shrink-0 flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-2 sm:gap-3">
-        <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="text-xs font-body font-light text-white/50 hover:text-white transition-colors duration-300">
+      <footer class="px-6 md:px-10 pb-4 md:pb-10 shrink-0 flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
+        <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">
           <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
         </a>
-        <div class="flex items-center gap-6">
-          <NuxtLink to="/blog" class="text-xs font-body font-light text-white/50 hover:text-white transition-colors duration-300">Blog</NuxtLink>
-          <a href="mailto:lila.chibane@outlook.com" class="text-xs font-body font-light text-white/50 hover:text-white transition-colors duration-300">lila.chibane@outlook.com</a>
+        <div class="flex items-center gap-7 sm:gap-6">
+          <NuxtLink to="/blog" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">Blog</NuxtLink>
+          <a href="mailto:lila.chibane@outlook.com" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">lila.chibane@outlook.com</a>
         </div>
       </footer>
     </div>
