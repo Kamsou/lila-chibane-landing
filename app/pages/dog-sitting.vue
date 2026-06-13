@@ -94,7 +94,6 @@ useHead(() => {
 
     <PanelDeck :labels="labels">
       <template #default="{ active }">
-        <!-- Présentation -->
         <ActivityIntro
           v-show="active === idx('intro')"
           :title="dog.title"
@@ -105,7 +104,6 @@ useHead(() => {
           image-position="object-bottom md:object-center"
         />
 
-        <!-- Prestations -->
         <section v-show="active === idx('prestations')" class="panel">
           <div class="max-w-4xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-12">{{ content.dog.servicesTitle }}</h2>
@@ -123,7 +121,6 @@ useHead(() => {
           </div>
         </section>
 
-        <!-- Tarifs -->
         <section v-if="dog.pricingSlices.length" v-show="active === idx('tarifs')" class="panel">
           <div class="max-w-3xl mx-auto w-full">
             <div class="flex items-center gap-3 mb-6 md:mb-8">
@@ -159,7 +156,6 @@ useHead(() => {
           </div>
         </section>
 
-        <!-- FAQ -->
         <section v-if="faq.length" v-show="active === idx('faq')" class="panel">
           <div class="max-w-2xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
@@ -175,7 +171,6 @@ useHead(() => {
           </div>
         </section>
 
-        <!-- Contact -->
         <section v-show="active === idx('contact')" class="panel">
           <div class="max-w-lg mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl font-display font-normal text-white leading-[1.1] mb-2 text-center">{{ content.contact.title }}</h2>

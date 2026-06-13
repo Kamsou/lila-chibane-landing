@@ -94,7 +94,6 @@ useHead(() => {
 
     <PanelDeck :labels="panels">
       <template #default="{ active }">
-        <!-- Présentation -->
         <ActivityIntro
           v-show="active === 0"
           :title="coaching.title"
@@ -104,10 +103,9 @@ useHead(() => {
           :cta-url="coaching.ctaUrl"
           image-src="/coaching-sportif.jpeg"
           image-alt="Lila Chibane, coach sportive"
-          image-position="object-bottom"
+          image-position="object-center"
         />
 
-        <!-- Approche -->
         <section v-show="active === 1" class="panel">
           <div class="max-w-4xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-12">{{ content.coaching.approachTitle }}</h2>
@@ -125,7 +123,6 @@ useHead(() => {
           </div>
         </section>
 
-        <!-- FAQ -->
         <section v-if="faq.length" v-show="active === 2" class="panel">
           <div class="max-w-2xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
@@ -141,7 +138,6 @@ useHead(() => {
           </div>
         </section>
 
-        <!-- Contact -->
         <section v-show="active === panels.length - 1" class="panel">
           <div class="max-w-lg mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl font-display font-normal text-white leading-[1.1] mb-2 text-center">{{ content.contact.title }}</h2>
