@@ -6,12 +6,17 @@ useSeoMeta({
   description: 'Coach sportive sport-santé (en visio et en présentiel dans le Médoc) et dog sitter à Avensan et Le Bouscat. Choisis ton espace : coaching ou dog sitting.',
   ogTitle: 'Lila Chibane · Coach sportive & dog sitter · Médoc et Le Bouscat',
   ogDescription: 'Coaching sport-santé et dog sitting, dans le Médoc et à Le Bouscat.',
-  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
+  ogImage: 'https://lilachibane.com/test-2.jpeg',
+  ogImageAlt: 'Lila Chibane, coach sportive et dog sitter',
+  ogImageWidth: 1200,
+  ogImageHeight: 1800,
   ogUrl: 'https://lilachibane.com',
   ogType: 'website',
+  twitterCard: 'summary_large_image',
   twitterTitle: 'Lila Chibane · Coach sportive & dog sitter · Médoc et Le Bouscat',
   twitterDescription: 'Coaching sport-santé et dog sitting, dans le Médoc et à Le Bouscat.',
-  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
+  twitterImage: 'https://lilachibane.com/test-2.jpeg',
+  twitterImageAlt: 'Lila Chibane, coach sportive et dog sitter',
 })
 
 useHead({
@@ -25,7 +30,7 @@ useHead({
         name: 'Lila Chibane',
         description: 'Coach sportive sport-santé et dog sitter basée à Avensan, dans le Médoc. Coaching en visio et en présentiel dans le Médoc ; garde de chien, promenades et visites à Avensan, dans le Médoc, et à Le Bouscat.',
         url: 'https://lilachibane.com',
-        image: 'https://lilachibane.com/IMG_2553.jpg',
+        image: 'https://lilachibane.com/test-2.jpeg',
         email: 'lila.chibane@outlook.com',
         areaServed: [
           { '@type': 'City', name: 'Avensan' },
@@ -66,7 +71,7 @@ useHead({
         name: 'Lila Chibane',
         jobTitle: 'Coach sportive et dog sitter',
         url: 'https://lilachibane.com',
-        image: 'https://lilachibane.com/IMG_2553.jpg',
+        image: 'https://lilachibane.com/test-2.jpeg',
         email: 'lila.chibane@outlook.com',
         knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Dog sitting', 'Garde de chien', 'Bien-être animal'],
         sameAs: ['https://jamaistroptard.substack.com/'],
@@ -77,9 +82,8 @@ useHead({
 </script>
 
 <template>
-  <main class="min-h-[100dvh] md:h-[100dvh] md:overflow-hidden bg-bleu text-white flex flex-col md:grid md:grid-rows-1 md:grid-cols-2">
-    <!-- Photo -->
-    <div class="relative overflow-hidden h-[38vh] md:h-auto shrink-0">
+  <main class="h-[100dvh] overflow-hidden bg-bleu text-white flex flex-col md:grid md:grid-rows-1 md:grid-cols-2">
+    <div class="relative overflow-hidden flex-1 min-h-0 md:flex-none">
       <img
         src="/test-2.jpeg"
         alt="Lila Chibane"
@@ -92,15 +96,14 @@ useHead({
       />
     </div>
 
-    <!-- Contenu -->
-    <div class="flex flex-col min-h-0">
+    <div class="flex flex-col min-h-0 shrink-0 md:shrink">
       <header class="px-6 md:px-10 pt-5 md:pt-10 shrink-0">
         <p class="font-display text-lg md:text-xl font-normal portal-fade" style="animation-delay: 0.05s">
           {{ content.brand }}
         </p>
       </header>
 
-      <div class="flex-1 min-h-0 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-10 lg:px-16 py-8 md:py-0">
+      <div class="flex-1 min-h-0 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-10 lg:px-16 py-5 md:py-0">
         <h1 class="font-display font-normal text-3xl md:text-4xl lg:text-6xl leading-[1.1] mb-4 md:mb-5 max-w-xl portal-fade" style="animation-delay: 0.2s">
           {{ content.hero.name }}
         </h1>
@@ -159,7 +162,7 @@ useHead({
         </div>
       </div>
 
-      <footer class="px-6 md:px-10 pb-4 md:pb-10 shrink-0 flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
+      <footer class="px-6 md:px-10 pb-[max(1rem,env(safe-area-inset-bottom))] md:pb-10 shrink-0 flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
         <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">
           <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
         </a>

@@ -23,7 +23,7 @@ const formatDate = (dateString) => {
 };
 
 const articleUrl = computed(() => `https://lilachibane.com/blog/${route.params.uid}`)
-const articleImage = computed(() => article.value?.data.featured_image?.url || 'https://lilachibane.com/IMG_2553.jpg')
+const articleImage = computed(() => article.value?.data.featured_image?.url || 'https://lilachibane.com/test-2.jpeg')
 
 useSeoMeta({
   title: () => article.value ? `${article.value.data.title} | Lila Chibane` : 'Blog | Lila Chibane',

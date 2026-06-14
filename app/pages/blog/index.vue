@@ -17,10 +17,10 @@ useSeoMeta({
   ogDescription: 'Conseils sport-santé, forme et confiance en soi, en douceur.',
   ogUrl: 'https://lilachibane.com/blog',
   ogType: 'website',
-  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
+  ogImage: 'https://lilachibane.com/test-2.jpeg',
   twitterTitle: 'Blog sport-santé & bien-être · Lila Chibane',
   twitterDescription: 'Conseils sport-santé, forme et confiance en soi, en douceur.',
-  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
+  twitterImage: 'https://lilachibane.com/test-2.jpeg',
 })
 
 useHead({

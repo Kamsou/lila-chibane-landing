@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <section class="flex-1 min-h-0 flex flex-col md:flex-row">
-    <div class="flex-1 min-h-0 overflow-y-auto flex flex-col justify-start md:justify-center px-6 py-8 md:py-12 md:pr-10 md:pl-[max(2.5rem,calc((100vw_-_64rem)/2_+_2.5rem))]">
+    <div class="flex-1 min-h-0 overflow-y-auto flex flex-col justify-start md:justify-center px-6 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] md:py-12 md:pr-10 md:pl-[max(2.5rem,calc((100vw_-_64rem)/2_+_2.5rem))]">
       <div class="max-w-md">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white leading-[1.1] mb-6 md:mb-8">
           {{ title }}

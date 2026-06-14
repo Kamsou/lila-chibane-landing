@@ -8,10 +8,10 @@ useSeoMeta({
   ogDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
   ogUrl: 'https://lilachibane.com/quiz',
   ogType: 'website',
-  ogImage: 'https://lilachibane.com/IMG_2553.jpg',
+  ogImage: 'https://lilachibane.com/test-2.jpeg',
   twitterTitle: 'Quiz Énergie | Lila Chibane',
   twitterDescription: 'Quel est ton profil énergie ? Fais le quiz gratuit.',
-  twitterImage: 'https://lilachibane.com/IMG_2553.jpg',
+  twitterImage: 'https://lilachibane.com/test-2.jpeg',
 })
 
 useHead({

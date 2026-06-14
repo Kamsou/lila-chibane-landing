@@ -14,7 +14,8 @@ useHead({
     { rel: 'preconnect', href: 'https://lila-chibane.cdn.prismic.io', crossorigin: '' },
   ],
   meta: [
-    { name: 'theme-color', content: '#EDE4D3' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+    { name: 'theme-color', content: '#1B3FA0' },
     { name: 'geo.region', content: 'FR-33' },
     { name: 'geo.placename', content: 'Avensan, Médoc, Gironde' },
     { name: 'geo.position', content: '45.0167;-0.7833' },

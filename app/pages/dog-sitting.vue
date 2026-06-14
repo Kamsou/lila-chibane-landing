@@ -185,7 +185,7 @@ useHead(() => {
 
 <style scoped lang="postcss">
 .panel {
-  @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 py-8 md:py-12;
+  @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] md:py-12;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 
