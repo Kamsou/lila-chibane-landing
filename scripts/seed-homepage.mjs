@@ -67,6 +67,12 @@ const data = {
   dog_pricing_title: 'Tarifs',
   dog_title: 'Dog sitting',
   dog_intro: para("Je prends soin de ton chien comme s'il était le mien. Promenades, garde, présence rassurante : à chaque animal son rythme, à chaque humain sa tranquillité d'esprit."),
+  dog_approach_title: 'Mon approche',
+  dog_approach: [
+    { type: 'paragraph', text: "Les chiens et moi, c'est une histoire d'amour de toujours. J'ai obtenu l'ACACED (la certification officielle de connaissances pour les animaux de compagnie) et je m'intéresse de près à l'éthologie canine et à l'éducation positive, respectueuse et sans coercition.", spans: [] },
+    { type: 'paragraph', text: "Concrètement, je commence toujours par comprendre ton chien (sa façon de communiquer, ses habitudes, ce qui le rassure et ce qu'il aime) pour m'adapter à lui, et non l'inverse.", spans: [] },
+    { type: 'paragraph', text: "Et pour partir sur de bonnes bases, la première rencontre est offerte : on fait connaissance, tu me confies ses petites habitudes, et je m'assure que tout le monde est à l'aise. Pendant la garde, je t'envoie régulièrement photos et vidéos, pour que tu le voies épanoui même à distance, et que tu sois tranquille de ton côté.", spans: [] },
+  ],
   dog_cards: [
     { title: 'Promenades & sorties', text: "Balades adaptées à l'énergie et au caractère de ton chien." },
     { title: 'Garde à domicile', text: "Ton chien reste chez lui, dans ses repères. Je viens, je m'installe, je veille." },

@@ -154,6 +154,22 @@
           "single": "paragraph,strong,em"
         }
       },
+      "dog_cta_caption": {
+        "type": "Text",
+        "config": { "label": "Sous-texte (zone desservie)", "placeholder": "Avensan · Médoc · Le Bouscat · tarifs sur demande" }
+      },
+      "dog_approach_title": {
+        "type": "Text",
+        "config": { "label": "Mon approche · titre", "placeholder": "Mon approche" }
+      },
+      "dog_approach": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Mon approche · texte",
+          "placeholder": "Écris un ou plusieurs paragraphes (Entrée = nouveau paragraphe)",
+          "multi": "paragraph,strong,em"
+        }
+      },
       "dog_cards": {
         "type": "Group",
         "config": {
@@ -181,10 +197,6 @@
             }
           }
         }
-      },
-      "dog_cta_caption": {
-        "type": "Text",
-        "config": { "label": "Sous-texte (zone desservie)", "placeholder": "Avensan · Médoc · Le Bouscat · tarifs sur demande" }
       }
     },
     "FAQ": {

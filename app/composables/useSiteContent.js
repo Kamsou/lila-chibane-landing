@@ -48,6 +48,14 @@ export const useSiteContent = async () => {
         ]),
         pricingSlices: d.dog_pricing_slices || [],
         ctaCaption: d.dog_cta_caption || 'Avensan · Médoc · Le Bouscat · tarifs sur demande',
+        approachTitle: d.dog_approach_title || 'Mon approche',
+        approachParagraphs: (d.dog_approach?.length
+          ? d.dog_approach.map((b) => b.text).filter(Boolean)
+          : [
+              "Les chiens et moi, c'est une histoire d'amour de toujours. J'ai obtenu l'ACACED (la certification officielle de connaissances pour les animaux de compagnie) et je m'intéresse de près à l'éthologie canine et à l'éducation positive, respectueuse et sans coercition.",
+              "Concrètement, je commence toujours par comprendre ton chien (sa façon de communiquer, ses habitudes, ce qui le rassure et ce qu'il aime) pour m'adapter à lui, et non l'inverse.",
+              "Et pour partir sur de bonnes bases, la première rencontre est offerte : on fait connaissance, tu me confies ses petites habitudes, et je m'assure que tout le monde est à l'aise. Pendant la garde, je t'envoie régulièrement photos et vidéos, pour que tu le voies épanoui même à distance, et que tu sois tranquille de ton côté.",
+            ]),
       },
       faq: {
         visible: isSectionVisible(d, 'faq'),
