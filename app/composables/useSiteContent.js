@@ -10,6 +10,11 @@ export const useSiteContent = async () => {
       portal: {
         choiceLabel: d.portal_choice_label || 'Je viens pour…',
       },
+      socials: [
+        { key: 'instagram-coaching', type: 'instagram', label: 'Instagram coaching', short: 'coaching', url: asLink(d.instagram_coaching) || 'https://www.instagram.com/lila_chibane/' },
+        { key: 'linkedin', type: 'linkedin', label: 'LinkedIn', short: '', url: asLink(d.linkedin_coaching) || 'https://www.linkedin.com/in/lila-chibane-61704864/' },
+        { key: 'instagram-dog', type: 'instagram', label: 'Instagram dog sitting', short: 'dog sitting', url: asLink(d.instagram_dog) || 'https://www.instagram.com/lilagardetonchien/' },
+      ].filter((s) => s.url),
       hero: {
         name: d.hero_name || "Je m'appelle Lila.",
         intro1: d.hero_intro_1 || 'Prendre soin du corps, des sens, du vivant, et de ce qui nous relie au monde.',
@@ -61,14 +66,7 @@ export const useSiteContent = async () => {
         visible: isSectionVisible(d, 'faq'),
         label: d.faq_label || 'Questions fréquentes',
         title: d.faq_title || 'Tu te poses peut-être ces questions',
-        items: (d.faq_items?.length ? d.faq_items : [
-          { question: 'Où proposes-tu le dog sitting ?', answer: "À Avensan, dans tout le Médoc, ainsi qu'au Bouscat. Garde à domicile, promenades et visites, selon les besoins de ton chien.", category: 'dog' },
-          { question: 'Tu gardes mon chien chez moi ou chez toi ?', answer: "À domicile, chez toi : ton chien reste dans ses repères. Je propose aussi des promenades et des passages quotidiens pour les absences plus courtes.", category: 'dog' },
-          { question: 'Le coaching se passe en visio ou en présentiel ?', answer: "Les deux. En visio partout en France, et en présentiel dans le Médoc. On choisit ensemble ce qui te convient le mieux.", category: 'coaching' },
-          { question: 'À qui s’adresse le coaching sportif ?', answer: "Aux femmes actives qui veulent reprendre une activité physique en douceur, sans pression ni performance, à leur rythme.", category: 'coaching' },
-          { question: 'Comment réserver un premier échange ?', answer: "Tu peux réserver un bilan personnalisé gratuit de 30 minutes, en visio et sans engagement, depuis la page coaching.", category: 'coaching' },
-          { question: 'Combien coûte la garde de mon chien ?', answer: "Les tarifs dépendent de la prestation (promenade, garde à domicile, visite). Le détail est sur la page dog sitting ; pour un devis adapté, écris-moi.", category: 'dog' },
-        ]),
+        items: d.faq_items?.length ? d.faq_items : [],
       },
       contact: {
         visible: isSectionVisible(d, 'contact'),

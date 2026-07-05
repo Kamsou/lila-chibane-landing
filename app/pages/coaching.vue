@@ -5,7 +5,7 @@ const coaching = computed(() => content.value.coaching)
 const faq = computed(() => faqFor('coaching'))
 const panels = computed(() => {
   const list = ['Présentation', 'Approche']
-  if (faq.value.length) list.push('Questions')
+  if (content.value.faq.visible && faq.value.length) list.push('Questions')
   list.push('Contact')
   return list
 })

@@ -49,6 +49,10 @@ const handleSubmit = async (e) => {
       </div>
     </div>
     <div>
+      <label for="phone" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Téléphone <span class="text-white/40">(facultatif)</span></label>
+      <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78" autocomplete="tel" inputmode="tel" class="form-input-light" />
+    </div>
+    <div>
       <label for="message" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Message</label>
       <textarea id="message" name="message" placeholder="Dis-moi ce qui t'amène..." rows="3" required class="form-input-light resize-none"></textarea>
     </div>
@@ -65,7 +69,7 @@ const handleSubmit = async (e) => {
       </p>
       <p v-else-if="formStatus === 'error'" class="text-sm font-body font-light text-white/90 mt-4" role="alert">
         Oups, l'envoi n'a pas fonctionné. Tu peux réessayer ou m'écrire à
-        <a href="mailto:lila.chibane@outlook.com" class="underline">lila.chibane@outlook.com</a>.
+        <a href="mailto:lila.chibane.pro@outlook.com" class="underline">lila.chibane.pro@outlook.com</a>.
       </p>
     </div>
   </form>

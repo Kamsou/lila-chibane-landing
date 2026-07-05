@@ -165,7 +165,7 @@ useHead({
               Coach sportive, peintre et créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
             </p>
             <a
-              href="mailto:lila.chibane@outlook.com"
+              href="mailto:lila.chibane.pro@outlook.com"
               class="group inline-flex items-center gap-1.5 font-body text-sm text-gray-light hover:text-bleu transition-colors duration-300"
             >
               Me contacter

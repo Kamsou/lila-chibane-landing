@@ -58,7 +58,9 @@ const priceRange = computed(() => {
         <tr v-for="(item, i) in slice.items" :key="i" class="border-b border-white/12 last:border-0">
           <td class="py-2.5 pr-3 text-sm md:text-base font-body text-white align-top">
             {{ item.col1 }}
-            <span v-if="hasCol3 && item.col3" class="block sm:hidden text-xs font-body font-light text-white/60 mt-1">{{ item.col3 }}</span>
+            <span v-if="hasCol3 && item.col3" class="block sm:hidden text-xs font-body font-light text-white/60 mt-1">
+              <span v-if="slice.primary.col3_label" class="text-white/40">{{ slice.primary.col3_label }} : </span>{{ item.col3 }}
+            </span>
           </td>
           <td class="py-2.5 pl-4 text-sm md:text-base font-body font-normal text-white text-right whitespace-nowrap align-top">{{ item.col2 }}</td>
           <td v-if="hasCol3" class="py-2.5 pl-4 text-xs md:text-sm font-body font-light text-white/60 text-right align-top hidden sm:table-cell">{{ item.col3 }}</td>

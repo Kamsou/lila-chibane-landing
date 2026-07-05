@@ -437,8 +437,8 @@ function restart() {
           </a>
           <div class="border-t border-white/10 pt-6 mt-2">
             <p class="text-xs font-body text-white/40 mb-2">Aucun créneau ne te convient ?</p>
-            <a href="mailto:lila.chibane@outlook.com" class="text-sm font-body font-medium text-white hover:text-white/80 transition-colors duration-200 underline underline-offset-4">
-              lila.chibane@outlook.com
+            <a href="mailto:lila.chibane.pro@outlook.com" class="text-sm font-body font-medium text-white hover:text-white/80 transition-colors duration-200 underline underline-offset-4">
+              lila.chibane.pro@outlook.com
             </a>
           </div>
         </div>

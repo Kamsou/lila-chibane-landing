@@ -204,6 +204,9 @@ const data = {
   nav_label_dog: 'Dog sitting',
   nav_show_blog: true,
   nav_label_blog: 'Blog',
+  instagram_coaching: webLink('https://www.instagram.com/lila_chibane/'),
+  linkedin_coaching: webLink('https://www.linkedin.com/in/lila-chibane-61704864/'),
+  instagram_dog: webLink('https://www.instagram.com/lilagardetonchien/'),
 }
 
 const client = createWriteClient(REPOSITORY, { writeToken: WRITE_TOKEN })

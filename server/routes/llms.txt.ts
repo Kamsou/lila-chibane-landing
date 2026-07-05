@@ -11,7 +11,7 @@ export default defineEventHandler((event) => {
 - Professions: sports & health coach, dog sitter
 - Based in: Avensan, Médoc, Gironde (33480), France
 - Website: https://lilachibane.com
-- Contact: lila.chibane@outlook.com
+- Contact: lila.chibane.pro@outlook.com
 - Newsletter: https://jamaistroptard.substack.com/
 - Language: French
 

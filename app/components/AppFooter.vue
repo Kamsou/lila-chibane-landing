@@ -44,10 +44,10 @@ const tagline = computed(() => {
 
         <div>
           <a
-            href="mailto:lila.chibane@outlook.com"
+            href="mailto:lila.chibane.pro@outlook.com"
             class="text-sm font-body text-white/40 hover:text-white transition-colors duration-300"
           >
-            lila.chibane@outlook.com
+            lila.chibane.pro@outlook.com
           </a>
         </div>
       </div>

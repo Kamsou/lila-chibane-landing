@@ -13,7 +13,7 @@ const panelDefs = computed(() => {
     { key: 'prestations', label: 'Prestations' },
   ]
   if (dog.value.pricingSlices.length) list.push({ key: 'tarifs', label: 'Tarifs' })
-  if (faq.value.length) list.push({ key: 'faq', label: 'Questions' })
+  if (content.value.faq.visible && faq.value.length) list.push({ key: 'faq', label: 'Questions' })
   list.push({ key: 'contact', label: 'Contact' })
   return list
 })

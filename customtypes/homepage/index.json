@@ -290,6 +290,20 @@
         "type": "Text",
         "config": { "label": "Lien Blog", "placeholder": "Blog" }
       }
+    },
+    "Réseaux sociaux": {
+      "instagram_coaching": {
+        "type": "Link",
+        "config": { "label": "Instagram coaching", "placeholder": "https://instagram.com/...", "allowTargetBlank": true }
+      },
+      "linkedin_coaching": {
+        "type": "Link",
+        "config": { "label": "LinkedIn coaching", "placeholder": "https://www.linkedin.com/in/...", "allowTargetBlank": true }
+      },
+      "instagram_dog": {
+        "type": "Link",
+        "config": { "label": "Instagram dog sitting", "placeholder": "https://instagram.com/...", "allowTargetBlank": true }
+      }
     }
   }
 }

@@ -31,7 +31,7 @@ useHead({
         description: 'Coach sportive sport-santé et dog sitter basée à Avensan, dans le Médoc. Coaching en visio et en présentiel dans le Médoc ; garde de chien, promenades et visites à Avensan, dans le Médoc, et à Le Bouscat.',
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/test-2.jpeg',
-        email: 'lila.chibane@outlook.com',
+        email: 'lila.chibane.pro@outlook.com',
         areaServed: [
           { '@type': 'City', name: 'Avensan' },
           { '@type': 'AdministrativeArea', name: 'Médoc' },
@@ -48,7 +48,12 @@ useHead({
         geo: { '@type': 'GeoCoordinates', latitude: 45.0167, longitude: -0.7833 },
         priceRange: '€€',
         serviceType: ['Coach sportif', 'Coach santé', 'Coaching en visio', 'Coaching en présentiel', 'Dog sitting', 'Garde de chien à domicile', 'Promenade de chien'],
-        sameAs: ['https://jamaistroptard.substack.com/'],
+        sameAs: [
+          'https://jamaistroptard.substack.com/',
+          'https://www.instagram.com/lila_chibane/',
+          'https://www.instagram.com/lilagardetonchien/',
+          'https://www.linkedin.com/in/lila-chibane-61704864/',
+        ],
       }),
     },
     {
@@ -72,9 +77,14 @@ useHead({
         jobTitle: 'Coach sportive et dog sitter',
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/test-2.jpeg',
-        email: 'lila.chibane@outlook.com',
+        email: 'lila.chibane.pro@outlook.com',
         knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Dog sitting', 'Garde de chien', 'Bien-être animal'],
-        sameAs: ['https://jamaistroptard.substack.com/'],
+        sameAs: [
+          'https://jamaistroptard.substack.com/',
+          'https://www.instagram.com/lila_chibane/',
+          'https://www.instagram.com/lilagardetonchien/',
+          'https://www.linkedin.com/in/lila-chibane-61704864/',
+        ],
       }),
     },
   ],
@@ -162,13 +172,37 @@ useHead({
         </div>
       </div>
 
-      <footer class="px-6 md:px-10 pb-[max(1rem,env(safe-area-inset-bottom))] md:pb-10 shrink-0 flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
-        <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">
-          <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
-        </a>
-        <div class="flex items-center gap-7 sm:gap-6">
-          <NuxtLink to="/blog" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">Blog</NuxtLink>
-          <a href="mailto:lila.chibane@outlook.com" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">lila.chibane@outlook.com</a>
+      <footer class="px-6 md:px-10 pb-[max(1rem,env(safe-area-inset-bottom))] md:pb-10 shrink-0 flex flex-col gap-3 md:gap-4">
+        <div v-if="content.socials.length" class="flex items-center justify-center md:justify-start gap-5">
+          <a
+            v-for="s in content.socials"
+            :key="s.key"
+            :href="s.url"
+            target="_blank"
+            rel="noopener"
+            :aria-label="s.label"
+            :title="s.label"
+            class="inline-flex items-center gap-1.5 text-white/60 hover:text-white transition-colors duration-300"
+          >
+            <svg v-if="s.type === 'instagram'" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+            </svg>
+            <svg v-else class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+              <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21H18.6v-5.55c0-1.32-.02-3.02-1.9-3.02-1.9 0-2.2 1.44-2.2 2.93V21H10z" />
+            </svg>
+            <span v-if="s.short" class="text-sm md:text-xs font-body font-light">{{ s.short }}</span>
+          </a>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
+          <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">
+            <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
+          </a>
+          <div class="flex items-center gap-7 sm:gap-6">
+            <NuxtLink to="/blog" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">Blog</NuxtLink>
+            <a href="mailto:lila.chibane.pro@outlook.com" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">lila.chibane.pro@outlook.com</a>
+          </div>
         </div>
       </footer>
     </div>
