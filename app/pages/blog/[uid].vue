@@ -161,8 +161,11 @@ useHead({
         <div class="bg-sand p-8 md:p-10">
           <div class="text-center sm:text-left">
             <h3 class="text-xl md:text-2xl font-display font-normal text-warm mb-2">Lila Chibane</h3>
+            <p class="text-sm font-body font-light text-gray leading-relaxed mb-3">
+              Coach sportive sport-santé pour femmes et dog sitter dans le Médoc. Un même fil : prendre soin du vivant, des humains comme des chiens.
+            </p>
             <p class="text-sm font-body font-light text-gray leading-relaxed mb-4">
-              Coach sportive, peintre et créatrice sonore. Trois pratiques, un même fil : prendre soin du corps, des sens et de ce qui nous relie au monde.
+              Découvre le <NuxtLink to="/coaching" class="text-bleu hover:underline">coaching sportif</NuxtLink> ou le <NuxtLink to="/dog-sitting" class="text-bleu hover:underline">dog sitting</NuxtLink>.
             </p>
             <a
               href="mailto:lila.chibane.pro@outlook.com"

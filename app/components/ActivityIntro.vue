@@ -35,7 +35,7 @@ defineProps({
       </div>
     </div>
     <div class="order-first md:order-none md:flex-1 h-48 sm:h-64 md:h-auto min-h-0 overflow-hidden">
-      <img :src="imageSrc" :alt="imageAlt" class="w-full h-full object-cover" :class="imagePosition" loading="eager" decoding="async" />
+      <img :src="imageSrc" :alt="imageAlt" class="w-full h-full object-cover" :class="imagePosition" fetchpriority="high" loading="eager" decoding="async" />
     </div>
   </section>
 </template>

@@ -29,21 +29,6 @@
          transition-colors duration-300 w-full;
 }
 
-.sparkle {
-  display: inline-block;
-  color: #1B3FA0;
-  animation: sparkle 2s ease-in-out infinite;
-  margin-right: 4px;
-}
-@keyframes sparkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sparkle { animation: none !important; }
-}
-
 /* Évite un flash pendant la transition de page (mood bleu) */
 body { background-color: #1B3FA0; }
 

@@ -10,7 +10,7 @@ useSeoMeta({
   ogImageAlt: 'Lila Chibane, coach sportive et dog sitter',
   ogImageWidth: 1200,
   ogImageHeight: 1800,
-  ogUrl: 'https://lilachibane.com',
+  ogUrl: 'https://lilachibane.com/',
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Lila Chibane · Coach sportive & dog sitter · Médoc et Le Bouscat',
@@ -34,6 +34,9 @@ useHead({
         email: 'lila.chibane.pro@outlook.com',
         areaServed: [
           { '@type': 'City', name: 'Avensan' },
+          { '@type': 'City', name: 'Castelnau-de-Médoc' },
+          { '@type': 'City', name: 'Moulis-en-Médoc' },
+          { '@type': 'City', name: 'Listrac-Médoc' },
           { '@type': 'AdministrativeArea', name: 'Médoc' },
           { '@type': 'City', name: 'Le Bouscat' },
           { '@type': 'Country', name: 'France' },
@@ -78,7 +81,12 @@ useHead({
         url: 'https://lilachibane.com',
         image: 'https://lilachibane.com/test-2.jpeg',
         email: 'lila.chibane.pro@outlook.com',
-        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Dog sitting', 'Garde de chien', 'Bien-être animal'],
+        knowsAbout: ['Activité physique adaptée', 'Régulation nerveuse', 'Coaching santé', 'Dog sitting', 'Garde de chien', 'Bien-être animal', 'Éthologie canine', 'Éducation positive'],
+        hasCredential: {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'certification',
+          name: "ACACED, attestation de connaissances pour les animaux de compagnie d'espèces domestiques",
+        },
         sameAs: [
           'https://jamaistroptard.substack.com/',
           'https://www.instagram.com/lila_chibane/',
@@ -96,7 +104,7 @@ useHead({
     <div class="relative overflow-hidden flex-1 min-h-0 md:flex-none">
       <img
         src="/test-2.jpeg"
-        alt="Lila Chibane"
+        alt="Lila Chibane, coach sportive et dog sitter dans le Médoc"
         width="1200"
         height="1800"
         fetchpriority="high"
@@ -172,8 +180,8 @@ useHead({
         </div>
       </div>
 
-      <footer class="px-6 md:px-10 pb-[max(1rem,env(safe-area-inset-bottom))] md:pb-10 shrink-0 flex flex-col gap-3 md:gap-4">
-        <div v-if="content.socials.length" class="flex items-center justify-center md:justify-start gap-5">
+      <footer class="px-6 md:px-10 pb-[max(1.25rem,env(safe-area-inset-bottom))] md:pb-10 shrink-0 flex flex-col items-center md:items-start gap-2 md:gap-3">
+        <div v-if="content.socials.length" class="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-0.5">
           <a
             v-for="s in content.socials"
             :key="s.key"
@@ -182,27 +190,30 @@ useHead({
             rel="noopener"
             :aria-label="s.label"
             :title="s.label"
-            class="inline-flex items-center gap-1.5 text-white/60 hover:text-white transition-colors duration-300"
+            class="footer-link"
           >
-            <svg v-if="s.type === 'instagram'" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg v-if="s.type === 'instagram'" class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
             </svg>
-            <svg v-else class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+            <svg v-else class="footer-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
               <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21H18.6v-5.55c0-1.32-.02-3.02-1.9-3.02-1.9 0-2.2 1.44-2.2 2.93V21H10z" />
             </svg>
-            <span v-if="s.short" class="text-sm md:text-xs font-body font-light">{{ s.short }}</span>
+            <span v-if="s.short">{{ s.short }}</span>
           </a>
         </div>
-        <div class="flex flex-col sm:flex-row items-center md:items-start md:justify-between gap-1 sm:gap-3">
-          <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">
-            <span class="sparkle">✦</span> {{ content.hero.ctaLabel }}
+
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-0.5">
+          <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="footer-link">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            {{ content.hero.ctaLabel }}
           </a>
-          <div class="flex items-center gap-7 sm:gap-6">
-            <NuxtLink to="/blog" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">Blog</NuxtLink>
-            <a href="mailto:lila.chibane.pro@outlook.com" class="text-sm md:text-xs font-body font-light text-white/60 hover:text-white transition-colors duration-300 py-2.5 md:py-0">lila.chibane.pro@outlook.com</a>
-          </div>
+          <NuxtLink to="/blog" class="footer-link">Blog</NuxtLink>
+          <a href="mailto:lila.chibane.pro@outlook.com" class="footer-link">lila.chibane.pro@outlook.com</a>
         </div>
       </footer>
     </div>
@@ -210,6 +221,15 @@ useHead({
 </template>
 
 <style scoped lang="postcss">
+.footer-link {
+  @apply inline-flex items-center gap-1.5 whitespace-nowrap py-2 md:py-1
+         text-sm md:text-xs font-body font-light text-white/60
+         hover:text-white transition-colors duration-300;
+}
+.footer-icon {
+  @apply w-[18px] h-[18px] md:w-4 md:h-4 shrink-0;
+}
+
 .door {
   @apply flex items-center justify-between gap-4 rounded-2xl px-5 py-4 md:px-7 md:py-6
          border border-white/20 bg-white/[0.03]

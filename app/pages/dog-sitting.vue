@@ -7,6 +7,26 @@ const dog = computed(() => content.value.dog)
 const faq = computed(() => faqFor('dog'))
 const selectedPrice = ref(null)
 
+const priceOffers = computed(() =>
+  dog.value.pricingSlices.flatMap((slice) => {
+    const category = slice.primary?.title || ''
+    return (slice.items || [])
+      .filter((it) => it.col1)
+      .map((it) => {
+        const match = String(it.col2 || '').match(/\d+(?:[.,]\d+)?/)
+        const num = match ? parseFloat(match[0].replace(',', '.')) : NaN
+        const offer = {
+          '@type': 'Offer',
+          name: [category, it.col1].filter(Boolean).join(' · '),
+          priceCurrency: 'EUR',
+          url: 'https://lilachibane.com/dog-sitting',
+        }
+        if (!Number.isNaN(num)) offer.price = String(num)
+        return offer
+      })
+  })
+)
+
 const panelDefs = computed(() => {
   const list = [
     { key: 'intro', label: 'Présentation' },
@@ -21,7 +41,7 @@ const labels = computed(() => panelDefs.value.map((p) => p.label))
 const idx = (key) => panelDefs.value.findIndex((p) => p.key === key)
 
 useSeoMeta({
-  title: 'Dog sitter Avensan, Médoc & Le Bouscat · garde de chien · Lila Chibane',
+  title: 'Garde de chien Médoc & Le Bouscat · dog sitter · Lila Chibane',
   description: "Garde de chien à domicile, promenades et visites à Avensan, dans le Médoc, et à Le Bouscat. À chaque chien son rythme, à chaque humain sa tranquillité.",
   ogTitle: 'Dog sitter · Médoc et Le Bouscat · Lila Chibane',
   ogDescription: 'Garde de chien à domicile, promenades et visites, dans le Médoc et à Le Bouscat.',
@@ -33,7 +53,7 @@ useSeoMeta({
   twitterImage: 'https://lilachibane.com/dog-sitting.jpg',
 })
 
-useHead({
+useHead(() => ({
   script: [
     {
       type: 'application/ld+json',
@@ -46,10 +66,15 @@ useHead({
         provider: { '@type': 'Person', '@id': 'https://lilachibane.com/#lila', name: 'Lila Chibane', url: 'https://lilachibane.com' },
         areaServed: [
           { '@type': 'City', name: 'Avensan' },
+          { '@type': 'City', name: 'Castelnau-de-Médoc' },
+          { '@type': 'City', name: 'Moulis-en-Médoc' },
+          { '@type': 'City', name: 'Listrac-Médoc' },
           { '@type': 'AdministrativeArea', name: 'Médoc' },
           { '@type': 'City', name: 'Le Bouscat' },
         ],
-        offers: { '@type': 'Offer', priceCurrency: 'EUR', url: 'https://lilachibane.com/dog-sitting' },
+        ...(priceOffers.value.length
+          ? { hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Tarifs dog sitting', itemListElement: priceOffers.value } }
+          : {}),
         url: 'https://lilachibane.com/dog-sitting',
       }),
     },
@@ -65,7 +90,7 @@ useHead({
       }),
     },
   ],
-})
+}))
 
 useHead(() => {
   if (!faq.value.length) return {}

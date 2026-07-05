@@ -3,17 +3,25 @@ import { asText, asLink } from '@prismicio/client'
 export const useSiteContent = async () => {
   const { data: homepage } = await useHomepage()
 
+  const igHandle = (u) => {
+    const m = (u || '').match(/instagram\.com\/([^/?#]+)/i)
+    return m ? `@${m[1]}` : 'Instagram'
+  }
+
   const content = computed(() => {
     const d = homepage.value?.data || {}
+    const igCoachingUrl = asLink(d.instagram_coaching) || 'https://www.instagram.com/lila_chibane/'
+    const linkedinUrl = asLink(d.linkedin_coaching) || 'https://www.linkedin.com/in/lila-chibane-61704864/'
+    const igDogUrl = asLink(d.instagram_dog) || 'https://www.instagram.com/lilagardetonchien/'
     return {
       brand: d.nav_brand_label || 'Lila Chibane',
       portal: {
         choiceLabel: d.portal_choice_label || 'Je viens pour…',
       },
       socials: [
-        { key: 'instagram-coaching', type: 'instagram', label: 'Instagram coaching', short: 'coaching', url: asLink(d.instagram_coaching) || 'https://www.instagram.com/lila_chibane/' },
-        { key: 'linkedin', type: 'linkedin', label: 'LinkedIn', short: '', url: asLink(d.linkedin_coaching) || 'https://www.linkedin.com/in/lila-chibane-61704864/' },
-        { key: 'instagram-dog', type: 'instagram', label: 'Instagram dog sitting', short: 'dog sitting', url: asLink(d.instagram_dog) || 'https://www.instagram.com/lilagardetonchien/' },
+        { key: 'instagram-coaching', type: 'instagram', label: 'Instagram coaching', short: igHandle(igCoachingUrl), url: igCoachingUrl },
+        { key: 'linkedin', type: 'linkedin', label: 'LinkedIn', short: 'LinkedIn', url: linkedinUrl },
+        { key: 'instagram-dog', type: 'instagram', label: 'Instagram dog sitting', short: igHandle(igDogUrl), url: igDogUrl },
       ].filter((s) => s.url),
       hero: {
         name: d.hero_name || "Je m'appelle Lila.",
@@ -80,6 +88,7 @@ export const useSiteContent = async () => {
 
   const faqFor = (activity) =>
     content.value.faq.items.filter((it) => {
+      if (!it.question?.trim() || !it.answer?.trim()) return false
       const c = it.category || 'les deux'
       return c === 'les deux' || c === activity
     })
