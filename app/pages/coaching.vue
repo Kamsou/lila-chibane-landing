@@ -139,10 +139,21 @@ useHead(() => {
         </section>
 
         <section v-show="active === panels.length - 1" class="panel">
-          <div class="max-w-lg mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl font-display font-normal text-white leading-[1.1] mb-2 text-center">{{ content.contact.title }}</h2>
-            <p class="text-sm font-body font-light text-white/75 mb-6 text-center leading-relaxed max-w-md mx-auto">{{ content.contact.intro }}</p>
-            <ContactForm :contact="content.contact" />
+          <div class="max-w-md mx-auto w-full text-center">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-3">{{ content.contact.title }}</h2>
+            <p class="text-sm md:text-base font-body font-light text-white/75 mb-8 leading-relaxed">
+              Réponds à quelques questions pour préparer un premier échange vraiment utile pour toi.
+            </p>
+
+            <NuxtLink to="/feuille-de-route" class="btn-light inline-flex items-center justify-center gap-2 group">
+              Remplir la feuille de route
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </NuxtLink>
+
+            <p class="text-sm font-body font-light text-white/55 mt-7">
+              ou écris-moi à
+              <a href="mailto:lila.chibane.pro@outlook.com" class="text-white/80 hover:text-white underline underline-offset-2 transition-colors duration-300">lila.chibane.pro@outlook.com</a>
+            </p>
           </div>
         </section>
       </template>

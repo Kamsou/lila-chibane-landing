@@ -16,9 +16,14 @@ export default defineNuxtConfig({
   site: {
     url: 'https://lilachibane.com',
   },
+  runtimeConfig: {
+    formspreeId: 'movwedpw',
+    notionToken: '',
+    notionDatabaseId: '',
+  },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/preview'],
+    exclude: ['/preview', '/feuille-de-route'],
   },
   prismic: {
     endpoint: 'lila-chibane',
