@@ -100,11 +100,11 @@ useHead({
       </div>
 
       <!-- Featured Image -->
-      <div v-if="article.data.featured_image?.url" class="w-full max-w-5xl mx-auto px-6 md:px-10 mb-10 md:mb-14 flex justify-center">
+      <div v-if="article.data.featured_image?.url" class="w-full max-w-3xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
         <img
           :src="article.data.featured_image.url"
           :alt="article.data.featured_image.alt || article.data.title"
-          class="max-h-[26rem] md:max-h-[36rem] max-w-full w-auto rounded-2xl"
+          class="block max-h-[26rem] md:max-h-[36rem] max-w-full w-auto"
         />
       </div>
 
@@ -236,7 +236,7 @@ useHead({
 }
 
 :deep(.article-content img) {
-  @apply my-8 w-full h-auto object-contain rounded-xl;
+  @apply my-8 w-full h-auto object-contain;
 }
 
 :deep(.article-content code) {
