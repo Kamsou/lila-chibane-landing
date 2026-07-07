@@ -31,6 +31,7 @@ const posts = [
     uid: 'reprendre-le-sport-en-douceur',
     title: 'Reprendre le sport après une longue pause, en douceur',
     excerpt: 'Pas besoin de tout révolutionner pour se remettre en mouvement. Voici comment recommencer sans pression, à ton rythme.',
+    category: 'coaching',
     publication_date: '2026-06-04',
     reading_time: 4,
     content: [
@@ -50,6 +51,7 @@ const posts = [
     uid: 'preparer-son-chien-a-une-garde',
     title: 'Préparer son chien à une garde sereine',
     excerpt: 'Quelques gestes simples pour que ton chien vive ton absence en confiance, et que tu partes l’esprit tranquille.',
+    category: 'dog',
     publication_date: '2026-05-20',
     reading_time: 3,
     content: [
@@ -93,6 +95,7 @@ for (const post of posts) {
       data: {
         title: post.title,
         excerpt: post.excerpt,
+        category: post.category,
         publication_date: post.publication_date,
         reading_time: post.reading_time,
         content: post.content,

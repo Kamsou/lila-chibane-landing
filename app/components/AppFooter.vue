@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
   simple: { type: Boolean, default: false },
+  blue: { type: Boolean, default: false },
 })
 
 const { navLinks: footerLinks, homepage } = await useNavLinks()
@@ -61,7 +62,7 @@ const tagline = computed(() => {
   </footer>
 
   <!-- Footer simple -->
-  <footer v-else class="bg-warm py-14 md:py-16 px-6 md:px-10">
+  <footer v-else class="py-14 md:py-16 px-6 md:px-10" :class="blue ? 'bg-bleu border-t border-white/10' : 'bg-warm'">
     <div class="max-w-5xl mx-auto flex flex-col items-center gap-3">
       <p class="font-display text-lg text-white font-normal">Lila Chibane</p>
       <p class="text-xs font-body text-white/30">&copy; {{ new Date().getFullYear() }} Lila Chibane</p>

@@ -27,14 +27,19 @@
           "placeholder": "Courte description de l'article (sera affiché dans la liste des articles)"
         }
       },
+      "category": {
+        "type": "Select",
+        "config": {
+          "label": "Catégorie",
+          "options": ["coaching", "dog", "les deux"],
+          "default_value": "les deux"
+        }
+      },
       "featured_image": {
         "type": "Image",
         "config": {
-          "label": "Image à la une",
-          "constraint": {
-            "width": 1200,
-            "height": 675
-          },
+          "label": "Image à la une (n'importe quel format, elle s'affiche en entier)",
+          "constraint": {},
           "thumbnails": []
         }
       },

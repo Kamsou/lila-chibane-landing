@@ -1,12 +1,18 @@
 <script setup>
 const route = useRoute()
 
-const allLinks = [
+const blogTheme = computed(() => {
+  if (route.path === '/coaching') return 'coaching'
+  if (route.path === '/dog-sitting') return 'dog'
+  return null
+})
+
+const allLinks = computed(() => [
   { label: 'Coaching', to: '/coaching' },
   { label: 'Dog sitting', to: '/dog-sitting' },
-  { label: 'Blog', to: '/blog' },
-]
-const links = computed(() => allLinks.filter((l) => l.to !== route.path))
+  { label: 'Blog', to: blogTheme.value ? { path: '/blog', query: { theme: blogTheme.value } } : '/blog' },
+])
+const links = computed(() => allLinks.value.filter((l) => l.to !== route.path))
 </script>
 
 <template>
@@ -17,7 +23,7 @@ const links = computed(() => allLinks.filter((l) => l.to !== route.path))
         <span class="font-display text-lg font-normal text-white tracking-tight">Lila Chibane</span>
       </NuxtLink>
       <nav class="flex items-center gap-6 sm:gap-8 md:gap-10">
-        <NuxtLink v-for="l in links" :key="l.to" :to="l.to" class="nav-link">
+        <NuxtLink v-for="l in links" :key="l.label" :to="l.to" class="nav-link">
           {{ l.label }}
         </NuxtLink>
       </nav>
