@@ -116,6 +116,30 @@
       "coaching_cta_caption": {
         "type": "Text",
         "config": { "label": "Sous-texte du bouton", "placeholder": "30 minutes · gratuit · en visio..." }
+      },
+      "coaching_testimonials": {
+        "type": "Group",
+        "config": {
+          "label": "Témoignages",
+          "fields": {
+            "highlight": {
+              "type": "Text",
+              "config": { "label": "Accroche (phrase courte mise en avant)", "placeholder": "Elle a vraiment écouté qui je suis." }
+            },
+            "quote": {
+              "type": "StructuredText",
+              "config": { "label": "Témoignage complet", "placeholder": "Le texte du témoignage (un ou plusieurs paragraphes)", "multi": "paragraph,strong,em" }
+            },
+            "author": {
+              "type": "Text",
+              "config": { "label": "Prénom", "placeholder": "Raquel" }
+            },
+            "detail": {
+              "type": "Text",
+              "config": { "label": "Détail (âge · date)", "placeholder": "51 ans · Juin 2026" }
+            }
+          }
+        }
       }
     },
     "Dog sitting": {

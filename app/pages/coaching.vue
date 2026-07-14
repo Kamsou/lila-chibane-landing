@@ -3,12 +3,25 @@ const { content, faqFor } = await useSiteContent()
 
 const coaching = computed(() => content.value.coaching)
 const faq = computed(() => faqFor('coaching'))
-const panels = computed(() => {
-  const list = ['Présentation', 'Approche']
-  if (content.value.faq.visible && faq.value.length) list.push('Questions')
-  list.push('Contact')
+const testimonials = computed(() => coaching.value.testimonials || [])
+const openTestimonials = reactive(new Set())
+const toggleTestimonial = (i) => {
+  if (openTestimonials.has(i)) openTestimonials.delete(i)
+  else openTestimonials.add(i)
+}
+
+const panelDefs = computed(() => {
+  const list = [
+    { key: 'intro', label: 'Présentation' },
+    { key: 'approche', label: 'Approche' },
+  ]
+  if (testimonials.value.length) list.push({ key: 'temoignages', label: 'Témoignages' })
+  if (content.value.faq.visible && faq.value.length) list.push({ key: 'faq', label: 'Questions' })
+  list.push({ key: 'contact', label: 'Contact' })
   return list
 })
+const labels = computed(() => panelDefs.value.map((p) => p.label))
+const idx = (key) => panelDefs.value.findIndex((p) => p.key === key)
 
 useSeoMeta({
   title: 'Coach sportive sport-santé · visio & Médoc · Lila Chibane',
@@ -23,7 +36,7 @@ useSeoMeta({
   twitterImage: 'https://lilachibane.com/coaching-sportif.jpeg',
 })
 
-useHead({
+useHead(() => ({
   script: [
     {
       type: 'application/ld+json',
@@ -50,6 +63,15 @@ useHead({
           priceCurrency: 'EUR',
           url: 'https://calendly.com/lilacoach/bilanpersonnalise',
         },
+        ...(testimonials.value.length
+          ? {
+              review: testimonials.value.map((t) => ({
+                '@type': 'Review',
+                author: { '@type': 'Person', name: t.author },
+                reviewBody: t.quote.join(' '),
+              })),
+            }
+          : {}),
         url: 'https://lilachibane.com/coaching',
       }),
     },
@@ -65,7 +87,7 @@ useHead({
       }),
     },
   ],
-})
+}))
 
 useHead(() => {
   if (!faq.value.length) return {}
@@ -92,10 +114,10 @@ useHead(() => {
   <div class="bg-bleu text-white">
     <ActivityHeader />
 
-    <PanelDeck :labels="panels">
+    <PanelDeck :labels="labels">
       <template #default="{ active }">
         <ActivityIntro
-          v-show="active === 0"
+          v-show="active === idx('intro')"
           :title="coaching.title"
           :intro="coaching.intro"
           :caption="coaching.ctaCaption"
@@ -106,7 +128,7 @@ useHead(() => {
           image-position="object-center"
         />
 
-        <section v-show="active === 1" class="panel">
+        <section v-show="active === idx('approche')" class="panel">
           <div class="max-w-4xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-12">{{ content.coaching.approachTitle }}</h2>
             <div class="grid sm:grid-cols-3 gap-5 md:gap-6">
@@ -123,7 +145,63 @@ useHead(() => {
           </div>
         </section>
 
-        <section v-if="faq.length" v-show="active === 2" class="panel">
+        <section v-if="testimonials.length" v-show="active === idx('temoignages')" class="panel">
+          <div class="max-w-4xl mx-auto w-full flex-1 min-h-0 flex flex-col">
+            <h2 class="shrink-0 text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">Ce qu'elles en disent</h2>
+            <div class="flex-1 min-h-0 overflow-y-auto pr-1 -mr-1">
+              <div class="columns-1 lg:columns-2 gap-5">
+                <figure
+                  v-for="(t, i) in testimonials"
+                  :key="`t-${i}`"
+                  class="card-in break-inside-avoid mb-5 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.09] hover:shadow-lg hover:shadow-black/20"
+                  :style="{ animationDelay: `${i * 100}ms` }"
+                >
+                  <blockquote>
+                    <p class="font-display text-lg md:text-xl font-normal text-white leading-snug">« {{ t.highlight }} »</p>
+                  </blockquote>
+                  <figcaption class="mt-5 flex items-center gap-3">
+                    <span class="testi-avatar">{{ t.author.charAt(0) }}</span>
+                    <span class="leading-tight">
+                      <span class="block text-sm font-body font-normal text-white">{{ t.author }}</span>
+                      <span v-if="t.detail" class="block text-xs font-body text-white/45">{{ t.detail }}</span>
+                    </span>
+                  </figcaption>
+                  <div v-if="t.quote.length" class="mt-4">
+                    <button
+                      type="button"
+                      class="inline-flex items-center gap-1.5 text-sm font-body text-white/60 hover:text-white transition-colors duration-300"
+                      :aria-expanded="openTestimonials.has(i)"
+                      @click="toggleTestimonial(i)"
+                    >
+                      {{ openTestimonials.has(i) ? 'Réduire' : 'Lire le témoignage' }}
+                      <svg class="w-3.5 h-3.5 transition-transform duration-300" :class="{ 'rotate-180': openTestimonials.has(i) }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                    </button>
+                    <div
+                      class="grid transition-all duration-300 ease-out motion-reduce:transition-none"
+                      :class="openTestimonials.has(i) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+                    >
+                      <div class="overflow-hidden">
+                        <div class="pt-3 space-y-3">
+                          <p v-for="(para, j) in t.quote" :key="j" class="text-sm font-body font-light text-white/80 leading-relaxed">{{ para }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+            </div>
+
+            <div class="shrink-0 border-t border-white/10 pt-5 text-center">
+              <NuxtLink to="/feuille-de-route" class="group inline-flex items-center gap-1.5 text-sm font-body text-white/70 hover:text-white transition-colors duration-300">
+                Toi aussi, prête à t'y mettre&nbsp;?
+                <span class="underline underline-offset-2">Remplir la feuille de route</span>
+                <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </NuxtLink>
+            </div>
+          </div>
+        </section>
+
+        <section v-if="faq.length" v-show="active === idx('faq')" class="panel">
           <div class="max-w-2xl mx-auto w-full">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
             <div class="divide-y divide-white/15 max-h-[55vh] overflow-y-auto">
@@ -138,7 +216,7 @@ useHead(() => {
           </div>
         </section>
 
-        <section v-show="active === panels.length - 1" class="panel">
+        <section v-show="active === idx('contact')" class="panel">
           <div class="max-w-md mx-auto w-full text-center">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-3">{{ content.contact.title }}</h2>
             <p class="text-sm md:text-base font-body font-light text-white/75 mb-8 leading-relaxed">
@@ -166,6 +244,11 @@ useHead(() => {
   @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] md:py-12;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
+
+.testi-avatar {
+  @apply w-9 h-9 shrink-0 rounded-full bg-white/10 flex items-center justify-center
+         font-display text-white text-sm select-none;
+}
 
 .card-in {
   opacity: 0;

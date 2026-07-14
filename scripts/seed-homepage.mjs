@@ -58,6 +58,36 @@ const data = {
   coaching_cta_label: 'Réserver un bilan gratuit',
   coaching_cta_url: webLink('https://calendly.com/lilacoach/bilanpersonnalise'),
   coaching_cta_caption: '30 minutes · gratuit · en visio · sans engagement',
+  coaching_testimonials: [
+    {
+      author: 'Raquel',
+      detail: '51 ans · Juin 2026',
+      highlight: "Elle a vraiment écouté qui je suis. Je recommande sans hésiter.",
+      quote: [
+        { type: 'paragraph', text: "J'arrive avec une bonne condition physique, une pratique régulière, des connaissances solides en yoga, biomécanique et hormones. Et une perte de poids verrouillée.", spans: [] },
+        { type: 'paragraph', text: "Un appel avec Lila. Un protocole clair. Des ajustements alimentaires et un programme renfo/cardio taillé à ma ménopause, mon mode de vie, ma personnalité. Pas une méthode standard sortie d'un tiroir : elle a vraiment écouté qui je suis. Ce que j'ai apprécié : la clarté, l'absence totale de blabla, et des solutions vraiment actionnables. Même quand on a des connaissances, on a parfois besoin d'une vraie expertise extérieure pour débloquer ce qui est coincé.", spans: [] },
+        { type: 'paragraph', text: "Lila est aussi quelqu'un de curieux et d'une grande gentillesse. Ça change tout dans le type d'accompagnement qu'elle propose. Je recommande sans hésiter.", spans: [] },
+      ],
+    },
+    {
+      author: 'Sabrina',
+      detail: '38 ans · Mai 2026',
+      highlight: "On n'a jamais fait deux fois la même séance, ça maintient l'envie.",
+      quote: [
+        { type: 'paragraph', text: "J'avais déjà pris des abonnements en salle de sport et j'arrivais à être assidue les premières semaines. Mais ensuite je payais des mois entiers pour rien. J'avais aussi fait des vidéos YouTube, mais ce n'était pas adapté à mon niveau. Quand je t'ai rencontrée via Bouge Ta Boite, il y a eu un vrai feeling, quelque chose de naturel et de bienveillant dans ta façon d'être. Et le fait de pouvoir être coachée depuis chez moi, sans contrainte de déplacement, c'était idéal. L'approche était complète : sport, nutrition, mental.", spans: [] },
+        { type: 'paragraph', text: "J'ai adoré ton programme. Avoir un rendez-vous fixé avec toi m'a obligée à ne plus reporter. Avant, le sport était toujours repoussé au lendemain, voire plus tard. Aujourd'hui j'organise mon travail pour avoir plus de temps pour le sport. Pendant les séances, tu as su t'adapter à moi, à mon niveau, mon humeur, mon cycle du moment, sans jamais me mettre en difficulté ni me faire sentir en échec. Mes habitudes alimentaires ont aussi changé. Ce qui m'a le plus aidée, ce sont tes encouragements sans faille et la diversité des séances : on n'a jamais fait deux fois la même, et ça maintient vraiment l'envie et la curiosité.", spans: [] },
+      ],
+    },
+    {
+      author: 'Caroline',
+      detail: '48 ans · Juillet 2025',
+      highlight: "Après 8 ans d'arrêt, Lila a été un véritable cadeau.",
+      quote: [
+        { type: 'paragraph', text: "Après 8 ans d'arrêt, Lila a été un véritable cadeau. Cette reprise n'aurait jamais été aussi facile et légère sans elle. Rendez-vous pris, impossible de se débiner : j'étais engagée vis-à-vis d'elle. À chaque séance, un parcours varié et du challenge. On a travaillé plusieurs parties du corps à chaque fois, avec un tapis, un ballon, des lestes et des élastiques. Elle ne m'a jamais lâchée, même fatiguée : tout au plus elle adaptait. J'ai vu ma progression : en un mois, à raison de 2 séances par semaine, j'ai perdu 1,5 kg et je me suis affinée. Mon mental tient bon.", spans: [] },
+        { type: 'paragraph', text: "Même si cet accompagnement d'un mois est terminé, elle est toujours là dans un coin de ma tête : je me sens encore engagée, je l'entends m'encourager, je ne suis pas seule. Et je sais déjà que si un jour je décroche et que j'ai besoin de soutien, ou de changement dans mon programme, c'est elle que j'appellerai. Elle est vraiment dans son élément, solaire, joyeuse. Grâce à elle, j'ai compris l'importance d'avoir un coach sportif pour traverser certains passages. Je vous la conseille à 10000 % !", spans: [] },
+      ],
+    },
+  ],
 
   // Dog sitting
   dog_visible: true,
