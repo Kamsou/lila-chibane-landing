@@ -10,7 +10,6 @@ const tagline = computed(() => {
   const d = homepage.value?.data || {}
   return [
     { key: 'coaching', label: 'Coach sportive' },
-    { key: 'dog', label: 'Dog sitter' },
   ]
     .filter((r) => isSectionVisible(d, r.key))
     .map((r) => r.label)

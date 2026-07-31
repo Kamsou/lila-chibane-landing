@@ -23,7 +23,11 @@ defineProps({
         <p v-if="intro" class="text-base sm:text-lg font-body font-light text-white/75 leading-relaxed mb-8 md:mb-10">
           {{ intro }}
         </p>
-        <a v-if="ctaLabel" :href="ctaUrl" target="_blank" rel="noopener" class="btn-light inline-block">{{ ctaLabel }}</a>
+        <NuxtLink v-if="ctaLabel && ctaUrl.startsWith('/')" :to="ctaUrl" class="btn-light inline-flex items-center gap-2 group">
+          {{ ctaLabel }}
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </NuxtLink>
+        <a v-else-if="ctaLabel" :href="ctaUrl" target="_blank" rel="noopener" class="btn-light inline-block">{{ ctaLabel }}</a>
         <p v-if="caption" class="text-xs font-body text-white/50 tracking-wide" :class="{ 'mt-4': ctaLabel }">{{ caption }}</p>
 
         <div v-if="approachParagraphs.length" class="mt-7 md:mt-8 pt-6 border-t border-white/10">

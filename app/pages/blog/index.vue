@@ -10,20 +10,9 @@ const { data: articles } = await useAsyncData('blog-posts', async () => {
   return response;
 });
 
-const route = useRoute()
-const theme = computed(() => {
-  const t = route.query.theme
-  return t === 'coaching' || t === 'dog' ? t : null
-})
-const filtered = computed(() => {
-  const list = articles.value || []
-  if (!theme.value) return list
-  return list.filter((a) => {
-    const c = a.data.category || 'les deux'
-    return c === 'les deux' || c === theme.value
-  })
-})
-const themeLabel = computed(() => (theme.value === 'coaching' ? 'coaching sportif' : theme.value === 'dog' ? 'dog sitting' : ''))
+// Blog recentré coaching : on masque les articles catégorisés "dog"
+// (ils restent dans Prismic pour le futur site dog sitting dédié).
+const filtered = computed(() => (articles.value || []).filter((a) => (a.data.category || 'les deux') !== 'dog'))
 
 useSeoMeta({
   title: 'Blog sport-santé & bien-être · Lila Chibane',
@@ -86,7 +75,7 @@ const formatDate = (dateString) => {
     <main class="pt-28 md:pt-36 pb-20 md:pb-32">
       <div class="max-w-5xl mx-auto px-6 md:px-10">
         <!-- Header -->
-        <div class="mb-8 md:mb-10">
+        <div class="mb-10 md:mb-14">
           <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block">Blog</span>
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-white leading-[1.1] mb-5 md:mb-6">
             Conseils et réflexions
@@ -94,13 +83,6 @@ const formatDate = (dateString) => {
           <p class="text-base sm:text-lg font-body font-light text-white/70 max-w-2xl leading-relaxed">
             Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.
           </p>
-        </div>
-
-        <!-- Filtres -->
-        <div class="flex flex-wrap gap-2 mb-10 md:mb-14">
-          <NuxtLink to="/blog" class="blog-tab" :class="{ 'blog-tab--active': !theme }">Tout</NuxtLink>
-          <NuxtLink :to="{ path: '/blog', query: { theme: 'coaching' } }" class="blog-tab" :class="{ 'blog-tab--active': theme === 'coaching' }">Coaching</NuxtLink>
-          <NuxtLink :to="{ path: '/blog', query: { theme: 'dog' } }" class="blog-tab" :class="{ 'blog-tab--active': theme === 'dog' }">Dog sitting</NuxtLink>
         </div>
 
         <!-- Articles (masonry: images entières, hauteurs variables) -->
@@ -145,16 +127,9 @@ const formatDate = (dateString) => {
 
         <!-- Empty State -->
         <div v-else class="py-20">
-          <template v-if="theme">
-            <h2 class="text-2xl font-display font-normal text-white mb-3">Pas encore d'article {{ themeLabel }}</h2>
-            <p class="text-base font-body font-light text-white/70 mb-8">Les premiers arrivent bientôt.</p>
-            <NuxtLink to="/blog" class="btn-light inline-block">Voir tous les articles</NuxtLink>
-          </template>
-          <template v-else>
-            <h2 class="text-2xl font-display font-normal text-white mb-3">Aucun article pour le moment</h2>
-            <p class="text-base font-body font-light text-white/70 mb-8">Les premiers articles arrivent bientôt !</p>
-            <NuxtLink to="/" class="btn-light inline-block">Retour à l'accueil</NuxtLink>
-          </template>
+          <h2 class="text-2xl font-display font-normal text-white mb-3">Aucun article pour le moment</h2>
+          <p class="text-base font-body font-light text-white/70 mb-8">Les premiers articles arrivent bientôt !</p>
+          <NuxtLink to="/" class="btn-light inline-block">Retour à l'accueil</NuxtLink>
         </div>
       </div>
     </main>
@@ -164,15 +139,6 @@ const formatDate = (dateString) => {
 </template>
 
 <style scoped lang="postcss">
-.blog-tab {
-  @apply rounded-full border border-white/20 bg-white/[0.04] px-4 py-2
-         text-sm font-body font-light text-white/70
-         hover:bg-white/10 hover:text-white transition-colors duration-200;
-}
-.blog-tab--active {
-  @apply bg-white text-bleu border-white font-normal hover:bg-white hover:text-bleu;
-}
-
 .line-clamp-3 {
   display: -webkit-box;
   line-clamp: 3;

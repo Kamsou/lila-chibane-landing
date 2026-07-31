@@ -1,18 +1,8 @@
 <script setup>
 const route = useRoute()
 
-const blogTheme = computed(() => {
-  if (route.path === '/coaching') return 'coaching'
-  if (route.path === '/dog-sitting') return 'dog'
-  return null
-})
-
-const allLinks = computed(() => [
-  { label: 'Coaching', to: '/coaching' },
-  { label: 'Dog sitting', to: '/dog-sitting' },
-  { label: 'Blog', to: blogTheme.value ? { path: '/blog', query: { theme: blogTheme.value } } : '/blog' },
-])
-const links = computed(() => allLinks.value.filter((l) => l.to !== route.path))
+const allLinks = [{ label: 'Blog', to: '/blog' }]
+const links = computed(() => allLinks.filter((l) => l.to !== route.path))
 </script>
 
 <template>

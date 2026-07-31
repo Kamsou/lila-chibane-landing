@@ -26,6 +26,20 @@ const onKey = (e) => {
 }
 onMounted(() => window.addEventListener('keydown', onKey))
 onUnmounted(() => window.removeEventListener('keydown', onKey))
+
+let touchX = 0
+let touchY = 0
+const onTouchStart = (e) => {
+  touchX = e.changedTouches[0].clientX
+  touchY = e.changedTouches[0].clientY
+}
+const onTouchEnd = (e) => {
+  const dx = e.changedTouches[0].clientX - touchX
+  const dy = e.changedTouches[0].clientY - touchY
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+    go(active.value + (dx < 0 ? 1 : -1))
+  }
+}
 </script>
 
 <template>
@@ -43,37 +57,38 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
             :class="active === i ? 'tab--active' : ''"
             @click="go(i)"
           >
-            <span class="tab-num hidden sm:inline-block">{{ String(i + 1).padStart(2, '0') }}</span>
             {{ label }}
           </button>
         </div>
       </div>
     </div>
 
-    <div class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col">
+    <div
+      class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col"
+      @touchstart.passive="onTouchStart"
+      @touchend.passive="onTouchEnd"
+    >
       <Transition :name="transitionName" mode="out-in">
         <div :key="active" class="flex-1 min-h-0 flex flex-col">
           <slot :active="active" />
         </div>
       </Transition>
     </div>
+
+    <p class="md:hidden shrink-0 pb-[max(0.75rem,env(safe-area-inset-bottom))] text-center text-[11px] font-body font-light text-white/35">
+      Glisse ou touche un onglet pour naviguer
+    </p>
   </div>
 </template>
 
 <style scoped>
 .tab {
-  @apply flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-body whitespace-nowrap
+  @apply flex items-center px-3.5 sm:px-5 py-2.5 rounded-full text-sm font-body whitespace-nowrap
          text-white/60 hover:text-white transition-all duration-300
          focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40;
 }
 .tab--active {
   @apply bg-white text-bleu shadow-sm hover:text-bleu;
-}
-.tab-num {
-  @apply text-[10px] tracking-wider tabular-nums opacity-50;
-}
-.tab--active .tab-num {
-  @apply opacity-60;
 }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

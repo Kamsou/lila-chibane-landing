@@ -16,6 +16,10 @@ export default defineNuxtConfig({
   site: {
     url: 'https://lilachibane.com',
   },
+  routeRules: {
+    // Le coaching est désormais la page d'accueil.
+    '/coaching': { redirect: { to: '/', statusCode: 301 } },
+  },
   runtimeConfig: {
     formspreeId: 'movwedpw',
     notionToken: '',

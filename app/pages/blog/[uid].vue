@@ -160,10 +160,10 @@ useHead({
           <div class="text-center sm:text-left">
             <h3 class="text-xl md:text-2xl font-display font-normal text-white mb-2">Lila Chibane</h3>
             <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-3">
-              Coach sportive sport-santé pour femmes et dog sitter dans le Médoc. Un même fil : prendre soin du vivant, des humains comme des chiens.
+              Coach sportive sport-santé pour femmes, en visio partout en France et en présentiel dans le Médoc. Reprendre une activité physique en douceur, à ton rythme, sans pression.
             </p>
             <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-4">
-              Découvre le <NuxtLink to="/coaching" class="text-white underline underline-offset-2 hover:text-white/70">coaching sportif</NuxtLink> ou le <NuxtLink to="/dog-sitting" class="text-white underline underline-offset-2 hover:text-white/70">dog sitting</NuxtLink>.
+              Découvre le <NuxtLink to="/" class="text-white underline underline-offset-2 hover:text-white/70">coaching sportif</NuxtLink>.
             </p>
             <a
               href="mailto:lila.chibane.pro@outlook.com"

@@ -101,22 +101,6 @@
           }
         }
       },
-      "coaching_cta_label": {
-        "type": "Text",
-        "config": { "label": "Texte du bouton", "placeholder": "Réserver un bilan gratuit" }
-      },
-      "coaching_cta_url": {
-        "type": "Link",
-        "config": {
-          "label": "Lien du bouton (Calendly)",
-          "placeholder": "https://calendly.com/...",
-          "allowTargetBlank": true
-        }
-      },
-      "coaching_cta_caption": {
-        "type": "Text",
-        "config": { "label": "Sous-texte du bouton", "placeholder": "30 minutes · gratuit · en visio..." }
-      },
       "coaching_testimonials": {
         "type": "Group",
         "config": {

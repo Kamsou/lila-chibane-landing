@@ -47,9 +47,6 @@ export const useSiteContent = async () => {
           { title: 'Régulation nerveuse', text: "Des outils pour sortir du mode « survie » et retrouver un quotidien plus apaisé, moins de stress, moins d'anxiété." },
           { title: 'Alimentation soutenante', text: "Pas de régime, pas de restriction. Remettre de la conscience et du plaisir dans l'assiette pour nourrir ton énergie." },
         ]),
-        ctaLabel: d.coaching_cta_label || 'Réserver un bilan gratuit',
-        ctaUrl: asLink(d.coaching_cta_url) || 'https://calendly.com/lilacoach/bilanpersonnalise',
-        ctaCaption: d.coaching_cta_caption || '30 minutes · gratuit · en visio · sans engagement',
         testimonials: (d.coaching_testimonials?.length
           ? d.coaching_testimonials.map((t) => {
               const quote = t.quote?.length ? t.quote.map((b) => b.text).filter(Boolean) : []

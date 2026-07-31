@@ -85,9 +85,8 @@ Chaque chien à son rythme, chaque humain l'esprit tranquille. Lila a obtenu l'A
 
 ## Pages du site
 
-- https://lilachibane.com - Accueil (choisir entre coaching et dog sitting)
-- https://lilachibane.com/coaching - Page coaching sportif (approche, FAQ, contact)
-- https://lilachibane.com/dog-sitting - Page dog sitting (prestations, tarifs, FAQ, contact)
+- https://lilachibane.com - Accueil : coaching sportif (approche, témoignages, questions, contact)
+- https://lilachibane.com/dog-sitting - Page dog sitting (prestations, tarifs, questions, contact)
 - https://lilachibane.com/blog - Blog : santé, forme et bien-être
 - https://lilachibane.com/quiz - Quiz énergie pour découvrir ton profil et recevoir des conseils personnalisés
 `
