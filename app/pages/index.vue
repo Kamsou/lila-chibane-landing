@@ -132,15 +132,6 @@ useHead(() => ({
           priceCurrency: 'EUR',
           url: 'https://calendly.com/lilacoach/bilanpersonnalise',
         },
-        ...(testimonials.value.length
-          ? {
-              review: testimonials.value.map((t) => ({
-                '@type': 'Review',
-                author: { '@type': 'Person', name: t.author },
-                reviewBody: t.quote.join(' '),
-              })),
-            }
-          : {}),
         url: 'https://lilachibane.com/',
       }),
     },
