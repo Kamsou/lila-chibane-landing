@@ -46,3 +46,34 @@ body { background-color: #1B3FA0; }
   .page-enter-from,
   .page-leave-to { transform: none; }
 }
+
+/* Apparition au scroll (v-reveal). Masqué seulement quand le JS tourne. */
+.js [data-reveal] {
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal]:not(.is-in) { opacity: 0; }
+.js [data-reveal='up']:not(.is-in) { transform: translateY(32px); }
+.js [data-reveal='scale']:not(.is-in) { transform: scale(0.94); }
+.js [data-reveal='blur']:not(.is-in) { filter: blur(10px); transform: translateY(12px); }
+.js [data-reveal='left']:not(.is-in) { transform: translateX(-40px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { transition: none; }
+  .js [data-reveal]:not(.is-in) { opacity: 1; transform: none; filter: none; }
+}
+/* "draw" : l'élément reste visible, seuls ses tracés s'animent */
+.js [data-reveal='draw']:not(.is-in) { opacity: 1; }
+
+/* Gros bouton pilule avec flèche ronde */
+.btn-big {
+  @apply inline-flex items-center gap-4 h-16 pl-7 pr-2 rounded-full bg-paper text-ink text-[15px] font-body font-medium
+         hover:bg-white transition-colors duration-300;
+  box-shadow: 0 20px 40px -18px rgba(10, 12, 30, 0.6);
+}
+.btn-big-arrow {
+  @apply w-12 h-12 rounded-full bg-terra text-paper grid place-items-center transition-transform duration-500;
+}
+.btn-big:hover .btn-big-arrow { transform: rotate(-45deg); }
+.btn-big--ink { @apply bg-ink text-paper hover:bg-black; }
+.btn-big--ink .btn-big-arrow { @apply bg-paper text-ink; }

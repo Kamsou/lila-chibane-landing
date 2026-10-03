@@ -56,6 +56,16 @@ useHead({
   ],
 })
 
+const covers = ['bg-terra', 'bg-mat', 'bg-bleu']
+const featured = computed(() => filtered.value[0])
+const rest = computed(() => filtered.value.slice(1))
+
+const { content } = await useSiteContent()
+const navLinks = [
+  { label: 'Coaching', to: '/' },
+  { label: 'Blog', to: '/blog' },
+]
+
 const formatDate = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -68,77 +78,126 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-bleu text-white">
-    <ActivityHeader />
+  <div class="min-h-screen bg-paper text-ink">
+    <HomeNav :links="navLinks" />
 
-    <!-- Blog Content -->
-    <main class="pt-28 md:pt-36 pb-20 md:pb-32">
-      <div class="max-w-5xl mx-auto px-6 md:px-10">
-        <!-- Header -->
-        <div class="mb-10 md:mb-14">
-          <span class="text-xs font-body font-normal tracking-wider text-white/50 mb-4 block">Blog</span>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-white leading-[1.1] mb-5 md:mb-6">
-            Conseils et réflexions
-          </h1>
-          <p class="text-base sm:text-lg font-body font-light text-white/70 max-w-2xl leading-relaxed">
-            Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.
-          </p>
-        </div>
+    <main class="max-w-6xl mx-auto px-5 md:px-10 pt-32 md:pt-40 pb-24 md:pb-32">
+      <header class="grid md:grid-cols-[1fr_auto] gap-6 md:gap-16 items-end mb-12 md:mb-16">
+        <h1 v-reveal class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[0.95] tracking-tight">
+          Conseils et réflexions
+        </h1>
+        <p v-reveal="{ delay: 120 }" class="max-w-sm text-base font-body font-light text-ink/65 leading-relaxed">
+          Retrouve mes conseils, réflexions et astuces pour retrouver énergie, forme et confiance en douceur.
+        </p>
+      </header>
 
-        <!-- Articles (masonry: images entières, hauteurs variables) -->
-        <div v-if="filtered.length > 0" class="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8">
+      <template v-if="featured">
+        <!-- À la une : le dernier article -->
+        <NuxtLink v-reveal :to="`/blog/${featured.uid}`" class="group featured">
+          <div class="relative overflow-hidden min-h-[16rem] md:min-h-[26rem]">
+            <img
+              v-if="featured.data.featured_image?.url"
+              :src="featured.data.featured_image.url"
+              :alt="featured.data.featured_image.alt || featured.data.title"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              loading="eager"
+            />
+            <div v-else class="absolute inset-0 bg-terra"></div>
+          </div>
+          <div class="p-7 md:p-10 lg:p-12 flex flex-col">
+            <p class="text-[13px] font-body text-paper/60 mb-4">
+              À la une · {{ formatDate(featured.data.publication_date) }}<template v-if="featured.data.reading_time"> · {{ featured.data.reading_time }} min</template>
+            </p>
+            <h2 class="font-display text-3xl lg:text-4xl font-medium leading-[1.05] tracking-tight mb-5">{{ featured.data.title }}</h2>
+            <p v-if="featured.data.excerpt" class="text-base font-body font-light text-paper/80 leading-relaxed">{{ featured.data.excerpt }}</p>
+            <span class="read-link mt-8 md:mt-auto pt-0 md:pt-8">
+              Lire l'article
+              <span class="read-link-arrow">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
+            </span>
+          </div>
+        </NuxtLink>
+
+        <!-- Les autres articles -->
+        <div v-if="rest.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 mt-14 md:mt-16">
           <NuxtLink
-            v-for="article in filtered"
+            v-for="(article, i) in rest"
             :key="article.id"
+            v-reveal="{ delay: (i % 3) * 100 }"
             :to="`/blog/${article.uid}`"
-            class="group block break-inside-avoid mb-8 md:mb-10"
+            class="group block"
           >
-            <!-- Image -->
-            <div v-if="article.data.featured_image?.url" class="overflow-hidden rounded-xl bg-white/[0.06] mb-4">
+            <div class="relative aspect-[4/3] rounded-[1.5rem] overflow-hidden mb-5" :class="covers[i % covers.length]">
               <img
+                v-if="article.data.featured_image?.url"
                 :src="article.data.featured_image.url"
                 :alt="article.data.featured_image.alt || article.data.title"
-                class="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 loading="lazy"
               />
+              <!-- Sans image : la grande initiale du titre, aux couleurs du site -->
+              <span v-else class="absolute -right-4 -bottom-16 font-display font-medium leading-none text-paper/90 select-none transition-transform duration-700 group-hover:-translate-y-2" style="font-size: 16rem" aria-hidden="true">
+                {{ article.data.title.charAt(0) }}
+              </span>
             </div>
-            <div v-else class="aspect-video rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center mb-4">
-              <svg class="w-10 h-10 text-white/30" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-
-            <!-- Content -->
-            <p v-if="article.data.publication_date" class="text-xs font-body text-white/50 mb-2">
-              {{ formatDate(article.data.publication_date) }}
+            <p class="text-[13px] font-body text-ink/50 mb-2">
+              {{ formatDate(article.data.publication_date) }}<template v-if="article.data.reading_time"> · {{ article.data.reading_time }} min</template>
             </p>
-            <h2 class="text-lg md:text-xl font-display font-normal text-white mb-2 leading-snug group-hover:underline underline-offset-4 decoration-white/40">
+            <h2 class="font-display text-xl lg:text-2xl font-medium leading-[1.12] tracking-tight mb-3 group-hover:text-bleu transition-colors duration-300">
               {{ article.data.title }}
             </h2>
-            <p v-if="article.data.excerpt" class="text-sm font-body font-light text-white/65 leading-relaxed line-clamp-3">
-              {{ article.data.excerpt }}
-            </p>
-            <span class="inline-flex items-center gap-1.5 mt-3 text-sm font-body text-white/50 group-hover:text-white transition-colors duration-300">
-              Lire
-              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </span>
+            <p v-if="article.data.excerpt" class="text-[15px] font-body font-light text-ink/65 leading-relaxed line-clamp-3">{{ article.data.excerpt }}</p>
           </NuxtLink>
         </div>
+      </template>
 
-        <!-- Empty State -->
-        <div v-else class="py-20">
-          <h2 class="text-2xl font-display font-normal text-white mb-3">Aucun article pour le moment</h2>
-          <p class="text-base font-body font-light text-white/70 mb-8">Les premiers articles arrivent bientôt !</p>
-          <NuxtLink to="/" class="btn-light inline-block">Retour à l'accueil</NuxtLink>
-        </div>
+      <div v-else class="py-16">
+        <h2 class="font-display text-3xl font-medium mb-3">Aucun article pour le moment</h2>
+        <p class="text-base font-body font-light text-ink/65 mb-8">Les premiers articles arrivent bientôt.</p>
+        <NuxtLink to="/" class="btn-big pr-7">Retour à l'accueil</NuxtLink>
       </div>
     </main>
 
-    <AppFooter simple blue />
+    <!-- Appel final -->
+    <section class="bg-bleu text-paper">
+      <div class="max-w-6xl mx-auto px-5 md:px-10 py-20 md:py-24 grid md:grid-cols-[1fr_auto] gap-8 md:gap-16 items-center">
+        <div>
+          <h2 v-reveal class="font-display text-4xl sm:text-5xl font-medium leading-[0.98] tracking-tight mb-4">Envie d'aller plus loin ?</h2>
+          <p v-reveal="{ delay: 100 }" class="text-base md:text-lg font-body font-light text-paper/80 leading-relaxed max-w-xl">
+            Les articles donnent des pistes. Un accompagnement les transforme en habitudes, adaptées à ton corps et à ta vie.
+          </p>
+        </div>
+        <div v-reveal="{ delay: 180 }" class="flex flex-col items-start gap-4">
+          <NuxtLink v-magnetic to="/feuille-de-route" class="btn-big group">
+            Remplir la feuille de route
+            <span class="btn-big-arrow">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </span>
+          </NuxtLink>
+          <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="text-sm font-body text-paper/75 hover:text-paper underline underline-offset-4 decoration-paper/30 hover:decoration-paper transition-colors">
+            ou {{ content.hero.ctaLabel.charAt(0).toLowerCase() + content.hero.ctaLabel.slice(1) }}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <HomeFooter />
   </div>
 </template>
 
 <style scoped lang="postcss">
+.featured {
+  @apply grid md:grid-cols-[1.1fr_0.9fr] rounded-[2rem] overflow-hidden bg-bleu text-paper;
+  box-shadow: 0 40px 80px -40px rgba(27, 63, 160, 0.55);
+}
+.read-link {
+  @apply inline-flex items-center gap-3 text-[15px] font-body font-medium;
+}
+.read-link-arrow {
+  @apply w-11 h-11 rounded-full bg-paper text-ink grid place-items-center transition-transform duration-500;
+}
+.group:hover .read-link-arrow { transform: rotate(-45deg); }
 .line-clamp-3 {
   display: -webkit-box;
   line-clamp: 3;

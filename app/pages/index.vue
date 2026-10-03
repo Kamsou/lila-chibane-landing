@@ -2,27 +2,25 @@
 const { content, faqFor } = await useSiteContent()
 
 const coaching = computed(() => content.value.coaching)
-const faq = computed(() => faqFor('coaching'))
+const faq = computed(() => (content.value.faq.visible ? faqFor('coaching') : []))
 const testimonials = computed(() => coaching.value.testimonials || [])
 const socials = computed(() => content.value.socials.filter((s) => s.key !== 'instagram-dog'))
-const openTestimonials = reactive(new Set())
-const toggleTestimonial = (i) => {
-  if (openTestimonials.has(i)) openTestimonials.delete(i)
-  else openTestimonials.add(i)
-}
 
-const panelDefs = computed(() => {
-  const list = [
-    { key: 'intro', label: 'Présentation' },
-    { key: 'approche', label: 'Approche' },
-  ]
-  if (testimonials.value.length) list.push({ key: 'temoignages', label: 'Témoignages' })
-  if (content.value.faq.visible && faq.value.length) list.push({ key: 'faq', label: 'Questions' })
-  list.push({ key: 'contact', label: 'Contact' })
-  return list
-})
-const labels = computed(() => panelDefs.value.map((p) => p.label))
-const idx = (key) => panelDefs.value.findIndex((p) => p.key === key)
+const navLinks = computed(() => [
+  { label: 'Approche', to: '#approche' },
+  ...(testimonials.value.length ? [{ label: 'Témoignages', to: '#temoignages' }] : []),
+  ...(faq.value.length ? [{ label: 'Questions', to: '#questions' }] : []),
+  { label: 'Blog', to: '/blog' },
+])
+
+// "Coach sportive" : un mot par ligne, apparition mot à mot
+const titleWords = computed(() => (coaching.value.title || '').trim().split(/\s+/))
+
+const cardThemes = [
+  { bg: 'bg-bleu', accent: 'text-terra-soft' },
+  { bg: 'bg-terra', accent: 'text-ink' },
+  { bg: 'bg-mat', accent: 'text-terra-soft' },
+]
 
 useSeoMeta({
   title: 'Lila Chibane · Coach sportive sport-santé · visio & Médoc',
@@ -160,177 +158,287 @@ useHead(() => {
 </script>
 
 <template>
-  <div class="bg-bleu text-white">
-    <ActivityHeader />
+  <div class="home bg-paper text-ink">
+    <HomeNav :links="navLinks" />
 
-    <PanelDeck :labels="labels">
-      <template #default="{ active }">
-        <ActivityIntro
-          v-show="active === idx('intro')"
-          :title="coaching.title"
-          :intro="coaching.intro"
-          caption="2 minutes · gratuit · sans engagement"
-          cta-label="Remplir la feuille de route"
-          cta-url="/feuille-de-route"
-          image-src="/coaching-sportif.jpeg"
-          image-alt="Lila Chibane, coach sportive"
-          image-position="object-center"
-        />
+    <main>
+      <!-- Hero -->
+      <section class="hero relative overflow-hidden bg-bleu text-paper">
+        <div class="hero-glow hero-glow--a" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow--b" aria-hidden="true"></div>
 
-        <section v-show="active === idx('approche')" class="panel">
-          <div class="max-w-4xl mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-12">{{ content.coaching.approachTitle }}</h2>
-            <div class="grid sm:grid-cols-3 gap-5 md:gap-6">
-              <div
-                v-for="(card, i) in coaching.cards"
-                :key="`c-${i}`"
-                class="card-in bg-white/[0.06] border border-white/10 rounded-xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:bg-white/10 hover:shadow-black/20"
-                :style="{ animationDelay: `${i * 90}ms` }"
-              >
-                <h3 class="text-lg font-display font-normal text-white mb-3">{{ card.title }}</h3>
-                <p class="text-sm font-body font-light text-white/75 leading-relaxed">{{ card.text }}</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div class="relative max-w-6xl mx-auto px-5 md:px-10 pt-28 pb-20 md:pt-28 md:pb-14 grid md:grid-cols-[1.15fr_0.85fr] gap-12 md:gap-8 items-center min-h-[100svh]">
+          <div class="order-2 md:order-1">
+            <h1 class="hero-title">
+              <span v-for="(w, i) in titleWords" :key="w + i" class="hero-line"><span class="hero-word" :style="{ '--d': `${80 + i * 120}ms` }">{{ w }}</span></span>
+            </h1>
 
-        <section v-if="testimonials.length" v-show="active === idx('temoignages')" class="panel">
-          <div class="max-w-4xl mx-auto w-full flex-1 min-h-0 flex flex-col">
-            <h2 class="shrink-0 text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">Ce qu'elles en disent</h2>
-            <div class="flex-1 min-h-0 overflow-y-auto pr-1 -mr-1">
-              <div class="columns-1 lg:columns-2 gap-5">
-                <figure
-                  v-for="(t, i) in testimonials"
-                  :key="`t-${i}`"
-                  class="card-in break-inside-avoid mb-5 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.09] hover:shadow-lg hover:shadow-black/20"
-                  :style="{ animationDelay: `${i * 100}ms` }"
-                >
-                  <blockquote>
-                    <p class="font-display text-lg md:text-xl font-normal text-white leading-snug">« {{ t.highlight }} »</p>
-                  </blockquote>
-                  <figcaption class="mt-5 flex items-center gap-3">
-                    <span class="testi-avatar">{{ t.author.charAt(0) }}</span>
-                    <span class="leading-tight">
-                      <span class="block text-sm font-body font-normal text-white">{{ t.author }}</span>
-                      <span v-if="t.detail" class="block text-xs font-body text-white/45">{{ t.detail }}</span>
-                    </span>
-                  </figcaption>
-                  <div v-if="t.quote.length" class="mt-4">
-                    <button
-                      type="button"
-                      class="inline-flex items-center gap-1.5 text-sm font-body text-white/60 hover:text-white transition-colors duration-300"
-                      :aria-expanded="openTestimonials.has(i)"
-                      @click="toggleTestimonial(i)"
-                    >
-                      {{ openTestimonials.has(i) ? 'Réduire' : 'Lire le témoignage' }}
-                      <svg class="w-3.5 h-3.5 transition-transform duration-300" :class="{ 'rotate-180': openTestimonials.has(i) }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-                    </button>
-                    <div
-                      class="grid transition-all duration-300 ease-out motion-reduce:transition-none"
-                      :class="openTestimonials.has(i) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
-                    >
-                      <div class="overflow-hidden">
-                        <div class="pt-3 space-y-3">
-                          <p v-for="(para, j) in t.quote" :key="j" class="text-sm font-body font-light text-white/80 leading-relaxed">{{ para }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
+            <p class="hero-in text-base sm:text-lg font-body font-light text-paper/80 leading-relaxed max-w-xl mt-7 md:mt-9 mb-9" style="--d: 360ms">
+              {{ coaching.intro }}
+            </p>
 
-            <div class="shrink-0 border-t border-white/10 pt-5 text-center">
-              <NuxtLink to="/feuille-de-route" class="group inline-flex items-center gap-1.5 text-sm font-body text-white/70 hover:text-white transition-colors duration-300">
-                Toi aussi, prête à t'y mettre&nbsp;?
-                <span class="underline underline-offset-2">Remplir la feuille de route</span>
-                <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            <div class="hero-in flex flex-wrap items-center gap-x-6 gap-y-4" style="--d: 480ms">
+              <NuxtLink v-magnetic to="/feuille-de-route" class="btn-big group">
+                Remplir la feuille de route
+                <span class="btn-big-arrow">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
               </NuxtLink>
+              <p class="text-[13px] font-body text-paper/60">2 minutes · gratuit<span class="sm:hidden"> ·</span><br class="hidden sm:block"> sans engagement</p>
             </div>
           </div>
-        </section>
 
-        <section v-if="faq.length" v-show="active === idx('faq')" class="panel">
-          <div class="max-w-2xl mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
-            <div class="divide-y divide-white/15 max-h-[55vh] overflow-y-auto">
-              <details v-for="(item, i) in faq" :key="`f-${i}`" class="faq-item group py-5">
-                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none marker:hidden">
-                  <h3 class="text-base md:text-lg font-display font-normal text-white">{{ item.question }}</h3>
-                  <svg class="w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
-                </summary>
-                <p class="text-sm md:text-base font-body font-light text-white/75 leading-relaxed mt-3">{{ item.answer }}</p>
-              </details>
+          <div class="order-1 md:order-2 relative w-full max-w-[13.5rem] sm:max-w-xs md:max-w-none mx-auto">
+            <div class="hero-in relative aspect-[4/5]" style="--d: 150ms">
+              <span class="ring ring--1" aria-hidden="true"></span>
+              <span class="ring ring--2" aria-hidden="true"></span>
+              <div class="blob">
+                <img src="/coaching-sportif.jpeg" alt="Lila Chibane, coach sportive, en étirement sur un tapis" class="w-full h-full object-cover object-[50%_30%]" fetchpriority="high" loading="eager" decoding="async" />
+              </div>
             </div>
+            <p class="hero-in mt-6 md:mt-8 text-center text-[13px] font-body text-paper/60" style="--d: 300ms">
+              Avensan, Médoc · et en visio partout en France
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section v-show="active === idx('contact')" class="panel">
-          <div class="max-w-md mx-auto w-full text-center">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-3">{{ content.contact.title }}</h2>
-            <p class="text-sm md:text-base font-body font-light text-white/75 mb-8 leading-relaxed">
+      <!-- La courbe : 45 et 60 ans -->
+      <section class="screen max-w-6xl mx-auto px-5 md:px-10 py-20">
+        <HomeAgeCurve />
+      </section>
+
+      <!-- Pause respiration -->
+      <section id="pause" class="anchor screen max-w-6xl mx-auto px-5 md:px-10 py-20">
+        <HomeBreathingPause />
+      </section>
+
+      <!-- Approche -->
+      <section id="approche" class="anchor screen max-w-6xl mx-auto px-5 md:px-10 py-20">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 lg:mb-12">
+          <h2 v-reveal class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[0.92] tracking-tight">
+            {{ coaching.approachTitle }}
+          </h2>
+          <p v-reveal="{ delay: 120 }" class="max-w-xs text-base font-body font-light text-ink/65 leading-relaxed">
+            Trois engagements, pour que ton corps redevienne un terrain de jeu, pas un chantier.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 lg:gap-5">
+          <article
+            v-for="(card, i) in coaching.cards"
+            :key="`c-${i}`"
+            v-reveal="{ delay: i * 120 }"
+            class="approach-card"
+            :class="cardThemes[i % cardThemes.length].bg"
+          >
+            <div class="h-[11.5rem] mb-6">
+              <HomeApproachVisual :kind="i" />
+            </div>
+            <h3 class="font-display text-2xl lg:text-[1.7rem] font-medium leading-[1.08] tracking-tight mb-3">{{ card.title }}</h3>
+            <p class="text-[15px] font-body font-light leading-relaxed opacity-85">{{ card.text }}</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Témoignages -->
+      <section v-if="testimonials.length" id="temoignages" class="anchor screen bg-bleu py-20 rounded-t-[2.5rem] md:rounded-t-[4rem] relative">
+        <HomeTestimonials :items="testimonials" />
+        <div class="w-full max-w-6xl mx-auto px-5 md:px-10 mt-8">
+          <NuxtLink to="/feuille-de-route" class="group inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] font-body text-paper/75 hover:text-paper transition-colors duration-300">
+            Toi aussi, prête à t'y mettre&nbsp;?
+            <span class="underline underline-offset-4 decoration-terra-soft decoration-2">Remplir la feuille de route</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </NuxtLink>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section v-if="faq.length" id="questions" class="anchor screen max-w-6xl mx-auto px-5 md:px-10 py-20 grid md:grid-cols-[0.8fr_1.2fr] gap-10 md:gap-16">
+        <h2 v-reveal class="font-display text-4xl sm:text-5xl md:text-6xl font-medium leading-[0.98] tracking-tight md:sticky md:top-28 self-start">
+          {{ content.faq.title }}
+        </h2>
+        <div>
+          <details v-for="(item, i) in faq" :key="`f-${i}`" v-reveal="{ delay: i * 60 }" class="faq group">
+            <summary class="flex items-center justify-between gap-6 cursor-pointer list-none py-6">
+              <h3 class="text-lg md:text-xl font-display font-medium">{{ item.question }}</h3>
+              <span class="faq-icon">
+                <svg class="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+              </span>
+            </summary>
+            <p class="text-base font-body font-light text-ink/70 leading-relaxed pb-6 -mt-1 max-w-2xl">{{ item.answer }}</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Appel final -->
+      <section id="contact" class="anchor screen relative overflow-hidden bg-terra text-paper py-20">
+        <div class="w-full max-w-6xl mx-auto px-5 md:px-10 grid md:grid-cols-[1.3fr_0.7fr] gap-14 md:gap-10 items-center">
+          <div>
+            <h2 v-reveal class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[0.92] tracking-tight mb-6">
+              {{ content.contact.title }}
+            </h2>
+            <p v-reveal="{ delay: 100 }" class="text-base md:text-lg font-body font-light text-paper/85 leading-relaxed max-w-lg mb-8">
               Réponds à quelques questions pour préparer un premier échange vraiment utile pour toi.
             </p>
+            <div v-reveal="{ delay: 180 }" class="flex flex-wrap items-center gap-x-6 gap-y-4 mb-10">
+              <NuxtLink v-magnetic to="/feuille-de-route" class="btn-big btn-big--ink group">
+                Remplir la feuille de route
+                <span class="btn-big-arrow">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
+              </NuxtLink>
+              <p class="text-[13px] font-body text-paper/75">2 minutes · gratuit · sans engagement</p>
+            </div>
 
-            <NuxtLink to="/feuille-de-route" class="btn-light inline-flex items-center justify-center gap-2 group">
-              Remplir la feuille de route
-              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </NuxtLink>
-
-            <p class="text-sm font-body font-light text-white/55 mt-7">
-              ou écris-moi à
-              <a href="mailto:lila.chibane.pro@outlook.com" class="text-white/80 hover:text-white underline underline-offset-2 transition-colors duration-300">lila.chibane.pro@outlook.com</a>
-            </p>
-
-            <div class="mt-8 pt-6 border-t border-white/10 flex flex-col items-center gap-4">
-              <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm font-body font-light text-white/70 hover:text-white transition-colors duration-300">
-                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
-                {{ content.hero.ctaLabel }}
-              </a>
-              <div v-if="socials.length" class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                <a
-                  v-for="s in socials"
-                  :key="s.key"
-                  :href="s.url"
-                  target="_blank"
-                  rel="noopener"
-                  :aria-label="s.label"
-                  :title="s.label"
-                  class="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-body font-light text-white/60 hover:text-white transition-colors duration-300"
-                >
+            <div v-reveal="{ delay: 240 }" class="flex flex-col gap-4 text-[15px] font-body text-paper/80">
+              <p>
+                ou écris-moi à
+                <a href="mailto:lila.chibane.pro@outlook.com" class="text-paper underline underline-offset-4 decoration-paper/40 hover:decoration-paper transition-colors">lila.chibane.pro@outlook.com</a>
+              </p>
+              <div class="flex flex-wrap items-center gap-2">
+                <a :href="content.hero.ctaUrl" target="_blank" rel="noopener" class="chip-link">
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                  {{ content.hero.ctaLabel }}
+                </a>
+                <a v-for="s in socials" :key="s.key" :href="s.url" target="_blank" rel="noopener" :aria-label="s.label" class="chip-link">
                   <svg v-if="s.type === 'instagram'" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" /></svg>
                   <svg v-else class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21H18.6v-5.55c0-1.32-.02-3.02-1.9-3.02-1.9 0-2.2 1.44-2.2 2.93V21H10z" /></svg>
-                  <span v-if="s.short">{{ s.short }}</span>
+                  {{ s.short }}
                 </a>
               </div>
             </div>
           </div>
-        </section>
-      </template>
-    </PanelDeck>
+
+          <figure v-reveal="{ type: 'scale', delay: 150 }" class="max-w-[18rem] md:max-w-[20rem] mx-auto w-full">
+            <img src="/test-2.jpeg" alt="Lila Chibane en ville, écharpe bleue" class="w-full aspect-[4/5] max-h-[62svh] object-cover object-[60%_45%] rounded-[1.75rem]" loading="lazy" decoding="async" />
+            <figcaption class="mt-4 text-[13px] font-body text-paper/75">C'est moi, Lila. Je réponds personnellement à chaque message.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <HomeFooter />
   </div>
 </template>
 
 <style scoped lang="postcss">
-.panel {
-  @apply flex-1 flex flex-col justify-start md:justify-center px-6 md:px-10 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] md:py-12;
+/* Grain léger sur toute la page */
+.home::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.faq-item summary::-webkit-details-marker { display: none; }
 
-.testi-avatar {
-  @apply w-9 h-9 shrink-0 rounded-full bg-white/10 flex items-center justify-center
-         font-display text-white text-sm select-none;
-}
+/* Sur mobile la navigation recouvre le haut ; dès md, chaque section intègre déjà sa place */
+.anchor { @apply scroll-mt-20 md:scroll-mt-0; }
 
-.card-in {
-  opacity: 0;
-  animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Hero */
+.hero-title {
+  @apply font-display font-medium tracking-[-0.045em] leading-[0.88];
+  font-size: clamp(3.4rem, min(9.6vw, 15.5svh), 8.6rem);
 }
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(14px); }
+.hero-line {
+  @apply block overflow-hidden pb-[0.08em];
+}
+.hero-word {
+  @apply inline-block;
+  animation: wordUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes wordUp {
+  from { transform: translateY(105%) rotate(4deg); }
+  to { transform: none; }
+}
+.hero-in {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
 }
+
+.hero-glow {
+  @apply absolute rounded-full pointer-events-none;
+  filter: blur(90px);
+}
+.hero-glow--a {
+  width: 38rem; height: 38rem; right: -10rem; top: -8rem;
+  background: rgba(238, 138, 99, 0.45);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.hero-glow--b {
+  width: 32rem; height: 32rem; left: -12rem; bottom: -14rem;
+  background: rgba(110, 150, 255, 0.45);
+  animation: drift 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-4rem, 3rem) scale(1.15); }
+}
+
+.blob {
+  @apply absolute inset-0 overflow-hidden;
+  border-radius: 58% 42% 46% 54% / 52% 44% 56% 48%;
+  animation: morph 14s ease-in-out infinite;
+  box-shadow: 0 50px 100px -40px rgba(10, 12, 30, 0.7);
+}
+@keyframes morph {
+  0%, 100% { border-radius: 58% 42% 46% 54% / 52% 44% 56% 48%; }
+  33% { border-radius: 44% 56% 60% 40% / 42% 58% 42% 58%; }
+  66% { border-radius: 52% 48% 38% 62% / 60% 40% 60% 40%; }
+}
+.ring {
+  @apply absolute rounded-full border border-paper/25 pointer-events-none;
+  inset: -6%;
+  animation: breathe 10s ease-in-out infinite;
+}
+.ring--2 {
+  inset: -14%;
+  border-style: dashed;
+  border-color: rgba(244, 238, 227, 0.15);
+  animation-delay: -1.5s;
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(0.96); opacity: 0.6; }
+  40% { transform: scale(1.04); opacity: 1; }
+}
+
+
+
+/* Une section = un écran (portable 14 pouces et plus). Le haut laisse la place à la navigation. */
+.screen {
+  @apply md:min-h-[100svh] md:flex md:flex-col md:justify-center md:pt-24 md:pb-10;
+}
+
+/* Approche */
+.approach-card {
+  @apply rounded-[1.75rem] p-6 lg:p-7 text-paper flex flex-col;
+}
+
+/* FAQ */
+.faq { @apply border-b border-ink/15; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq-icon {
+  @apply w-10 h-10 shrink-0 rounded-full border border-ink/20 grid place-items-center transition-colors duration-300;
+}
+.faq[open] .faq-icon { @apply bg-ink text-paper border-ink; }
+
+/* Appel final */
+.chip-link {
+  @apply inline-flex items-center gap-2 h-10 px-4 rounded-full bg-paper/10 border border-paper/20 text-paper/90
+         hover:bg-paper hover:text-terra transition-colors duration-300;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .card-in { animation: none; opacity: 1; }
+  .hero-word, .hero-in, .hero-glow, .blob, .ring {
+    animation: none;
+  }
 }
 </style>

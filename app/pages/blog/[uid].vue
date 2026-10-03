@@ -22,6 +22,11 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
+const navLinks = [
+  { label: 'Coaching', to: '/' },
+  { label: 'Blog', to: '/blog' },
+]
+
 const articleUrl = computed(() => `https://lilachibane.com/blog/${route.params.uid}`)
 const articleImage = computed(() => article.value?.data.featured_image?.url || 'https://lilachibane.com/test-2.jpeg')
 
@@ -85,22 +90,31 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen bg-bleu text-white">
-    <!-- Header -->
-    <ActivityHeader />
+  <div class="min-h-screen bg-paper text-ink">
+    <HomeNav :links="navLinks" />
 
-    <!-- Article Content -->
-    <article v-if="article" class="pt-28 md:pt-36 pb-20 md:pb-32">
-      <!-- Back to blog -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mb-8 md:mb-10">
-        <NuxtLink to="/blog" class="group inline-flex items-center gap-1.5 font-body text-sm text-white/70 hover:text-white transition-colors duration-300">
-          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
-          Retour aux articles
+    <article v-if="article" class="pt-32 md:pt-40 pb-24 md:pb-32">
+      <header class="max-w-3xl mx-auto px-5 md:px-10 mb-10 md:mb-14">
+        <NuxtLink to="/blog" class="group inline-flex items-center gap-2 text-sm font-body text-ink/60 hover:text-ink transition-colors duration-300 mb-8 md:mb-10">
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          Tous les articles
         </NuxtLink>
-      </div>
 
-      <!-- Featured Image -->
-      <div v-if="article.data.featured_image?.url" class="w-full max-w-3xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
+        <p class="text-[13px] font-body text-ink/50 mb-5">
+          {{ formatDate(article.data.publication_date) }}<template v-if="article.data.reading_time"> · {{ article.data.reading_time }} min de lecture</template>
+        </p>
+
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.02] tracking-tight mb-6 md:mb-8">
+          {{ article.data.title }}
+        </h1>
+
+        <p v-if="article.data.excerpt" class="text-lg md:text-xl font-body font-light text-ink/70 leading-relaxed">
+          {{ article.data.excerpt }}
+        </p>
+      </header>
+
+      <!-- Image à la une : nette, alignée sur la colonne de texte, jamais recadrée -->
+      <div v-if="article.data.featured_image?.url" class="max-w-3xl mx-auto px-5 md:px-10 mb-12 md:mb-16">
         <img
           :src="article.data.featured_image.url"
           :alt="article.data.featured_image.alt || article.data.title"
@@ -108,146 +122,101 @@ useHead({
         />
       </div>
 
-      <!-- Article Header -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
-        <div class="flex items-center gap-4 mb-5 md:mb-6">
-          <span v-if="article.data.publication_date" class="text-xs font-body text-white/50">
-            {{ formatDate(article.data.publication_date) }}
-          </span>
-          <span v-if="article.data.reading_time" class="text-xs font-body text-white/50">
-            {{ article.data.reading_time }} min de lecture
-          </span>
-        </div>
-
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white mb-6 md:mb-8 leading-[1.1]">
-          {{ article.data.title }}
-        </h1>
-
-        <p v-if="article.data.excerpt" class="text-lg md:text-xl font-body font-light italic text-white/70 leading-relaxed">
-          {{ article.data.excerpt }}
-        </p>
-      </div>
-
-      <!-- Article Body -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10">
+      <div class="max-w-3xl mx-auto px-5 md:px-10">
         <div class="article-content">
-          <PrismicRichText
-            v-if="article.data.content"
-            :field="article.data.content"
-          />
-          <div v-else class="text-white/60 font-body font-light italic">
-            Le contenu de cet article sera bientôt disponible...
-          </div>
+          <PrismicRichText v-if="article.data.content" :field="article.data.content" />
+          <p v-else class="text-ink/60 font-body font-light">Le contenu de cet article sera bientôt disponible.</p>
         </div>
       </div>
 
-      <!-- Bottom CTA -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mt-16 md:mt-20 pt-8 border-t border-white/15">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div class="text-center sm:text-left">
-            <p class="font-body font-normal text-white mb-1">Cet article t'a plu ?</p>
-            <p class="text-sm font-body font-light text-white/60">Partage-le avec tes amies !</p>
-          </div>
-          <NuxtLink to="/blog" class="btn-light shrink-0">
-            Voir tous les articles
-          </NuxtLink>
-        </div>
-      </div>
-
-      <!-- Author Section -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mt-14 md:mt-20">
-        <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-8 md:p-10">
-          <div class="text-center sm:text-left">
-            <h3 class="text-xl md:text-2xl font-display font-normal text-white mb-2">Lila Chibane</h3>
-            <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-3">
+      <!-- Autrice + suite -->
+      <div class="max-w-3xl mx-auto px-5 md:px-10 mt-16 md:mt-20">
+        <div class="author">
+          <img src="/coaching-sportif.jpeg" alt="Lila Chibane" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover object-[50%_25%] shrink-0" loading="lazy" />
+          <div>
+            <p class="font-display text-2xl font-medium tracking-tight mb-2">Lila Chibane</p>
+            <p class="text-[15px] font-body font-light text-paper/80 leading-relaxed mb-6">
               Coach sportive sport-santé pour femmes, en visio partout en France et en présentiel dans le Médoc. Reprendre une activité physique en douceur, à ton rythme, sans pression.
             </p>
-            <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-4">
-              Découvre le <NuxtLink to="/" class="text-white underline underline-offset-2 hover:text-white/70">coaching sportif</NuxtLink>.
-            </p>
-            <a
-              href="mailto:lila.chibane.pro@outlook.com"
-              class="group inline-flex items-center gap-1.5 font-body text-sm text-white/60 hover:text-white transition-colors duration-300"
-            >
-              Me contacter
-              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </a>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <NuxtLink to="/feuille-de-route" class="btn-big group">
+                Remplir la feuille de route
+                <span class="btn-big-arrow">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
+              </NuxtLink>
+              <NuxtLink to="/" class="text-sm font-body text-paper/75 hover:text-paper underline underline-offset-4 decoration-paper/30 hover:decoration-paper transition-colors">
+                Découvrir le coaching
+              </NuxtLink>
+            </div>
           </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 text-sm font-body text-ink/60">
+          <p>Cet article t'a plu ? Partage-le avec tes amies.</p>
+          <NuxtLink to="/blog" class="group inline-flex items-center gap-2 text-ink hover:text-bleu transition-colors">
+            Voir tous les articles
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </NuxtLink>
         </div>
       </div>
     </article>
 
-    <AppFooter simple blue />
+    <HomeFooter />
   </div>
 </template>
 
 <style scoped lang="postcss">
+.author {
+  @apply flex flex-col sm:flex-row gap-6 sm:gap-8 rounded-[2rem] bg-bleu text-paper p-7 md:p-10;
+}
+
 :deep(.article-content) {
-  @apply text-white/85 leading-relaxed font-body;
+  @apply text-ink/85 leading-relaxed font-body;
 }
-
 :deep(.article-content p) {
-  @apply mb-6 text-base md:text-lg leading-relaxed font-light;
+  @apply mb-6 text-base md:text-[1.075rem] leading-[1.75] font-light;
 }
-
 :deep(.article-content h2) {
-  @apply text-2xl md:text-3xl font-normal text-white mt-12 mb-6 font-display;
+  @apply font-display text-2xl md:text-3xl font-medium tracking-tight text-ink mt-14 mb-5;
 }
-
 :deep(.article-content h3) {
-  @apply text-xl md:text-2xl font-normal text-white mt-10 mb-4 font-display;
+  @apply font-display text-xl md:text-2xl font-medium tracking-tight text-ink mt-10 mb-4;
 }
-
 :deep(.article-content h4) {
-  @apply text-lg md:text-xl font-medium text-white mt-8 mb-3 font-display;
+  @apply font-display text-lg md:text-xl font-medium text-ink mt-8 mb-3;
 }
-
 :deep(.article-content ul),
 :deep(.article-content ol) {
   @apply mb-6 ml-6 space-y-2;
 }
-
-:deep(.article-content ul) {
-  @apply list-disc;
-}
-
-:deep(.article-content ol) {
-  @apply list-decimal;
-}
-
+:deep(.article-content ul) { @apply list-disc; }
+:deep(.article-content ol) { @apply list-decimal; }
 :deep(.article-content li) {
-  @apply text-base md:text-lg leading-relaxed font-light;
+  @apply text-base md:text-[1.075rem] leading-[1.75] font-light marker:text-terra;
 }
-
 :deep(.article-content a) {
-  @apply text-white hover:text-white/70 underline underline-offset-4 transition-colors duration-300;
+  @apply text-bleu underline underline-offset-4 decoration-bleu/30 hover:decoration-bleu transition-colors duration-300;
 }
-
 :deep(.article-content strong) {
-  @apply font-medium text-white;
+  @apply font-medium text-ink;
 }
-
 :deep(.article-content em) {
   @apply italic;
 }
-
 :deep(.article-content blockquote) {
-  @apply pl-6 py-2 my-8 italic text-white/70 font-display text-lg md:text-xl;
+  @apply my-10 rounded-[1.5rem] bg-bleu/[0.06] px-7 py-6 font-display text-xl md:text-2xl font-medium tracking-tight text-bleu leading-snug;
 }
-
 :deep(.article-content img) {
   @apply my-8 w-full h-auto object-contain;
 }
-
 :deep(.article-content code) {
-  @apply bg-white/10 text-white px-2 py-1 rounded text-sm font-mono;
+  @apply bg-ink/[0.06] text-ink px-2 py-1 rounded text-sm font-mono;
 }
-
 :deep(.article-content pre) {
-  @apply bg-black/30 text-white p-6 rounded-xl overflow-x-auto my-6;
+  @apply bg-ink text-paper p-6 rounded-xl overflow-x-auto my-6;
 }
-
 :deep(.article-content pre code) {
-  @apply bg-transparent px-0 py-0;
+  @apply bg-transparent text-paper px-0 py-0;
 }
 </style>
