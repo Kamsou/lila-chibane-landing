@@ -112,6 +112,17 @@ export const useSiteContent = async () => {
               "Et pour partir sur de bonnes bases, la première rencontre est offerte : on fait connaissance, tu me confies ses petites habitudes, et je m'assure que tout le monde est à l'aise. Pendant la garde, je t'envoie régulièrement photos et vidéos, pour que tu le voies épanoui même à distance, et que tu sois tranquille de ton côté.",
             ]),
       },
+      links: {
+        bio: d.links_bio || "Tu as le droit de comprendre ton corps avant qu'on te dise quoi en faire. Tous les numéros de Corps de rêves sont ici ↓",
+        items: (d.links_items?.length
+          ? d.links_items.map((l) => ({ title: l.title || '', description: l.description || '', url: asLink(l.url) || '' }))
+          : [
+              { title: 'Corps de rêves, la newsletter', description: '', url: 'https://corpsdereves.substack.com/' },
+              { title: "#12 A t'on peur des femmes fortes ?", description: 'Histoire de corset, de protéines et de nature féminine', url: 'https://fs03lq.s.gy/atonpeurdesfemmesfortes' },
+              { title: '#11 Tu ne manges pas assez de protéines', description: "Ce n'est pas de ta faute et je vais t'expliquer pourquoi", url: 'https://corpsdereves.substack.com/p/tu-ne-manges-pas-assez-de-proteines?r=4h75jn' },
+              { title: '#1 Les femmes allaient à la chasse et à la guerre.', description: 'Bouger fait partie intrinsèque de leur équilibre, la science revoit ses cartes.', url: 'https://corpsdereves.substack.com/p/1-les-femmes-allaient-a-la-chasse?r=4h75jn' },
+            ]).filter((l) => l.title && l.url),
+      },
       faq: {
         visible: isSectionVisible(d, 'faq'),
         label: d.faq_label || 'Questions fréquentes',

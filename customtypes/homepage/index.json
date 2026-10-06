@@ -312,6 +312,32 @@
         "type": "Link",
         "config": { "label": "Instagram dog sitting", "placeholder": "https://instagram.com/...", "allowTargetBlank": true }
       }
+    },
+    "Liens": {
+      "links_bio": {
+        "type": "Text",
+        "config": { "label": "Bio de la page liens (lilachibane.com/liens)", "placeholder": "Tu as le droit de comprendre ton corps..." }
+      },
+      "links_items": {
+        "type": "Group",
+        "config": {
+          "label": "Liens (dans l'ordre d'affichage)",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Titre", "placeholder": "#12 A t'on peur des femmes fortes ?" }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description (facultatif)", "placeholder": "Histoire de corset, de protéines..." }
+            },
+            "url": {
+              "type": "Link",
+              "config": { "label": "Lien", "placeholder": "https://corpsdereves.substack.com/...", "allowTargetBlank": true }
+            }
+          }
+        }
+      }
     }
   }
 }

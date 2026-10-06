@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/preview', '/feuille-de-route'],
+    exclude: ['/preview', '/feuille-de-route', '/liens'],
   },
   prismic: {
     endpoint: 'lila-chibane',
