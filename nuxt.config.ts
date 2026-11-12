@@ -13,6 +13,13 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxthub/core',
   ],
+  fonts: {
+    families: [
+      { name: 'Lexend', provider: 'google', weights: [600, 700] },
+      { name: 'DM Sans', provider: 'google', weights: [400, 500, 600, 700] },
+      { name: 'Instrument Serif', provider: 'google', weights: [400], styles: ['normal', 'italic'] },
+    ],
+  },
   site: {
     url: 'https://lilachibane.com',
   },
@@ -27,7 +34,7 @@ export default defineNuxtConfig({
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/preview', '/feuille-de-route', '/liens'],
+    exclude: ['/preview', '/feuille-de-route', '/liens', '/dog-sitting'],
   },
   prismic: {
     endpoint: 'lila-chibane',

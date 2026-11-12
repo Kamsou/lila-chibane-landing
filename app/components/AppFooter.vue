@@ -61,11 +61,11 @@ const tagline = computed(() => {
   </footer>
 
   <!-- Footer simple -->
-  <footer v-else class="py-14 md:py-16 px-6 md:px-10" :class="blue ? 'bg-bleu border-t border-white/10' : 'bg-warm'">
+  <footer v-else class="py-14 md:py-16 px-6 md:px-10" :class="blue ? '' : 'bg-warm'">
     <div class="max-w-5xl mx-auto flex flex-col items-center gap-3">
-      <p class="font-display text-lg text-white font-normal">Lila Chibane</p>
-      <p class="text-xs font-body text-white/30">&copy; {{ new Date().getFullYear() }} Lila Chibane</p>
-      <NuxtLink to="/" class="text-xs font-body text-white/40 hover:text-white transition-colors duration-300 mt-1">
+      <p class="text-lg" :class="blue ? 'font-titre font-bold text-encre' : 'font-display font-normal text-white'">Lila Chibane</p>
+      <p class="text-xs" :class="blue ? 'font-titre text-ardoise/80' : 'font-body text-white/30'">&copy; {{ new Date().getFullYear() }} Lila Chibane</p>
+      <NuxtLink to="/" class="text-xs transition-colors duration-300 mt-1" :class="blue ? 'font-titre text-ardoise hover:text-encre' : 'font-body text-white/40 hover:text-white'">
         Retour à l'accueil
       </NuxtLink>
     </div>

@@ -1,93 +1,60 @@
 export default defineEventHandler((event) => {
   setHeader(event, 'content-type', 'text/plain; charset=utf-8')
 
-  return `# Lila Chibane · Coach sportive · Dog sitter
+  return `# Lila Chibane · Coach sportive sport-santé
 
-> Lila Chibane est coach sportive sport-santé et dog sitter, basée à Avensan, dans le Médoc (Gironde, Nouvelle-Aquitaine, France). Son fil conducteur : prendre soin du vivant, du corps, des sens, des humains comme des chiens.
+> Lila Chibane est coach sportive sport-santé, basée à Avensan, dans le Médoc (Gironde, Nouvelle-Aquitaine, France). Elle accompagne des femmes qui veulent reprendre une activité physique à leur rythme, sans pression ni culpabilité. Elle est aussi fondatrice des Tortues du Médoc et autrice de la newsletter Corps de rêves.
 
 ## Identité
 
 - Nom : Lila Chibane
-- Métiers : coach sportive sport-santé, dog sitter
+- Métier : coach sportive sport-santé, diplômée en sport santé, certifiée en nutrition
+- Fondatrice des Tortues du Médoc : https://lestortuesdumedoc.fr/
 - Basée à : Avensan, Médoc, Gironde (33480), France
 - Site : https://lilachibane.com
 - Contact : lila.chibane.pro@outlook.com
-- Newsletter : https://jamaistroptard.substack.com/
+- Newsletter Corps de rêves (sport, santé des femmes et sciences, chaque dimanche) : https://corpsdereves.substack.com/
 - Langue : français
 
-## Zones desservies
-
-- Coaching sportif en visio : toute la France
-- Coaching sportif en présentiel : Médoc (Gironde)
-- Dog sitting : Avensan, le Médoc (Castelnau-de-Médoc, Moulis-en-Médoc, Listrac-Médoc…) et Le Bouscat
-
----
-
-## 01 - Coaching sportif
-
-### Public
+## Public
 
 - Femmes actives, 30-55 ans
 - Reprise d'une activité physique après une longue pause
-- Fatigue chronique, stress, charge mentale
-- Douleurs ou limitations physiques
+- Fatigue, stress, charge mentale, planning chargé
 - En quête d'un accompagnement bienveillant, sans pression
 
-### Approche
-
-Lila propose un coaching individuel construit sur trois piliers :
+## Approche
 
 1. **Activité physique adaptée** : renforcement, mobilité, cardio dosé, ajustés au niveau et aux contraintes de chacune.
-2. **Régulation nerveuse** : gestion du stress, respiration, conscience du corps. L'effort s'ajuste à l'état du système nerveux.
-3. **Alimentation soutenante** : des repères pour maintenir l'énergie et la récupération, sans régime ni restriction.
+2. **Régulation nerveuse** : gestion du stress, respiration, conscience du corps.
+3. **Alimentation soutenante** : des repères pour l'énergie et la récupération, sans régime ni restriction.
 
-### Format
+Valeurs : à ton rythme, le plaisir avant la performance, la régularité avant l'intensité, zéro culpabilité. L'objectif est l'autonomie : un coaching conçu pour qu'on n'en ait plus besoin.
 
-- Coaching individuel, en visio (toute la France) ou en présentiel (Médoc)
-- Programme entièrement personnalisé, séances selon les disponibilités
-- Bilan gratuit de 30 minutes, sans engagement
+## Accompagnements
 
-### Valeurs
+### Les tortues libres et musclées (cohorte en ligne)
 
-- Sans pression, sans punition, à ton rythme
-- Le plaisir avant la performance, la régularité avant l'intensité
-- Bienveillance, zéro culpabilité
+- 12 semaines en ligne, en petit groupe de 6 femmes
+- Un live par semaine, trois vidéos par semaine (36 vidéos à garder)
+- Un groupe WhatsApp et 3 appels individuels avec Lila
+- En semaine 12, chaque participante conçoit sa propre séance
+- Tarif de la première cohorte : 650 € (800 € pour la cohorte d'avril)
+- Inscription sur liste d'attente : https://lilachibane.com/cohorte
 
----
+### Allô Lila (appel individuel)
 
-## 02 - Dog sitting
-
-Garde de chien à Avensan, dans le Médoc et à Le Bouscat.
-
-### Prestations
-
-- **Promenades & sorties** : balades adaptées à l'énergie et au caractère du chien (forêt, plage, sentiers)
-- **Garde à domicile** : le chien reste chez lui, dans ses repères ; présence de jour et/ou de nuit
-- **Visites & soins** : passages quotidiens pour nourrir, sortir et câliner, pour les absences plus courtes
-- **Transport** : accompagnement chez le vétérinaire, le toiletteur, etc.
-
-### Approche
-
-Chaque chien à son rythme, chaque humain l'esprit tranquille. Lila a obtenu l'ACACED (l'attestation officielle de connaissances pour les animaux de compagnie) et travaille avec des méthodes positives, respectueuses et sans coercition, nourries par l'éthologie canine. Elle commence toujours par comprendre le chien avant de s'adapter à lui. La première rencontre est offerte, et elle envoie régulièrement photos et vidéos pendant la garde.
-
-### Tarifs (à partir de ; tarifs complets et à jour sur le site)
-
-- Promenades individuelles : à partir de 17€ (30 min), 28€ (1h) ; cartes de 10 balades disponibles
-- Promenades collectives (avec des chiens copains) : à partir de 10€ par chien
-- Visites à domicile : à partir de 11€ (15 min) ; cartes de 5 visites disponibles
-- Garderie de jour : 30€ la journée
-- Garde à domicile : journée (12h) 75€, nuit (12h) 50€, 24h (jour + nuit) 125€ tout compris
-- Forfait à la semaine : à partir de 270€ (7 jours)
-- Accompagnement vétérinaire/toiletteur et déplacement (0,65€/km) sur demande
-- Devis personnalisé ; chien supplémentaire sur demande
-
----
+- Un appel de 45 minutes en visio, en tête-à-tête
+- Un court questionnaire avant, un récap écrit après l'appel
+- Pour repérer ce qui coince et repartir avec un plan pour les semaines qui arrivent
+- Tarif : 85 €
+- Détails : https://lilachibane.com/allo-lila
 
 ## Pages du site
 
-- https://lilachibane.com - Accueil : coaching sportif (approche, témoignages, questions, contact)
-- https://lilachibane.com/dog-sitting - Page dog sitting (prestations, tarifs, questions, contact)
-- https://lilachibane.com/blog - Blog : santé, forme et bien-être
-- https://lilachibane.com/quiz - Quiz énergie pour découvrir ton profil et recevoir des conseils personnalisés
+- https://lilachibane.com : accueil (présentation, accompagnements, approche, newsletter, témoignages, contact)
+- https://lilachibane.com/cohorte : la cohorte en ligne de 12 semaines
+- https://lilachibane.com/allo-lila : l'appel individuel de 45 minutes
+- https://lilachibane.com/blog : articles sur le corps des femmes, le sport et la santé
 `
 })

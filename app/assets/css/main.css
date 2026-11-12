@@ -4,13 +4,13 @@
 }
 
 .btn-ghost {
-  @apply inline-flex items-center gap-2 border border-white/40 text-white text-sm font-body font-normal tracking-wide
-         py-4 px-8 rounded-full hover:bg-white hover:text-bleu transition-all duration-300;
+  @apply inline-flex items-center gap-2 border border-azur/35 text-azur text-[15px] font-titre font-semibold
+         py-3.5 px-7 rounded-full hover:bg-azur hover:text-white transition-all duration-300;
 }
 
 .btn-light {
-  @apply bg-white text-bleu text-sm font-body font-normal tracking-wide py-4 px-10 rounded-full
-         hover:opacity-90 active:scale-[0.98] transition-all duration-300;
+  @apply bg-azur text-white text-[15px] font-titre font-semibold py-3.5 px-7 rounded-full
+         hover:bg-encre active:scale-[0.98] transition-all duration-300;
 }
 
 .form-input {
@@ -22,15 +22,21 @@
 }
 
 .form-input-light {
-  @apply bg-transparent border-b border-white/25 px-0 py-3
-         text-white font-body text-base
-         placeholder:text-white/40
-         focus:outline-none focus:border-white
+  @apply bg-transparent border-b border-brume px-0 py-3
+         text-encre font-titre text-base
+         placeholder:text-ardoise/60
+         focus:outline-none focus:border-azur
          transition-colors duration-300 w-full;
 }
 
 /* Évite un flash pendant la transition de page (mood bleu) */
-body { background-color: #1B3FA0; }
+body {
+  background-color: #EEEFFB;
+}
+
+.bande-ciel {
+  background-color: #F1E9FA;
+}
 
 /* Transition de page (fondu + léger glissement) */
 .page-enter-active,
@@ -45,4 +51,104 @@ body { background-color: #1B3FA0; }
   .page-leave-active { transition: opacity 0.2s ease; }
   .page-enter-from,
   .page-leave-to { transform: none; }
+}
+
+.titre {
+  @apply font-titre font-bold text-encre text-3xl md:text-[2.6rem] leading-[1.08] tracking-tight;
+}
+.accent {
+  @apply font-titre not-italic;
+}
+.btn-azur {
+  @apply inline-flex items-center justify-center gap-2 bg-azur text-white font-titre font-semibold text-[15px]
+         py-3.5 px-7 rounded-full hover:bg-encre active:scale-[0.98] transition-all duration-300;
+}
+.text-link {
+  @apply font-titre font-semibold text-[15px] text-azur underline underline-offset-4 decoration-azur/40
+         hover:decoration-azur transition-colors duration-300;
+}
+.teinte {
+  filter: sepia(0.18) saturate(1.3) brightness(1.06) contrast(1.02);
+}
+
+.vente-section {
+  @apply py-14 md:py-20;
+}
+.vente-grille {
+  @apply grid md:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] gap-x-12 gap-y-6;
+}
+.vente-ligne {
+  @apply py-3;
+}
+.vente-ligne-titre {
+  @apply font-titre font-bold text-lg text-encre mb-1.5;
+}
+.vente-texte {
+  @apply font-titre text-ardoise text-base md:text-[17px] leading-relaxed;
+}
+
+.btn-blanc {
+  @apply inline-flex items-center justify-center gap-2 bg-white text-azur font-titre font-semibold text-[15px]
+         py-3.5 px-7 rounded-full hover:bg-ciel active:scale-[0.98] transition-all duration-300;
+}
+.vente-conteneur {
+  @apply max-w-5xl mx-auto px-6 md:px-10;
+}
+.vente-bande {
+  @apply py-16 md:py-[clamp(3.5rem,10vh,6rem)];
+}
+
+.revele {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.revele.vu {
+  opacity: 1;
+  transform: none;
+}
+.revele .pousse {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+.revele.vu .pousse {
+  transform: scaleY(1);
+}
+
+html.de-nuit .tab {
+  color: rgb(255 255 255 / 0.65);
+}
+html.de-nuit .tab:hover,
+html.de-nuit .tab--active,
+html.de-nuit .bouton-menu,
+html.de-nuit .brand-name,
+html.de-nuit .nav-link {
+  color: #fff;
+}
+
+.fiche-ligne {
+  @apply grid md:grid-cols-[13rem_minmax(0,1fr)] gap-x-10 gap-y-4 py-7 md:py-9;
+}
+.fiche-titre {
+  @apply font-titre font-bold text-encre text-lg md:text-xl leading-snug tracking-tight;
+}
+
+.bande-voile {
+  background-color: #FFFFFF;
+}
+.bande-nuit {
+  @apply text-white py-20 md:py-28;
+  background-color: #171F4D;
+}
+.bande-couchant {
+  background-color: #F1E9FA;
+}
+
+h1.font-titre,
+h2.font-titre,
+.titre {
+  font-family: 'Lexend', 'DM Sans', system-ui, sans-serif;
+  letter-spacing: -0.035em;
 }
