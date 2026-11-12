@@ -15,6 +15,14 @@ export const useSiteContent = async () => {
 
   const content = computed(() => {
     const d = homepage.value?.data || {}
+    const offresParDefaut = [
+      { besoin: "D'un cadre et d'un groupe", nom: 'Les tortues libres et musclées', prix: '650 €', note: 'cohorte en ligne, 12 semaines', cta: 'Découvrir la cohorte', url: '/cohorte' },
+      { besoin: "D'une réponse à ma question", nom: 'Allô Lila', prix: '85 €', note: 'un appel de 45 minutes en visio', cta: "Découvrir l'appel", url: '/allo-lila' },
+      { besoin: 'De courir sans pression', nom: 'Les Tortues du Médoc', prix: '15 à 25 € par an', note: 'mon association de course lente', cta: 'Découvrir les Tortues', url: 'https://lestortuesdumedoc.fr/' },
+    ]
+    const offresValides = (d.offres || [])
+      .map((o) => ({ besoin: o.besoin, nom: o.nom, prix: o.prix || '', note: o.note || '', cta: o.bouton || 'Découvrir', url: o.lien }))
+      .filter((o) => o.besoin && o.nom && o.url)
     const igCoachingUrl = asLink(d.instagram_coaching) || 'https://www.instagram.com/lila_chibane/'
     const linkedinUrl = asLink(d.linkedin_coaching) || 'https://www.linkedin.com/in/lila-chibane-61704864/'
     const igDogUrl = asLink(d.instagram_dog) || 'https://www.instagram.com/lilagardetonchien/'
@@ -28,6 +36,28 @@ export const useSiteContent = async () => {
         { key: 'linkedin', type: 'linkedin', label: 'LinkedIn', short: 'LinkedIn', url: linkedinUrl },
         { key: 'instagram-dog', type: 'instagram', label: 'Instagram dog sitting', short: igHandle(igDogUrl), url: igDogUrl },
       ].filter((s) => s.url),
+      accueil: {
+        titre: d.accueil_titre || 'Tu as le droit de comprendre ton corps,',
+        titreAccent: d.accueil_titre_accent || "avant qu'on te dise quoi en faire.",
+        bouton: d.accueil_bouton || 'Voir les accompagnements',
+        lien: d.accueil_lien || 'Lire la newsletter',
+        preuves: (d.accueil_preuves?.length ? d.accueil_preuves : [
+          { label: 'Diplômée', valeur: 'Sport santé' },
+          { label: 'Certifiée', valeur: 'Nutrition' },
+          { label: 'Fondatrice', valeur: 'Tortues du Médoc' },
+        ]).filter((p) => p.valeur),
+      },
+      offres: {
+        titre: d.offres_titre || 'De quoi as-tu besoin ?',
+        items: offresValides.length ? offresValides : offresParDefaut,
+      },
+      newsletter: {
+        titre: d.newsletter_titre || 'Corps de rêves, chaque dimanche.',
+        texte: d.newsletter_texte || 'Ma newsletter. Le corps et la santé des femmes, le sport, la société et la gourmandise, racontés et questionnés avec humour, rigueur et douceur.',
+        bouton: d.newsletter_bouton || "S'abonner à Corps de rêves",
+        url: asLink(d.newsletter_url) || 'https://corpsdereves.substack.com/',
+      },
+      temoignagesTitre: d.temoignages_titre || "Ce qu'elles en disent",
       hero: {
         name: d.hero_name || "Je m'appelle Lila.",
         intro1: d.hero_intro_1 || 'Prendre soin du corps, des sens, du vivant, et de ce qui nous relie au monde.',
@@ -135,6 +165,16 @@ export const useSiteContent = async () => {
         intro: asText(d.contact_intro) || 'Que ce soit pour un coaching, une garde de chien ou simplement discuter, je réponds personnellement à chaque message.',
         buttonLabel: d.contact_button_label || 'Envoyer',
         successMessage: d.contact_success || 'Merci, ton message est bien arrivé. Je te réponds très vite.',
+        phrase: d.contact_phrase || "Quelques lignes sur ce qui t'amène suffisent. Je te réponds moi-même.",
+        email: d.contact_email || 'lila.chibane.pro@outlook.com',
+        objet: d.contact_objet || "J'aimerais qu'on en parle",
+        brouillons: (d.contact_brouillons?.length ? d.contact_brouillons.map((b) => b.texte).filter(Boolean) : [
+          "j'aimerais me remettre au sport, mais je ne sais pas par où commencer.",
+          'ma semaine est pleine et je culpabilise de ne rien faire pour moi.',
+          "je cours depuis un an et je stagne, tu pourrais m'aider ?",
+        ]),
+        mention: d.contact_mention || 'Pas de robot, pas de séquence automatique.',
+        ecrire: d.contact_ecrire || 'Écris-moi',
       },
     }
   })

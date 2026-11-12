@@ -85,7 +85,7 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen bg-bleu text-white">
+  <div class="min-h-screen text-encre">
     <!-- Header -->
     <ActivityHeader />
 
@@ -93,7 +93,7 @@ useHead({
     <article v-if="article" class="pt-28 md:pt-36 pb-20 md:pb-32">
       <!-- Back to blog -->
       <div class="max-w-3xl mx-auto px-6 md:px-10 mb-8 md:mb-10">
-        <NuxtLink to="/blog" class="group inline-flex items-center gap-1.5 font-body text-sm text-white/70 hover:text-white transition-colors duration-300">
+        <NuxtLink to="/blog" class="group inline-flex items-center gap-1.5 font-titre text-sm text-ardoise hover:text-encre transition-colors duration-300">
           <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
           Retour aux articles
         </NuxtLink>
@@ -111,19 +111,19 @@ useHead({
       <!-- Article Header -->
       <div class="max-w-3xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
         <div class="flex items-center gap-4 mb-5 md:mb-6">
-          <span v-if="article.data.publication_date" class="text-xs font-body text-white/50">
+          <span v-if="article.data.publication_date" class="text-sm font-titre font-semibold text-corail">
             {{ formatDate(article.data.publication_date) }}
           </span>
-          <span v-if="article.data.reading_time" class="text-xs font-body text-white/50">
+          <span v-if="article.data.reading_time" class="text-sm font-titre text-ardoise">
             {{ article.data.reading_time }} min de lecture
           </span>
         </div>
 
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-normal text-white mb-6 md:mb-8 leading-[1.1]">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-titre font-bold text-encre mb-6 md:mb-8 leading-[1.1]">
           {{ article.data.title }}
         </h1>
 
-        <p v-if="article.data.excerpt" class="text-lg md:text-xl font-body font-light italic text-white/70 leading-relaxed">
+        <p v-if="article.data.excerpt" class="font-plume italic text-2xl md:text-[1.9rem] text-encre/80 leading-snug">
           {{ article.data.excerpt }}
         </p>
       </div>
@@ -135,46 +135,27 @@ useHead({
             v-if="article.data.content"
             :field="article.data.content"
           />
-          <div v-else class="text-white/60 font-body font-light italic">
+          <div v-else class="text-ardoise font-titre italic">
             Le contenu de cet article sera bientôt disponible...
           </div>
         </div>
       </div>
 
-      <!-- Bottom CTA -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mt-16 md:mt-20 pt-8 border-t border-white/15">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div class="text-center sm:text-left">
-            <p class="font-body font-normal text-white mb-1">Cet article t'a plu ?</p>
-            <p class="text-sm font-body font-light text-white/60">Partage-le avec tes amies !</p>
-          </div>
-          <NuxtLink to="/blog" class="btn-light shrink-0">
-            Voir tous les articles
-          </NuxtLink>
-        </div>
-      </div>
-
-      <!-- Author Section -->
-      <div class="max-w-3xl mx-auto px-6 md:px-10 mt-14 md:mt-20">
-        <div class="bg-white/[0.06] border border-white/10 rounded-2xl p-8 md:p-10">
-          <div class="text-center sm:text-left">
-            <h3 class="text-xl md:text-2xl font-display font-normal text-white mb-2">Lila Chibane</h3>
-            <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-3">
-              Coach sportive sport-santé pour femmes, en visio partout en France et en présentiel dans le Médoc. Reprendre une activité physique en douceur, à ton rythme, sans pression.
-            </p>
-            <p class="text-sm font-body font-light text-white/70 leading-relaxed mb-4">
-              Découvre le <NuxtLink to="/" class="text-white underline underline-offset-2 hover:text-white/70">coaching sportif</NuxtLink>.
-            </p>
-            <a
-              href="mailto:lila.chibane.pro@outlook.com"
-              class="group inline-flex items-center gap-1.5 font-body text-sm text-white/60 hover:text-white transition-colors duration-300"
-            >
-              Me contacter
-              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </a>
+      <section class="max-w-3xl mx-auto px-6 md:px-10 mt-20 md:mt-28">
+        <div class="flex items-center gap-5 mb-6">
+          <img src="/lila-rire.jpg" alt="Lila Chibane" class="teinte w-20 h-20 rounded-full object-cover ring-4 ring-white/70 shrink-0" loading="lazy" />
+          <div>
+            <p class="font-titre font-bold text-encre text-xl">Lila Chibane</p>
+            <p class="font-titre text-ardoise">Coach sportive, autrice de Corps de rêves.</p>
           </div>
         </div>
-      </div>
+        <p class="font-plume italic text-3xl md:text-[2.4rem] leading-[1.08] text-encre mb-8">Cet article t'a parlé ? <span class="text-corail">On peut aller plus loin ensemble.</span></p>
+        <div class="flex flex-wrap items-center gap-x-7 gap-y-4">
+          <NuxtLink to="/#accompagnements" class="btn-azur">Voir les accompagnements</NuxtLink>
+          <a href="https://corpsdereves.substack.com/" target="_blank" rel="noopener" class="text-link">Recevoir la newsletter</a>
+          <NuxtLink to="/blog" class="text-link">Tous les articles</NuxtLink>
+        </div>
+      </section>
     </article>
 
     <AppFooter simple blue />
@@ -183,23 +164,23 @@ useHead({
 
 <style scoped lang="postcss">
 :deep(.article-content) {
-  @apply text-white/85 leading-relaxed font-body;
+  @apply text-ardoise leading-relaxed font-titre;
 }
 
 :deep(.article-content p) {
-  @apply mb-6 text-base md:text-lg leading-relaxed font-light;
+  @apply mb-6 text-base md:text-lg leading-relaxed;
 }
 
 :deep(.article-content h2) {
-  @apply text-2xl md:text-3xl font-normal text-white mt-12 mb-6 font-display;
+  @apply text-2xl md:text-3xl font-bold text-encre mt-12 mb-6 font-titre;
 }
 
 :deep(.article-content h3) {
-  @apply text-xl md:text-2xl font-normal text-white mt-10 mb-4 font-display;
+  @apply text-xl md:text-2xl font-bold text-encre mt-10 mb-4 font-titre;
 }
 
 :deep(.article-content h4) {
-  @apply text-lg md:text-xl font-medium text-white mt-8 mb-3 font-display;
+  @apply text-lg md:text-xl font-bold text-encre mt-8 mb-3 font-titre;
 }
 
 :deep(.article-content ul),
@@ -216,15 +197,15 @@ useHead({
 }
 
 :deep(.article-content li) {
-  @apply text-base md:text-lg leading-relaxed font-light;
+  @apply text-base md:text-lg leading-relaxed;
 }
 
 :deep(.article-content a) {
-  @apply text-white hover:text-white/70 underline underline-offset-4 transition-colors duration-300;
+  @apply text-azur hover:text-encre underline underline-offset-4 transition-colors duration-300;
 }
 
 :deep(.article-content strong) {
-  @apply font-medium text-white;
+  @apply font-bold text-encre;
 }
 
 :deep(.article-content em) {
@@ -232,7 +213,7 @@ useHead({
 }
 
 :deep(.article-content blockquote) {
-  @apply pl-6 py-2 my-8 italic text-white/70 font-display text-lg md:text-xl;
+  @apply py-2 my-8 italic text-encre font-plume text-2xl md:text-[1.75rem] leading-snug;
 }
 
 :deep(.article-content img) {
@@ -240,11 +221,11 @@ useHead({
 }
 
 :deep(.article-content code) {
-  @apply bg-white/10 text-white px-2 py-1 rounded text-sm font-mono;
+  @apply bg-white text-encre px-2 py-1 rounded text-sm font-mono;
 }
 
 :deep(.article-content pre) {
-  @apply bg-black/30 text-white p-6 rounded-xl overflow-x-auto my-6;
+  @apply bg-encre text-white p-6 rounded-xl overflow-x-auto my-6;
 }
 
 :deep(.article-content pre code) {

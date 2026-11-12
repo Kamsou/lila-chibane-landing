@@ -5,6 +5,155 @@
   "repeatable": false,
   "status": true,
   "json": {
+    "Accueil": {
+      "accueil_titre": {
+        "type": "Text",
+        "config": {
+          "label": "Titre, première partie (en blanc)",
+          "placeholder": ""
+        }
+      },
+      "accueil_titre_accent": {
+        "type": "Text",
+        "config": {
+          "label": "Titre, fin (en lilas)",
+          "placeholder": ""
+        }
+      },
+      "accueil_bouton": {
+        "type": "Text",
+        "config": {
+          "label": "Bouton principal",
+          "placeholder": ""
+        }
+      },
+      "accueil_lien": {
+        "type": "Text",
+        "config": {
+          "label": "Lien vers la newsletter",
+          "placeholder": ""
+        }
+      },
+      "accueil_preuves": {
+        "type": "Group",
+        "config": {
+          "label": "Preuves sous les boutons",
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Petit mot (ex. Diplômée)",
+                "placeholder": ""
+              }
+            },
+            "valeur": {
+              "type": "Text",
+              "config": {
+                "label": "En gras (ex. Sport santé)",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Accompagnements": {
+      "offres_titre": {
+        "type": "Text",
+        "config": {
+          "label": "Question affichée",
+          "placeholder": ""
+        }
+      },
+      "offres": {
+        "type": "Group",
+        "config": {
+          "label": "Accompagnements (garder le même ordre : cohorte, appel, Tortues)",
+          "fields": {
+            "besoin": {
+              "type": "Text",
+              "config": {
+                "label": "Besoin (bouton de gauche)",
+                "placeholder": ""
+              }
+            },
+            "nom": {
+              "type": "Text",
+              "config": {
+                "label": "Nom de l'offre",
+                "placeholder": ""
+              }
+            },
+            "prix": {
+              "type": "Text",
+              "config": {
+                "label": "Prix",
+                "placeholder": ""
+              }
+            },
+            "note": {
+              "type": "Text",
+              "config": {
+                "label": "Précision après le prix",
+                "placeholder": ""
+              }
+            },
+            "bouton": {
+              "type": "Text",
+              "config": {
+                "label": "Texte du bouton",
+                "placeholder": ""
+              }
+            },
+            "lien": {
+              "type": "Text",
+              "config": {
+                "label": "Lien (ex. /cohorte ou https://…)",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Newsletter": {
+      "newsletter_titre": {
+        "type": "Text",
+        "config": {
+          "label": "Titre",
+          "placeholder": ""
+        }
+      },
+      "newsletter_texte": {
+        "type": "Text",
+        "config": {
+          "label": "Texte",
+          "placeholder": ""
+        }
+      },
+      "newsletter_bouton": {
+        "type": "Text",
+        "config": {
+          "label": "Bouton",
+          "placeholder": ""
+        }
+      },
+      "newsletter_url": {
+        "type": "Link",
+        "config": {
+          "label": "Adresse de la newsletter",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "temoignages_titre": {
+        "type": "Text",
+        "config": {
+          "label": "Titre de l'onglet Témoignages",
+          "placeholder": ""
+        }
+      }
+    },
     "Hero": {
       "hero_name": {
         "type": "Text",
@@ -60,15 +209,24 @@
       },
       "coaching_kicker": {
         "type": "Text",
-        "config": { "label": "Surtitre / titre de la porte du portail", "placeholder": "Coaching sportif" }
+        "config": {
+          "label": "Surtitre / titre de la porte du portail",
+          "placeholder": "Coaching sportif"
+        }
       },
       "coaching_door_text": {
         "type": "Text",
-        "config": { "label": "Description sous la porte (portail)", "placeholder": "Sport-santé pour femmes, en douceur" }
+        "config": {
+          "label": "Description sous la porte (portail)",
+          "placeholder": "Sport-santé pour femmes, en douceur"
+        }
       },
       "coaching_approach_title": {
         "type": "Text",
-        "config": { "label": "Titre du panneau « Approche »", "placeholder": "Mon approche" }
+        "config": {
+          "label": "Titre du panneau « Approche »",
+          "placeholder": "Mon approche"
+        }
       },
       "coaching_title": {
         "type": "Text",
@@ -92,11 +250,17 @@
           "fields": {
             "title": {
               "type": "Text",
-              "config": { "label": "Titre", "placeholder": "Mouvement intelligent" }
+              "config": {
+                "label": "Titre",
+                "placeholder": "Mouvement intelligent"
+              }
             },
             "text": {
               "type": "Text",
-              "config": { "label": "Description", "placeholder": "Renforcement, mobilité..." }
+              "config": {
+                "label": "Description",
+                "placeholder": "Renforcement, mobilité..."
+              }
             }
           }
         }
@@ -108,19 +272,32 @@
           "fields": {
             "highlight": {
               "type": "Text",
-              "config": { "label": "Accroche (phrase courte mise en avant)", "placeholder": "Elle a vraiment écouté qui je suis." }
+              "config": {
+                "label": "Accroche (phrase courte mise en avant)",
+                "placeholder": "Elle a vraiment écouté qui je suis."
+              }
             },
             "quote": {
               "type": "StructuredText",
-              "config": { "label": "Témoignage complet", "placeholder": "Le texte du témoignage (un ou plusieurs paragraphes)", "multi": "paragraph,strong,em" }
+              "config": {
+                "label": "Témoignage complet",
+                "placeholder": "Le texte du témoignage (un ou plusieurs paragraphes)",
+                "multi": "paragraph,strong,em"
+              }
             },
             "author": {
               "type": "Text",
-              "config": { "label": "Prénom", "placeholder": "Raquel" }
+              "config": {
+                "label": "Prénom",
+                "placeholder": "Raquel"
+              }
             },
             "detail": {
               "type": "Text",
-              "config": { "label": "Détail (âge · date)", "placeholder": "51 ans · Juin 2026" }
+              "config": {
+                "label": "Détail (âge · date)",
+                "placeholder": "51 ans · Juin 2026"
+              }
             }
           }
         }
@@ -136,23 +313,38 @@
       },
       "dog_kicker": {
         "type": "Text",
-        "config": { "label": "Surtitre / titre de la porte du portail", "placeholder": "Dog sitting" }
+        "config": {
+          "label": "Surtitre / titre de la porte du portail",
+          "placeholder": "Dog sitting"
+        }
       },
       "dog_door_text": {
         "type": "Text",
-        "config": { "label": "Description sous la porte (portail)", "placeholder": "Garde & promenade, Médoc et Le Bouscat" }
+        "config": {
+          "label": "Description sous la porte (portail)",
+          "placeholder": "Garde & promenade, Médoc et Le Bouscat"
+        }
       },
       "dog_services_title": {
         "type": "Text",
-        "config": { "label": "Titre du panneau « Prestations »", "placeholder": "Les prestations" }
+        "config": {
+          "label": "Titre du panneau « Prestations »",
+          "placeholder": "Les prestations"
+        }
       },
       "dog_pricing_title": {
         "type": "Text",
-        "config": { "label": "Titre du panneau « Tarifs »", "placeholder": "Tarifs" }
+        "config": {
+          "label": "Titre du panneau « Tarifs »",
+          "placeholder": "Tarifs"
+        }
       },
       "dog_title": {
         "type": "Text",
-        "config": { "label": "Titre de section", "placeholder": "Dog sitting" }
+        "config": {
+          "label": "Titre de section",
+          "placeholder": "Dog sitting"
+        }
       },
       "dog_intro": {
         "type": "StructuredText",
@@ -164,11 +356,17 @@
       },
       "dog_cta_caption": {
         "type": "Text",
-        "config": { "label": "Sous-texte (zone desservie)", "placeholder": "Avensan · Médoc · Le Bouscat · tarifs sur demande" }
+        "config": {
+          "label": "Sous-texte (zone desservie)",
+          "placeholder": "Avensan · Médoc · Le Bouscat · tarifs sur demande"
+        }
       },
       "dog_approach_title": {
         "type": "Text",
-        "config": { "label": "Mon approche · titre", "placeholder": "Mon approche" }
+        "config": {
+          "label": "Mon approche · titre",
+          "placeholder": "Mon approche"
+        }
       },
       "dog_approach": {
         "type": "StructuredText",
@@ -185,11 +383,17 @@
           "fields": {
             "title": {
               "type": "Text",
-              "config": { "label": "Titre", "placeholder": "Promenades & sorties" }
+              "config": {
+                "label": "Titre",
+                "placeholder": "Promenades & sorties"
+              }
             },
             "text": {
               "type": "Text",
-              "config": { "label": "Description", "placeholder": "Des balades dans le Médoc..." }
+              "config": {
+                "label": "Description",
+                "placeholder": "Des balades dans le Médoc..."
+              }
             }
           }
         }
@@ -217,11 +421,17 @@
       },
       "faq_label": {
         "type": "Text",
-        "config": { "label": "Surtitre", "placeholder": "Questions fréquentes" }
+        "config": {
+          "label": "Surtitre",
+          "placeholder": "Questions fréquentes"
+        }
       },
       "faq_title": {
         "type": "Text",
-        "config": { "label": "Titre de section", "placeholder": "Tu te poses peut-être ces questions" }
+        "config": {
+          "label": "Titre de section",
+          "placeholder": "Tu te poses peut-être ces questions"
+        }
       },
       "faq_items": {
         "type": "Group",
@@ -230,17 +440,27 @@
           "fields": {
             "question": {
               "type": "Text",
-              "config": { "label": "Question", "placeholder": "Où proposes-tu le dog sitting ?" }
+              "config": {
+                "label": "Question",
+                "placeholder": "Où proposes-tu le dog sitting ?"
+              }
             },
             "answer": {
               "type": "Text",
-              "config": { "label": "Réponse", "placeholder": "À Avensan, dans le Médoc..." }
+              "config": {
+                "label": "Réponse",
+                "placeholder": "À Avensan, dans le Médoc..."
+              }
             },
             "category": {
               "type": "Select",
               "config": {
                 "label": "Activité concernée",
-                "options": ["coaching", "dog", "les deux"],
+                "options": [
+                  "coaching",
+                  "dog",
+                  "les deux"
+                ],
                 "default_value": "les deux"
               }
             }
@@ -258,7 +478,10 @@
       },
       "contact_title": {
         "type": "Text",
-        "config": { "label": "Titre de section", "placeholder": "Envie d'échanger ?" }
+        "config": {
+          "label": "Titre de section",
+          "placeholder": "Envie d'échanger ?"
+        }
       },
       "contact_intro": {
         "type": "StructuredText",
@@ -270,53 +493,139 @@
       },
       "contact_button_label": {
         "type": "Text",
-        "config": { "label": "Texte du bouton d'envoi", "placeholder": "Envoyer" }
+        "config": {
+          "label": "Texte du bouton d'envoi",
+          "placeholder": "Envoyer"
+        }
       },
       "contact_success": {
         "type": "Text",
-        "config": { "label": "Message de succès", "placeholder": "Merci, ton message est bien arrivé..." }
+        "config": {
+          "label": "Message de succès",
+          "placeholder": "Merci, ton message est bien arrivé..."
+        }
+      },
+      "contact_phrase": {
+        "type": "Text",
+        "config": {
+          "label": "Phrase sous le titre",
+          "placeholder": ""
+        }
+      },
+      "contact_email": {
+        "type": "Text",
+        "config": {
+          "label": "Adresse email affichée",
+          "placeholder": ""
+        }
+      },
+      "contact_objet": {
+        "type": "Text",
+        "config": {
+          "label": "Objet du faux email",
+          "placeholder": ""
+        }
+      },
+      "contact_brouillons": {
+        "type": "Group",
+        "config": {
+          "label": "Messages qui s'écrivent tout seuls",
+          "fields": {
+            "texte": {
+              "type": "Text",
+              "config": {
+                "label": "Message (sans majuscule au début)",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "contact_mention": {
+        "type": "Text",
+        "config": {
+          "label": "Mention à côté du portrait",
+          "placeholder": ""
+        }
+      },
+      "contact_ecrire": {
+        "type": "Text",
+        "config": {
+          "label": "Texte du bouton",
+          "placeholder": ""
+        }
       }
     },
     "Navigation": {
       "nav_brand_label": {
         "type": "Text",
-        "config": { "label": "Logo / nom (en haut à gauche du site)", "placeholder": "Lila Chibane" }
+        "config": {
+          "label": "Logo / nom (en haut à gauche du site)",
+          "placeholder": "Lila Chibane"
+        }
       },
       "nav_label_coaching": {
         "type": "Text",
-        "config": { "label": "Lien Coaching", "placeholder": "Coaching" }
+        "config": {
+          "label": "Lien Coaching",
+          "placeholder": "Coaching"
+        }
       },
       "nav_label_dog": {
         "type": "Text",
-        "config": { "label": "Lien Dog sitting", "placeholder": "Dog sitting" }
+        "config": {
+          "label": "Lien Dog sitting",
+          "placeholder": "Dog sitting"
+        }
       },
       "nav_show_blog": {
         "type": "Boolean",
-        "config": { "label": "Afficher le lien Blog dans la navigation", "default_value": true }
+        "config": {
+          "label": "Afficher le lien Blog dans la navigation",
+          "default_value": true
+        }
       },
       "nav_label_blog": {
         "type": "Text",
-        "config": { "label": "Lien Blog", "placeholder": "Blog" }
+        "config": {
+          "label": "Lien Blog",
+          "placeholder": "Blog"
+        }
       }
     },
     "Réseaux sociaux": {
       "instagram_coaching": {
         "type": "Link",
-        "config": { "label": "Instagram coaching", "placeholder": "https://instagram.com/...", "allowTargetBlank": true }
+        "config": {
+          "label": "Instagram coaching",
+          "placeholder": "https://instagram.com/...",
+          "allowTargetBlank": true
+        }
       },
       "linkedin_coaching": {
         "type": "Link",
-        "config": { "label": "LinkedIn coaching", "placeholder": "https://www.linkedin.com/in/...", "allowTargetBlank": true }
+        "config": {
+          "label": "LinkedIn coaching",
+          "placeholder": "https://www.linkedin.com/in/...",
+          "allowTargetBlank": true
+        }
       },
       "instagram_dog": {
         "type": "Link",
-        "config": { "label": "Instagram dog sitting", "placeholder": "https://instagram.com/...", "allowTargetBlank": true }
+        "config": {
+          "label": "Instagram dog sitting",
+          "placeholder": "https://instagram.com/...",
+          "allowTargetBlank": true
+        }
       }
     },
     "Liens": {
       "links_bio": {
         "type": "Text",
-        "config": { "label": "Bio de la page liens (lilachibane.com/liens)", "placeholder": "Tu as le droit de comprendre ton corps..." }
+        "config": {
+          "label": "Bio de la page liens (lilachibane.com/liens)",
+          "placeholder": "Tu as le droit de comprendre ton corps..."
+        }
       },
       "links_items": {
         "type": "Group",
@@ -325,15 +634,25 @@
           "fields": {
             "title": {
               "type": "Text",
-              "config": { "label": "Titre", "placeholder": "#12 A t'on peur des femmes fortes ?" }
+              "config": {
+                "label": "Titre",
+                "placeholder": "#12 A t'on peur des femmes fortes ?"
+              }
             },
             "description": {
               "type": "Text",
-              "config": { "label": "Description (facultatif)", "placeholder": "Histoire de corset, de protéines..." }
+              "config": {
+                "label": "Description (facultatif)",
+                "placeholder": "Histoire de corset, de protéines..."
+              }
             },
             "url": {
               "type": "Link",
-              "config": { "label": "Lien", "placeholder": "https://corpsdereves.substack.com/...", "allowTargetBlank": true }
+              "config": {
+                "label": "Lien",
+                "placeholder": "https://corpsdereves.substack.com/...",
+                "allowTargetBlank": true
+              }
             }
           }
         }
