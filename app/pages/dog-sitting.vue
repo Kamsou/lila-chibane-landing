@@ -41,6 +41,7 @@ const labels = computed(() => panelDefs.value.map((p) => p.label))
 const idx = (key) => panelDefs.value.findIndex((p) => p.key === key)
 
 useSeoMeta({
+  robots: 'noindex, follow',
   title: 'Garde de chien Médoc & Le Bouscat · dog sitter · Lila Chibane',
   description: "Garde de chien à domicile, promenades et visites à Avensan, dans le Médoc, et à Le Bouscat. À chaque chien son rythme, à chaque humain sa tranquillité.",
   ogTitle: 'Dog sitter · Médoc et Le Bouscat · Lila Chibane',
@@ -114,7 +115,7 @@ useHead(() => {
 </script>
 
 <template>
-  <div class="bg-bleu text-white">
+  <div class="text-encre">
     <ActivityHeader />
 
     <PanelDeck :labels="labels">
@@ -133,16 +134,16 @@ useHead(() => {
 
         <section v-show="active === idx('prestations')" class="panel">
           <div class="max-w-4xl mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-12">{{ content.dog.servicesTitle }}</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-titre font-bold text-encre leading-[1.1] mb-8 md:mb-12">{{ content.dog.servicesTitle }}</h2>
             <div class="grid sm:grid-cols-3 gap-5 md:gap-6">
               <div
                 v-for="(card, i) in dog.cards"
                 :key="`d-${i}`"
-                class="card-in bg-white/[0.06] border border-white/10 rounded-xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:bg-white/10 hover:shadow-black/20"
+                class="card-in pt-5"
                 :style="{ animationDelay: `${i * 90}ms` }"
               >
-                <h3 class="text-lg font-display font-normal text-white mb-3">{{ card.title }}</h3>
-                <p class="text-sm font-body font-light text-white/75 leading-relaxed">{{ card.text }}</p>
+                <h3 class="text-lg font-titre font-bold text-encre mb-3">{{ card.title }}</h3>
+                <p class="text-sm font-titre text-ardoise leading-relaxed">{{ card.text }}</p>
               </div>
             </div>
           </div>
@@ -160,7 +161,7 @@ useHead(() => {
               >
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
               </button>
-              <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1]">{{ content.dog.pricingTitle }}</h2>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-titre font-bold text-encre leading-[1.1]">{{ content.dog.pricingTitle }}</h2>
             </div>
 
             <Transition name="md-fade" mode="out-in">
@@ -185,14 +186,14 @@ useHead(() => {
 
         <section v-if="faq.length" v-show="active === idx('faq')" class="panel">
           <div class="max-w-2xl mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-normal text-white leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
-            <div class="divide-y divide-white/15 max-h-[55vh] overflow-y-auto">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-titre font-bold text-encre leading-[1.1] mb-8 md:mb-10">{{ content.faq.title }}</h2>
+            <div class="max-h-[55vh] overflow-y-auto">
               <details v-for="(item, i) in faq" :key="`f-${i}`" class="faq-item group py-5">
                 <summary class="flex items-center justify-between gap-4 cursor-pointer list-none marker:hidden">
-                  <h3 class="text-base md:text-lg font-display font-normal text-white">{{ item.question }}</h3>
-                  <svg class="w-4 h-4 text-white/50 shrink-0 transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+                  <h3 class="text-base md:text-lg font-titre font-bold text-encre">{{ item.question }}</h3>
+                  <svg class="w-4 h-4 text-ardoise/80 shrink-0 transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
                 </summary>
-                <p class="text-sm md:text-base font-body font-light text-white/75 leading-relaxed mt-3">{{ item.answer }}</p>
+                <p class="text-sm md:text-base font-titre text-ardoise leading-relaxed mt-3">{{ item.answer }}</p>
               </details>
             </div>
           </div>
@@ -200,8 +201,8 @@ useHead(() => {
 
         <section v-show="active === idx('contact')" class="panel">
           <div class="max-w-lg mx-auto w-full">
-            <h2 class="text-2xl sm:text-3xl font-display font-normal text-white leading-[1.1] mb-2 text-center">{{ content.contact.title }}</h2>
-            <p class="text-sm font-body font-light text-white/75 mb-6 text-center leading-relaxed max-w-md mx-auto">{{ content.contact.intro }}</p>
+            <h2 class="text-2xl sm:text-3xl font-titre font-bold text-encre leading-[1.1] mb-2 text-center">{{ content.contact.title }}</h2>
+            <p class="text-sm font-titre text-ardoise mb-6 text-center leading-relaxed max-w-md mx-auto">{{ content.contact.intro }}</p>
             <ContactForm :contact="content.contact" />
           </div>
         </section>
@@ -230,8 +231,8 @@ useHead(() => {
 
 .back-btn {
   @apply w-9 h-9 rounded-full flex items-center justify-center shrink-0
-         border border-white/20 text-white/80
-         hover:bg-white hover:text-bleu
+         border border-brume text-ardoise
+         hover:bg-azur hover:text-white
          transition-all duration-300;
 }
 

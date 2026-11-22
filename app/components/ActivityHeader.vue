@@ -1,4 +1,9 @@
 <script setup>
+defineProps({
+  transparent: { type: Boolean, default: false },
+  burger: { type: Boolean, default: false },
+})
+
 const route = useRoute()
 
 const allLinks = [{ label: 'Blog', to: '/blog' }]
@@ -6,13 +11,12 @@ const links = computed(() => allLinks.filter((l) => l.to !== route.path))
 </script>
 
 <template>
-  <header class="fixed top-0 inset-x-0 z-40 bg-bleu/85 backdrop-blur-md">
+  <header class="fixed top-0 inset-x-0 z-40" :class="transparent ? '' : 'bg-ciel/85 backdrop-blur-md'">
     <div class="max-w-5xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
       <NuxtLink to="/" class="group flex items-center gap-2">
-        <span class="brand-dot"></span>
-        <span class="font-display text-lg font-normal text-white tracking-tight">Lila Chibane</span>
+        <span class="brand-name text-lg tracking-tight">Lila Chibane</span>
       </NuxtLink>
-      <nav class="flex items-center gap-6 sm:gap-8 md:gap-10">
+      <nav class="items-center gap-6 sm:gap-8 md:gap-10" :class="burger ? 'hidden lg:flex' : 'flex'">
         <NuxtLink v-for="l in links" :key="l.label" :to="l.to" class="nav-link">
           {{ l.label }}
         </NuxtLink>
@@ -22,15 +26,11 @@ const links = computed(() => allLinks.filter((l) => l.to !== route.path))
 </template>
 
 <style scoped lang="postcss">
-.brand-dot {
-  @apply w-1.5 h-1.5 rounded-full bg-white transition-transform duration-300;
+.brand-name {
+  @apply font-titre font-bold text-encre transition-colors duration-700;
 }
-.group:hover .brand-dot {
-  transform: scale(1.6);
-}
-
 .nav-link {
-  @apply relative text-sm font-body text-white/70 hover:text-white transition-colors duration-300 py-1;
+  @apply relative text-sm font-titre text-ardoise hover:text-encre transition-colors duration-300 py-1;
 }
 .nav-link::after {
   content: '';
@@ -50,6 +50,5 @@ const links = computed(() => allLinks.filter((l) => l.to !== route.path))
 
 @media (prefers-reduced-motion: reduce) {
   .nav-link::after { transition: none; }
-  .brand-dot { transition: none; }
-}
+  }
 </style>

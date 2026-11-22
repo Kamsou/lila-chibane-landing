@@ -40,20 +40,20 @@ const handleSubmit = async (e) => {
   >
     <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
       <div>
-        <label for="name" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Prénom</label>
+        <label for="name" class="text-xs font-titre font-normal tracking-wide text-ardoise mb-1.5 block">Prénom</label>
         <input type="text" id="name" name="name" placeholder="Ton prénom" required autocomplete="given-name" class="form-input-light" />
       </div>
       <div>
-        <label for="email" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Email</label>
+        <label for="email" class="text-xs font-titre font-normal tracking-wide text-ardoise mb-1.5 block">Email</label>
         <input type="email" id="email" name="email" placeholder="ton@email.com" required autocomplete="email" inputmode="email" class="form-input-light" />
       </div>
     </div>
     <div>
-      <label for="phone" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Téléphone <span class="text-white/40">(facultatif)</span></label>
+      <label for="phone" class="text-xs font-titre font-normal tracking-wide text-ardoise mb-1.5 block">Téléphone <span class="text-ardoise/80">(facultatif)</span></label>
       <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78" autocomplete="tel" inputmode="tel" class="form-input-light" />
     </div>
     <div>
-      <label for="message" class="text-xs font-body font-normal tracking-wide text-white/60 mb-1.5 block">Message</label>
+      <label for="message" class="text-xs font-titre font-normal tracking-wide text-ardoise mb-1.5 block">Message</label>
       <textarea id="message" name="message" placeholder="Dis-moi ce qui t'amène..." rows="3" required class="form-input-light resize-none"></textarea>
     </div>
     <div class="text-center pt-1">
@@ -64,10 +64,10 @@ const handleSubmit = async (e) => {
         </svg>
         {{ isSubmitting ? 'Envoi...' : contact.buttonLabel }}
       </button>
-      <p v-if="formStatus === 'success'" class="text-sm font-body font-light text-white mt-4" role="status" aria-live="polite">
+      <p v-if="formStatus === 'success'" class="text-sm font-titre text-encre mt-4" role="status" aria-live="polite">
         {{ contact.successMessage }}
       </p>
-      <p v-else-if="formStatus === 'error'" class="text-sm font-body font-light text-white/90 mt-4" role="alert">
+      <p v-else-if="formStatus === 'error'" class="text-sm font-titre text-ardoise mt-4" role="alert">
         Oups, l'envoi n'a pas fonctionné. Tu peux réessayer ou m'écrire à
         <a href="mailto:lila.chibane.pro@outlook.com" class="underline">lila.chibane.pro@outlook.com</a>.
       </p>

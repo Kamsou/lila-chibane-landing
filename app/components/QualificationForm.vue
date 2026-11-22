@@ -91,12 +91,12 @@ const submit = async () => {
 
 <template>
   <div>
-    <div v-if="status === 'success'" class="rounded-2xl bg-white/[0.06] border border-white/15 p-8 md:p-12 text-center" role="status" aria-live="polite">
-      <div class="w-12 h-12 mx-auto mb-5 rounded-full bg-white/10 flex items-center justify-center">
-        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+    <div v-if="status === 'success'" class="rounded-2xl bg-white border border-brume p-8 md:p-12 text-center" role="status" aria-live="polite">
+      <div class="w-12 h-12 mx-auto mb-5 rounded-full bg-azur/10 flex items-center justify-center">
+        <svg class="w-6 h-6 text-azur" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
       </div>
-      <h2 class="font-display text-2xl md:text-3xl font-normal text-white mb-3">Merci, {{ submittedPrenom }} !</h2>
-      <p class="text-base font-body font-light text-white/80 leading-relaxed max-w-md mx-auto">
+      <h2 class="font-titre text-2xl md:text-3xl font-bold text-encre mb-3">Merci, {{ submittedPrenom }} !</h2>
+      <p class="text-base font-titre text-ardoise leading-relaxed max-w-md mx-auto">
         J'ai bien reçu tes réponses. Je reviens vers toi très vite pour caler un premier appel ensemble.
       </p>
     </div>
@@ -280,7 +280,7 @@ const submit = async () => {
       <section class="block" :data-error="!!errors.consentement">
         <label class="consent" :class="{ 'consent--on': state.consentement }">
           <input v-model="state.consentement" type="checkbox" class="consent-box" />
-          <span class="text-sm font-body font-light text-white/85 leading-relaxed">
+          <span class="text-sm font-titre text-ardoise leading-relaxed">
             J'accepte que les informations transmises, y compris celles relatives à ma santé, soient utilisées uniquement pour évaluer l'adéquation avec l'accompagnement proposé par La Feuille de Route. Elles ne seront ni partagées ni cédées à des tiers. <span class="req">*</span>
           </span>
         </label>
@@ -289,7 +289,7 @@ const submit = async () => {
 
       <!-- Conclusion + envoi -->
       <div class="text-center">
-        <p class="text-sm font-body font-light text-white/70 leading-relaxed max-w-lg mx-auto mb-6">
+        <p class="text-sm font-titre text-ardoise leading-relaxed max-w-lg mx-auto mb-6">
           Tes réponses restent confidentielles et ne servent qu'à préparer notre échange. Je reviens vers toi sous 24/48h pour te proposer un créneau.
         </p>
         <button type="submit" class="btn-light inline-flex items-center justify-center gap-2" :disabled="status === 'submitting'">
@@ -309,30 +309,30 @@ const submit = async () => {
 </template>
 
 <style scoped lang="postcss">
-.block { @apply pt-8 border-t border-white/10 first:pt-0 first:border-0; }
-.block-title { @apply font-display text-xl md:text-2xl font-normal text-white mb-6; }
+.block { @apply pt-6 first:pt-0; }
+.block-title { @apply font-titre text-xl md:text-2xl font-bold text-encre mb-6; }
 .q { @apply border-0 p-0 m-0; }
-.q-label { @apply block text-sm font-body font-normal text-white/80 mb-3 leading-relaxed; }
-.req { @apply text-white/45 font-normal; }
+.q-label { @apply block text-sm font-titre font-normal text-ardoise mb-3 leading-relaxed; }
+.req { @apply text-ardoise/80 font-normal; }
 .q-options { @apply flex flex-col gap-2; }
 .q-options--row { @apply flex-row flex-wrap; }
 .opt {
-  @apply flex items-center gap-2 cursor-pointer select-none rounded-xl border border-white/20 bg-white/[0.04]
-         px-4 py-3 text-sm font-body font-light text-white/85
-         hover:bg-white/10 transition-colors duration-200;
+  @apply flex items-center gap-2 cursor-pointer select-none rounded-xl border border-brume bg-white
+         px-4 py-3 text-sm font-titre text-ardoise
+         hover:bg-nuage transition-colors duration-200;
 }
-.opt--on { @apply bg-white text-bleu border-white font-normal; }
-.opt:focus-within { @apply ring-2 ring-white/40; }
+.opt--on { @apply bg-azur text-white border-azur font-normal hover:bg-azur; }
+.opt:focus-within { @apply ring-2 ring-azur/40; }
 
 .select-wrap { @apply relative; }
-.select-caret { @apply w-4 h-4 text-white/50 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none; }
+.select-caret { @apply w-4 h-4 text-ardoise/80 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none; }
 
 .consent {
-  @apply flex items-start gap-3 cursor-pointer rounded-xl border border-white/20 bg-white/[0.04]
-         p-5 hover:bg-white/[0.07] transition-colors duration-200;
+  @apply flex items-start gap-3 cursor-pointer rounded-xl border border-brume bg-white
+         p-5 hover:bg-nuage transition-colors duration-200;
 }
-.consent--on { @apply border-white/40 bg-white/[0.08]; }
-.consent-box { @apply mt-0.5 w-5 h-5 shrink-0 accent-white cursor-pointer; }
+.consent--on { @apply border-azur bg-white; }
+.consent-box { @apply mt-0.5 w-5 h-5 shrink-0 accent-azur cursor-pointer; }
 
-.err { @apply text-sm text-red-200 mt-2; }
+.err { @apply text-sm text-red-700 mt-2; }
 </style>
