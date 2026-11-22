@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// La cohorte reste cachée en production tant que Lila ne l'a pas lancée.
+const cohorteEnLigne = process.env.CONTEXT !== 'production'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -31,10 +34,13 @@ export default defineNuxtConfig({
     formspreeId: 'movwedpw',
     notionToken: '',
     notionDatabaseId: '',
+    public: {
+      cohorteEnLigne,
+    },
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/preview', '/feuille-de-route', '/liens', '/dog-sitting'],
+    exclude: ['/preview', '/feuille-de-route', '/liens', '/dog-sitting', ...(cohorteEnLigne ? [] : ['/cohorte'])],
   },
   prismic: {
     endpoint: 'lila-chibane',

@@ -1,5 +1,6 @@
 export default defineEventHandler((event) => {
   setHeader(event, 'content-type', 'text/plain; charset=utf-8')
+  const { cohorteEnLigne } = useRuntimeConfig(event).public
 
   return `# Lila Chibane · Coach sportive sport-santé
 
@@ -33,7 +34,7 @@ Valeurs : à ton rythme, le plaisir avant la performance, la régularité avant 
 
 ## Accompagnements
 
-### Les tortues libres et musclées (cohorte en ligne)
+${cohorteEnLigne ? `### Les tortues libres et musclées (cohorte en ligne)
 
 - 12 semaines en ligne, en petit groupe de 6 femmes
 - Un live par semaine, trois vidéos par semaine (36 vidéos à garder)
@@ -42,7 +43,7 @@ Valeurs : à ton rythme, le plaisir avant la performance, la régularité avant 
 - Tarif de la première cohorte : 650 € (800 € pour la cohorte d'avril)
 - Inscription sur liste d'attente : https://lilachibane.com/cohorte
 
-### Allô Lila (appel individuel)
+` : ''}### Allô Lila (appel individuel)
 
 - Un appel de 45 minutes en visio, en tête-à-tête
 - Un court questionnaire avant, un récap écrit après l'appel
@@ -53,8 +54,7 @@ Valeurs : à ton rythme, le plaisir avant la performance, la régularité avant 
 ## Pages du site
 
 - https://lilachibane.com : accueil (présentation, accompagnements, approche, newsletter, témoignages, contact)
-- https://lilachibane.com/cohorte : la cohorte en ligne de 12 semaines
-- https://lilachibane.com/allo-lila : l'appel individuel de 45 minutes
+${cohorteEnLigne ? '- https://lilachibane.com/cohorte : la cohorte en ligne de 12 semaines\n' : ''}- https://lilachibane.com/allo-lila : l'appel individuel de 45 minutes
 - https://lilachibane.com/blog : articles sur le corps des femmes, le sport et la santé
 `
 })

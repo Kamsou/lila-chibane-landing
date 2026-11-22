@@ -43,7 +43,10 @@ onMounted(() => {
 })
 onUnmounted(() => clearInterval(frappe))
 const visuels = ['semaines', 'conversation', 'tortue']
-const offres = computed(() => content.value.offres.items.map((o, i) => ({ ...o, visuel: visuels[i] || 'tortue' })))
+const { cohorteEnLigne } = useRuntimeConfig().public
+const offres = computed(() => content.value.offres.items
+  .map((o, i) => ({ ...o, visuel: visuels[i] || 'tortue' }))
+  .filter((o) => cohorteEnLigne || !/\/cohorte\/?$/.test(o.url)))
 const offre = ref(0)
 onMounted(() => {
   try {
@@ -75,7 +78,9 @@ const nuit = computed(() => [idx('intro'), idx('newsletter')])
 
 useSeoMeta({
   title: 'Lila Chibane · Coach sportive sport-santé · visio & Médoc',
-  description: "Coach sportive pour femmes, dans le Médoc et en visio. Une cohorte en ligne de 12 semaines, un appel de 45 minutes, une pratique qui respecte ton rythme, sans pression.",
+  description: cohorteEnLigne
+    ? "Coach sportive pour femmes, dans le Médoc et en visio. Une cohorte en ligne de 12 semaines, un appel de 45 minutes, une pratique qui respecte ton rythme, sans pression."
+    : "Coach sportive pour femmes, dans le Médoc et en visio. Un appel de 45 minutes, une pratique qui respecte ton rythme, sans pression.",
   ogTitle: 'Lila Chibane · Coach sportive sport-santé',
   ogDescription: 'Reprendre une activité physique en douceur, sans pression. En visio et dans le Médoc.',
   ogImage: 'https://lilachibane.com/og-lila.jpg',
@@ -177,7 +182,7 @@ useHead(() => ({
         offers: [
           { '@type': 'Offer', name: 'Les tortues libres et musclées, cohorte en ligne de 12 semaines', price: '650', priceCurrency: 'EUR', url: 'https://lilachibane.com/cohorte' },
           { '@type': 'Offer', name: 'Allô Lila, appel individuel de 45 minutes', price: '85', priceCurrency: 'EUR', url: 'https://lilachibane.com/allo-lila' },
-        ],
+        ].filter((o) => cohorteEnLigne || !o.url.endsWith('/cohorte')),
         url: 'https://lilachibane.com/',
       }),
     },

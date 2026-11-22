@@ -1,4 +1,8 @@
 <script setup>
+if (!useRuntimeConfig().public.cohorteEnLigne) {
+  throw createError({ statusCode: 404, statusMessage: 'Page introuvable', fatal: true })
+}
+
 const listeUrl = 'https://tally.so/r/e5MeQl'
 
 const pourToi = [
