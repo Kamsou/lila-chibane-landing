@@ -1,5 +1,5 @@
 <script setup>
-const reservationUrl = 'mailto:lila.chibane.pro@outlook.com?subject=All%C3%B4%20Lila'
+const reservationUrl = 'https://calendly.com/lilacoach/bettercall'
 
 const blocages = [
   'Une semaine trop remplie',
@@ -103,7 +103,7 @@ useSeoMeta({
 <template>
   <div class="min-h-[100dvh] bg-ciel text-encre">
     <ActivityHeader />
-    <BoutonColle :href="reservationUrl" label="Réserver mon appel" prix="85 €" detail="45 minutes en visio" />
+    <BoutonColle :href="reservationUrl" externe label="Réserver mon appel" prix="85 €" detail="45 minutes en visio" />
 
     <main class="pt-24 md:pt-28">
 
@@ -115,7 +115,7 @@ useSeoMeta({
               <span class="accent text-corail">en route.</span>
             </h1>
             <div class="flex flex-wrap items-center gap-x-7 gap-y-4">
-              <a :href="reservationUrl" class="btn-azur">Réserver mon appel</a>
+              <a :href="reservationUrl" target="_blank" rel="noopener" class="btn-azur">Réserver mon appel</a>
               <a href="#deroule" class="text-link">Voir comment ça se passe</a>
             </div>
           </div>
@@ -161,7 +161,7 @@ useSeoMeta({
             </ul>
             <div class="hidden md:flex flex-col justify-between bg-white/70 p-10 min-h-[18rem]">
               <p :key="arrivee" class="apparait font-titre text-encre text-xl leading-relaxed">{{ arrivees[arrivee].texte }}</p>
-              <a :href="reservationUrl" class="btn-azur self-start mt-8">Réserver mon appel</a>
+              <a :href="reservationUrl" target="_blank" rel="noopener" class="btn-azur self-start mt-8">Réserver mon appel</a>
             </div>
           </div>
           <p class="vente-texte mt-8">Ta situation ne rentre dans aucune case ? Explique-la dans le questionnaire, on la cadre ensemble.</p>
@@ -218,7 +218,7 @@ useSeoMeta({
           </div>
           <div class="text-right">
             <p class="font-titre font-bold text-encre text-7xl md:text-8xl leading-none mb-5">85 €</p>
-            <a :href="reservationUrl" class="btn-azur">Réserver mon appel</a>
+            <a :href="reservationUrl" target="_blank" rel="noopener" class="btn-azur">Réserver mon appel</a>
           </div>
         </div>
       </section>
